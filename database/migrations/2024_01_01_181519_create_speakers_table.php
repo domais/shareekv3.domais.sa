@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('phone');
             $table->string('email');
             $table->string('nationality');
-            $table->enum('type',['1','2','3','4']);
+            $table->enum('type',['كاتب','شاعر','راوي','ناشط ثقافي']);
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();

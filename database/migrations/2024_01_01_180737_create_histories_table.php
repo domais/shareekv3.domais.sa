@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('permit_id');
             $table->unsignedBigInteger('status_id');
+            $table->boolean('edited')->nullable();
             $table->text('descreption')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();

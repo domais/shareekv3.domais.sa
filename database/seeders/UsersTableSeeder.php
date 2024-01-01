@@ -17,28 +17,22 @@ class UsersTableSeeder extends Seeder
         $superAdmin = User::create([
             'name'      => 'أحمد بوخمسين',
             'email'     => 'admin@gmail.com',
-            
-            
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin2 = User::create([
             'name'      => 'أحمد الغامدي',
-            'email'     => 'admin2@gmail.com',
-            
-            
+            'email'     => 'admin2@gmail.com',  
             'password'  => Hash::make(123456),
         ]);
 
-     /*   $superAdmin->addRole(1); 
-        $superAdmin2->addRole(1); */
+        $superAdmin->addRole(1); 
+        $superAdmin2->addRole(1); 
 
 
         $partner1  = User::create([
             'name'      => 'عبدالله الفوزان',
             'email'     => 'partner@gmail.com',
-            
-            
             'password'  => Hash::make(123456),
         ]);
 
@@ -46,8 +40,6 @@ class UsersTableSeeder extends Seeder
         $partner2  = User::create([
             'name'      => 'تركي المالح',
             'email'     => 'partner2@gmail.com',
-            
-            
             'password'  => Hash::make(123456),
         ]);
 
@@ -55,14 +47,12 @@ class UsersTableSeeder extends Seeder
         $partner3  = User::create([
             'name'      => 'منيرة الحمود',
             'email'     => 'partner3@gmail.com',
-            
-            
             'password'  => Hash::make(123456),
         ]);
 
-    /*    $partner1->addRole(2); 
+       $partner1->addRole(2); 
         $partner2->addRole(2); 
         $partner3->addRole(2); 
-*/
+
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('partnerships', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type',['1','2','3','4'])->default('1');
+            $table->enum('type',['نادي ثقافي','جمعية','قطاع خاص','قطاع حكومي']);
             $table->timestamps();
         });
     }
