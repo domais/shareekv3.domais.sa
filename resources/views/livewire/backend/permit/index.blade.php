@@ -166,18 +166,18 @@
 			confirmButtonText: 'نعم احذف الطلب'
 		}).then((result,id) => {
 			if (result.isConfirmed) {
-				Swal.fire({
-					title:'تم حذف الطلب بنجاح',
-					text: 'سيتم تحويلك لصفحة التصاريح خلال ثواني',
-					icon: "success",
-					timerProgressBar: true,
-					showConfirmButton: false,
-					timer:4000					
-				})
-				setTimeout(() => {
-					// window.location.href = "{{route('permit.index')}}";
-					window.location.reload
-				},4000)
+						Swal.fire({
+							title:'تم حذف الطلب بنجاح',
+							text: 'سيتم تحويلك لصفحة التصاريح خلال ثواني',
+							icon: "success",
+							timerProgressBar: true,
+							showConfirmButton: false,
+							timer:4000					
+						})
+						setTimeout(() => {
+							// window.location.href = "{{route('permit.index')}}";
+							window.location.reload
+						},4000)
 				// axios.post("https://google.com").then(function (response) {
 				// 	// Rahmani : true ارسل الامر للباك إند ولمن تتم العملية رجع
 				// 	if(response){
