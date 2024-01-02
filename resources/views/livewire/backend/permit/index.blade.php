@@ -166,6 +166,8 @@
 			confirmButtonText: 'نعم احذف الطلب'
 		}).then((result,id) => {
 			if (result.isConfirmed) {
+				document.addEventListener('livewire:init', () => {
+					Livewire.on('toevent', (event) => {
 						Swal.fire({
 							title:'تم حذف الطلب بنجاح',
 							text: 'سيتم تحويلك لصفحة التصاريح خلال ثواني',
@@ -178,17 +180,8 @@
 							// window.location.href = "{{route('permit.index')}}";
 							window.location.reload
 						},4000)
-				// axios.post("https://google.com").then(function (response) {
-				// 	// Rahmani : true ارسل الامر للباك إند ولمن تتم العملية رجع
-				// 	if(response){
-
-				// 	}else{
-				// 		console.log(error);
-				// 	}
-				// })
-				// .catch(function (error) {
-				// 	console.log(error);
-				// });
+					})
+				})
 			}
 		})
 	}

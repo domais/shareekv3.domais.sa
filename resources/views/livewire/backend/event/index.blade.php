@@ -207,18 +207,6 @@
                 setTimeout(() => {
                     // window.location.href = "{{route('permit.index')}}";
                 }, 3000)
-
-                // axios.post("https://google.com").then(function (response) {
-                // 	// Rahmani : true ارسل الامر للباك إند ولمن تتم العملية رجع
-                // 	if(response){
-
-                // 	}else{
-                // 		console.log(error);
-                // 	}
-                // })
-                // .catch(function (error) {
-                // 	console.log(error);
-                // });
             }
         });
     }
