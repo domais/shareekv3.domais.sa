@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('permits', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('cascade');
             $table->foreign('literary_id')->references('id')->on('literaries')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
@@ -20,6 +21,7 @@ return new class extends Migration
 
         Schema::table('events', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('event_type_id')->references('id')->on('event_types')->onDelete('cascade');
             $table->foreign('literary_id')->references('id')->on('literaries')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');

@@ -16,6 +16,8 @@ return new class extends Migration
 
             $table->string('order_number')->unique();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('admin_id')->nullable()->comment('admin who approved the permit');
+
             $table->unsignedBigInteger('event_type_id');
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside');

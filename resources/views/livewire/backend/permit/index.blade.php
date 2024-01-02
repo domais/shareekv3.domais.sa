@@ -28,114 +28,24 @@
 
 
 	<div class="kanban">
+		<x-backend.kanban-column 
+		name="مسودة"
+		count="1" 
+		:data="$drafts"
+		:buttons="[
+			['title' => 'إكمال', 'href' => '#','class' => 'btn btn-secondary'],
+			['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+		]"
+		/>
 
-		<div class="column">
-			<div class="head">
-				<div class="fw-bold">مسودة <span>1</span></div>
-			</div>
-			<div class="body">
-				<div class="item">
-					<div class="name">
-						<div>قراءة كتاب (محاط بالحمقى)</div>
-						<small>عبدالله الفوزان</small>
-						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
-					</div>
-					<div class="type mb-3">القصص > الخيال العلمي</div>
-					<div class="number">
-						<span>رقم الطلب : 230075869</span>
-						<small>قبل 11 دقيقة</small>
-					</div>
-					<div class="d-flex justify-content-between mt-3">
-						<a class="btn btn-secondary" href="#">إكمال</a>
-						<a class="btn btn-outline-danger" onclick="DeletePermit(1)">حذف</a>
-					</div>
-				</div><!-- /item -->
-			</div><!-- /body -->
-		</div><!-- /column -->
-
-
-
-
-
-
-
-		<div class="column">
-			<div class="head">
-				<div class="fw-bold">معاد للتعديل <span class="bg-danger text-light">2</span></div>
-			</div>
-			<div class="body">
-				<div class="item">
-					<div class="name">
-						<div>قراءة كتاب (محاط بالحمقى)</div>
-						<small>عبدالله الفوزان</small>
-						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
-					</div>
-					<div class="type mb-3">القصص > الخيال العلمي</div>
-					<div class="number">
-						<span>رقم الطلب : 230075869</span>
-						<small>قبل 11 دقيقة</small>
-					</div>
-					<div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>
-					<div class="d-flex justify-content-between mt-3">
-						<a class="btn btn-secondary" href="#">تعديل</a>
-						<a class="btn btn-outline-danger" onclick="DeletePermit(1)">حذف</a>
-					</div>
-				</div><!-- /item -->
-			</div><!-- /body -->
-		</div><!-- /column -->
-
-
-
-
-
-
-
-		<div class="column">
-			<div class="head">
-				<div class="fw-bold">تحت الدراسة <span>1</span></div>
-			</div>
-			<div class="body">
-				<div class="item">
-					<div class="name">
-						<div>قراءة كتاب (محاط بالحمقى)</div>
-						<small>عبدالله الفوزان</small>
-						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
-					</div>
-					<div class="type mb-3">القصص > الخيال العلمي</div>
-					<div class="number">
-						<span>رقم الطلب : 230075869</span>
-						<small>قبل 11 دقيقة</small>
-					</div>
-				</div><!-- /item -->
-			</div><!-- /body -->
-		</div><!-- /column -->
-
-
-
-
-
-
-
-		<div class="column">
-			<div class="head">
-				<div class="fw-bold">موافق عليها مبدأياً  <span>1</span></div>
-			</div>
-			<div class="body">
-				<div class="item">
-					<div class="name">
-						<div>قراءة كتاب (محاط بالحمقى)</div>
-						<small>عبدالله الفوزان</small>
-						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
-					</div>
-					<div class="type mb-3">القصص > الخيال العلمي</div>
-					<div class="number">
-						<span>رقم الطلب : 230075869</span>
-						<small>قبل 11 دقيقة</small>
-					</div>
-				</div><!-- /item -->
-			</div><!-- /body -->
-		</div><!-- /column -->
-
+		<x-backend.kanban-column name="معاد للتعديل" count="1" edit="1"
+		:buttons="[
+			['title' => 'تعديل', 'href' => '#','class' => 'btn btn-secondary'],
+			['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+		]"
+		/>
+		<x-backend.kanban-column name="تحت الدراسة" count="1" />
+		<x-backend.kanban-column name="موافق عليه مبدأيا" count="1" />
 
 	</div>
 
@@ -155,6 +65,7 @@
 
 <script>
 	function DeletePermit(id) {
+		
 		Swal.fire({
 			title: 'هل أنت متأكد؟',
 			icon: 'question',

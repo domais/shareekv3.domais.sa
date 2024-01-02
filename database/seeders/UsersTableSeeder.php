@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make(123456),
         ]);
 
-       $partner1->addRole(2); 
+        $partner1->addRole(2); 
         $partner2->addRole(2); 
         $partner3->addRole(2); 
 

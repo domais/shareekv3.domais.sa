@@ -23,7 +23,7 @@ class RolesTableSeeder extends Seeder
         ]);
         
         $user = Role::create([
-                    'name' => 'user',
+                    'name' => 'User',
                     'display_name' => 'زائر',
                     'description' => 'صلاحيات في حدود العمليات',
                     'is_admin' => false,
