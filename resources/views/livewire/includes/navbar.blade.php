@@ -24,7 +24,7 @@
 					<img src="{{asset('img/default_avatar.png')}}" alt="mdo" width="50" class="rounded-circle">
 				</a>
 				<div class="user-info">
-					جمال حماني
+					جمال رحماني
 					<br>
 					<sapn class="user-role">مقهى النرجس</span>
 				</div>

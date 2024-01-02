@@ -47,7 +47,7 @@
 					</div>
 					<div class="d-flex justify-content-between mt-3">
 						<a class="btn btn-secondary" href="#">إكمال</a>
-						<a class="btn btn-outline-danger" href="#">حذف</a>
+						<a class="btn btn-outline-danger" onclick="DeletePermit(1)">حذف</a>
 					</div>
 				</div><!-- /item -->
 			</div><!-- /body -->
@@ -78,7 +78,7 @@
 					<div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>
 					<div class="d-flex justify-content-between mt-3">
 						<a class="btn btn-secondary" href="#">تعديل</a>
-						<a class="btn btn-outline-danger" href="#">حذف</a>
+						<a class="btn btn-outline-danger" onclick="DeletePermit(1)">حذف</a>
 					</div>
 				</div><!-- /item -->
 			</div><!-- /body -->
@@ -145,3 +145,51 @@
 
 
 </div>
+
+
+
+
+
+
+
+
+<script>
+	function DeletePermit(id) {
+		Swal.fire({
+			title: 'هل أنت متأكد؟',
+			icon: 'question',
+			html: 'سيتم حذف التصريح ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
+			showCancelButton: true,
+			confirmButtonColor: '#e33e41',
+			cancelButtonColor: '#ccc',
+			cancelButtonText:'إلغاء',
+			confirmButtonText: 'نعم احذف الطلب'
+		}).then((result,id) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					title:'تم حذف الطلب بنجاح',
+					text: 'سيتم تحويلك لصفحة التصاريح خلال ثواني',
+					icon: "success",
+					timerProgressBar: true,
+					showConfirmButton: false,
+					timer:4000					
+				})
+				setTimeout(() => {
+					// window.location.href = "{{route('permit.index')}}";
+					window.location.reload
+				},4000)
+				// axios.post("https://google.com").then(function (response) {
+				// 	// Rahmani : true ارسل الامر للباك إند ولمن تتم العملية رجع
+				// 	if(response){
+
+				// 	}else{
+				// 		console.log(error);
+				// 	}
+				// })
+				// .catch(function (error) {
+				// 	console.log(error);
+				// });
+			}
+		})
+	}
+</script>
