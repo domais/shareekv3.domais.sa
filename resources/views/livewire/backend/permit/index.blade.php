@@ -1,9 +1,147 @@
 <div>
-    
 
-    <h1>
-        محتوى التصاريح 
-    </h1>
+
+	<nav aria-label="breadcrumb" class="my-5">
+		<div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
+			<ol class="breadcrumb breadcrumb-chevron m-0">
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis" href="#">
+						<i class="fa-solid fa-house"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
+				</li>
+				<li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
+			</ol>
+			<div class="links">
+				<a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a>
+				<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
+			</div>
+		</div>
+	</nav>
+
+
+
+
+
+
+
+	<div class="kanban">
+
+		<div class="column">
+			<div class="head">
+				<div class="fw-bold">مسودة <span>1</span></div>
+			</div>
+			<div class="body">
+				<div class="item">
+					<div class="name">
+						<div>قراءة كتاب (محاط بالحمقى)</div>
+						<small>عبدالله الفوزان</small>
+						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
+					</div>
+					<div class="type mb-3">القصص > الخيال العلمي</div>
+					<div class="number">
+						<span>رقم الطلب : 230075869</span>
+						<small>قبل 11 دقيقة</small>
+					</div>
+					<div class="d-flex justify-content-between mt-3">
+						<a class="btn btn-secondary" href="#">إكمال</a>
+						<a class="btn btn-outline-danger" href="#">حذف</a>
+					</div>
+				</div><!-- /item -->
+			</div><!-- /body -->
+		</div><!-- /column -->
+
+
+
+
+
+
+
+		<div class="column">
+			<div class="head">
+				<div class="fw-bold">معاد للتعديل <span class="bg-danger text-light">2</span></div>
+			</div>
+			<div class="body">
+				<div class="item">
+					<div class="name">
+						<div>قراءة كتاب (محاط بالحمقى)</div>
+						<small>عبدالله الفوزان</small>
+						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
+					</div>
+					<div class="type mb-3">القصص > الخيال العلمي</div>
+					<div class="number">
+						<span>رقم الطلب : 230075869</span>
+						<small>قبل 11 دقيقة</small>
+					</div>
+					<div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>
+					<div class="d-flex justify-content-between mt-3">
+						<a class="btn btn-secondary" href="#">تعديل</a>
+						<a class="btn btn-outline-danger" href="#">حذف</a>
+					</div>
+				</div><!-- /item -->
+			</div><!-- /body -->
+		</div><!-- /column -->
+
+
+
+
+
+
+
+		<div class="column">
+			<div class="head">
+				<div class="fw-bold">تحت الدراسة <span>1</span></div>
+			</div>
+			<div class="body">
+				<div class="item">
+					<div class="name">
+						<div>قراءة كتاب (محاط بالحمقى)</div>
+						<small>عبدالله الفوزان</small>
+						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
+					</div>
+					<div class="type mb-3">القصص > الخيال العلمي</div>
+					<div class="number">
+						<span>رقم الطلب : 230075869</span>
+						<small>قبل 11 دقيقة</small>
+					</div>
+				</div><!-- /item -->
+			</div><!-- /body -->
+		</div><!-- /column -->
+
+
+
+
+
+
+
+		<div class="column">
+			<div class="head">
+				<div class="fw-bold">موافق عليها مبدأياً  <span>1</span></div>
+			</div>
+			<div class="body">
+				<div class="item">
+					<div class="name">
+						<div>قراءة كتاب (محاط بالحمقى)</div>
+						<small>عبدالله الفوزان</small>
+						<!-- Rahmani: هنا يظهر اسم اليوزر إللي أنشأ الطلب -->
+					</div>
+					<div class="type mb-3">القصص > الخيال العلمي</div>
+					<div class="number">
+						<span>رقم الطلب : 230075869</span>
+						<small>قبل 11 دقيقة</small>
+					</div>
+				</div><!-- /item -->
+			</div><!-- /body -->
+		</div><!-- /column -->
+
+
+	</div>
+
+
+
+
 
 
 </div>
