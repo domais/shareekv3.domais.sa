@@ -6,10 +6,15 @@
 
 			<ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">الرئيسية</a></li>
-				<li class="nav-item"><a href="#" class="nav-link px-2 link-light active">المبادرات</a></li>
-				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">التصاريح</a></li>
+
+				<li class="nav-item"><a href="{{route('event.index')}}" class="nav-link px-2 link-light {{ is_active('event.index') ? 'active' : '' }}">المبادرات</a></li>
+
+				<li class="nav-item"><a href="{{route('permit.index')}}" class="nav-link px-2 link-light {{ is_active('permit.index') ? 'active' : '' }}">التصاريح</a></li>
+
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">دعم الشريك</a></li>
+
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">المساعدة</a></li>
+
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">الإعدادات</a></li>
 			</ul>
 

@@ -33,7 +33,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Util/validation.php"
+            "app/Util/validation.php",
+            "app/Util/helper.php"
         ]
 
     },

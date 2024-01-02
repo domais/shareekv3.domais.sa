@@ -32,6 +32,7 @@
     <div class="container wrapper mt-3">
 
         <!-- Rahmani: all pages goes here -->
+        {{$slot}}
 
     </div>
 

@@ -1,3 +1,7 @@
 <div>
-    {{-- The whole world belongs to you. --}}
+
+
+    <h1>
+        محتوى المبادرات 
+    </h1>
 </div>
