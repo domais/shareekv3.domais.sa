@@ -75,7 +75,9 @@
 			cancelButtonColor: '#ccc',
 			cancelButtonText:'إلغاء',
 			confirmButtonText: 'نعم احذف الطلب'
-		}).then((result,id) => {
+		})/*
+		Domais: please update this code to dispatch event to livewire component only.
+		.then((result,id) => {
 			if (result.isConfirmed) {
 				document.addEventListener('livewire:init', () => {
 					Livewire.on('toevent', (event) => {
@@ -94,6 +96,6 @@
 					})
 				})
 			}
-		})
+		})*/
 	}
 </script>
