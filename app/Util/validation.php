@@ -14,7 +14,7 @@ use Illuminate\Validation\Rules\Password;
 
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-			'phone' => ['required', 'string', 'unique:'.User::class],
+			'phone' => ['required','phone', 'string', 'unique:'.User::class],
             'password' => ['required', 'string', Password::defaults()],
        ];
         
