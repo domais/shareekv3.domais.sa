@@ -32,27 +32,102 @@ function ArToEn($input) {
  * 
  * this function to check role of user and get event or permit based on status_id
  * **/
-function getEvents($status_id = 1, $is_event = false)  {
+    function getEvents($is_event = false) {
 
-    $user = auth()->user();
+        $user = auth()->user();
 
-    $role = $user->roles()->first()->name;
+        $role = $user->roles()->first()->name;
 
-    $events = [];
+        $events = [];
 
-    if($role == 'User') {
-        if($is_event) {
-            $events = Event::where('status_id', $status_id)->where('user_id', $user->id)->get();
+        $statuses = [1, 2, 3, 4, 10];
+        if($role == 'User') {
+            if($is_event) {
+                $events = Event::where('status_id')->where('user_id', $user->id)->get();
+            } else {
+                foreach($statuses as $status) {
+                    $events[$status] = Permit::where('status_id', $status)->where('user_id', $user->id)->get();
+                }
+            }
         } else {
-            $events = Permit::where('status_id', $status_id)->where('user_id', $user->id)->get();
+            if($is_event) {
+                $events = Event::where('status_id')->where('admin_id',$user->id)->get();
+            } else {
+                foreach($statuses as $status) {
+                    if($status == 2) {
+                        $events[$status] = Permit::where('status_id', $status)
+                        ->whereNull('admin_id')->get();
+                    } else {
+                        $events[$status] = Permit::where('status_id', $status)
+                        ->where('admin_id',$user->id)->get();
+                    }
+                }
+            }
         }
-    } else {
-        if($is_event) {
-            $events = Event::where('status_id', $status_id)->where('admin_id',$user->id)->get();
-        } else {
-            $events = Permit::where('status_id', $status_id)->where('admin_id',$user->id)->get();
-        }
+        
+        return $events;
     }
 
-    return $events; 
-}
+    function SwalResponse($default = 1)
+    {
+        if ($default == 1) {
+            
+            return [
+                'icon' => 'success',
+                'title' => 'تمت العملية بنجاح',
+                'text' => 'تمت العملية بنجاح',
+    
+            ];
+        } else {
+
+            return [
+                'icon' => 'error',
+                'title' => 'حدث خطأ',
+                'text' => 'حدث خطأ',
+    
+            ];
+        }
+        
+
+    }
+
+    function KanbanButtons($name) {
+
+        switch ($name) {
+            case 'UserDraft':
+                return [
+                    ['title' => 'إكمال', 'href' => '#', 'class' => 'btn btn-secondary'],
+                    ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                ];
+                break;
+        
+            case 'UserRejected':
+                return[
+                    ['title' => 'تعديل', 'href' => '#','class' => 'btn btn-secondary'],
+                    ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                ];
+                break;
+            case 'AdminAssignToMe':
+                return[
+                    ['title' => 'إبدأ الدراسة', 'href' => '#','class' => 'btn btn-secondary'],
+                ];
+                break;
+            case 'AdminIntialApproved':
+                return[
+                    ['title' => 'موافقة مبدأية', 'href' => '#','class' => 'btn btn-secondary'],
+                    ['title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                ];
+                break;
+
+             case 'AdminFinalApproved':
+                    return[
+                        ['title' => 'تشغيل', 'href' => '#','class' => 'btn btn-warning'],
+                        ['title' => 'تشغيل بدون تصريح', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                    ];
+                    break;
+
+
+
+        }
+
+    }

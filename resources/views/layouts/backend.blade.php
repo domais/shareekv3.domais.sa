@@ -63,6 +63,7 @@
 
 
 	@stack('scripts')
+	<x-backend.sweet-alert />
 		
 </body>
 </html>

@@ -21,90 +21,48 @@
 		</div>
 	</nav>
 
-
-
-
-
-
-
 	<div class="kanban">
+		@role('User')
 		<x-backend.kanban-column 
-		name="مسودة"
-		count="1" 
-		:data="$drafts"
-		:buttons="[
-			['title' => 'إكمال', 'href' => '#','class' => 'btn btn-secondary'],
-			['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
-		]"
+			name="مسودة"
+			count="{{count($drafts)}}" 
+			:data="$drafts"
+			:buttons="KanbanButtons('UserDraft')"
+		/>
+		@endrole
+
+		@permission('permit.read')
+
+		<x-backend.kanban-column 
+			name="طلبات جديدة"
+			count="{{count($new_orders)}}" 
+			:data="$new_orders"
+			:buttons="KanbanButtons('AdminAssignToMe')"
+		/>
+		@endpermission
+
+
+
+		<x-backend.kanban-column
+		 name="معاد للتعديل"
+		  count="{{count($rejected)}}"
+		  edit="1"
+		  :data="$rejected"
+		  :buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserRejected') : []  "
+		  />
+		<x-backend.kanban-column
+			name="تحت الدراسة" 
+			count="{{count($pending)}}" 
+			:data="$pending" 
+			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('AdminIntialApproved')  "
 		/>
 
-		<x-backend.kanban-column name="معاد للتعديل" count="1" edit="1"
-		:buttons="[
-			['title' => 'تعديل', 'href' => '#','class' => 'btn btn-secondary'],
-			['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
-		]"
-		/>
-		<x-backend.kanban-column name="تحت الدراسة" count="1" />
-		<x-backend.kanban-column name="موافق عليه مبدأيا" count="1" />
+		<x-backend.kanban-column 
+			name="{{ auth()->user()->hasRole('User') ? 'موافق عليه مبدأيا' : 'بإنتظار تصريح الهيئة' }}"
+			count="{{ count($approved) }}"
+			:data="$approved"
+			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('AdminFinalApproved')  "
 
+			/>
 	</div>
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
-
-<script>
-	function DeletePermit(id) {
-		
-		Swal.fire({
-			title: 'هل أنت متأكد؟',
-			icon: 'question',
-			html: 'سيتم حذف التصريح ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
-			showCancelButton: true,
-			confirmButtonColor: '#e33e41',
-			cancelButtonColor: '#ccc',
-			cancelButtonText:'إلغاء',
-			confirmButtonText: 'نعم احذف الطلب'
-		}).then((result,id) => {
-			// Domais [OK 👍]: please update this code to dispatch event to livewire component only.
-			if (result.isConfirmed) {
-				Livewire.dispatch('DeletePermit_Dispatch', {
-				place: 'inside', // or outside
-				id: id,
-			})
-			}
-		})
-	}
-
-
-
-	// Rahmani: let's disscuss this
-	document.addEventListener('livewire:init', () => {
-		Livewire.on('DeletePermit_Response', (event) => {
-			Swal.fire({
-				title: event.title,
-				html: event.text,
-				icon: event.icon,
-				timerProgressBar: true,
-				showConfirmButton: false,
-				timer:4000					
-			})
-			setTimeout((event) => {
-				if(event.place == 'inside')
-					window.location.href = "{{route('permit.index')}}";
-				else
-					window.location.reload
-			},4000)
-		})
-	})
-</script>

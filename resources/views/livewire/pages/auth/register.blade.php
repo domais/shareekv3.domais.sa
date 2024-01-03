@@ -9,7 +9,7 @@ use Illuminate\Validation\Rules;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.auth')] class extends Component
 {
     public string $name = '';
     public string $email = '';
@@ -36,54 +36,31 @@ new #[Layout('layouts.guest')] class extends Component
         $this->redirect(RouteServiceProvider::HOME, navigate: true);
     }
 }; ?>
+						<div class="card-body px-4 py-4 px-md-5 text-center">
+							<form>
+								<h3 class="fs-3 fw-bold text-center">تسجيل شريك جديد</h3>
 
-<div>
-    <form wire:submit="register">
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
+								<input placeholder="أسم المقهى" type="text" class="form-control my-3 text-center">
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+								<input placeholder="الرقم الموحد 700" type="text" class="form-control my-3 text-center">
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+								<select class="form-control my-3 text-center">
+									<option value="" selected disabled>اختر المدينة ....</option>
+									<option value="">الرياض</option>
+									<option value="">جدة</option>
+									<option value="">مكة</option>
+									<option value="">أبها</option>
+								</select>
+								
+								<input placeholder="اسم الشخص المسؤول" type="text" class="form-control my-3 text-center">
+								
+								<input placeholder="رقم الجوال" type="text" class="form-control my-3 text-center">
+								
+								<input placeholder="البريد الإلكتروني" type="email" class="form-control my-3 text-center">		
 
-            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input wire:model="password_confirmation" id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}" wire:navigate>
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</div>
+								<button type="submit" class="btn btn-brand mt-4">
+									تسجيل
+								</button>
+							</form>
+						</div>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -29,6 +30,11 @@ class RolesTableSeeder extends Seeder
                     'is_admin' => false,
                     // Add permissions for deletion
         ]);
+
+
+        $permissions = Permission::all();
+
+        $SuperAdmin->syncPermissions($permissions);
         
     }
 }

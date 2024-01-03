@@ -33,6 +33,9 @@ return new class extends Migration
             $table->double('lat');
             $table->double('lng');
 
+            $table->softDeletes();
+
+
             $table->timestamps();
         });
     }
@@ -43,5 +46,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('permits');
+        
     }
 };

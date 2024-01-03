@@ -73,13 +73,6 @@ class StatusesTableSeeder extends Seeder
                 'name'         => 'معاد لتعديل',
                 'description'  => 'تم إرسالها للشريك للتعديل'
             ],
-
-            [
-                'id'           => 11,
-                'name'         => 'محذوفة',
-                'description'  => 'قام موظفي NextLevel بحذف المبادرة'
-            ],
-
         ];
 
         foreach($statuses as $status){
