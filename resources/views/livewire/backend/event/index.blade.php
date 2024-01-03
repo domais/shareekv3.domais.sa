@@ -283,7 +283,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 // انا وصلت هنا
-                // $('#approve').modal('show');
+                $('#approve').hide();
                 console.log(
                     document.getElementById('PermitNumber'),
                     document.getElementById('PermitPDF')

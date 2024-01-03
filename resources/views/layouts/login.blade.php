@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
 	<div class="w-100 px-4 py-5 px-md-5 text-center text-lg-start">
 		<div class="container">
 			<div class="row gx-lg-6 align-items-center mb-5">
@@ -36,31 +35,20 @@
 					<div class="card bg-glass">
 						<div class="card-body px-4 py-4 px-md-5 text-center">
 							<form>
-								<h3 class="fs-3 fw-bold text-center">تسجيل شريك جديد</h3>
+								<h3 class="fs-3 fw-bold text-center">دخول الأعضاء</h3>
 
-								<input placeholder="أسم المقهى" type="text" class="form-control my-3 text-center">
+								<input placeholder="البريد الإلكتروني أو رقم الجوال" autocomplete="username" type="email" class="form-control my-3 text-center">		
 
-								<input placeholder="الرقم الموحد 700" type="text" class="form-control my-3 text-center">
-
-								<select class="form-control my-3 text-center">
-									<option value="" selected disabled>اختر المدينة ....</option>
-									<option value="">الرياض</option>
-									<option value="">جدة</option>
-									<option value="">مكة</option>
-									<option value="">أبها</option>
-								</select>
-								
-								<input placeholder="اسم الشخص المسؤول" type="text" class="form-control my-3 text-center">
-								
-								<input placeholder="رقم الجوال" type="text" class="form-control my-3 text-center">
-								
-								<input placeholder="البريد الإلكتروني" type="email" class="form-control my-3 text-center">		
-
+								<input placeholder="كلمة المرور" type="text" class="form-control my-3 text-center">
 
 								<button type="submit" class="btn btn-brand mt-4">
-									تسجيل
+									دخول
 								</button>
 							</form>
+							<div class="border-top pt-4 mt-4 d-flex justify-content-between">
+								<a href="#" class="text-dark text-decoration-none">نسيت كلمة المرور؟</a>
+								<a href="#" class="text-dark text-decoration-none">تسجيل حساب جديد</a>
+							</div>
 						</div>
 					</div>
 				</div>
