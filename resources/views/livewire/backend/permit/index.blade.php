@@ -75,27 +75,36 @@
 			cancelButtonColor: '#ccc',
 			cancelButtonText:'إلغاء',
 			confirmButtonText: 'نعم احذف الطلب'
-		})/*
-		Domais: please update this code to dispatch event to livewire component only.
-		.then((result,id) => {
+		}).then((result,id) => {
+			// Domais [OK 👍]: please update this code to dispatch event to livewire component only.
 			if (result.isConfirmed) {
-				document.addEventListener('livewire:init', () => {
-					Livewire.on('toevent', (event) => {
-						Swal.fire({
-							title:'تم حذف الطلب بنجاح',
-							text: 'سيتم تحويلك لصفحة التصاريح خلال ثواني',
-							icon: "success",
-							timerProgressBar: true,
-							showConfirmButton: false,
-							timer:4000					
-						})
-						setTimeout(() => {
-							// window.location.href = "{{route('permit.index')}}";
-							window.location.reload
-						},4000)
-					})
-				})
+				Livewire.dispatch('DeletePermit_Dispatch', {
+				place: 'inside', // or outside
+				id: id,
+			})
 			}
-		})*/
+		})
 	}
+
+
+
+	// Rahmani: let's disscuss this
+	document.addEventListener('livewire:init', () => {
+		Livewire.on('DeletePermit_Response', (event) => {
+			Swal.fire({
+				title: event.title,
+				html: event.text,
+				icon: event.icon,
+				timerProgressBar: true,
+				showConfirmButton: false,
+				timer:4000					
+			})
+			setTimeout((event) => {
+				if(event.place == 'inside')
+					window.location.href = "{{route('permit.index')}}";
+				else
+					window.location.reload
+			},4000)
+		})
+	})
 </script>
