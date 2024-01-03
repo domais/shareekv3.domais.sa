@@ -16,6 +16,7 @@ class PermitsTableSeeder extends Seeder
         // مسودات
         $permit1 = Permit::create([
             'order_number' => '240001',
+            'targeted_audience' => '1',
             'user_id' => 3,
             'event_type_id' => 1,
             'event_location' => 1,
@@ -34,6 +35,7 @@ class PermitsTableSeeder extends Seeder
         //مسودة ثانية
         $permit2 = Permit::create([
             'order_number' => '240002',
+            'targeted_audience' => '1',
             'user_id' => 3,
             'event_type_id' => 1,
             'event_location' => 1,
@@ -53,6 +55,7 @@ class PermitsTableSeeder extends Seeder
 
         $permit3 = Permit::create([
             'order_number' => '240003',
+            'targeted_audience' => '1',
             'user_id' => 3,
             'admin_id' => 1,
             'event_type_id' => 1,
@@ -72,6 +75,7 @@ class PermitsTableSeeder extends Seeder
         // معادة لتعديل ثانية
         $permit4 = Permit::create([
             'order_number' => '240004',
+            'targeted_audience' => '1',
             'user_id' => 3,
             'admin_id' => 1,
             'event_type_id' => 1,
@@ -93,6 +97,7 @@ class PermitsTableSeeder extends Seeder
             'order_number' => '240005',
             'user_id' => 3,
             'admin_id' => 1,
+            'targeted_audience' => '1',
             'event_type_id' => 1,
             'event_location' => 1,
             'literary_id' => 15,
@@ -110,6 +115,7 @@ class PermitsTableSeeder extends Seeder
         // تحت الدراسة 2
         $permit6 = Permit::create([
             'order_number' => '240006',
+            'targeted_audience' => '1',
             'user_id' => 3,
             'admin_id' => 1,
             'event_type_id' => 1,
@@ -133,6 +139,7 @@ class PermitsTableSeeder extends Seeder
             'user_id' => 3,
             'admin_id' => 1,
             'event_type_id' => 1,
+            'targeted_audience' => '1',
             'event_location' => 1,
             'literary_id' => 16,
             'status_id' => 4,
@@ -152,6 +159,7 @@ class PermitsTableSeeder extends Seeder
             'order_number' => '240008',
             'user_id' => 3,
             'admin_id' => 1,
+            'targeted_audience' => "1",
             'event_type_id' => 1,
             'event_location' => 1,
             'literary_id' => 15,
@@ -170,6 +178,7 @@ class PermitsTableSeeder extends Seeder
         $permit9 = Permit::create([
             'order_number' => '240009',
             'user_id' => 3,
+            'targeted_audience' => "1",
             'event_type_id' => 1,
             'event_location' => 1,
             'literary_id' => 19,
@@ -188,6 +197,7 @@ class PermitsTableSeeder extends Seeder
         $permit10 = Permit::create([
             'order_number' => '240010',
             'user_id' => 3,
+            'targeted_audience' => "1",
             'event_type_id' => 1,
             'event_location' => 1,
             'literary_id' => 18,

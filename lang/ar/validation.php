@@ -150,7 +150,8 @@ return [
         'password' => 'كلمة السر',
         'password_new' => 'كلمة السر الجديدة',
         'title' => 'العنوان',
-
+        'nationality' => 'الجنسية',
+        'type' => 'التصنيف',
     ],
     'custom' => [
         'attribute-name' => [

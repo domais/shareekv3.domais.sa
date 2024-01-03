@@ -19,3 +19,36 @@ use Illuminate\Validation\Rules\Password;
        ];
         
     }
+
+     function newPermit()
+    {
+        return [
+            'order_number' => 'required|unique:permits,order_number',
+            'user_id' => 'required|exists:users,id',
+            'event_type_id' => 'required|exists:event_types,id',
+            'event_location' => 'required|in:1,2',
+            'literary_id' => 'required|exists:literaries,id',
+            'status_id' => 'required|exists:statuses,id',
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'available_seats' => 'required|integer',
+            'need_support' => 'required|boolean',
+            'lat' => 'required',
+            'lng' => 'required',
+        ];
+    }
+
+    function newSpeaker()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|phone',
+            'email' => 'required|email|max:255',
+            'nationality' => 'required|string|max:255',
+            'type' => 'required|in:كاتب,شاعر,راوي,ناشط ثقافي',
+            'twitter' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255',
+        ];
+    }

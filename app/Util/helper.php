@@ -1,7 +1,10 @@
 <?php
 
 use App\Models\Event;
+use App\Models\EventType;
+use App\Models\Literary;
 use App\Models\Permit;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 function is_active($route)
@@ -41,7 +44,7 @@ function ArToEn($input) {
         $events = [];
 
         $statuses = [1, 2, 3, 4, 10];
-        $statusesEvent = [5, 6, 7, 8, 9];
+        $statusesEvent = [5, 6, 7, 8];
         if($role == 'User') {
             if($is_event) {
                 foreach($statusesEvent as $status) {
@@ -133,8 +136,54 @@ function ArToEn($input) {
                     ];
                     break;
 
+            //Domais add events button here please
+
 
 
         }
 
+    }
+
+    function settings($key, $updateCache = false)
+    {
+
+        switch ($key) {
+            case 'event_type':
+
+                if ($updateCache) {
+
+                    // Remove it from cache
+                    Cache::forget('event_type');
+    
+                } else {
+            
+                    
+                    return Cache::rememberForever('event_type', function () {
+                        return EventType::all();
+                    });
+    
+                }
+                
+            break;
+
+            case 'Literary_parent':
+                if ($updateCache) {
+                    // Remove it from cache
+                    Cache::forget('Literary_parent');
+                } else {
+                    return Cache::rememberForever('Literary_parent', function () {
+                        return Literary::whereNull('parent_id')->get();
+                    });
+    
+                }    
+            break;
+            
+          
+        }
+
+    }
+
+    function getChildes($id)
+    {
+        return Literary::where('parent_id', $id)->get()->toArray(); 
     }

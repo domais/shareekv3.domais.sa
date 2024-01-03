@@ -15,9 +15,11 @@ class Index extends Component
     public function mount()
     {
         Auth::loginUsingId(1);
-        
         $events = getEvents(true);
-        dd($events);
+        $this->scheduled = $events['5'];
+        $this->active = $events['6'];
+        $this->completed = $events['7'];
+        $this->Waiting_for_approval = $events['8'];
      
     }
     public function render()

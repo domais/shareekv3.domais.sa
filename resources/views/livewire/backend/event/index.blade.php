@@ -28,115 +28,29 @@
 
     <div class="kanban">
 
-        <div class="column">
-            <div class="head">
-                <div class="fw-bold">طلبات جديدة <span class="bg-danger text-light">1</span></div>
-            </div>
-            <div class="body">
-                <div class="item">
-                    <div class="name">
-                        <div>قراءة كتاب (محاط بالحمقى)</div>
-                        <small>مقهى السعادة</small>
-                        <!-- Rahmani: هنا يظهر اسم المقهى وليس اسم اليوزر -->
-                    </div>
-                    <div class="type mb-3">القصص > الخيال العلمي</div>
-                    <div class="number">
-                        <span>رقم الطلب : 230075869</span>
-                        <small>قبل 11 دقيقة</small>
-                    </div>
-                    <div class="d-flex justify-content-between mt-3">
-                        <a class="btn btn-secondary" onclick="AssignToMe(1)">إبدا الدراسة</a>
-                    </div>
-                </div><!-- /item -->
-            </div><!-- /body -->
-        </div><!-- /column -->
+        <x-backend.kanban-column 
+            name="مجدولة"
+            count="{{count($scheduled)}}" 
+            :data="$scheduled"
+         />
 
+         <x-backend.kanban-column 
+            name="قائمة"
+            count="{{count($active)}}" 
+            :data="$active"
+          />
 
+          <x-backend.kanban-column 
+            name="{{ !auth()->user()->hasRole('User') ? 'بإنتظار توثيق الشريك ' : 'بإنتظار توثيق الفعالية' }}"
+            count="{{count($completed)}}" 
+            :data="$completed"
+         />
 
-
-
-
-
-        <div class="column">
-            <div class="head">
-                <div class="fw-bold">تحت الدراسة <span>1</span></div>
-            </div>
-            <div class="body">
-                <div class="item">
-                    <div class="name">
-                        <div>قراءة كتاب (محاط بالحمقى)</div>
-                        <small>مقهى السعادة</small>
-                        <!-- Rahmani: هنا يظهر اسم المقهى وليس اسم اليوزر -->
-                    </div>
-                    <div class="type mb-3">القصص > الخيال العلمي</div>
-                    <div class="number">
-                        <span>رقم الطلب : 230075869</span>
-                        <small>قبل 11 دقيقة</small>
-                    </div>
-                    <div class="d-flex justify-content-between mt-3">
-                        <a class="btn btn-secondary" onclick="InitialApproval(1)">موافقة مبدأية</a>
-                        <a class="btn btn-outline-danger" onclick="RejectPermit(1)">رفض</a>
-                    </div>
-                </div><!-- /item -->
-            </div><!-- /body -->
-        </div><!-- /column -->
-
-
-
-
-
-
-
-        <div class="column">
-            <div class="head">
-                <div class="fw-bold">معاد للشريك للتعديل <span>1</span></div>
-            </div>
-            <div class="body">
-                <div class="item">
-                    <div class="name">
-                        <div>قراءة كتاب (محاط بالحمقى)</div>
-                        <small>مقهى السعادة</small>
-                        <!-- Rahmani: هنا يظهر اسم المقهى وليس اسم اليوزر -->
-                    </div>
-                    <div class="type mb-3">القصص > الخيال العلمي</div>
-                    <div class="number">
-                        <span>رقم الطلب : 230075869</span>
-                        <small>قبل 11 دقيقة</small>
-                    </div>
-                </div><!-- /item -->
-            </div><!-- /body -->
-        </div><!-- /column -->
-
-
-
-
-
-
-
-        <div class="column">
-            <div class="head">
-                <div class="fw-bold">بإنتظار إصدار تصريح الهيئة <span>1</span></div>
-            </div>
-            <div class="body">
-                <div class="item">
-                    <div class="name">
-                        <div>قراءة كتاب (محاط بالحمقى)</div>
-                        <small>مقهى السعادة</small>
-                        <!-- Rahmani: هنا يظهر اسم المقهى وليس اسم اليوزر -->
-                    </div>
-                    <div class="type mb-3">القصص > الخيال العلمي</div>
-                    <div class="number">
-                        <span>رقم الطلب : 230075869</span>
-                        <small>قبل 11 دقيقة</small>
-                    </div>
-                    <div class="d-flex justify-content-between mt-3">
-                        <!-- <a class="btn btn-warning" onclick="ApprovPermet(1)">تشغيل</a> -->
-                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#approve">تشغيل</a>
-                        <a class="btn btn-outline-secondary btn-sm d-flex align-items-center" onclick="ApproveWithoutPirmet(1)">تشغيل بدون تصريح</a>
-                    </div>
-                </div><!-- /item -->
-            </div><!-- /body -->
-        </div><!-- /column -->
+         <x-backend.kanban-column 
+         name="{{ !auth()->user()->hasRole('User') ? 'مراجعة التوثيق' : 'المشرف يراجع التوثيق' }}"
+         count="{{count($Waiting_for_approval)}}" 
+         :data="$Waiting_for_approval"
+        />
 
 
     </div>
