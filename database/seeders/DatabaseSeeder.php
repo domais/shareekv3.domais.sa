@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             EventTypeTableSeeder::class,
             LiteraryTableSeeder::class,
             PermitsTableSeeder::class,
+            EventTableSeeder::class,
         ]);
 
     }

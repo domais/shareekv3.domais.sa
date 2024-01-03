@@ -41,9 +41,13 @@ function ArToEn($input) {
         $events = [];
 
         $statuses = [1, 2, 3, 4, 10];
+        $statusesEvent = [5, 6, 7, 8, 9];
         if($role == 'User') {
             if($is_event) {
-                $events = Event::where('status_id')->where('user_id', $user->id)->get();
+                foreach($statusesEvent as $status) {
+                    $events[$status] = Event::where('status_id', $status)
+                    ->where('user_id', $user->id)->get();
+                }
             } else {
                 foreach($statuses as $status) {
                     $events[$status] = Permit::where('status_id', $status)->where('user_id', $user->id)->get();
@@ -51,7 +55,10 @@ function ArToEn($input) {
             }
         } else {
             if($is_event) {
-                $events = Event::where('status_id')->where('admin_id',$user->id)->get();
+                foreach($statusesEvent as $status) {
+                    $events[$status] = Event::where('status_id', $status)
+                    ->where('admin_id', $user->id)->get();
+                }
             } else {
                 foreach($statuses as $status) {
                     if($status == 2) {

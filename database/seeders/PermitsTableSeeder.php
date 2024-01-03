@@ -185,7 +185,7 @@ class PermitsTableSeeder extends Seeder
         ]);
         
         // طلبات جديدة ثانية
-        $permit2 = Permit::create([
+        $permit10 = Permit::create([
             'order_number' => '240010',
             'user_id' => 3,
             'event_type_id' => 1,
