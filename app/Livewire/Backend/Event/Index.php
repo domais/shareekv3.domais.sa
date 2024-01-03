@@ -14,7 +14,7 @@ class Index extends Component
 
     public function mount()
     {
-        Auth::loginUsingId(1);
+        Auth::loginUsingId(3);
         $events = getEvents(true);
         $this->scheduled = $events['5'];
         $this->active = $events['6'];

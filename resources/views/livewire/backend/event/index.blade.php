@@ -44,12 +44,15 @@
             name="{{ !auth()->user()->hasRole('User') ? 'بإنتظار توثيق الشريك ' : 'بإنتظار توثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
+            :buttons="auth()->user()->hasRole('User') ? KanbanButtons('AssignFiles') : KanbanButtons('AskForClose')  "
+
          />
 
          <x-backend.kanban-column 
-         name="{{ !auth()->user()->hasRole('User') ? 'مراجعة التوثيق' : 'المشرف يراجع التوثيق' }}"
-         count="{{count($Waiting_for_approval)}}" 
-         :data="$Waiting_for_approval"
+            name="{{ !auth()->user()->hasRole('User') ? 'مراجعة التوثيق' : 'المشرف يراجع التوثيق' }}"
+            count="{{count($Waiting_for_approval)}}" 
+            :data="$Waiting_for_approval"
+            :buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('Approval') "
         />
 
 

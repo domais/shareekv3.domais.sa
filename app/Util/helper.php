@@ -136,7 +136,27 @@ function ArToEn($input) {
                     ];
                     break;
 
-            //Domais add events button here please
+            //Event Buttons
+
+            case 'AskForClose':
+                return[
+                    ['title' => 'طلب إغلاق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                ];
+                break;
+
+            case 'AssignFiles':
+                    return[
+                        ['title' => 'إرفاق التوثيق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                    ];
+                    break;
+
+            case 'Approval':
+                        return[
+                            ['title' => 'إعتماد التوثيق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-warning btn-sm d-flex align-items-center'],
+                            ['title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+
+                        ];
+                        break;
 
 
 
