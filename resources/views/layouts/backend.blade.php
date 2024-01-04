@@ -31,7 +31,9 @@
 
 	<div class="container wrapper mt-3">
 
-		<!-- Rahmani: all pages goes here -->
+		<!-- Rahmani: لو حليت مشكلة الخرائد .. احذف السطر التالي -->
+		<div class="map"></div>
+
 		{{$slot}}
 
 	</div>

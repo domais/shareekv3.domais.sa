@@ -19,6 +19,7 @@
 		</div>
 	</nav>
 
+
 	<div class="row" x-data="{errors: @entangle('errors').live}" x-init="
 		$watch('errors', value => {
 

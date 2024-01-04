@@ -1770,16 +1770,11 @@ label.dropzone1 {
 	display: none !important;
 }
 
-#map {
+.map {
 	width: 99%;
-	height: 450px;
-	top: 0 !important;
+	min-height: 450px;
 	border-radius: 6px;
 	border: 1px #e9f1f9 solid;
-}
-
-#map>div:first-child {
-	height: 450px !important;
 }
 
 .listContainer {
