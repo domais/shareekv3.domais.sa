@@ -28,7 +28,6 @@ class Draft extends Model
         'need_support',
         'lat',
         'lng',
-        'speakers',
     ];
 
     public function user()

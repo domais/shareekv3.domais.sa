@@ -209,3 +209,13 @@ function ArToEn($input) {
     {
         return Literary::where('parent_id', $id)->get()->toArray(); 
     }
+    function deleteDraft()
+    {
+        if (session()->has('draft_to_delete')) {
+            $draft = Draft::find(session()->get('draft_to_delete'))->first();
+            if ($draft) {
+                $draft->delete();
+                session()->forget('draft_to_delete');
+            }
+        }
+    }

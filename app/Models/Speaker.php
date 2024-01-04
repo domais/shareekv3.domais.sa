@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Speaker extends Model
 {
     use HasFactory;
+
+
+    public function permit()
+    {
+        return $this->belongsTo(Permit::class);
+    }
+
 }

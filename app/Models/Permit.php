@@ -10,6 +10,27 @@ class Permit extends Model
 {
     use HasFactory,SoftDeletes;
 
+    protected $fillable = [
+        'order_number',
+        'user_id',
+        'admin_id',
+        'event_type_id',
+        'category_id',
+        'other',
+        'targeted_audience',
+        'event_location',
+        'literary_id',
+        'status_id',
+        'title',
+        'description',
+        'start_date',
+        'end_date',
+        'available_seats',
+        'need_support',
+        'lat',
+        'lng',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -28,6 +49,11 @@ class Permit extends Model
     public function literary()
     {
         return $this->belongsTo(Literary::class);
+    }
+
+    public function speakers()
+    {
+        return $this->hasMany(Speaker::class);
     }
     
 }

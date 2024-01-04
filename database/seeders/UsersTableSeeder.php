@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Partner;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -39,6 +40,16 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make(123456),
         ]);
 
+        Partner::create([
+            'owner_id' => $partner1->id,
+            'name' => 'Partner Name',
+            'city' => 'City Name',
+            'lat' => 0.0, // replace with actual latitude
+            'lng' => 0.0, // replace with actual longitude
+            'class' => 'أ', // replace with actual class
+            'CR' => 123457, // replace with actual CR
+        ]);
+
 
         $partner2  = User::create([
             'name'      => 'تركي المالح',
@@ -47,12 +58,32 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make(123456),
         ]);
 
+        Partner::create([
+            'owner_id' => $partner2->id,
+            'name' => 'Partner Name',
+            'city' => 'City Name',
+            'lat' => 0.0, // replace with actual latitude
+            'lng' => 0.0, // replace with actual longitude
+            'class' => 'أ', // replace with actual class
+            'CR' => 123485, // replace with actual CR
+        ]);
+
 
         $partner3  = User::create([
             'name'      => 'منيرة الحمود',
             'email'     => 'partner3@gmail.com',
             'phone'     => '0555555555',
             'password'  => Hash::make(123456),
+        ]);
+
+        Partner::create([
+            'owner_id' => $partner3->id,
+            'name' => 'Partner Name',
+            'city' => 'City Name',
+            'lat' => 0.0, // replace with actual latitude
+            'lng' => 0.0, // replace with actual longitude
+            'class' => 'أ', // replace with actual class
+            'CR' => 1485, // replace with actual CR
         ]);
 
         $partner1->addRole(2); 

@@ -27,10 +27,11 @@ class Inputs extends Component
         if ($this->draft) {
             $this->form->setForm($this->draft);
             $this->updatedForm();
-            $this->speakers = json_decode($this->draft->speakers, true);
+            if ($this->draft->speakers != null) {
+                $this->speakers = json_decode($this->draft->speakers , true);
+            }
             # code...
-        }
-       
+        }       
     }   
 
     public function store($status)
@@ -54,11 +55,14 @@ class Inputs extends Component
                 $this->errors[] = "يجب إدخال العنوان و التصنيف الأدبي" ; 
                 return;
             }
-            $this->saveDraft($permitData, $this->draft);
+            $this->saveDraft($permitData, $this->draft,$this->speakers);
         }
         else{
-            dd("انا هنا");
+            $this->savePermit($permitData, $this->speakers);
+            
         }
+        session(['draft_to_delete' => $this->draft->id]);
+        
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
     }

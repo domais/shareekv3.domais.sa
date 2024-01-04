@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Permit;
 
+use App\Models\Draft;
 use App\Models\Permit;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,19 +19,20 @@ class Index extends Component
 
     public function mount()
     {
+        deleteDraft();
+
         $permits = getEvents();
 
-      
-        
-        $this->drafts = $permits[1];  
+        $this->drafts = $permits[1] ?? [];  
 
         $this->new_orders = $permits[2];
-
         $this->rejected = $permits[10];
-
         $this->pending = $permits[3];
-
-        $this->approved = $permits[4];   
+        $this->approved = $permits[4]; 
+        
+        if (auth()->user()->hasRole('User')) {
+            $this->pending = $this->new_orders->concat($this->pending);
+        }
     }
 
     #[On('DeletePermit_Dispatch')] 
