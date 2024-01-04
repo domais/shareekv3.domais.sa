@@ -35,8 +35,8 @@
 		});
 	">
 		<!-- Rahmani: col-9 ماعدا ذلك خليه col-12 👇🏻 خلي هذا update أو create إذا كان الصفحة  -->
-		<div class="col-9">
-			<!-- <div class="col-12"> -->
+		<!-- <div class="col-9"> -->
+		<div class="col-12">
 			<ul class="nav nav-tabs" id="eventWizard" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">المعلومات العامة</button>
@@ -76,7 +76,7 @@
 			</div>
 		</div>
 		<!-- Rahmani: 👇🏻 ممن هنا d-none شيل update أو create إذا كان الصفحة  -->
-		<div class="col-3 event-history d-=none">
+		<div class="col-3 event-history d-none">
 			<h1>مراحل الطلب</h1>
 			<ul class="list-group">
 				<!-- Rahmani: م.جمال ، اعرض الهيستوري بشكل عكسي بحيث القديم يكون تحت والجديد يكون فوق -->
