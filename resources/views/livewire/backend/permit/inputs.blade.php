@@ -62,7 +62,7 @@
 				</div><!-- نهاية محتوى التاب -->
 
 				<div class="tab-pane fade" id="location-tab-pane" role="tabpanel" aria-labelledby="location-tab" tabindex="0">
-
+					<x-backend.permit.inputs.step-two />
 				</div><!-- نهاية محتوى التاب -->
 
 				<div class="tab-pane fade" id="speakers-tab-pane" role="tabpanel" aria-labelledby="speakers-tab" tabindex="0">
