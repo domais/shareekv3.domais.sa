@@ -1,7 +1,7 @@
 import axios from 'axios'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import $ from 'jquery'
-import Quill from 'quill/dist/quill'
+import Quill from 'quill'
 import * as bootstrap from 'bootstrap'
 import 'sweetalert2/src/sweetalert2.scss'
 window.Swal = Swal
