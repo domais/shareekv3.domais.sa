@@ -7,6 +7,7 @@
         @foreach ($data as $item)
         <div class="item">
             <div class="name">
+            <a href="{{route('permit.show',$item->id)}}">
                 <div>{{$item->title}}</div>
                 <small>{{$item->user->name}}</small>
             </div>
@@ -19,10 +20,11 @@
             <!-- Domais: this code only for now later will be dynamique -->
                 <div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>  
             @endif
+             </a>
             <div class="d-flex justify-content-between mt-3">
                 @foreach($buttons as $button)
                     <a class="{{ $button['class'] }}" href="{{ isset($button['href']) ? route($button['href'],$item->id) : '#' }}" 
-                      @if(isset($button['onclick'])) onclick="{{ $button['onclick'] }}({{ $item->id }})" @endif>
+                      @if(isset($button['onclick'])) onclick="{{ $button['onclick'] }}({{ $item->id }}, '{{ get_class($item) }}')" @endif>
                         {{ $button['title'] }}
                     </a>
                 @endforeach

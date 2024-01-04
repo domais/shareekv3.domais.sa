@@ -8,7 +8,7 @@
 					مقر إقامة المبادرة
 				</div>
 				<div class="col-8">
-					<select class="form-control" x-model="location" wire:model.live="form.event_location">
+					<select class="form-control" x-bind:disabled="is_show_page" x-model="location" wire:model.live="form.event_location">
 						<option selected disabled value="">اختر ...</option>
 						<option value="1">داخلية</option>
 						<option value="2">خارجية</option>

@@ -36,9 +36,14 @@ class Index extends Component
     }
 
     #[On('DeletePermit_Dispatch')] 
-    public function deletePermit($place, $id)
+    public function deletePermit($place, $id,$model)
     {
-        $permit = Permit::findOrfail($id);
+        if ($model == 'AppModelsPermit') {
+            $permit = Permit::findOrfail($id);        
+        }
+        else {
+            $permit = Draft::findOrfail($id);        
+        }
         $statusId = $permit->status_id;
         $permit->delete();
 

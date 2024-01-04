@@ -6,6 +6,8 @@ use App\Livewire\Backend\Permit\Traits\LiveChanges;
 use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
 use App\Models\Draft;
+use App\Models\Permit;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -15,12 +17,14 @@ class Inputs extends Component
     use LiveChanges;
 
     public ?Draft $draft = null;
+    public ?Permit $permit = null;
 
     public PermitForm $form;
     public SpeakerForm  $speakerForm;
     public $errors = [];
     public $speakers = [];
     public $Litrary_childes = [];
+    public $is_show_page = false;
 
     public function mount()
     {
@@ -30,8 +34,18 @@ class Inputs extends Component
             if ($this->draft->speakers != null) {
                 $this->speakers = json_decode($this->draft->speakers , true);
             }
-            # code...
-        }       
+        }   
+        
+        if ($this->permit) {
+            $this->form->setForm($this->permit);
+            $this->updatedForm();
+            if (!empty($this->permit->speakers)) {
+                $this->speakers = $this->permit->speakers->toArray();
+            }
+         
+        }   
+
+        $this->is_show_page = Route::currentRouteName() == 'permit.show';
     }   
 
     public function store($status)
@@ -58,11 +72,14 @@ class Inputs extends Component
             $this->saveDraft($permitData, $this->draft,$this->speakers);
         }
         else{
-            $this->savePermit($permitData, $this->speakers);
+            
+            $this->savePermit($permitData, $this->speakers,$this->permit);
             
         }
-        session(['draft_to_delete' => $this->draft->id]);
-        
+        if ($this->draft) {
+            session(['draft_to_delete' => $this->draft->id]);
+        }
+
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
     }

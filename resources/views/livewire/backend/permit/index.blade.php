@@ -28,6 +28,7 @@
 			count="{{count($drafts)}}" 
 			:data="$drafts"
 			:buttons="KanbanButtons('UserDraft')"
+			type="draft"
 		/>
 		@endrole
 
@@ -49,6 +50,7 @@
 		  edit="1"
 		  :data="$rejected"
 		  :buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserRejected') : []  "
+		  type="rejected"
 		  />
 		<x-backend.kanban-column
 			name="تحت الدراسة" 

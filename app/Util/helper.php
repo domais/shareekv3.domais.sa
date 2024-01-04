@@ -115,7 +115,7 @@ function ArToEn($input) {
         
             case 'UserRejected':
                 return[
-                    ['title' => 'تعديل', 'href' => 'permit.draft','class' => 'btn btn-secondary'],
+                    ['title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
                     ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;

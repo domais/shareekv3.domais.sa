@@ -9,7 +9,7 @@
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">نوع المبادرة</div>
 			<div class="col-9">
-				<select class="form-control rounded" wire:model.live="form.event_type_id" x-model="event_type_id">
+				<select class="form-control rounded" x-bind:disabled="is_show_page" wire:model.live="form.event_type_id" x-model="event_type_id">
 					<option selected disabled value="">اختر ...</option>
 					@foreach (settings('event_type') as $item)
 					<option value="{{$item->id}}">{{$item->name}} </option>
@@ -25,7 +25,7 @@
 				<span x-text="event_type_id == 1 ? 'نوع الفعالية' : 'نوع المساهمة' "></span>
 			</div>
 			<div class="col-9">
-				<select class="form-control" x-model="type" wire:model.live="form.category_id">
+				<select class="form-control" x-bind:disabled="is_show_page" x-model="type" wire:model.live="form.category_id">
 					<option selected disabled value="">اختر ...</option>
 					<option value="محاضرة">محاضرة</option>
 					<option value="ورشة عمل">ورشة عمل</option>
@@ -44,7 +44,7 @@
 				الرجاء كتابة النوع
 			</div>
 			<div class="col-9">
-				<input type="text" class="form-control rounded" wire:model.live="form.other">
+				<input type="text" x-bind:disabled="is_show_page" class="form-control rounded" wire:model.live="form.other">
 			</div>
 
 		</div>
@@ -54,7 +54,7 @@
 			<div class="col-3 d-flex align-items-center">الفئة المستهدفة</div>
 			<div class="col-9">
 				<div>
-					<select class="form-control rounded" wire:model.live="form.targeted_audience">
+					<select class="form-control rounded" wire:model.live="form.targeted_audience" x-bind:disabled="is_show_page">
 						<option selected disabled value="">اختر ...</option>
 						<option value="1">الأطفال (0-11)</option>
 						<option value="2">اليافعين (12-18)</option>
@@ -68,7 +68,7 @@
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">نوع الأدب</div>
 			<div class="col-9">
-				<select class="form-control rounded" wire:model.live="form.literary_id">
+				<select class="form-control rounded" wire:model.live="form.literary_id" x-bind:disabled="is_show_page">
 					<option selected disabled value="">اختر ...</option>
 					@foreach (settings('Literary_parent') as $item)
 					<option value="{{$item->id}}">{{$item->name}} </option>
@@ -82,7 +82,7 @@
 			<div class="col-3 d-flex align-items-center">نوع الفرعي للأدب</div>
 			<div class="col-9">
 				<div>
-					<select class="form-control rounded" wire:model.live="form.litrary_children_id">
+					<select class="form-control rounded" wire:model.live="form.litrary_children_id" x-bind:disabled="is_show_page">
 						<option selected disabled value="">اختر ...</option>
 						<template x-for="item in Litrary_childes" :key="item.id">
 							<option x-bind:value="item.id" x-text="item.name"></option>
@@ -95,7 +95,7 @@
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">عنوان المبادرة</div>
-			<div class="col-9"><input type="text" class="form-control rounded" wire:model="form.title"></div>
+			<div class="col-9"><input type="text" x-bind:disabled="is_show_page" class="form-control rounded" wire:model="form.title"></div>
 		</div>
 
 
@@ -116,19 +116,19 @@
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">عدد الحضور</div>
-			<div class="col-9"><input type="text" inputmode="numeric" class="form-control rounded text-left" wire:model="form.available_seats"></div>
+			<div class="col-9"><input type="text" x-bind:disabled="is_show_page" inputmode="numeric" class="form-control rounded text-left" wire:model="form.available_seats"></div>
 		</div>
 
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">تاريخ البداية</div>
-			<div class="col-9"><input type="text" value="" class="form-control rounded" id="start_date" wire:model.live="form.start_date"></div>
+			<div class="col-9"><input type="text" x-bind:disabled="is_show_page" value="" class="form-control rounded" id="start_date" wire:model.live="form.start_date"></div>
 		</div>
 
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">تاريخ النهاية</div>
-			<div class="col-9"><input type="text" class="form-control rounded" id="end_date" wire:model.live="form.end_date"></div>
+			<div class="col-9"><input type="text" x-bind:disabled="is_show_page" class="form-control rounded" id="end_date" wire:model.live="form.end_date"></div>
 		</div>
 
 		<!-- Rahmani: محترم نستخدمو هنا وفي باقي النظام ، امهلني بعض الوقت image cropperانا بدور على -->

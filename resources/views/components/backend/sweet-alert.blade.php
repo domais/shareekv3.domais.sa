@@ -1,7 +1,8 @@
 
 <script>
-	function DeletePermit(id) {
+function DeletePermit(id, model) {
 		var dataId = id;
+		var modelClassName = model;
 		Swal.fire({
 			title: 'هل أنت متأكد؟',
 			icon: 'question',
@@ -17,6 +18,7 @@
 				Livewire.dispatch('DeletePermit_Dispatch', {
 				place: 'inside', // or outside
 				id: dataId,
+				model: modelClassName
 			})
 			}
 		})

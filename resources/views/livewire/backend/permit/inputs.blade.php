@@ -13,19 +13,20 @@
 				<li class="breadcrumb-item active" aria-current="page">إنشاء تصريح جديد</li>
 			</ol>
 			<div class="links">
-
+				@if (!$permit)
 				<button class="btn btn-outline-secondary me-2" wire:click="store(1)">
 					حفظ
-
 					@if(empty($draft)) كمسودة @endif
 				</button>
+					
+				@endif
 				<button class="btn btn-brand"  wire:click="store(2)">إرسال الطلب</button>
 			</div>
 		</div>
 	</nav>
 
 
-	<div class="row" x-data="{errors: @entangle('errors').live}" x-init="
+	<div class="row" x-data="{errors: @entangle('errors').live,is_show_page: @entangle('is_show_page').live}" x-init="
 		$watch('errors', value => {
 
 			if (value.length > 0) {
@@ -42,8 +43,7 @@
 	">
 		<!-- Rahmani: col-9 ماعدا ذلك خليه col-12 👇🏻 خلي هذا update أو create إذا كان الصفحة  -->
 		<!-- <div class="col-9"> -->
-		<div class="col-12" wire:ignore>
-			<ul class="nav nav-tabs" id="eventWizard" role="tablist">
+			<div class="{{ $is_show_page ? 'col-9' : 'col-12' }}" wire:ignore>			<ul class="nav nav-tabs" id="eventWizard" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">المعلومات العامة</button>
 				</li>
@@ -82,7 +82,7 @@
 			</div>
 		</div>
 		<!-- Rahmani: 👇🏻 ممن هنا d-none شيل update أو create إذا كان الصفحة  -->
-		<div class="col-3 event-history d-none">
+		<div class="col-3 event-history {{$is_show_page ? '' : 'd-none'}}">
 			<h1>مراحل الطلب</h1>
 			<ul class="list-group">
 				<!-- Rahmani: م.جمال ، اعرض الهيستوري بشكل عكسي بحيث القديم يكون تحت والجديد يكون فوق -->
@@ -98,5 +98,6 @@
 				</li>
 			</ul>
 		</div>
+
 	</div><!-- /row -->
 </div>

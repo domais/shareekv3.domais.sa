@@ -74,19 +74,29 @@ trait LiveChanges
     }
 
 
-    public function savePermit($permitData,$speakers)
+    public function savePermit($permitData,$speakers,$permit = null)
     {
         $permitData = array_map(function($value) {
             return $value === "" ? null : $value;
         }, $permitData);
-        $permitData['speakers'] = json_encode($this->speakers);
+
         $permitData['literary_id'] =  $permitData['litrary_children_id'];
         $permitData['status_id'] =  2;
         
-        DB::transaction(function () use ($permitData,$speakers) {
-            $permit = Permit::create($permitData);
-            $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
-            $permit->save();
+        DB::transaction(function () use ($permitData,$speakers,$permit) {
+            if ($permit) {
+                $order_number = $permit->order_number;
+                $permitData['order_number'] = $order_number;
+                $permit->update($permitData);
+                $permit->speakers()->delete();
+            }
+            else{
+                $permit = Permit::create($permitData);
+                $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
+                $permit->save();
+
+            }
+
 
             foreach ($speakers as $key => $item) {
                 $speaker = new Speaker();
