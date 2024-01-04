@@ -103,6 +103,7 @@
 			<div class="col-3 d-flex align-items-center">وصف المبادرة</div>
 			<div class="col-9 h-75" wire:ignore>
 				<div id="editor" >
+					{!! $this->form->description !!}
 				</div>
 			</div>
 		</div>
@@ -115,7 +116,7 @@
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">عدد الحضور</div>
-			<div class="col-9"><input type="text" inputmode="numeric" class="form-control rounded text-left" wire:model="form.attendees_number"></div>
+			<div class="col-9"><input type="text" inputmode="numeric" class="form-control rounded text-left" wire:model="form.available_seats"></div>
 		</div>
 
 
@@ -176,15 +177,9 @@
 		quill.on('text-change', function (delta, oldDelta, source) {
 			if (source == 'user') {
 				quillContent = quill.root.innerHTML
-				Livewire.dispatch('editorUpdated', { data: quill.root.innerHTML })
+				Livewire.dispatch('editorUpdated', { data: quillContent })
 			}
 		});
-
-		document.addEventListener('livewire:update', function () {
-			quill.root.innerHTML = quillContent
-		});
-
-
 
 	})
 

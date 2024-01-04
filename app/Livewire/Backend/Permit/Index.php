@@ -19,6 +19,8 @@ class Index extends Component
     public function mount()
     {
         $permits = getEvents();
+
+      
         
         $this->drafts = $permits[1];  
 

@@ -1,4 +1,6 @@
-<div>
+<div
+  x-data="{location: @entangle('form.event_location').live}"
+>
 	<div class="row">
 		<div class="col-5">
 			<div class="row my-3">
@@ -6,7 +8,7 @@
 					مقر إقامة المبادرة
 				</div>
 				<div class="col-8">
-					<select class="form-control">
+					<select class="form-control" x-model="location" wire:model.live="form.event_location">
 						<option selected disabled value="">اختر ...</option>
 						<option value="1">داخلية</option>
 						<option value="2">خارجية</option>
@@ -14,7 +16,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="row my-3">
+			<div class="row my-3" x-show="location == 2">
 				<div class="col-4 d-flex align-items-center">خطاب الموافقة</div>
 				<div class="col-8"><input type="file" class="form-control"></div>
 			</div>
@@ -23,7 +25,7 @@
 				<div class="col-8"><input type="text" id="location" dir="ltr" placeholder="حدد المكان على الخريطة" disabled class="form-control text-start"></div>
 			</div>
 			<!-- Rahmani: محترم نستخدمو هنا وفي باقي النظام ، امهلني بعض الوقت image cropperانا بدور على -->
-			<div class="AdvImg" style="height: 311px">
+			<div class="AdvImg" style="height: 311px" x-show="location == 2">
 				<div>
 					اضغط هنا لإرفاق صورة للمكان<br><br>
 					<small>مقاسها 500×500 بكسل</small>
@@ -43,7 +45,7 @@
 		console.log('Google\'s Map loaded 👍')
 	}
 	function initMap() {
-		var position = { lat: 21.4969389, lng: 39.2271579 };
+		var position = { lat: {{$this->form->lat ?? 21.4969389}}, lng: {{$this->form->lng ?? 39.2271579}} };
 		var myOptions = {
 			zoom: 17,
 			streetViewControl: false,
@@ -77,6 +79,8 @@
 	
 	function updateInput(lat, lng) {
 		// Rahmani: هنا تاخد اللوكيشن إللي حدده المستخدم
+		//Domais : done thnx
+		Livewire.dispatch('updateLocation', {lat:lat, lng:lng})
 		console.log(lat, lng);
 		document.getElementById("location").value = lat + ' , ' + lng
 	}

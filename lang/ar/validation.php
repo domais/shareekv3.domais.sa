@@ -152,6 +152,15 @@ return [
         'title' => 'العنوان',
         'nationality' => 'الجنسية',
         'type' => 'التصنيف',
+        'event_type_id' => 'نوع المبادرة',
+        'event_location' => 'مقر إقامة المبادرة',
+        'literary_id' => 'التصنيف الأدبي',
+        'description' => 'الوصف',
+        'start_date' => 'تاريخ البداية',
+        'end_date' => 'تاريخ النهاية',
+        'available_seats' => 'المقاعد المتاحة',
+        'lat' => 'خط العرض',
+        'lng' => 'خط الطول',
     ],
     'custom' => [
         'attribute-name' => [

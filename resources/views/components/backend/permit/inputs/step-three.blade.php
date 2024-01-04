@@ -1,4 +1,13 @@
-<div class="row">
+<div    class="row"
+        x-data="{
+            speakers: @entangle('speakers').live,
+            removeSpeaker: function(index) {
+                this.speakers.splice(index, 1);
+            }
+        }"     
+
+
+>
 
     <div class="col-5">
         <div class="row my-2">
@@ -71,15 +80,15 @@
     <div class="col-1"></div>
     <div class="col-6">
         <div class=" row my-2">
-            @foreach ($this->speakers as $key => $item)
+            <template x-for="(speaker,index) in speakers">
 
-            <div class="card p-2 mx-1 mb-2" style="width: 100%">
-                <div class="card-body d-flex justify-space-between align-items-center p-0">
-                    <h5 class="card-title float-start mb-0 me-auto">{{$item['name']}}</h5>
-                    <button class="btn btn-danger float-end" wire:click="deleteSpeaker({{$key}})">×</button>
+                <div class="card p-2 mx-1 mb-2" style="width: 100%">
+                    <div class="card-body d-flex justify-space-between align-items-center p-0">
+                        <h5 class="card-title float-start mb-0 me-auto" x-text="speaker.name"></h5>
+                        <button class="btn btn-danger float-end" x-on:click="removeSpeaker(index)">×</button>
+                    </div>
                 </div>
-            </div>
-            @endforeach
-        </div>
+            </template>
+    </div>
     </div>
 </div>

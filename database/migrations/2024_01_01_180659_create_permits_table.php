@@ -19,6 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id')->nullable()->comment('admin who approved the permit');
 
             $table->unsignedBigInteger('event_type_id');
+            $table->string('category_id');
+            $table->string('other')->nullable();
             $table->string('targeted_audience');
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside');
@@ -26,8 +28,8 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->string('title');
             $table->longText('description');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
 
             $table->bigInteger('available_seats');
             $table->boolean('need_support')->default(0);

@@ -30,7 +30,7 @@
 					<img src="{{asset('img/default_avatar.png')}}" alt="mdo" width="50" class="rounded-circle">
 				</a>
 				<div class="user-info">
-					جمال رحماني
+					 {{auth()->user()->name}}
 					<br>
 					<sapn class="user-role">مقهى النرجس</span>
 				</div>

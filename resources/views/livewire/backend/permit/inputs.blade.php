@@ -13,8 +13,13 @@
 				<li class="breadcrumb-item active" aria-current="page">إنشاء تصريح جديد</li>
 			</ol>
 			<div class="links">
-				<a class="btn btn-outline-secondary me-2" href="#" role="button">حفظ كمسودة</a>
-				<a class="btn btn-brand" href="{{route('permit.create')}}">إرسال الطلب</a>
+
+				<button class="btn btn-outline-secondary me-2" wire:click="store(1)">
+					حفظ
+
+					@if(empty($draft)) كمسودة @endif
+				</button>
+				<button class="btn btn-brand"  wire:click="store(2)">إرسال الطلب</button>
 			</div>
 		</div>
 	</nav>
@@ -37,7 +42,7 @@
 	">
 		<!-- Rahmani: col-9 ماعدا ذلك خليه col-12 👇🏻 خلي هذا update أو create إذا كان الصفحة  -->
 		<!-- <div class="col-9"> -->
-		<div class="col-12">
+		<div class="col-12" wire:ignore>
 			<ul class="nav nav-tabs" id="eventWizard" role="tablist">
 				<li class="nav-item" role="presentation">
 					<button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">المعلومات العامة</button>

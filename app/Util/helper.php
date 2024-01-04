@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Draft;
 use App\Models\Event;
 use App\Models\EventType;
 use App\Models\Literary;
@@ -43,7 +44,7 @@ function ArToEn($input) {
 
         $events = [];
 
-        $statuses = [1, 2, 3, 4, 10];
+        $statuses = [2, 3, 4, 10];
         $statusesEvent = [5, 6, 7, 8];
         if($role == 'User') {
             if($is_event) {
@@ -55,6 +56,7 @@ function ArToEn($input) {
                 foreach($statuses as $status) {
                     $events[$status] = Permit::where('status_id', $status)->where('user_id', $user->id)->get();
                 }
+                $events[1] = Draft::where('user_id', $user->id)->get();
             }
         } else {
             if($is_event) {
@@ -106,32 +108,32 @@ function ArToEn($input) {
         switch ($name) {
             case 'UserDraft':
                 return [
-                    ['title' => 'إكمال', 'href' => '#', 'class' => 'btn btn-secondary'],
+                    ['title' => 'إكمال', 'href' => 'permit.draft', 'class' => 'btn btn-secondary'],
                     ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
         
             case 'UserRejected':
                 return[
-                    ['title' => 'تعديل', 'href' => '#','class' => 'btn btn-secondary'],
+                    ['title' => 'تعديل', 'href' => 'permit.draft','class' => 'btn btn-secondary'],
                     ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
             case 'AdminAssignToMe':
                 return[
-                    ['title' => 'إبدأ الدراسة', 'href' => '#','class' => 'btn btn-secondary'],
+                    ['title' => 'إبدأ الدراسة', 'href' => 'permit.draft','class' => 'btn btn-secondary'],
                 ];
                 break;
             case 'AdminIntialApproved':
                 return[
-                    ['title' => 'موافقة مبدأية', 'href' => '#','class' => 'btn btn-secondary'],
+                    ['title' => 'موافقة مبدأية', 'href' => 'permit.draft','class' => 'btn btn-secondary'],
                     ['title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
 
              case 'AdminFinalApproved':
                     return[
-                        ['title' => 'تشغيل', 'href' => '#','class' => 'btn btn-warning'],
+                        ['title' => 'تشغيل', 'href' => 'permit.draft','class' => 'btn btn-warning'],
                         ['title' => 'تشغيل بدون تصريح', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
                     ];
                     break;

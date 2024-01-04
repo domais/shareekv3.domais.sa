@@ -25,6 +25,7 @@
 
 
 	// Rahmani: let's disscuss this
+	//Domais : Here to change tO BE FOR ALL CRUD OPERATIONS 
     document.addEventListener('livewire:init', () => {
     Livewire.on('DeletePermit_Response', (event) => {
         var data = event[0];
