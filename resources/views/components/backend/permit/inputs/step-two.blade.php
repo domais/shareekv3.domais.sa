@@ -16,10 +16,14 @@
 			</div>
 			<div class="row my-3">
 				<div class="col-4 d-flex align-items-center">خطاب الموافقة</div>
-				<div class="col-8"><input type="file" wire:model="form.approval_letter_pdf" class="form-control" accept=".pdf"></div>
+				<div class="col-8"><input type="file" class="form-control"></div>
+			</div>
+			<div class="row my-3">
+				<div class="col-4 d-flex align-items-center">إحداثيات المكان</div>
+				<div class="col-8"><input type="text" id="location" dir="ltr" placeholder="حدد المكان على الخريطة" disabled class="form-control text-start"></div>
 			</div>
 			<!-- Rahmani: محترم نستخدمو هنا وفي باقي النظام ، امهلني بعض الوقت image cropperانا بدور على -->
-			<div class="AdvImg" style="height: 367px">
+			<div class="AdvImg" style="height: 311px">
 				<div>
 					اضغط هنا لإرفاق صورة للمكان<br><br>
 					<small>مقاسها 500×500 بكسل</small>
@@ -34,7 +38,6 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap&amp;key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&amp;language=ar&amp;region=SA"></script>
 <script>
 	function initMap() {
-		var map;
 		var position = { lat: 21.4969389, lng: 39.2271579 };
 		var myOptions = {
 			zoom: 17,
@@ -42,8 +45,10 @@
 			center: position
 		};
 		var map = new google.maps.Map(document.getElementById("map"), myOptions);
+		
+		map.setOptions({ styles: [{ featureType: "landscape", stylers: [{ visibility: "off" }], }, { featureType: "poi", stylers: [{ visibility: "off" }] }, { featureType: "landscape", stylers: [{ visibility: "off" }] }] });
 
-		var marker = new google.maps.Marker({ position: position, url: 'https://maps.google.com/?q=' + position.lat + ',' + position.lng + '', map });
+		// var marker = new google.maps.Marker({ position: position, url: 'https://maps.google.com/?q=' + position.lat + ',' + position.lng + '', map });
 
 		// google.maps.event.addListener(marker, 'click', function() {
 		// 	window.open(this.url, '_tab')
@@ -64,11 +69,11 @@
 		//     updateInput(lat,lng)
 		// });
 
-		map.setOptions({ styles: [{ featureType: "landscape", stylers: [{ visibility: "off" }], }, { featureType: "poi", stylers: [{ visibility: "off" }] }, { featureType: "landscape", stylers: [{ visibility: "off" }] }] });
 
 	}
 	function updateInput(lat, lng) {
 		// Rahmani: هنا تاخد اللوكيشن إللي حدده المستخدم
 		console.log(lat, lng);
+		document.getElementById("map").value = lat+' , '+lng
 	}
 </script>
