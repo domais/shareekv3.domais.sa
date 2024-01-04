@@ -26,9 +26,9 @@ html{
 	min-height: calc(100vh - 260px) !important;
 	padding-bottom: 50px;
 }
-.container{
+/* .container{
 	max-width: 1320px !important;
-}
+} */
 
 header {
 	background-color: #062E3A;
@@ -1638,6 +1638,13 @@ label.dropzone1 {
 	height: 100px;
 	width: 400px;
 }
+.AdvImg{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	aspect-ratio: 1;
+	width: 100%;
+}
 
 .dragover {
 	background-color: #ffffff !important;
@@ -1681,10 +1688,18 @@ label.dropzone1 {
 }
 
 .event-history h1 {
-	font-size: 25px;
+	font-size: 18px;
 	font-weight: bold;
 	margin: 0 0 20px 0;
 	color: #34566b;
+}
+.event-history .date {
+	font-size: 14px;
+	text-align: left;
+}
+#editor{
+	height: 220px;
+	background-color: #fff;
 }
 
 .event-history ul {
@@ -1857,4 +1872,20 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
 }
 .guest .container{
 	max-width: 1000px !important;
+}
+
+.ql-toolbar.ql-snow {
+    border: none;
+    padding: 0 0 8px 0;
+}
+.ql-toolbar.ql-snow .ql-formats{
+	margin-right: unset;
+	margin-left: auto;
+}
+.ql-snow .ql-color-picker .ql-picker-label, .ql-snow .ql-icon-picker .ql-picker-label {
+	display: flex;
+}
+.ql-snow .ql-icon-picker .ql-picker-item{
+	display: flex;
+	overflow: hidden;
 }
