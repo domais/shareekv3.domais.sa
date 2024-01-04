@@ -1627,7 +1627,7 @@ div.dropzone1 {
 	width: 100%;
 	text-align: center;
 	background: #ffffff;
-	border: 2px dashed #8e8e8e;
+	border: 2px dashed #c6d1e1;
 	border-radius: 10px;
 	padding: 10px;
 }
@@ -1644,6 +1644,11 @@ label.dropzone1 {
 	justify-content: center;
 	aspect-ratio: 1;
 	width: 100%;
+	text-align: center;
+	background: #ffffff;
+	border: 2px dashed #c6d1e1;
+	border-radius: 10px;
+	padding: 10px;
 }
 
 .dragover {
@@ -1698,7 +1703,7 @@ label.dropzone1 {
 	text-align: left;
 }
 #editor{
-	height: 220px;
+	height: 245px;
 	background-color: #fff;
 }
 

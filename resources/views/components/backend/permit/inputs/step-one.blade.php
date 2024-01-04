@@ -92,11 +92,6 @@
 			</div>
 		</div>
 
-		<div class="row my-3">
-			<div class="col-3 d-flex align-items-center">عدد الحضور</div>
-			<div class="col-9"><input type="text" inputmode="numeric" class="form-control rounded text-left" wire:model="form.attendees_number"></div>
-		</div>
-
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">عنوان المبادرة</div>
@@ -117,6 +112,13 @@
 
 
 	<div class="col-5">
+
+		<div class="row my-3">
+			<div class="col-3 d-flex align-items-center">عدد الحضور</div>
+			<div class="col-9"><input type="text" inputmode="numeric" class="form-control rounded text-left" wire:model="form.attendees_number"></div>
+		</div>
+
+
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">تاريخ البداية</div>
 			<div class="col-9"><input type="text" value="" class="form-control rounded" id="start_date" wire:model.live="form.start_date"></div>
@@ -129,17 +131,15 @@
 		</div>
 
 		<!-- Rahmani: محترم نستخدمو هنا وفي باقي النظام ، امهلني بعض الوقت image cropperانا بدور على -->
-		<div class="row my-3 mt-5">
-			<div class="col-3"></div>
-			<div class="col-9">
-				<label for="test" class="dropzone1 w-100">
-					<div class="dropzone1 AdvImg">
-						<div>
-							اضغط هنا لإرفاق صورة الإعلان<br><br>
-							<small>مقاسها 500×500 بكسل</small>
-						</div>
+		<div class="row mt-3 mt-5">
+			<div class="col-1"></div>
+			<div class="col-11">
+				<div class="AdvImg" style="height: 367px">
+					<div>
+						اضغط هنا لإرفاق صورة للمكان<br><br>
+						<small>مقاسها 500×500 بكسل</small>
 					</div>
-				</label>
+				</div>
 			</div>
 		</div><!-- /col-5 -->
 	</div>
