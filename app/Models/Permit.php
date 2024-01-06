@@ -56,6 +56,11 @@ class Permit extends Model
         return $this->hasMany(Speaker::class);
     }
 
+    public function partnerships()
+    {
+        return $this->hasMany(Partnership::class);
+    }
+    
     public function history()
     {
         return $this->hasMany(History::class);

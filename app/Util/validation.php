@@ -52,3 +52,12 @@ use Illuminate\Validation\Rules\Password;
             'linkedin' => 'nullable|string|max:255',
         ];
     }
+
+    function newPartnership()
+    {
+        return [
+            'name' => 'required|string',
+            'type' => 'required|in:نادي ثقافي,جمعية,قطاع خاص,قطاع حكومي',
+            'description' => 'required|string',
+        ];
+    }

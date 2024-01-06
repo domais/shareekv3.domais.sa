@@ -36,6 +36,7 @@ return new class extends Migration
             $table->double('lng')->nullable();
 
             $table->json('speakers')->nullable();
+            $table->json('partnership')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');

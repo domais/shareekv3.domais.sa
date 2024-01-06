@@ -25,6 +25,16 @@ class Event extends Model
         return $this->belongsTo(EventType::class);
     }
 
+    public function speakers()
+    {
+        return $this->hasMany(Speaker::class);
+    }
+
+    public function partnerships()
+    {
+        return $this->hasMany(Partnership::class);
+    }
+
     public function literary()
     {
         return $this->belongsTo(Literary::class);

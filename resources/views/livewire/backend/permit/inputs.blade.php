@@ -78,7 +78,7 @@
 				</div><!-- نهاية محتوى التاب -->
 
 				<div class="tab-pane fade" id="partnership-tab-pane" role="tabpanel" aria-labelledby="partnership-tab" tabindex="0">
-
+					<x-backend.permit.inputs.step-four />
 				</div><!-- نهاية محتوى التاب -->
 
 			</div>

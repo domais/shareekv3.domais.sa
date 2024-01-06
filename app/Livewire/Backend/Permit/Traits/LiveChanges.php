@@ -4,6 +4,7 @@ namespace App\Livewire\Backend\Permit\Traits;
 
 use App\Models\Draft;
 use App\Models\History;
+use App\Models\Partnership;
 use App\Models\Permit;
 use App\Models\Speaker;
 use Illuminate\Support\Facades\DB;
@@ -33,6 +34,19 @@ trait LiveChanges
         $this->speakerForm->reset(); 
     }
 
+    public function addPartnership()
+    {
+        try {
+            $this->partnershipForm->validate();
+        } catch (ValidationException $thTwo) {
+            $this->errors = $thTwo->validator->errors()->all();
+            return;
+        }
+        $this->partnerships[] = $this->partnershipForm->toArray();
+
+        $this->partnershipForm->reset(); 
+    }
+
     public function deleteSpeaker($index)
     {
         unset($this->speakers[$index]);
@@ -51,7 +65,7 @@ trait LiveChanges
         $this->form->lng = $lng;
     }
 
-    public function saveDraft($permitData, $draft = null,$speakers = [])
+    public function saveDraft($permitData, $draft = null,$speakers = [],$partnerships = [])
     {
         $permitData = array_map(function($value) {
             return $value === "" ? null : $value;
@@ -64,18 +78,20 @@ trait LiveChanges
             $draft = Draft::create($permitData);
             $draft->order_number = date('y').str_pad($draft->id, 5, '0', STR_PAD_LEFT);
             $draft->speakers = json_encode($speakers);
+            $draft->partnership = json_encode($partnerships);
         } else {
             $order_number = $draft->order_number;
             $permitData['order_number'] = $order_number;
             $draft->update($permitData);
             $draft->speakers = json_encode($speakers);
+            $draft->partnership = json_encode($partnerships);
         }
     
         $draft->save();
     }
 
 
-    public function savePermit($permitData,$speakers,$permit = null)
+    public function savePermit($permitData,$speakers,$partnerships,$permit = null)
     {
         $permitData = array_map(function($value) {
             return $value === "" ? null : $value;
@@ -84,13 +100,15 @@ trait LiveChanges
         $permitData['literary_id'] =  $permitData['litrary_children_id'];
         $permitData['status_id'] =  2;
         
-        DB::transaction(function () use ($permitData,$speakers,$permit) {
+        DB::transaction(function () use ($permitData,$speakers,$permit,$partnerships) {
             if ($permit) {
                 $permitData['status_id'] = 3;
                 $order_number = $permit->order_number;
                 $permitData['order_number'] = $order_number;
                 $permit->update($permitData);
                 $permit->speakers()->delete();
+                $permit->partnerships()->delete();
+
 
                 AddToHistory($permit->id,$permitData['status_id'],true);
 
@@ -117,6 +135,18 @@ trait LiveChanges
                 $speaker->linkedin = $item['linkedin'];
                 $speaker->partner_id = auth()->user()->owner->id;
                 $speaker->save();
+            }
+            
+            foreach ($partnerships as $key => $item) {
+                $parntership = new Partnership();
+                $parntership->permit_id = $permit->id;
+                $parntership->partner_id = auth()->user()->owner->id;
+
+                $parntership->name = $item['name'];
+                $parntership->type = $item['type'];
+                $parntership->description = $item['description'];
+
+                $parntership->save();
             }
 
             

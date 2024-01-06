@@ -13,8 +13,15 @@ return new class extends Migration
     {
         Schema::create('partnerships', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('permit_id');
+            $table->unsignedBigInteger('event_id')->nullable();
+            $table->unsignedBigInteger('partner_id');
+
+            
             $table->string('name');
             $table->enum('type',['نادي ثقافي','جمعية','قطاع خاص','قطاع حكومي']);
+            $table->text('description');
             $table->timestamps();
         });
     }

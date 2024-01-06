@@ -37,7 +37,12 @@ return new class extends Migration
             $table->foreign('event_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('permit_id')->references('id')->on('permits')->onDelete('cascade');
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
+        });
 
+        Schema::table('partnerships', function (Blueprint $table) {
+            $table->foreign('event_id')->references('id')->on('statuses')->onDelete('cascade');
+            $table->foreign('permit_id')->references('id')->on('permits')->onDelete('cascade');
+            $table->foreign('partner_id')->references('id')->on('partners')->onDelete('cascade');
         });
 
         Schema::table('partners', function (Blueprint $table) {

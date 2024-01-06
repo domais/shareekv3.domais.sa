@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Permit;
 
 use App\Livewire\Backend\Permit\Traits\LiveChanges;
+use App\Livewire\Forms\PartnershipForm;
 use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
 use App\Models\Draft;
@@ -21,8 +22,11 @@ class Inputs extends Component
 
     public PermitForm $form;
     public SpeakerForm  $speakerForm;
+    public PartnershipForm  $partnershipForm;
+
     public $errors = [];
     public $speakers = [];
+    public $partnerships = [];
     public $Litrary_childes = [];
     public $is_show_page = false;
     public $histories =  [];
@@ -34,6 +38,7 @@ class Inputs extends Component
             $this->updatedForm();
             if ($this->draft->speakers != null) {
                 $this->speakers = json_decode($this->draft->speakers , true);
+                $this->partnerships = json_decode($this->draft->partnership , true);
             }
         }   
         
@@ -43,6 +48,10 @@ class Inputs extends Component
             if (!empty($this->permit->speakers)) {
                 $this->speakers = $this->permit->speakers->toArray();
             }
+            if (!empty($this->permit->partnerships)) {
+                $this->partnerships = $this->permit->partnerships->toArray();
+            }
+
          
         }   
 
@@ -74,11 +83,11 @@ class Inputs extends Component
                 $this->errors[] = "يجب إدخال العنوان و التصنيف الأدبي" ; 
                 return;
             }
-            $this->saveDraft($permitData, $this->draft,$this->speakers);
+            $this->saveDraft($permitData, $this->draft,$this->speakers,$this->partnerships);
         }
         else{
             
-            $this->savePermit($permitData, $this->speakers,$this->permit);
+            $this->savePermit($permitData, $this->speakers,$this->partnerships,$this->permit);
             
         }
         if ($this->draft) {
