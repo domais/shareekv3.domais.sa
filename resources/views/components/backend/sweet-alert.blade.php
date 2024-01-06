@@ -1,96 +1,43 @@
 
 <script>
+function handleAction(id, model, title, html, confirmButtonColor, confirmButtonText, action) {
+    Swal.fire({
+        title: title,
+        icon: 'question',
+        html: html,
+        showCancelButton: true,
+        confirmButtonColor: confirmButtonColor,
+        cancelButtonColor: '#ccc',
+        cancelButtonText:'إلغاء',
+        confirmButtonText: confirmButtonText
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Livewire.dispatch(action, {
+                place: 'inside', // or outside
+                id: id,
+                model: model
+            })
+        }
+    })
+}
+
 function DeletePermit(id, model) {
-		var dataId = id;
-		var modelClassName = model;
-		Swal.fire({
-			title: 'هل أنت متأكد؟',
-			icon: 'question',
-			html: 'سيتم حذف التصريح ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
-			showCancelButton: true,
-			confirmButtonColor: '#e33e41',
-			cancelButtonColor: '#ccc',
-			cancelButtonText:'إلغاء',
-			confirmButtonText: 'نعم احذف الطلب'
-		}).then((result,id) => {
-			// Domais [OK 👍]: please update this code to dispatch event to livewire component only.
-			if (result.isConfirmed) {
-				Livewire.dispatch('DeletePermit_Dispatch', {
-				place: 'inside', // or outside
-				id: dataId,
-				model: modelClassName
-			})
-			}
-		})
-	}
+    handleAction(id, model, 'هل أنت متأكد؟', 'سيتم حذف التصريح ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟', '#e33e41', 'نعم احذف الطلب', 'DeletePermit_Dispatch');
+}
 
 function AssignTome(id,model) {
-		var dataId = id;
 		var modelClassName = model;
-		Swal.fire({
-			title: 'هل أنت متأكد؟',
-			icon: 'question',
-			html: 'سيتم إرفاق التصريح إليك  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
-			showCancelButton: true,
-			confirmButtonColor: '#5de868',
-			cancelButtonColor: '#ccc',
-			cancelButtonText:'إلغاء',
-			confirmButtonText: 'نعم ارفق الطلب'
-		}).then((result,id) => {
-			if (result.isConfirmed) {
-				Livewire.dispatch('AssignPermit_Dispatch', {
-				place: 'inside', // or outside
-				id: dataId,
-			})
-			}
-		})
-	
+		handleAction(id, modelClassName, 'هل أنت متأكد؟', 'سيتم إرفاق التصريح إليك  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟', '#e33e41', 'إرفاق', 'AssignPermit_Dispatch');
 }
 
 function RejectPermit(id,model) {
-		var dataId = id;
 		var modelClassName = model;
-		Swal.fire({
-			title: 'هل أنت متأكد؟',
-			icon: 'question',
-			html: 'سيتم إعادة التصريح إلى المستخدم ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
-			showCancelButton: true,
-			confirmButtonColor: '#e33e41',
-			cancelButtonColor: '#ccc',
-			cancelButtonText:'إلغاء',
-			confirmButtonText: 'نعم إعادة الطلب'
-		}).then((result,id) => {
-			if (result.isConfirmed) {
-				Livewire.dispatch('RejectPermit_Dispatch', {
-				place: 'inside', // or outside
-				id: dataId,
-			})
-			}
-		})
-	
+		handleAction(id, modelClassName, 'هل أنت متأكد؟', 'سيتم إعادة التصريح إلى المستخدم  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟', '#e33e41', 'إعادة الطلب', 'RejectPermit_Dispatch');
 }
 
 function IntialApproved(id,model) {
-		var dataId = id;
 		var modelClassName = model;
-		Swal.fire({
-			title: 'هل أنت متأكد؟',
-			icon: 'question',
-			html: 'سيتم قبول التصريح  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
-			showCancelButton: true,
-			confirmButtonColor: '#5de868',
-			cancelButtonColor: '#ccc',
-			cancelButtonText:'إلغاء',
-			confirmButtonText: 'نعم ارفق الطلب'
-		}).then((result,id) => {
-			if (result.isConfirmed) {
-				Livewire.dispatch('IntialApproved_Dispatch', {
-				place: 'inside', // or outside
-				id: dataId,
-			})
-			}
-		})
-	
+		handleAction(id, modelClassName, 'هل أنت متأكد؟', 'يتم قبول التصريح  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟', '#e33e41', 'موافقة مبدأية', 'IntialApproved_Dispatch');
 }
 
 

@@ -67,7 +67,7 @@ class Index extends Component
     }
 
     #[On('AssignPermit_Dispatch')] 
-    public function AssignPermit($place, $id)
+    public function AssignPermit($place, $id,$model)
     {
        $permit = Permit::findorfail($id);
        $permit->status_id = 3;
@@ -80,7 +80,7 @@ class Index extends Component
     }
 
     #[On('RejectPermit_Dispatch')] 
-    public function RejectPermit($place, $id)
+    public function RejectPermit($place, $id,$model)
     {
         $permit = Permit::findorfail($id);
         $permit->status_id = 10;
@@ -93,7 +93,7 @@ class Index extends Component
     }
     
     #[On('IntialApproved_Dispatch')] 
-    public function IntialApproved($place, $id)
+    public function IntialApproved($place, $id,$model)
     {
         $permit = Permit::findorfail($id);
         $permit->status_id = 4;
