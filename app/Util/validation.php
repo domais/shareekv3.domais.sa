@@ -61,3 +61,15 @@ use Illuminate\Validation\Rules\Password;
             'description' => 'required|string',
         ];
     }
+
+    function newTicket()
+    {
+        return [
+            'request_type' => 'required|integer|between:1,4',
+            'permit_number' => 'nullable|integer',
+            'subject' => 'required|string',
+            'description' => 'required|string',
+            'additional_info' => 'nullable|string',
+            'status' => 'required|integer|between:0,1',
+        ];
+    }

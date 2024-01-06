@@ -51,4 +51,9 @@ class User extends Authenticatable implements LaratrustUser
     {
         return $this->hasOne(Partner::class, 'owner_id');
     }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

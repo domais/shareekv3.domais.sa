@@ -17,7 +17,7 @@ Route::get('/', function() {
     return redirect()->route('login');
 });
 
-Route::namespace('App\Livewire\Backend')->group(function() {
+Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function() {
 
     Route::namespace('Permit')->prefix('permit')->as('permit.')->group(function() {
        
@@ -34,6 +34,11 @@ Route::namespace('App\Livewire\Backend')->group(function() {
     });
 
     Route::namespace('Event')->prefix('event')->as('event.')->group(function() {
+       
+        Route::get('/', Index::class)->name('index');
+    });
+
+    Route::namespace('Ticket')->prefix('ticket')->as('ticket.')->group(function() {
        
         Route::get('/', Index::class)->name('index');
     });

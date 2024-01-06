@@ -19,7 +19,7 @@
 
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">دعم الشريك</a></li>
 
-				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">المساعدة</a></li>
+				<li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link px-2 link-light">المساعدة</a></li>
 
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">الإعدادات</a></li>
 			</ul>
@@ -32,7 +32,13 @@
 				<div class="user-info">
 					 {{auth()->user()->name}}
 					<br>
-					<sapn class="user-role">مقهى النرجس</span>
+					<sapn class="user-role">
+						@if (auth()->user()->hasRole('User'))
+						  	{{auth()->user()->owner->name}}
+						@else
+							{{auth()->user()->roles[0]->name}}
+						@endif
+					</span>
 				</div>
 				<ul class="dropdown-menu text-small">
 					<li><a class="dropdown-item" href="#">ملفي الشخصي</a></li>
