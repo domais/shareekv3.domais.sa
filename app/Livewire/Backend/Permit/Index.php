@@ -16,6 +16,7 @@ class Index extends Component
     public $pending = [];
     public $approved = [];
     public $rejected = [];
+    public $role = 0;
 
     public function mount()
     {
@@ -29,9 +30,12 @@ class Index extends Component
         $this->rejected = $permits[10];
         $this->pending = $permits[3];
         $this->approved = $permits[4]; 
+
+        $user = auth()->user();
         
-        if (auth()->user()->hasRole('User')) {
+        if ($user->hasRole('User')) {
             $this->pending = $this->new_orders->concat($this->pending);
+            $this->role = 2;
         }
     }
 
@@ -55,9 +59,49 @@ class Index extends Component
         else {
             $this->rejected = collect($this->rejected)->filter(function ($value, $key) use ($id) {
                 return $value->id != $id;
-            });       
+            });   
+            AddToHistory($permit->id,$statusId);
+    
          }
          $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+    }
+
+    #[On('AssignPermit_Dispatch')] 
+    public function AssignPermit($place, $id)
+    {
+       $permit = Permit::findorfail($id);
+       $permit->status_id = 3;
+       $permit->admin_id = auth()->id();
+       $permit->save();
+
+       AddToHistory($permit->id,$permit->status_id);
+
+       $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+    }
+
+    #[On('RejectPermit_Dispatch')] 
+    public function RejectPermit($place, $id)
+    {
+        $permit = Permit::findorfail($id);
+        $permit->status_id = 10;
+        $permit->save();
+
+        AddToHistory($permit->id,$permit->status_id);
+
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+    }
+    
+    #[On('IntialApproved_Dispatch')] 
+    public function IntialApproved($place, $id)
+    {
+        $permit = Permit::findorfail($id);
+        $permit->status_id = 4;
+        $permit->save();
+
+        AddToHistory($permit->id,$permit->status_id);
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
     
 

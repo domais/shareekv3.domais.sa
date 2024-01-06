@@ -16,7 +16,10 @@
 			</ol>
 			<div class="links">
 				<a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a>
-				<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
+
+				@if ($role == 2)
+					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
+				@endif
 			</div>
 		</div>
 	</nav>

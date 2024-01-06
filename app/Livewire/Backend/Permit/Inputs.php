@@ -25,6 +25,7 @@ class Inputs extends Component
     public $speakers = [];
     public $Litrary_childes = [];
     public $is_show_page = false;
+    public $histories =  [];
 
     public function mount()
     {
@@ -46,6 +47,10 @@ class Inputs extends Component
         }   
 
         $this->is_show_page = Route::currentRouteName() == 'permit.show';
+
+        if ($this->is_show_page && $this->permit) {
+            $this->histories = $this->permit->history()->orderBy('created_at', 'Desc')->get();
+        }
     }   
 
     public function store($status)

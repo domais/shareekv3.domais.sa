@@ -3,6 +3,7 @@
 use App\Models\Draft;
 use App\Models\Event;
 use App\Models\EventType;
+use App\Models\History;
 use App\Models\Literary;
 use App\Models\Permit;
 use Illuminate\Support\Facades\Cache;
@@ -121,13 +122,13 @@ function ArToEn($input) {
                 break;
             case 'AdminAssignToMe':
                 return[
-                    ['title' => 'إبدأ الدراسة', 'href' => 'permit.draft','class' => 'btn btn-secondary'],
+                    ['title' => 'إبدأ الدراسة', 'onclick' => 'AssignTome','class' => 'btn btn-secondary'],
                 ];
                 break;
             case 'AdminIntialApproved':
                 return[
-                    ['title' => 'موافقة مبدأية', 'href' => 'permit.draft','class' => 'btn btn-secondary'],
-                    ['title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                    ['title' => 'موافقة مبدأية', 'onclick' => 'IntialApproved','class' => 'btn btn-secondary'],
+                    ['title' => 'رفض', 'onclick' => 'RejectPermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
 
@@ -218,4 +219,17 @@ function ArToEn($input) {
                 session()->forget('draft_to_delete');
             }
         }
+    }
+
+    function AddToHistory($id,$status,$edited = null,$descreption = null,$notes = null)
+    {
+        $history = new History();
+        $history->permit_id = $id;
+        $history->status_id =$status;
+        $history->user_id = auth()->id();
+        $history->descreption = $descreption;
+        $history->notes = $notes;
+        $history->edited = $edited;
+
+        $history->save();
     }

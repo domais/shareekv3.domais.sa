@@ -20,7 +20,9 @@
 				</button>
 					
 				@endif
-				<button class="btn btn-brand"  wire:click="store(2)">إرسال الطلب</button>
+				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
+					<button class="btn btn-brand"  wire:click="store(2)">إرسال الطلب</button>
+				@endif
 			</div>
 		</div>
 	</nav>
@@ -86,16 +88,24 @@
 			<h1>مراحل الطلب</h1>
 			<ul class="list-group">
 				<!-- Rahmani: م.جمال ، اعرض الهيستوري بشكل عكسي بحيث القديم يكون تحت والجديد يكون فوق -->
-				<li>
-					<div>
-						<span>
-							<small>اسم المرحلة</small><br>
-							الشريك / الآدمن
-						</span>
-						<span class="d-block date">2024-12-28<br>12:33PM</span>
-					</div>
-					<div class="edit">هنا التعديلات لو في تعديلات</div>
-				</li>
+				@foreach ($this->histories as $item)
+					<li>
+						<div>
+							<span>
+								<small>{{$item->status->name}}</small><br>
+								 {{$item->user->name}}
+							</span>
+							<span class="d-block date">
+								{{ $item->created_at->format('Y-m-d') }}<br>
+								{{ $item->created_at->format('h:i') }} {{ $item->created_at->format('A') == 'PM' ? 'م' : 'ص' }}
+							</span>				
+						</div>
+						@if ($item->descreption)
+							<div class="edit">{{$item->descreption}}</div>
+						@endif
+					</li>
+				@endforeach
+
 			</ul>
 		</div>
 

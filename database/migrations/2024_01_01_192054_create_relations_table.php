@@ -30,6 +30,7 @@ return new class extends Migration
         Schema::table('histories', function (Blueprint $table) {
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->foreign('permit_id')->references('id')->on('permits')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         Schema::table('speakers', function (Blueprint $table) {

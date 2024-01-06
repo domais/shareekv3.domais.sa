@@ -24,6 +24,75 @@ function DeletePermit(id, model) {
 		})
 	}
 
+function AssignTome(id,model) {
+		var dataId = id;
+		var modelClassName = model;
+		Swal.fire({
+			title: 'هل أنت متأكد؟',
+			icon: 'question',
+			html: 'سيتم إرفاق التصريح إليك  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
+			showCancelButton: true,
+			confirmButtonColor: '#5de868',
+			cancelButtonColor: '#ccc',
+			cancelButtonText:'إلغاء',
+			confirmButtonText: 'نعم ارفق الطلب'
+		}).then((result,id) => {
+			if (result.isConfirmed) {
+				Livewire.dispatch('AssignPermit_Dispatch', {
+				place: 'inside', // or outside
+				id: dataId,
+			})
+			}
+		})
+	
+}
+
+function RejectPermit(id,model) {
+		var dataId = id;
+		var modelClassName = model;
+		Swal.fire({
+			title: 'هل أنت متأكد؟',
+			icon: 'question',
+			html: 'سيتم إعادة التصريح إلى المستخدم ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
+			showCancelButton: true,
+			confirmButtonColor: '#e33e41',
+			cancelButtonColor: '#ccc',
+			cancelButtonText:'إلغاء',
+			confirmButtonText: 'نعم إعادة الطلب'
+		}).then((result,id) => {
+			if (result.isConfirmed) {
+				Livewire.dispatch('RejectPermit_Dispatch', {
+				place: 'inside', // or outside
+				id: dataId,
+			})
+			}
+		})
+	
+}
+
+function IntialApproved(id,model) {
+		var dataId = id;
+		var modelClassName = model;
+		Swal.fire({
+			title: 'هل أنت متأكد؟',
+			icon: 'question',
+			html: 'سيتم قبول التصريح  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟',
+			showCancelButton: true,
+			confirmButtonColor: '#5de868',
+			cancelButtonColor: '#ccc',
+			cancelButtonText:'إلغاء',
+			confirmButtonText: 'نعم ارفق الطلب'
+		}).then((result,id) => {
+			if (result.isConfirmed) {
+				Livewire.dispatch('IntialApproved_Dispatch', {
+				place: 'inside', // or outside
+				id: dataId,
+			})
+			}
+		})
+	
+}
+
 
 
 	// Rahmani: let's disscuss this

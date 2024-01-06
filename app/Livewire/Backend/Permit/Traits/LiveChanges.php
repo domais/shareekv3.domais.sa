@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Permit\Traits;
 
 use App\Models\Draft;
+use App\Models\History;
 use App\Models\Permit;
 use App\Models\Speaker;
 use Illuminate\Support\Facades\DB;
@@ -85,16 +86,21 @@ trait LiveChanges
         
         DB::transaction(function () use ($permitData,$speakers,$permit) {
             if ($permit) {
+                $permitData['status_id'] = 3;
                 $order_number = $permit->order_number;
                 $permitData['order_number'] = $order_number;
                 $permit->update($permitData);
                 $permit->speakers()->delete();
+
+                AddToHistory($permit->id,$permitData['status_id'],true);
+
             }
             else{
                 $permit = Permit::create($permitData);
                 $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
                 $permit->save();
 
+                AddToHistory($permit->id,$permitData['status_id']);
             }
 
 
@@ -110,10 +116,11 @@ trait LiveChanges
                 $speaker->twitter = $item['twitter'];
                 $speaker->linkedin = $item['linkedin'];
                 $speaker->partner_id = auth()->user()->owner->id;
-
                 $speaker->save();
             }
+
             
         });
     }
+
 }
