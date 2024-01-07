@@ -141,6 +141,12 @@ function ArToEn($input) {
 
             //Event Buttons
 
+            case 'shareEvent':
+                return[
+                    ['title' => 'مشاركة', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                ];
+                break;
+
             case 'AskForClose':
                 return[
                     ['title' => 'طلب إغلاق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],

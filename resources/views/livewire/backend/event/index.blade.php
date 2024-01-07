@@ -32,12 +32,15 @@
             name="مجدولة"
             count="{{count($scheduled)}}" 
             :data="$scheduled"
+            :buttons="KanbanButtons('shareEvent') "
+
          />
 
          <x-backend.kanban-column 
             name="قائمة"
             count="{{count($active)}}" 
             :data="$active"
+            :buttons="KanbanButtons('shareEvent')"
           />
 
           <x-backend.kanban-column 
