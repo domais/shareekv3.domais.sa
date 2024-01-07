@@ -1,28 +1,39 @@
 
 <script>
-function handleAction(id, model, title, html, confirmButtonColor, confirmButtonText, action) {
+function handleAction(id, model, icon, img , title, html , showConfirmButton , showCancelButton ,confirmButtonColor, confirmButtonText , cancelButtonText , time , bar , action , place , actionable , redirect) {
+console.log(window.location.origin+'/img/alert/')
     Swal.fire({
-        title: title,
-        icon: 'question',
-        html: html,
-        showCancelButton: true,
-        confirmButtonColor: confirmButtonColor,
-        cancelButtonColor: '#ccc',
-        cancelButtonText:'إلغاء',
-        confirmButtonText: confirmButtonText
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Livewire.dispatch(action, {
-                place: 'inside', // or outside
-                id: id,
-                model: model
-            })
+        title:              (title) ? title:false,
+        icon:               (icon) ? icon:false,
+        html:               (html) ? html:false,
+        imageUrl:           (img) ? window.location.origin+'/img/alert/'+img:false,
+        imageWidth:        	300,
+        showCancelButton:   (showCancelButton) ? showCancelButton:false,
+        showConfirmButton:  (showConfirmButton) ? showConfirmButton:false,
+        confirmButtonColor: (confirmButtonColor) ? confirmButtonColor:'#3085d6',
+        cancelButtonColor:  '#ccc',
+        cancelButtonText:   (cancelButtonText) ? cancelButtonText:'إلغاء',
+        confirmButtonText:  (confirmButtonText) ? confirmButtonText:'موافق',
+        timer:              (time) ? time:false,
+        timerProgressBar:   (bar) ? bar:false,
+    }).then((result,place) => {
+        if(actionable){
+            if (result.isConfirmed) {
+                Livewire.dispatch(action, {
+                    place: (place) ? place:'outside', 			// inside or outside
+					redirect : (redirect) ? redirect:'self',	// redirect to another URL or refresh current url
+                    id: id,
+                    model: model
+                })
+            }
         }
+
     })
 }
 
 function DeletePermit(id, model) {
-    handleAction(id, model, 'هل أنت متأكد؟', 'سيتم حذف التصريح ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟', '#e33e41', 'نعم احذف الطلب', 'DeletePermit_Dispatch');
+    handleAction( );
+
 }
 
 function AssignTome(id,model) {
@@ -38,6 +49,29 @@ function RejectPermit(id,model) {
 function IntialApproved(id,model) {
 		var modelClassName = model;
 		handleAction(id, modelClassName, 'هل أنت متأكد؟', 'يتم قبول التصريح  ولايمكنك التراجع عن هذه الخطوة ، هل أنت متأكد؟', '#e33e41', 'موافقة مبدأية', 'IntialApproved_Dispatch');
+}
+
+function ShareEvent(id,model) {
+		handleAction(
+		id, 			// id,         
+		model, 			// model, 
+		false, 			// icon , 
+		'share.png', 	// img located => public/img/alert/ 
+		'هنا العنوان', 
+		'هنا نص الرسالة التي تظهر للمستخدم ويقبل وسم html',
+		false, 			// show Confirm Button
+		true, 			// show Cancel Button
+		false, 			// confirm Button Color 	default = #3085d6
+		false, 			// confirm Button Text 		default = موافق
+		false, 			// cancel Button Text  		default = إلغاء
+		false, 			// use need to take action ?
+		false, 			// timer before auto disaplear
+		false, 			// bar
+		false, 			// actio
+		false, 			// place inside? 
+		false, 			// actionable 
+		false, 			// redirect
+    );
 }
 
 

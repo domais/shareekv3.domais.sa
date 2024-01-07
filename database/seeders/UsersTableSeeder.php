@@ -42,12 +42,12 @@ class UsersTableSeeder extends Seeder
 
         Partner::create([
             'owner_id' => $partner1->id,
-            'name' => 'Partner Name',
-            'city' => 'City Name',
-            'lat' => 0.0, // replace with actual latitude
-            'lng' => 0.0, // replace with actual longitude
-            'class' => 'أ', // replace with actual class
-            'CR' => 123457, // replace with actual CR
+            'name' => 'فابريكا دي كافيه',
+            'city' => 'الرياض',
+            'lat' => 24.830973,
+            'lng' => 46.659908,
+            'class' => 'أ',
+            'CR' => 7007455674,
         ]);
 
 
@@ -60,12 +60,12 @@ class UsersTableSeeder extends Seeder
 
         Partner::create([
             'owner_id' => $partner2->id,
-            'name' => 'Partner Name',
-            'city' => 'City Name',
-            'lat' => 0.0, // replace with actual latitude
-            'lng' => 0.0, // replace with actual longitude
-            'class' => 'أ', // replace with actual class
-            'CR' => 123485, // replace with actual CR
+            'name' => 'هاف مليون',
+            'city' => 'الرياض',
+            'lat' => 21.559637,
+            'lng' => 39.131173,
+            'class' => 'أ',
+            'CR' => 7017333890,
         ]);
 
 
@@ -78,12 +78,12 @@ class UsersTableSeeder extends Seeder
 
         Partner::create([
             'owner_id' => $partner3->id,
-            'name' => 'Partner Name',
-            'city' => 'City Name',
-            'lat' => 0.0, // replace with actual latitude
-            'lng' => 0.0, // replace with actual longitude
-            'class' => 'أ', // replace with actual class
-            'CR' => 1485, // replace with actual CR
+            'name' => 'ثلث',
+            'city' => 'جدة',
+            'lat' => 21.631101,
+            'lng' => 39.133647,
+            'class' => 'أ',
+            'CR' => 70037801129,
         ]);
 
         $partner1->addRole(2); 

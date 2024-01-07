@@ -25,7 +25,7 @@
                 @foreach($buttons as $button)
                     <a class="{{ $button['class'] }}" href="{{ isset($button['href']) ? route($button['href'],$item->id) : '#' }}" 
                       @if(isset($button['onclick'])) onclick="{{ $button['onclick'] }}({{ $item->id }}, '{{ get_class($item) }}')" @endif>
-                        {{ $button['title'] }}
+                        {!! $button['title'] !!}
                     </a>
                 @endforeach
             </div>

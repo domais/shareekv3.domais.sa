@@ -86,9 +86,12 @@ function ArToEn($input) {
         if ($default == 1) {
             
             return [
-                'icon' => 'success',
-                'title' => 'تمت العملية بنجاح',
-                'text' => 'تمت العملية بنجاح',
+                'icon'              => 'success',
+                'title'             => 'تمت العملية بنجاح',
+                'text'              => 'تمت العملية بنجاح',
+                'timerProgressBar'  => true,
+                'showConfirmButton' => false,
+                'timer'             => 4000	
     
             ];
         } else {
@@ -143,7 +146,7 @@ function ArToEn($input) {
 
             case 'shareEvent':
                 return[
-                    ['title' => 'مشاركة', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                    ['title' => '<i class="fa-solid fa-share-nodes me-2"></i> مشاركة', 'onclick' => 'ShareEvent', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
                 ];
                 break;
 
