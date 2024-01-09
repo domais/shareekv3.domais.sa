@@ -6,16 +6,19 @@ use App\Livewire\Backend\Permit\Traits\LiveChanges;
 use App\Livewire\Forms\PartnershipForm;
 use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
+use App\Mail\ChangeStatus;
 use App\Models\Draft;
 use App\Models\Permit;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Inputs extends Component
 {
-    use LiveChanges;
+    use LiveChanges,WithFileUploads;
 
     public ?Draft $draft = null;
     public ?Permit $permit = null;
@@ -96,6 +99,12 @@ class Inputs extends Component
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
+    }
+
+    #[On('fileSelected')] 
+    public function fileSelected($image)
+    {
+       dd($image);
     }
 
     public function render()

@@ -8,6 +8,7 @@ use App\Models\Partnership;
 use App\Models\Permit;
 use App\Models\Speaker;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 
@@ -111,6 +112,7 @@ trait LiveChanges
 
 
                 AddToHistory($permit->id,$permitData['status_id'],true);
+                ChangePermitStatus($permit);
 
             }
             else{
@@ -119,6 +121,8 @@ trait LiveChanges
                 $permit->save();
 
                 AddToHistory($permit->id,$permitData['status_id']);
+                ChangePermitStatus($permit);
+
             }
 
 

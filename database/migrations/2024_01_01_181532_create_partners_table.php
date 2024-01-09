@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
+            $table->integer('status')->default(0); 
+            // 0 => pending , 1 => approved , 2 => rejected
 
             $table->string('name');
             $table->string('city');

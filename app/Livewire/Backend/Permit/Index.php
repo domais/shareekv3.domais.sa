@@ -100,6 +100,8 @@ class Index extends Component
         $permit->save();
 
         AddToHistory($permit->id,$permit->status_id);
+        ChangePermitStatus($permit);
+
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }

@@ -12,16 +12,21 @@ class Show extends Component
     public $events;
     public $permits;
     public $tickets;
-    public $data;
 
     public function mount()
     {
         $this->owner =  $this->partner->owner;
         $this->events = $this->owner->events->toArray();
         $this->permits = $this->owner->permits->toArray();
-        $this->data = collect(array_merge($this->events, $this->permits))->sortByDesc('created_at');
         $this->tickets = $this->owner->tickets;
+    }
 
+    public function changeStatus($status)
+    {
+        $this->partner->status = $status;
+        $this->partner->save();
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 
 

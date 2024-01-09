@@ -23,7 +23,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function() {
        
         Route::get('/', Index::class)->name('index');
 
-        Route::get('/create', Inputs::class)->name('create');
+        Route::get('/create', Inputs::class)->name('create')->middleware('role:User');
 
         Route::get('/draft/{draft}', Inputs::class)->name('draft');
 

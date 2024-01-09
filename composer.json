@@ -37,7 +37,8 @@
         },
         "files": [
             "app/Util/validation.php",
-            "app/Util/helper.php"
+            "app/Util/helper.php",
+            "app/Util/mailer.php"
         ]
 
     },

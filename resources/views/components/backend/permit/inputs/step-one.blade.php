@@ -246,6 +246,7 @@ input[type=file]#AdvImg_input::before {
 				cropBoxResizable: false,
 				toggleDragModeOnDblclick: false,
 			});
+            
 
 			window.cropper1.replace(URL.createObjectURL(e.target.files[0]))
 

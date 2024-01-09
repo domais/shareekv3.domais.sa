@@ -17,14 +17,14 @@ class UsersTableSeeder extends Seeder
     {
         $superAdmin = User::create([
             'name'      => 'أحمد بوخمسين',
-            'email'     => 'admin@gmail.com',
+            'email'     => 'rahmanidja8@gmail.com',
             'phone'     => '0555555551',
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin2 = User::create([
             'name'      => 'أحمد الغامدي',
-            'email'     => 'admin2@gmail.com',  
+            'email'     => 'hxhdono34@gmail.com',  
             'phone'     => '0555555552',
             'password'  => Hash::make(123456),
         ]);
@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
 
         $partner1  = User::create([
             'name'      => 'عبدالله الفوزان',
-            'email'     => 'partner@gmail.com',
+            'email'     => 'hxhdono11@gmail.com',
             'phone'     => '0555555553',
             'password'  => Hash::make(123456),
         ]);
