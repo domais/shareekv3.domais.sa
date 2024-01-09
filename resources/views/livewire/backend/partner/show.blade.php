@@ -2,9 +2,16 @@
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
 
     <!--  
+        Domais
         user informatiotion : $owner,
         partner information : $partner,
     -->
+    <h1>
+        {{ $partner->name }}}
+    </h1>
+    <h2>
+        {{ $owner->email }}
+    </h2>
 
     @foreach ($tickets as $index => $item)
         <!-- tickets -->
