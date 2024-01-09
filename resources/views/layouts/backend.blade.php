@@ -8,6 +8,8 @@
 	<title>الشريك الأدبي</title>
 
 	@vite(['resources/scss/app.scss', 'resources/js/app.js'])
+	@stack('styles')
+
 
 	
 </head>

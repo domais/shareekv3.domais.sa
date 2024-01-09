@@ -8,9 +8,9 @@
 
 
       <div class="btn-group mx-2" role="group" aria-label="Third group">
-        <button type="button" class="btn btn-success">
+        <a href="{{route('partner.show',$row->id)}}" type="button" class="btn btn-success">
             <x-heroicon-o-document-text style="width: 28px; color: white" />
-        </button>
+        </a>
       </div>
 
   </div>
