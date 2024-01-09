@@ -14,7 +14,7 @@ use Illuminate\Validation\Rules\Password;
 
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-			'phone' => ['required','phone', 'string', 'unique:'.User::class],
+			'phone' => ['required','regex:/05[0-9]{8}$/', 'unique:'.User::class],
             'password' => ['required', 'string', Password::defaults()],
        ];
         
@@ -43,10 +43,10 @@ use Illuminate\Validation\Rules\Password;
     {
         return [
             'name' => 'required|string|max:255',
-            'phone' => 'required|phone',
+            'phone' => 'required|regex:/05[0-9]{8}$/',
             'email' => 'required|email|max:255',
             'nationality' => 'required|string|max:255',
-            'type' => 'required|in:كاتب,شاعر,راوي,ناشط ثقافي',
+            'type' => 'required|in:كاتب,ناشط ثقافي',
             'twitter' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
             'linkedin' => 'nullable|string|max:255',

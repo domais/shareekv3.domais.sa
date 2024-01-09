@@ -48,18 +48,19 @@
 
 
 		<x-backend.kanban-column
-		 name="معاد للتعديل"
-		  count="{{count($rejected)}}"
-		  edit="1"
-		  :data="$rejected"
-		  :buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserRejected') : []  "
-		  type="rejected"
-		  />
+			name="معاد للتعديل"
+			count="{{count($rejected)}}"
+			edit="1"
+			:data="$rejected"
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserRejected') : []  "
+			type="rejected"
+		/>
+
 		<x-backend.kanban-column
 			name="تحت الدراسة" 
 			count="{{count($pending)}}" 
 			:data="$pending" 
-			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('AdminIntialApproved')  "
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserUnderReview') : KanbanButtons('AdminIntialApproved')  "
 		/>
 
 		<x-backend.kanban-column 
@@ -67,7 +68,7 @@
 			count="{{ count($approved) }}"
 			:data="$approved"
 			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('AdminFinalApproved')  "
+		/>
 
-			/>
 	</div>
 </div>

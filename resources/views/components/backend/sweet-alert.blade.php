@@ -32,7 +32,26 @@ console.log(window.location.origin+'/img/alert/')
 }
 
 function DeletePermit(id, model) {
-    handleAction( );
+    handleAction(
+		id, 			// id,         
+		model, 			// model, 
+		'question', 	// icon , 
+		false, 	        // img located => public/img/alert/ 
+		'حذف التصريح؟', 
+		'سيتم حذف التصريح ولايمكنك التراجع ، هل أنت متأكد؟',
+		true, 			// show Confirm Button
+		true, 			// show Cancel Button
+		'red', 			// confirm Button Color 	default = #3085d6
+		'نعم احذف', 	// confirm Button Text 		default = موافق
+		false, 			// cancel Button Text  		default = إلغاء
+		false, 			// use need to take action ?
+		false, 			// timer before auto disaplear
+		false, 			// bar
+		false, 			// actio
+		false, 			// place inside? 
+		false, 			// actionable 
+		false, 			// redirect
+    );
 
 }
 
@@ -57,13 +76,13 @@ function ShareEvent(id,model) {
 		model, 			// model, 
 		false, 			// icon , 
 		'share.png', 	// img located => public/img/alert/ 
-		'هنا العنوان', 
-		'هنا نص الرسالة التي تظهر للمستخدم ويقبل وسم html',
+		'مشاركة الفعالية', 
+		'انسخ الرابط التالي وقم بمشاركته مع الآخرين<br><input type="text" class="form-control text-center mt-3" dir="ltr" value="{{url('uuu')}}" />',
 		false, 			// show Confirm Button
 		true, 			// show Cancel Button
 		false, 			// confirm Button Color 	default = #3085d6
 		false, 			// confirm Button Text 		default = موافق
-		false, 			// cancel Button Text  		default = إلغاء
+		'إغلاق', 		 // cancel Button Text  		default = إلغاء
 		false, 			// use need to take action ?
 		false, 			// timer before auto disaplear
 		false, 			// bar

@@ -112,33 +112,40 @@ function ArToEn($input) {
         switch ($name) {
             case 'UserDraft':
                 return [
-                    ['title' => 'إكمال', 'href' => 'permit.draft', 'class' => 'btn btn-secondary'],
-                    ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                    ['sweetalert'=> true , 'title' => 'إكمال', 'href' => 'permit.draft', 'class' => 'btn btn-secondary'],
+                    ['sweetalert'=> true , 'title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
         
             case 'UserRejected':
                 return[
-                    ['title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
-                    ['title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                    ['sweetalert'=> true , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
+                    ['sweetalert'=> true , 'title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                ];
+                break;
+        
+            case 'UserUnderReview':
+                return[
+                    ['sweetalert'=> true , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
+                    ['sweetalert'=> true , 'title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
             case 'AdminAssignToMe':
                 return[
-                    ['title' => 'إبدأ الدراسة', 'onclick' => 'AssignTome','class' => 'btn btn-secondary'],
+                    ['sweetalert'=> true , 'title' => 'إبدأ الدراسة', 'onclick' => 'AssignTome','class' => 'btn btn-secondary'],
                 ];
                 break;
             case 'AdminIntialApproved':
                 return[
-                    ['title' => 'موافقة مبدأية', 'onclick' => 'IntialApproved','class' => 'btn btn-secondary'],
-                    ['title' => 'رفض', 'onclick' => 'RejectPermit', 'class' => 'btn btn-outline-danger']
+                    ['sweetalert'=> true , 'title' => 'موافقة مبدأية', 'onclick' => 'IntialApproved','class' => 'btn btn-secondary'],
+                    ['sweetalert'=> true , 'title' => 'رفض', 'onclick' => 'RejectPermit', 'class' => 'btn btn-outline-danger']
                 ];
                 break;
 
              case 'AdminFinalApproved':
                     return[
-                        ['title' => 'تشغيل', 'href' => 'permit.draft','class' => 'btn btn-warning'],
-                        ['title' => 'تشغيل بدون تصريح', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                        ['sweetalert'=> true , 'title' => 'تشغيل', 'href' => 'permit.draft','class' => 'btn btn-warning'],
+                        ['sweetalert'=> true , 'title' => 'تشغيل بدون تصريح', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
                     ];
                     break;
 
@@ -146,26 +153,26 @@ function ArToEn($input) {
 
             case 'shareEvent':
                 return[
-                    ['title' => '<i class="fa-solid fa-share-nodes me-2"></i> مشاركة', 'onclick' => 'ShareEvent', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                    ['sweetalert'=> true , 'title' => '<i class="fa-solid fa-share-nodes me-2"></i> مشاركة', 'onclick' => 'ShareEvent', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
                 ];
                 break;
 
             case 'AskForClose':
                 return[
-                    ['title' => 'طلب إغلاق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                    ['sweetalert'=> true , 'title' => 'طلب إغلاق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
                 ];
                 break;
 
             case 'AssignFiles':
                     return[
-                        ['title' => 'إرفاق التوثيق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+                        ['sweetalert'=> false , 'title' => 'إرفاق التوثيق', 'modal' => 'tawtheeq', 'class' => 'btn btn-warning'],
                     ];
                     break;
 
             case 'Approval':
                         return[
-                            ['title' => 'إعتماد التوثيق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-warning btn-sm d-flex align-items-center'],
-                            ['title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
+                            ['sweetalert'=> true , 'title' => 'إعتماد التوثيق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-warning btn-sm d-flex align-items-center'],
+                            ['sweetalert'=> true , 'title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
 
                         ];
                         break;

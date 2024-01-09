@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             StatusesTableSeeder::class,
             EventTypeTableSeeder::class,
             LiteraryTableSeeder::class,
-            //PermitsTableSeeder::class,
+            PermitsTableSeeder::class,
             EventTableSeeder::class,
         ]);
 

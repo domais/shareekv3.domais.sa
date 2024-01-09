@@ -10,12 +10,17 @@
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
+                    <a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">الفعاليات</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
             </ol>
             <div class="links">
                 <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a>
+
+                {{-- Rahmani: make this work as $role == 2 --}}
+                @if (2 == 2)
+                    <a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
+                @endif
             </div>
         </div>
     </nav>
@@ -59,6 +64,38 @@
         />
 
 
+    </div>
+
+
+
+    {{-- i'm testing, if things are OK then i'll install it as a package --}}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+
+    <!-- مودال رفع توثيق الشريك -->
+    <div class="modal fade" id="tawtheeq" tabindex="-1" aria-labelledby="tawtheeqLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="tawtheeqLabel">رفع ملفات توثيق الفعالية</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
+                
+                </form>
+                
+                <div class="mt-3">رابط الفيديو 1 : <a href="https://youtu.be/HPHMZfUs_98" target="_blank">https://youtu.be/HPHMZfUs_98</a></div>
+                <div class="mt-3">رابط الفيديو 2 : <a href="https://youtu.be/HPHMZfUs_98" target="_blank">https://youtu.be/HPHMZfUs_98</a></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
+                <button type="button" class="btn btn-success">اعتماد الفعالية</button>
+            </div>
+        </div>
+        </div>
     </div>
 
 
