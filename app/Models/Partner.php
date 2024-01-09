@@ -19,4 +19,9 @@ class Partner extends Model
         'owner_id',
      
     ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }

@@ -52,6 +52,26 @@ class User extends Authenticatable implements LaratrustUser
         return $this->hasOne(Partner::class, 'owner_id');
     }
 
+    public function permits()
+    {
+        return $this->hasMany(Permit::class,'user_id');
+    }
+
+    public function assignedpermits()
+    {
+        return $this->hasMany(Permit::class,'admin_id');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Event::class,'user_id');
+    }
+
+    public function assignedevents()
+    {
+        return $this->hasMany(Event::class,'admin_id');
+    }
+
     public function tickets()
     {
         return $this->hasMany(Ticket::class);

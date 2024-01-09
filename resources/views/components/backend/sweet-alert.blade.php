@@ -97,7 +97,7 @@ function ShareEvent(id,model) {
 
 	// Rahmani: let's disscuss this
 	//Domais : Here to change tO BE FOR ALL CRUD OPERATIONS 
-    document.addEventListener('livewire:init', () => {
+document.addEventListener('livewire:init', () => {
     Livewire.on('DeletePermit_Response', (event) => {
         var data = event[0];
         Swal.fire({
@@ -114,6 +114,20 @@ function ShareEvent(id,model) {
             else
                 window.location.reload()
         },4000)
+    })
+
+
+    Livewire.on('show-partner-details', (event) => {
+        Swal.fire({
+            title: 'معلومات الشريك',
+            html: `<ul>
+                    <li>المالك: ${event[0].owner}</li>
+                    <li> عدد التصاريح: ${event[0].permitCounter}</li>
+                    <li> عدد المبادرات: ${event[0].eventCounter}</li>
+                </ul>`,
+            icon: 'info',
+            showConfirmButton: false,
+        });
     })
 })
 </script>

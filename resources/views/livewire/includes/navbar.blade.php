@@ -17,7 +17,12 @@
 					<span class="badge text-bg-danger rounded-pill">3</span>
 				</li>
 
+				<li class="nav-item">
+					<a href="{{route('partner.index')}}" class="nav-link px-2 link-light {{ is_active('partner.index') ? 'active' : '' }}">الشركاء</a>
+				</li>
+
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">دعم الشريك</a></li>
+
 
 				<li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link px-2 link-light">المساعدة</a></li>
 

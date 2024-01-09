@@ -33,6 +33,11 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function() {
 
     });
 
+    Route::namespace('Partner')->prefix('partner')->as('partner.')->group(function() {
+       
+        Route::get('/', Index::class)->name('index');
+    });
+
     Route::namespace('Event')->prefix('event')->as('event.')->group(function() {
        
         Route::get('/', Index::class)->name('index');
