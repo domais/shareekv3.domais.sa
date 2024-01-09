@@ -40,8 +40,6 @@
                 <select class="form-control" wire:model="speakerForm.type" x-bind:disabled="is_show_page">
                     <option selected disabled value="">اختر ...</option>
                     <option value="كاتب">كاتب</option>
-                    <option value="شاعر">شاعر</option>
-                    <option value="راوي">راوي</option>
                     <option value="ناشط ثقافي">ناشط ثقافي</option>
                 </select>
             </div>

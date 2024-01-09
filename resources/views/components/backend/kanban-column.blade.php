@@ -6,21 +6,21 @@
     <div class="body">
         @foreach ($data as $item)
         <div class="item">
-            <div class="name">
-            <a href="{{route('permit.show',$item->id)}}">
-                <div>{{$item->title}}</div>
-                <small>{{$item->user->name}}</small>
+            <div class="click" onclick="window.location = '{{route('permit.show',$item->id)}}'">
+                <div class="name">
+                    <div>{{$item->title}}</div>
+                    <small>{{$item->user->name}}</small>
+                </div>
+                <div class="type mb-3">{{$item->literary->parent->name}} > {{$item->literary->name}}</div>
+                <div class="number">
+                    <span>رقم الطلب : {{$item->order_number}}</span>
+                    <small>{{ $item->created_at->diffForHumans() }}</small>            
+                </div>
+                @if ($edit == 1)
+                <!-- Domais: this code only for now later will be dynamique -->
+                    <div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>  
+                @endif
             </div>
-            <div class="type mb-3">{{$item->literary->parent->name}} > {{$item->literary->name}}</div>
-            <div class="number">
-                <span>رقم الطلب : {{$item->order_number}}</span>
-                <small>{{ $item->created_at->diffForHumans() }}</small>            
-            </div>
-            @if ($edit == 1)
-            <!-- Domais: this code only for now later will be dynamique -->
-                <div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>  
-            @endif
-             </a>
             <div class="d-flex justify-content-between mt-3">
                 @foreach($buttons as $button)
                     <a class="{{ $button['class'] }}" href="{{ isset($button['href']) ? route($button['href'],$item->id) : '#' }}" 

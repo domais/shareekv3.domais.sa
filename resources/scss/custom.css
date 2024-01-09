@@ -614,6 +614,14 @@ nav .topbar {
 	color: #999;
 	font-size: 13px;
 }
+.kanban .column .item .click {
+	cursor: pointer;
+}
+.kanban .column .item .type {
+	height: 30px;
+	overflow: hidden;
+	font-size: 90%;
+}
 
 
 
@@ -1570,23 +1578,22 @@ tr.action td {
 div:where(.swal2-icon) .swal2-icon-content {
 	font-size: 3.75em !important;
 }
-/*
-input[type=file],
-input[type=file]:active,
-input[type=file]:focus {
-	width: 190px;
+
+input[type=file].style,
+input[type=file].style:active,
+input[type=file].style:focus {
+	min-width: 190px;
 	height: 48px;
 	overflow: hidden;
 	outline: none;
 	display: block;
 }
 
-input[type=file]::-webkit-file-upload-button {
+input[type=file].style::-webkit-file-upload-button {
 	visibility: hidden;
 }
 
-input[type=file]::before {
-	content: 'اضغط هنا لإختيار الملف';
+input[type=file].style::before {
 	display: block;
 	background: linear-gradient(top, #f9f9f9, #e3e3e3);
 	border: 1px solid #999;
@@ -1600,14 +1607,20 @@ input[type=file]::before {
 	text-align: center;
 }
 
-input[type=file]:hover::before {
+input[type=file].style:hover::before {
 	border-color: black;
 }
 
-input[type=file]:active::before {
+input[type=file].style:active::before {
 	background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
-*/
+input[type=file].file::before {
+	content: 'اضغط هنا لإختيار الملف';
+}
+input[type=file].image::before {
+	content: 'اضغط هنا لإختيار الصور';
+}
+
 
 select {
 	background-position: left 0.5rem center !important;
@@ -1638,17 +1651,17 @@ label.dropzone1 {
 	height: 100px;
 	width: 400px;
 }
-.AdvImg{
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	aspect-ratio: 1;
-	width: 100%;
-	text-align: center;
-	background: #ffffff;
-	border: 2px dashed #c6d1e1;
-	border-radius: 10px;
-	padding: 10px;
+.DropArea{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    width: 100%;
+    text-align: center;
+    background: #d9dfe7 url('https://shareek-jamal.domais.sa.me/img/dropzone.png') no-repeat center center;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 4px #a4b0bf dashed;
 }
 
 .dragover {
@@ -1885,4 +1898,55 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
 .ql-snow .ql-icon-picker .ql-picker-item{
 	display: flex;
 	overflow: hidden;
+}
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div {
+	direction: ltr;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td:hover, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div:hover {
+    background: #a84e5d !important;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_default, .xdsoft_datetimepicker .xdsoft_calendar td.xdsoft_current, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box >div >div.xdsoft_current {
+    background: #748997;
+	box-shadow: none;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td, .xdsoft_datetimepicker .xdsoft_calendar th {
+    text-align: center;
+}
+.xdsoft_datetimepicker .xdsoft_calendar td > div {
+    padding-right: 0px;
+}
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_prev, .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_next {
+    margin-left: 0;
+    margin-right: 14px;
+}
+.xdsoft_datetimepicker {
+    border-radius: 7px;
+}
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option {
+    direction: ltr;
+    text-align: left;
+}
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover {
+    color: #fff;
+    background: #a84e5d;
+}
+.xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option.xdsoft_current {
+	background: #748997;
+	box-shadow: none;
+}
+.xdsoft_datetimepicker .xdsoft_month {
+	width: 80px;
+    text-align: left;
+}
+.xdsoft_datetimepicker .xdsoft_year {
+    width: 60px;
+    margin-left: 5px;
+}
+.xdsoft_datetimepicker .xdsoft_label i {
+    opacity: 0.5;
+    background-position: -92px -19px;
+    display: inline-block;
+    width: 14px;
+    height: 20px;
+    vertical-align: middle;
 }

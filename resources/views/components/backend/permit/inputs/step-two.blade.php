@@ -24,20 +24,22 @@
 				<div class="col-4 d-flex align-items-center">إحداثيات المكان</div>
 				<div class="col-8"><input type="text" id="location" dir="ltr" placeholder="حدد المكان على الخريطة" disabled class="form-control text-start"></div>
 			</div>
-			<!-- Rahmani: محترم نستخدمو هنا وفي باقي النظام ، امهلني بعض الوقت image cropperانا بدور على -->
-			<div class="AdvImg" style="height: 311px" x-show="location == 2">
-				<div>
-					اضغط هنا لإرفاق صورة للمكان<br><br>
-					<small>مقاسها 500×500 بكسل</small>
-				</div>
-			</div><!-- /AdvImg -->
+			<input type="file" class="style image mx-auto mb-3" id="LocImg_input" x-show="location == 2">
+			<div class="DropArea" style="height: 311px" x-show="location == 2">
+				<img id="LocImg" src="{{asset('img/pexel.png')}}" alt="Picture">
+			</div><!-- /DropArea -->
 		</div>
 		<div class="col-7">
 			<!-- Rahmani: لو حليت مشكلة الخرائد .. فعل السطر التالي -->
-			<div class="map" style="height: 500px"></div>
+			<div class="map" style="height: 562px"></div>
 		</div>
 	</div>
 </div>
+<style>
+input[type=file]#LocImg_input::before {
+	content: 'اضغط هنا لأختيار صورة المكان'
+}
+</style>
 <script async defer src="https://maps.googleapis.com/maps/api/js?callback=start&amp;key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&amp;language=ar&amp;region=SA"></script>
 <script>
 	let map;
@@ -91,5 +93,40 @@
 			initMap()
 		});
 	}, 1000);
+
+
+
+
+
+
+
+	window.addEventListener('DOMContentLoaded', function() {
+
+
+$("#LocImg_input").on('change', (e)=> {
+
+	var image = document.querySelector('#LocImg');
+
+	if(window.cropper2){
+		window.cropper2.destroy()
+	}
+
+	window.cropper2 = new Cropper(image, {
+		viewMode: 3,
+		dragMode: 'move',
+		autoCropArea: 1,
+		restore: false,
+		modal: false,
+		guides: false,
+		highlight: false,
+		cropBoxMovable: false,
+		cropBoxResizable: false,
+		toggleDragModeOnDblclick: false,
+	});
+
+	window.cropper2.replace(URL.createObjectURL(e.target.files[0]))
+
+});
+});
 
 </script>

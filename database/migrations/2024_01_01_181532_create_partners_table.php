@@ -20,7 +20,7 @@ return new class extends Migration
             $table->double('lat');
             $table->double('lng');
             $table->enum('class',['أ','ب','ج','د']);
-            $table->integer('CR');
+            $table->BigInteger('CR');
             // logo to table file 
             $table->timestamps();
         });
