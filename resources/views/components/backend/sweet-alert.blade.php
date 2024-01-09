@@ -224,5 +224,18 @@
 					window.location.reload()
 			},4000)
 		})
+
+		Livewire.on('show-partner-details', (event) => {
+			Swal.fire({
+				title: 'معلومات الشريك',
+				html: `<ul>
+						<li>المالك: ${event[0].owner}</li>
+						<li> عدد التصاريح: ${event[0].permitCounter}</li>
+						<li> عدد المبادرات: ${event[0].eventCounter}</li>
+					</ul>`,
+				icon: 'info',
+				showConfirmButton: false,
+			});
+		})
 	})
 	</script>

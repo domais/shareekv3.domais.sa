@@ -7,7 +7,7 @@
         partner information : $partner,
     -->
     <h1>
-        {{ $partner->name }}}
+        {{ $partner->name }}
     </h1>
     <h2>
         {{ $owner->email }}
@@ -22,7 +22,7 @@
 
         @foreach ($data as $index => $item)
             
-        @if($index % 2 == 0)
+        @if($loop->iteration % 2 == 0)
        
         <!-- timeline item 1 -->
         <div class="row no-gutters">
