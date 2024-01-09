@@ -18,7 +18,7 @@
                 <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a>
 
                 {{-- Rahmani: make this work as $role == 2 --}}
-                @if (2 == 2)
+                @if (auth()->user()->hasRole('User'))
                     <a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
                 @endif
             </div>
