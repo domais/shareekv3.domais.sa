@@ -37,7 +37,7 @@
             name="مجدولة"
             count="{{count($scheduled)}}" 
             :data="$scheduled"
-            :buttons="KanbanButtons('shareEvent') "
+            :buttons="KanbanButtons('EventShareLink') "
 
          />
 
@@ -45,14 +45,14 @@
             name="قائمة"
             count="{{count($active)}}" 
             :data="$active"
-            :buttons="KanbanButtons('shareEvent')"
+            :buttons="KanbanButtons('EventShareLink')"
           />
 
           <x-backend.kanban-column 
-            name="{{ !auth()->user()->hasRole('User') ? 'بإنتظار توثيق الشريك ' : 'بإنتظار توثيق الفعالية' }}"
+            name="{{ !auth()->user()->hasRole('User') ? 'منتهية وبإنتظار توثيق الشريك' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
-            :buttons="auth()->user()->hasRole('User') ? KanbanButtons('AssignFiles') : KanbanButtons('AskForClose')  "
+            :buttons="auth()->user()->hasRole('User') ? KanbanButtons('EventUserUploadTawtheeq') : KanbanButtons('AskForClose')"
 
          />
 
@@ -68,31 +68,31 @@
 
 
 
-    {{-- i'm testing, if things are OK then i'll install it as a package --}}
-    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
-
-
     <!-- مودال رفع توثيق الشريك -->
-    <div class="modal fade" id="tawtheeq" tabindex="-1" aria-labelledby="tawtheeqLabel" aria-hidden="true">
+    <div class="modal fade" id="Event-User-Upload-Tawtheeq-Modal" tabindex="-1" aria-labelledby="tawtheeqLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="tawtheeqLabel">رفع ملفات توثيق الفعالية</h1>
+                <h1 class="modal-title fs-5" id="tawtheeqLabel">رفع ملفات توثيق المبادرة</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
-                <form action="/file-upload" class="dropzone" id="my-awesome-dropzone">
-                
+                <form action="/file-upload" class="dropzone">
+                    <div class="dropzone-previews previews"></div>
                 </form>
                 
-                <div class="mt-3">رابط الفيديو 1 : <a href="https://youtu.be/HPHMZfUs_98" target="_blank">https://youtu.be/HPHMZfUs_98</a></div>
-                <div class="mt-3">رابط الفيديو 2 : <a href="https://youtu.be/HPHMZfUs_98" target="_blank">https://youtu.be/HPHMZfUs_98</a></div>
+                <div class="links">
+                    <div class="mt-3 row mx-0">
+                        <div class="col-3 px-0 d-flex align-items-center">رابط الفيديو : </div>
+                        <div class="col-8"><input type="text" class="form-control" name="link[]" /></div>
+                        <div class="col-1 px-0 text-end"><button class="btn btn-secondary AddLink">+</button></div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                <button type="button" class="btn btn-success">اعتماد الفعالية</button>
+                <button type="button" class="btn btn-success">ارسال التوثيق</button>
             </div>
         </div>
         </div>
@@ -104,11 +104,11 @@
 
 
     <!-- مودال اعتماد تشغيل فعالية -->
-    <div class="modal fade" id="approve" tabindex="-1" aria-labelledby="approveLabel" aria-hidden="true">
+    <div class="modal fade" id="FinalApproval" tabindex="-1" aria-labelledby="FinalApprovalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="approveLabel">اعتماد الفعالية</h1>
+                    <h1 class="modal-title fs-5" id="FinalApprovalLabel">اعتماد الفعالية</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -141,149 +141,30 @@
 
 
 <script>
-    // إبدا الدراسة
-    function AssignToMe(id) {
-        Swal.fire({
-            html: 'بالضغط على (إبدأ معالجة الطلب) سيختفي هذا الطلب من عند باقي المستخدمين وستكون انت المسؤول عن إتمامه ، هل انت متأكد؟',
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#ccc",
-            cancelButtonText: 'إلغاء',
-            confirmButtonText: "إبدأ معالجة الطلب"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    // title: "",
-                    html: "سيتم تحويلك للطلب لدراسته",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 3000
-                });
-                setTimeout(() => {
-                    // window.location.href = "{{route('permit.index')}}";
-                }, 3000)
-            }
-        });
-    }
 
-
-
-
-
-    // موافقة مبدأية
-    function InitialApproval(id) {
-        var EventId = id;
-        Swal.fire({
-            html: "بالضغط على (موافق) سيتم إعلام الشريك بالموافقة المبدأية على الطلب ، لايمكن التراجع عن هذه الخطوة ، هل انت متأكد؟",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#ccc',
-            cancelButtonText: 'إلغاء',
-            confirmButtonText: "موافق"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'تمت العملية',
-                    html: 'قام النظام بإبلاغ الشريك بالموافقة المبدأية',
-                    icon: "success",
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 6000
-                });
-            }
-        });
-
-    }
-
-
-
-    // رفض الطلب
-    function RejectPermit(id) {
-        Swal.fire({
-            html: 'الرجاء توضيح سبب الرفض حتى يقوم الشريك<br>بتعديل المطلوب وإرساله لك مرة أخرى',
-            icon: 'info',
-            input: 'textarea',
-            inputPlaceholder: 'اكتب هنا سبب الرفض',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#ccc',
-            cancelButtonText: 'إلغاء',
-            confirmButtonText: 'إعادة للشريك'
-        }).then((result) => {
-            if (result.isConfirmed && result.value) {
-                var descreption = result.value;
-                Swal.fire({
-                    title: 'تمت العملية',
-                    icon: 'success',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+    document.addEventListener("DOMContentLoaded", function() {
+        Dropzone.autoDiscover = false
+        new Dropzone('.dropzone',{
+            previewsContainer:'.previews',
+            addRemoveLinks:true,
+            dictRemoveFile:'x',
+            thumbnailWidth:130,
+            thumbnailHeight:130,
+            removedfile: function(file) {
+               // Rahmani: add Ajax to remove image from server 
+                file.previewElement.remove()
+                console.log('Delete this file',file)
             }
         })
-    }
-
-
-    // تشغيل الفعالية
-    function ApprovPermet(id) {
-        Swal.fire({
-            title: 'تأكيد تشغيل فعالية',
-            icon: 'question',
-            html: 'سيتم تنبيه الشريك بالموافقة النهائية وتشغيل المبادرة ، هل أنت متأكد؟',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#ccc',
-            cancelButtonText: 'إلغاء',
-            confirmButtonText: 'نعم ، شغل المبادرة'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // انا وصلت هنا
-                $('#approve').hide();
-                console.log(
-                    document.getElementById('PermitNumber'),
-                    document.getElementById('PermitPDF')
-                )
-                Swal.fire({
-                    title:'تم تشغيل المبادرة',
-                    html: 'قام النظام آليا بجدولة المبادرة مع إبلاغ الشريك بذلك',
-                    icon: "success",
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 6000
-                });
-            }
-        });
-
-    }
-
-
-    //  تشغيل بدون تصريح
-
-
-    function ApproveWithoutPirmet(id) {
-        Swal.fire({
-            html: 'يجب عليك توضيح سبب تشغيل الفعالية بدون تصريح<br>وتأكد أنك تتحمل مسؤولية ذلك أمام الجهات الرسمية',
-            icon: 'warning',
-            input: 'textarea',
-            inputPlaceholder: 'اكتب السبب هنا',
-            showCancelButton: true,
-            confirmButtonColor: 'red',
-            cancelButtonColor: '#ccc',
-            cancelButtonText: 'إلغاء',
-            confirmButtonText: 'تشغيل بدون تصريح'
-        }).then((result) => {
-            if (result.isConfirmed && result.value) {
-                Swal.fire({
-                    title: 'تم تشغيل الفعالية بدون تصريح',
-                    html: 'قام النظام آليا بجدولة الفعالية مع إبلاغ الشريك بذلك',
-                    icon: "success",
-                    showConfirmButton: false,
-                    timerProgressBar: true,
-                    timer: 6000
-                })
-            }
+        $('.AddLink').on('click',()=>{
+            var i = $('.modal .links .row').length;
+            ++i
+            var NewRow = '<div id="LinkRow_'+i+'" class="mt-3 row mx-0 mt-3"><div class="col-3 px-0 d-flex align-items-center">رابط الفيديو '+i+' : </div><div class="col-8"><input type="text" class="form-control" name="link[]" /></div><div class="col-1 px-0 text-end"><button class="btn btn-outline-danger RemoveLink" data-id="LinkRow_'+i+'">×</button></div></div>'
+            $('.modal .links').append(NewRow)
         })
-    }
+        $(document).on('click','.RemoveLink', function(){
+            $(this).parent().parent().remove()
+        })
+    })
+
 </script>

@@ -30,7 +30,7 @@
 			name="مسودة"
 			count="{{count($drafts)}}" 
 			:data="$drafts"
-			:buttons="KanbanButtons('UserDraft')"
+			:buttons="KanbanButtons('PermitUserDraft')"
 			type="draft"
 		/>
 		@endrole
@@ -41,7 +41,7 @@
 			name="طلبات جديدة"
 			count="{{count($new_orders)}}" 
 			:data="$new_orders"
-			:buttons="KanbanButtons('AdminAssignToMe')"
+			:buttons="KanbanButtons('PermitAdminNewOrders')"
 		/>
 		@endpermission
 
@@ -52,7 +52,7 @@
 			count="{{count($rejected)}}"
 			edit="1"
 			:data="$rejected"
-			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserRejected') : []  "
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('PermitUserReturned') : []  "
 			type="rejected"
 		/>
 
@@ -60,15 +60,54 @@
 			name="تحت الدراسة" 
 			count="{{count($pending)}}" 
 			:data="$pending" 
-			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('UserUnderReview') : KanbanButtons('AdminIntialApproved')  "
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('PermitUserReview') : KanbanButtons('PermitAdminReview')  "
 		/>
 
 		<x-backend.kanban-column 
 			name="{{ auth()->user()->hasRole('User') ? 'موافق عليه مبدأيا' : 'بإنتظار تصريح الهيئة' }}"
 			count="{{ count($approved) }}"
 			:data="$approved"
-			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('AdminFinalApproved')  "
+			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminAwatingApproval')  "
 		/>
 
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- مودال اعتماد تشغيل فعالية -->
+    <div class="modal fade" id="Permit-Admin-Final-Approval-Modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">اعتماد الفعالية</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-2">
+                        <div class="col-3 d-flex align-items-center">رقم التصريح</div>
+                        <div class="col-8"><input type="text" class="form-control" id="PermitNumber"></div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-3 d-flex align-items-center">نسخ التصريح</div>
+                        <div class="col-8"><input type="file" class="form-control" id="PermitPDF"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
+                    <button type="button" class="btn btn-success" onclick="FinalApprove(1,2)">اعتماد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>

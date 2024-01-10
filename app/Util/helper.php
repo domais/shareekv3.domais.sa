@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Route;
 
 function is_active($route)
 {
-    $segments = explode('.', Route::current()->getName());
-    $routePrefix = $segments[0]; // returns 'clients'
+	$segments = explode('.', Route::current()->getName());
+	$routePrefix = $segments[0]; // returns 'clients'
 
-    $segments2 = explode('.', $route);
-    $routePrefix2 = $segments2[0]; 
-    
-    return $routePrefix ==  $routePrefix2;
+	$segments2 = explode('.', $route);
+	$routePrefix2 = $segments2[0]; 
+	
+	return $routePrefix ==  $routePrefix2;
 }
 
 
@@ -37,215 +37,232 @@ function ArToEn($input) {
  * 
  * this function to check role of user and get event or permit based on status_id
  * **/
-    function getEvents($is_event = false) {
+	function getEvents($is_event = false) {
 
-        $user = auth()->user();
+		$user = auth()->user();
 
-        $role = $user->roles()->first()->name;
+		$role = $user->roles()->first()->name;
 
-        $events = [];
+		$events = [];
 
-        $statuses = [2, 3, 4, 10];
-        $statusesEvent = [5, 6, 7, 8];
-        if($role == 'User') {
-            if($is_event) {
-                foreach($statusesEvent as $status) {
-                    $events[$status] = Event::where('status_id', $status)
-                    ->where('user_id', $user->id)->get();
-                }
-            } else {
-                foreach($statuses as $status) {
-                    $events[$status] = Permit::where('status_id', $status)->where('user_id', $user->id)->get();
-                }
-                $events[1] = Draft::where('user_id', $user->id)->get();
-            }
-        } else {
-            if($is_event) {
-                foreach($statusesEvent as $status) {
-                    $events[$status] = Event::where('status_id', $status)
-                    ->where('admin_id', $user->id)->get();
-                }
-            } else {
-                foreach($statuses as $status) {
-                    if($status == 2) {
-                        $events[$status] = Permit::where('status_id', $status)
-                        ->whereNull('admin_id')->get();
-                    } else {
-                        $events[$status] = Permit::where('status_id', $status)
-                        ->where('admin_id',$user->id)->get();
-                    }
-                }
-            }
-        }
-        
-        return $events;
-    }
+		$statuses = [2, 3, 4, 10];
+		$statusesEvent = [5, 6, 7, 8];
 
-    function SwalResponse($default = 1)
-    {
-        if ($default == 1) {
-            
-            return [
-                'icon'              => 'success',
-                'title'             => 'تمت العملية بنجاح',
-                'text'              => 'تمت العملية بنجاح',
-                'timerProgressBar'  => true,
-                'showConfirmButton' => false,
-                'timer'             => 4000	
-    
-            ];
-        } else {
+		if($role == 'User') {
+			if($is_event) {
+				foreach($statusesEvent as $status) {
+					$events[$status] = Event::where('status_id', $status)
+					->where('user_id', $user->id)->get();
+				}
+			} else {
+				foreach($statuses as $status) {
+					$events[$status] = Permit::where('status_id', $status)->where('user_id', $user->id)->get();
+				}
+				$events[1] = Draft::where('user_id', $user->id)->get();
+			}
+		} else {
+			if($is_event) {
+				foreach($statusesEvent as $status) {
+					$events[$status] = Event::where('status_id', $status)
+					->where('admin_id', $user->id)->get();
+				}
+			} else {
+				foreach($statuses as $status) {
+					if($status == 2) {
+						$events[$status] = Permit::where('status_id', $status)
+						->whereNull('admin_id')->get();
+					} else {
+						$events[$status] = Permit::where('status_id', $status)
+						->where('admin_id',$user->id)->get();
+					}
+				}
+			}
+		}
+		
+		return $events;
+	}
 
-            return [
-                'icon' => 'error',
-                'title' => 'حدث خطأ',
-                'text' => 'حدث خطأ',
-    
-            ];
-        }
-        
+	function SwalResponse($default = 1)
+	{
+		if ($default == 1) {
+			
+			return [
+				'icon'              => 'success',
+				'title'             => 'تمت العملية بنجاح',
+				'text'              => 'تمت العملية بنجاح',
+				'timerProgressBar'  => true,
+				'showConfirmButton' => false,
+				'timer'             => 4000	
+	
+			];
+		} else {
 
-    }
+			return [
+				'icon' => 'error',
+				'title' => 'حدث خطأ',
+				'text' => 'حدث خطأ',
+	
+			];
+		}
+		
 
-    function KanbanButtons($name) {
+	}
 
-        switch ($name) {
-            case 'UserDraft':
-                return [
-                    ['sweetalert'=> true , 'title' => 'إكمال', 'href' => 'permit.draft', 'class' => 'btn btn-secondary'],
-                    ['sweetalert'=> true , 'title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
-                ];
-                break;
-        
-            case 'UserRejected':
-                return[
-                    ['sweetalert'=> true , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
-                    ['sweetalert'=> true , 'title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
-                ];
-                break;
-        
-            case 'UserUnderReview':
-                return[
-                    ['sweetalert'=> true , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
-                    ['sweetalert'=> true , 'title' => 'حذف', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
-                ];
-                break;
-            case 'AdminAssignToMe':
-                return[
-                    ['sweetalert'=> true , 'title' => 'إبدأ الدراسة', 'onclick' => 'AssignToMe','class' => 'btn btn-secondary'],
-                ];
-                break;
-            case 'AdminIntialApproved':
-                return[
-                    ['sweetalert'=> true , 'title' => 'موافقة مبدأية', 'onclick' => 'IntialApproved','class' => 'btn btn-secondary'],
-                    ['sweetalert'=> true , 'title' => 'رفض', 'onclick' => 'RejectPermit', 'class' => 'btn btn-outline-danger']
-                ];
-                break;
+	function KanbanButtons($name) {
 
-             case 'AdminFinalApproved':
-                    return[
-                        ['sweetalert'=> true , 'title' => 'تشغيل', 'href' => 'permit.draft','class' => 'btn btn-warning'],
-                        ['sweetalert'=> true , 'title' => 'تشغيل بدون تصريح', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
-                    ];
-                    break;
+		switch ($name) {
+			case 'PermitUserDraft':
+				return [
+					['type' => 'link' , 'title' => 'إكمال', 'onclick' => null , 'href' => 'permit.draft', 'class' => 'btn btn-secondary'],
+					['type' => 'sweetalert' , 'title' => 'حذف', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+				];
+			break;
 
-            //Event Buttons
+		
+			case 'PermitUserReturned':
+				return[
+					['type' => 'link' , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
+					['type' => 'sweetalert' , 'title' => 'حذف', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+				];
+			break;
 
-            case 'shareEvent':
-                return[
-                    ['sweetalert'=> true , 'title' => '<i class="fa-solid fa-share-nodes me-2"></i> مشاركة', 'onclick' => 'ShareEvent', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
-                ];
-                break;
+		
+			case 'PermitUserReview':
+				return[
+					['type' => 'link' , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
+					['type' => 'sweetalert' , 'title' => 'حذف', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+				];
+			break;
 
-            case 'AskForClose':
-                return[
-                    ['sweetalert'=> true , 'title' => 'طلب إغلاق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
-                ];
-                break;
 
-            case 'AssignFiles':
-                    return[
-                        ['sweetalert'=> false , 'title' => 'إرفاق التوثيق', 'modal' => 'tawtheeq', 'class' => 'btn btn-warning'],
-                    ];
-                    break;
+			case 'PermitAdminNewOrders':
+				return[
+					['type' => 'sweetalert' , 'title' => 'إبدأ الدراسة', 'onclick' => 'Act_AdminStartStudy','class' => 'btn btn-secondary'],
+				];
+			break;
 
-            case 'Approval':
-                        return[
-                            ['sweetalert'=> true , 'title' => 'إعتماد التوثيق', 'onclick' => 'DeletePermit', 'class' => 'btn btn-warning btn-sm d-flex align-items-center'],
-                            ['sweetalert'=> true , 'title' => 'رفض', 'onclick' => 'DeletePermit', 'class' => 'btn btn-outline-danger']
 
-                        ];
-                        break;
+			case 'PermitAdminReview':
+				return[
+					['type' => 'sweetalert' , 'title' => 'موافقة مبدأية', 'onclick' => 'IntialApproved','class' => 'btn btn-secondary'],
+					['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_AdminRejectPermit', 'class' => 'btn btn-outline-danger']
+				];
+			break;
+
+
+			case 'PermitAdminAwatingApproval':
+				return[
+					['type' => 'modal' , 'title' => 'تشغيل', 'modal' => 'Permit-Admin-Final-Approval-Modal' ,'class' => 'btn btn-warning'],
+					['type' => 'sweetalert' , 'title' => 'تشغيل بدون تصريح', 'onclick' => 'Act_ApproveWithoutPirmet', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+				];
+			break;
 
 
 
-        }
 
-    }
 
-    function settings($key, $updateCache = false)
-    {
 
-        switch ($key) {
-            case 'event_type':
 
-                if ($updateCache) {
+			//Event Buttons
 
-                    // Remove it from cache
-                    Cache::forget('event_type');
-    
-                } else {
-            
-                    
-                    return Cache::rememberForever('event_type', function () {
-                        return EventType::all();
-                    });
-    
-                }
-                
-            break;
+			case 'EventShareLink':
+				return[
+					['type' => 'switch'],
+					['type' => 'sweetalert' , 'title' => '<i class="fa-solid fa-share-nodes me-2"></i> مشاركة', 'onclick' => 'Act_ShareEvent', 'class' => 'btn btn-outline-secondary btn-sm d-flex align-items-center'],
+				];
+			break;
 
-            case 'Literary_parent':
-                if ($updateCache) {
-                    // Remove it from cache
-                    Cache::forget('Literary_parent');
-                } else {
-                    return Cache::rememberForever('Literary_parent', function () {
-                        return Literary::whereNull('parent_id')->get();
-                    });
-    
-                }    
-            break;
-            
-          
-        }
 
-    }
+			case 'AskForClose':
+				return[
+					['type' => 'sweetalert' , 'title' => 'طلب إغلاق', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-secondary'],
+				];
+			break;
 
-    function getChildes($id)
-    {
-        return Literary::where('parent_id', $id)->get()->toArray(); 
-    }
-    function deleteDraft()
-    {
-        if (session()->has('draft_to_delete')) {
-            $draft = Draft::find(session()->get('draft_to_delete'))->first();
-            if ($draft) {
-                $draft->delete();
-                session()->forget('draft_to_delete');
-            }
-        }
-    }
 
-    function AddToHistory($id,$status,$edited = null,$descreption = null,$notes = null)
-    {
-        $history = new History();
-        $history->permit_id = $id;
-        $history->status_id =$status;
-        $history->user_id = auth()->id();
-        $history->descreption = $descreption;
-        $history->notes = $notes;
-        $history->edited = $edited;
+			case 'EventUserUploadTawtheeq':
+				return[
+					['type' => 'modal' , 'title' => 'إرفاق التوثيق', 'modal' => 'Event-User-Upload-Tawtheeq-Modal', 'class' => 'btn btn-warning'],
+				];
+			break;
 
-        $history->save();
-    }
+
+			case 'Approval':
+				return[
+					['type' => 'sweetalert' , 'title' => 'إعتماد التوثيق', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-warning'],
+					['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+
+				];
+			break;
+
+
+
+		}
+
+	}
+
+	function settings($key, $updateCache = false)
+	{
+
+		switch ($key) {
+			case 'event_type':
+
+				if ($updateCache) {
+
+					// Remove it from cache
+					Cache::forget('event_type');
+	
+				} else {
+			
+					
+					return Cache::rememberForever('event_type', function () {
+						return EventType::all();
+					});
+	
+				}
+				
+			break;
+
+			case 'Literary_parent':
+				if ($updateCache) {
+					// Remove it from cache
+					Cache::forget('Literary_parent');
+				} else {
+					return Cache::rememberForever('Literary_parent', function () {
+						return Literary::whereNull('parent_id')->get();
+					});
+				}    
+			break;
+			
+		
+		}
+
+	}
+
+	function getChildes($id)
+	{
+		return Literary::where('parent_id', $id)->get()->toArray(); 
+	}
+	function deleteDraft()
+	{
+		if (session()->has('draft_to_delete')) {
+			$draft = Draft::find(session()->get('draft_to_delete'))->first();
+			if ($draft) {
+				$draft->delete();
+				session()->forget('draft_to_delete');
+			}
+		}
+	}
+
+	function AddToHistory($id,$status,$edited = null,$descreption = null,$notes = null)
+	{
+		$history = new History();
+		$history->permit_id = $id;
+		$history->status_id =$status;
+		$history->user_id = auth()->id();
+		$history->descreption = $descreption;
+		$history->notes = $notes;
+		$history->edited = $edited;
+
+		$history->save();
+	}
