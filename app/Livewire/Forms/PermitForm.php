@@ -17,8 +17,8 @@ class PermitForm extends Form
     public $litrary_children_id = "";
     public $title;
     public $description;
-    public $start_date = "2024-01-01 00:00:00";
-    public $end_date = "2024-01-10 00:00:00";
+    public $start_date = "2024-01-15 12:00PM";
+    public $end_date = "2024-01-15 03:00PM";
     public $available_seats;
     public $event_location = "";
 

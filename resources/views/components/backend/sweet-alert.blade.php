@@ -48,7 +48,6 @@
 			'red', 			// confirm Button Color 	default = #456496
 			'نعم احذف',     // confirm Button Text 		default = موافق
 			false,          // cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			false, 			// actio
@@ -68,13 +67,12 @@
 			'question', 	// icon , 
 			false, 	        // img located => public/img/alert/ 
 			'بدء دراسة الطلب؟', 
-			'بالضغط على (إبدا الدراسة) سيتحول الطلب إلى قائمة (تحت الدراسة) لديك وسيختفي من عند باقي الموظفين ، هل أنت متأكد؟',
+			'بالضغط على (إبدا الدراسة) سيتحول الطلب إلى قائمة (تحت الدراسة) لديك وسيختفي من عند باقي الموظفين ، متأكد؟',
 			true, 			// show Confirm Button
 			true, 			// show Cancel Button
 			false, 			// confirm Button Color 	default = #456496
 			'إبدأ الدراسة', 	// confirm Button Text 		default = موافق
 			false, 			// cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			'AssignPermit_Dispatch', 			// action
@@ -99,7 +97,6 @@
 			false, 			// confirm Button Color 	default = #456496
 			'تشغيل المبادرة', 	// confirm Button Text 		default = موافق
 			false, 			// cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			false, 			// actio
