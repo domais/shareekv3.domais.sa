@@ -76,6 +76,8 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make(123456),
         ]);
 
+
+
         Partner::create([
             'owner_id' => $partner3->id,
             'name' => 'ثلث',
@@ -89,6 +91,16 @@ class UsersTableSeeder extends Seeder
         $partner1->addRole(2); 
         $partner2->addRole(2); 
         $partner3->addRole(2); 
+
+        $guest  = User::create([
+            'name'      => 'أحمد محمود',
+            'email'     => 'guest@gmail.com',
+            'phone'     => '0555555577',
+            'password'  => Hash::make(123456),
+        ]);
+
+        $guest->addRole(3); 
+
 
     }
 }

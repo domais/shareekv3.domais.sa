@@ -25,11 +25,19 @@ class RolesTableSeeder extends Seeder
         
         $user = Role::create([
                     'name' => 'User',
-                    'display_name' => 'زائر',
+                    'display_name' => 'مدير مقهى',
                     'description' => 'صلاحيات في حدود العمليات',
                     'is_admin' => false,
                     // Add permissions for deletion
         ]);
+
+        $Guest = Role::create([
+            'name' => 'Guest',
+            'display_name' => 'زائر',
+            'description' => 'صلاحيات في حدود العمليات',
+            'is_admin' => false,
+            // Add permissions for deletion
+]);
 
 
         $permissions = Permission::all();
