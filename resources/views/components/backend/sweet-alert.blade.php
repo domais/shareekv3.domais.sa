@@ -31,11 +31,13 @@
 					})
 				}
 			}
-	
 		})
 	}
-	
-	function DeletePermit(id, model) {
+
+
+
+	// حذف التصريح لليوزر
+	function Act_UserDeletePermit(id, model) {
 		handleAction(
 			id, 			// id,         
 			model, 			// model, 
@@ -59,7 +61,9 @@
 	
 	}
 	
-	function AssignToMe(id,model) {
+
+	// إبدا دراسة الطلب للآدمن
+	function Act_AdminStartStudy(id,model) {
 		console.log(id,model);
 		handleAction(
 			id, 			// id,         
@@ -83,7 +87,59 @@
 		);
 	}
 	
+
+	// موافقة مبدأية للآدمن
+	function IntialApproved(id,model) {
+		handleAction(
+			id, 			// id,         
+			model, 			// model, 
+			'question', 	// icon , 
+			false, 	        // img located => public/img/alert/ 
+			'موافقة مبدأية', 
+			'بالضغط على (موافقة مبدأية) سيتم تنبيه الشريك بأنه تمت الموافقة المبدأية على طلب التصريح ، هل أنت متأكد؟',
+			true, 			// show Confirm Button
+			true, 			// show Cancel Button
+			false, 			// confirm Button Color 	default = #456496
+			'موافقة مبدأية', 			// confirm Button Text 		default = موافق
+			false, 		 // cancel Button Text  		default = إلغاء
+			false, 			// use need to take action ?
+			false, 			// timer before auto disaplear
+			false, 			// bar
+			false, 			// actio
+			false, 			// place inside? 
+			false, 			// actionable 
+			false, 			// redirect
+			false, 			// textarea
+		);
+	}
 	
+	
+	// رفض طلب للآدمن
+	function Act_AdminRejectPermit(id,model) {
+		handleAction(
+			id, 			// id,         
+			model, 			// model, 
+			'question', 	// icon , 
+			false, 	        // img located => public/img/alert/ 
+			'رفض التصريح', 
+			'أنت على وشك رفض التصريح ، لرفض التصريح ، جيب عليك ذكر سبب الرفض في الخانة بالأسف ثم الضغط على (رفض الطلب)',
+			true, 			// show Confirm Button
+			true, 			// show Cancel Button
+			'red', 			// confirm Button Color 	default = #456496
+			'رفض الطلب',     // confirm Button Text 		default = موافق
+			false,          // cancel Button Text  		default = إلغاء
+			false, 			// use need to take action ?
+			false, 			// timer before auto disaplear
+			false, 			// bar
+			false, 			// actio
+			false, 			// place inside? 
+			false, 			// actionable 
+			true, 			// textarea
+		);
+	}
+	
+	
+	// تشغيل الفعالية للآدمن
 	function FinalApprove(id,model) {
 		handleAction(
 			id, 			// id,         
@@ -107,99 +163,55 @@
 		);
 	}
 	
-	
-	function RejectPermit(id,model) {
-			handleAction(
-				id, 			// id,         
-				model, 			// model, 
-				'question', 	// icon , 
-				false, 	        // img located => public/img/alert/ 
-				'رفض التصريح', 
-				'أنت على وشك رفض التصريح ، لرفض التصريح ، جيب عليك ذكر سبب الرفض في الخانة بالأسف ثم الضغط على (رفض الطلب)',
-				true, 			// show Confirm Button
-				true, 			// show Cancel Button
-				'red', 			// confirm Button Color 	default = #456496
-				'رفض الطلب',     // confirm Button Text 		default = موافق
-				false,          // cancel Button Text  		default = إلغاء
-				false, 			// use need to take action ?
-				false, 			// timer before auto disaplear
-				false, 			// bar
-				false, 			// actio
-				false, 			// place inside? 
-				false, 			// actionable 
-				true, 			// textarea
-			);
+
+	// تشغيل بدون تصريح للآدمن
+	function Act_ApproveWithoutPirmet(id,model) {
+		handleAction(
+			id, 			// id,         
+			model, 			// model, 
+			'question', 	// icon , 
+			false, 	        // img located => public/img/alert/ 
+			'تشغيل بدون تصريح', 
+			'لتشغيل المبادرة بدون تصريح ، يجب عليك ذكر السبب في الأسفل وأنت تتحمل المسؤولية لتبعات هذا القرار',
+			true, 			// show Confirm Button
+			true, 			// show Cancel Button
+			'red', 			// confirm Button Color 	default = #456496
+			'تشغيل بدون تصريح',     // confirm Button Text 		default = موافق
+			false,          // cancel Button Text  		default = إلغاء
+			false, 			// use need to take action ?
+			false, 			// timer before auto disaplear
+			false, 			// bar
+			false, 			// actio
+			false, 			// place inside? 
+			false, 			// actionable 
+			true, 			// textarea
+		);
 	}
 	
-	function IntialApproved(id,model) {
-			handleAction(
-				id, 			// id,         
-				model, 			// model, 
-				'question', 	// icon , 
-				false, 	        // img located => public/img/alert/ 
-				'موافقة مبدأية', 
-				'بالضغط على (موافقة مبدأية) سيتم تنبيه الشريك بأنه تمت الموافقة المبدأية على طلب التصريح ، هل أنت متأكد؟',
-				true, 			// show Confirm Button
-				true, 			// show Cancel Button
-				false, 			// confirm Button Color 	default = #456496
-				'موافقة مبدأية', 			// confirm Button Text 		default = موافق
-				false, 		 // cancel Button Text  		default = إلغاء
-				false, 			// use need to take action ?
-				false, 			// timer before auto disaplear
-				false, 			// bar
-				false, 			// actio
-				false, 			// place inside? 
-				false, 			// actionable 
-				false, 			// redirect
-				false, 			// textarea
-			);
-	}
-	
-	function ApproveWithoutPirmet(id,model) {
-			handleAction(
-				id, 			// id,         
-				model, 			// model, 
-				'question', 	// icon , 
-				false, 	        // img located => public/img/alert/ 
-				'تشغيل بدون تصريح', 
-				'لتشغيل المبادرة بدون تصريح ، يجب عليك ذكر السبب في الأسفل وأنت تتحمل المسؤولية لتبعات هذا القرار',
-				true, 			// show Confirm Button
-				true, 			// show Cancel Button
-				'red', 			// confirm Button Color 	default = #456496
-				'تشغيل بدون تصريح',     // confirm Button Text 		default = موافق
-				false,          // cancel Button Text  		default = إلغاء
-				false, 			// use need to take action ?
-				false, 			// timer before auto disaplear
-				false, 			// bar
-				false, 			// actio
-				false, 			// place inside? 
-				false, 			// actionable 
-				true, 			// textarea
-			);
-	}
-	
-	function ShareEvent(id,model) {
-			handleAction(
-				id, 			// id,         
-				model, 			// model, 
-				false, 			// icon , 
-				'share.png', 	// img located => public/img/alert/ 
-				'مشاركة الفعالية', 
-				'انسخ الرابط التالي وقم بمشاركته مع الآخرين<br><input type="text" class="form-control text-center mt-3" dir="ltr" value="{{url('uuu')}}" />',
-				false, 			// show Confirm Button
-				true, 			// show Cancel Button
-				false, 			// confirm Button Color 	default = #456496
-				false, 			// confirm Button Text 		default = موافق
-				'إغلاق', 		 // cancel Button Text  		default = إلغاء
-				false, 			// use need to take action ?
-				false, 			// timer before auto disaplear
-				false, 			// bar
-				false, 			// actio
-				false, 			// place inside? 
-				false, 			// actionable 
-				false, 			// redirect
-				false, 			// textarea
-			);
+
+	// مشاركة فعالية لجميع المستخدمين
+	function Act_ShareEvent(id,model) {
+		handleAction(
+			id, 			// id,         
+			model, 			// model, 
+			false, 			// icon , 
+			'share.png', 	// img located => public/img/alert/ 
+			'مشاركة الفعالية', 
+			'انسخ الرابط التالي وقم بمشاركته مع الآخرين<br><input type="text" class="form-control text-center mt-3" dir="ltr" value="{{url('uuu')}}" />',
+			false, 			// show Confirm Button
+			true, 			// show Cancel Button
+			false, 			// confirm Button Color 	default = #456496
+			false, 			// confirm Button Text 		default = موافق
+			'إغلاق', 		 // cancel Button Text  		default = إلغاء
+			false, 			// use need to take action ?
+			false, 			// timer before auto disaplear
+			false, 			// bar
+			false, 			// actio
+			false, 			// place inside? 
+			false, 			// actionable 
+			false, 			// redirect
+			false, 			// textarea
+		);
 	}
 	
 	

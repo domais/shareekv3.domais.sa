@@ -70,7 +70,7 @@ x-data="{errors: @entangle('errors').live}"
 
 		<input placeholder="البريد الإلكتروني أو رقم الجوال" wire:model="form.email" autocomplete="username" type="email" class="form-control my-3 text-center">		
 
-		<input placeholder="كلمة المرور" type="text" wire:model="form.password" class="form-control my-3 text-center">
+		<input placeholder="كلمة المرور" type="password" wire:model="form.password" class="form-control my-3 text-center">
 
 		<button type="submit" class="btn btn-brand mt-4">
 			دخول

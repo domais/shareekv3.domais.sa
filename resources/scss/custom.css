@@ -1264,13 +1264,19 @@ tr.action td {
 
 /* Drop file zone */
 .dropzone {
-	width: 100%;
-	position: relative;
-	padding: 10px;
+	border: 2px dashed #383c3f;
+	display: flex;
+	flex-direction: column;
+	min-height: 220px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	border-radius: 10px;
+	padding: 15px 0px;
 	cursor: pointer;
-	border-radius: .5rem
 }
-
+.dropzone-previews{
+	display: flex;
+}
 .dropzone:not(.dz-clickable) {
 	opacity: .5;
 	cursor: not-allowed
@@ -1446,21 +1452,41 @@ tr.action td {
 
 .dz-remove {
 	background: red;
-	color: #fff;
-	text-decoration: none;
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	right: 107px;
-	top: -10px;
+    color: #fff;
+    text-decoration: none;
+    width: 31px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    right: 46px;
+    top: -14px;
+    font-size: 27px;
+    padding-bottom: 4px;
+    box-shadow: 0 0 3px #fff;
 }
 
 .dz-thumbnail img {
 	border-radius: 6px;
+}
+.dz-error-message,.dz-success-mark,.dz-error-mark,.dz-message{
+	display: none !important;
+}
+.dropzone .dz-preview .dz-image {
+    border-radius: 10px !important;
+	overflow: hidden;
+}
+.dropzone .dz-preview.dz-image-preview {
+    background: #fff;
+	border-radius: 10px;
+}
+.dropzone::before{
+	content: 'اضغط هنا لإختيار الصور';
+	display: block;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 
@@ -1566,8 +1592,25 @@ tr.action td {
 
 [type='checkbox']:focus,
 [type='radio']:focus {
-	background-color: #0dfd54 !important;
 	box-shadow: none !important;
+}
+.form-check-input:checked {
+    background-color: #538b9c;
+    border-color: #538b9c;
+}
+.form-switch .form-check-input:focus {
+    --bs-form-switch-bg: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23999999'/%3e%3c/svg%3e) !important;
+}
+.form-switch .form-check-input {
+	--bs-form-switch-bg: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23999999'/%3e%3c/svg%3e);
+    background-position: left center;
+	border-color: #999999;
+}
+.form-switch .form-check-input:checked {
+    background-position: right center;
+}
+.form-check-input:focus {
+    border-color: #999999;
 }
 
 .iti--separate-dial-code .iti__selected-flag {
@@ -1600,7 +1643,6 @@ input[type=file].style::before {
 	border-radius: 5px;
 	padding: 10px;
 	white-space: nowrap;
-	-webkit-user-select: none;
 	cursor: pointer;
 	font-size: 17px;
 	outline: none;
@@ -1949,4 +1991,12 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
     width: 14px;
     height: 20px;
     vertical-align: middle;
+}
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
+    color: #fff;
+    border-color: transparent;
+	box-shadow: 0 0 25px #db314e50;
+}
+.swal2-confirm {
+    background-color: #355f7c;
 }
