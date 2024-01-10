@@ -9,47 +9,72 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Headers;
+use Illuminate\Support\Str;
 
 
 class ChangeStatus extends Mailable
 {
-    use Queueable, SerializesModels;
+	use Queueable, SerializesModels;
 
-    public $data;
+	public $data;
 
-    public function __construct($data)
-    {
-        $this->data = $data;
-    }
+	public function __construct($data)
+	{
+		$this->data = $data;
+	}
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            subject: 'تغيير الحالة',
-        );
-    }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
 
-            view: 'mail.change-status',
-        );
-    }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
+
+
+	public function envelope(): Envelope
+	{
+		return new Envelope(
+			// Rahmani: make sure is this working
+			subject: 'بخصوص طلب تصريح رقم '.$this->data['permit']['order_number'],
+		);
+	}
+
+
+
+
+
+
+	public function content(): Content
+	{
+		return new Content(
+
+			view: 'mail.change-status',
+		);
+	}
+
+
+
+
+
+
+	public function headers()
+	{
+		// Rahmani: do the email 
+		$email = 'm@domais.sa';
+		return new Headers(
+			messageId: Str::random(15)."@hvc-sa.org",
+			text:[
+				'List-Unsubscribe' => '<mailto:info@hvc-sa.org?subject=unsubscribe&body=Please unsubscribe my email '.$email.' from your list or system.>'
+			]
+
+		);
+	}
+
+
+
+
+
+
+	public function attachments(): array
+	{
+		return [];
+	}
 }

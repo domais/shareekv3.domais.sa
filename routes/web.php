@@ -54,4 +54,15 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function() {
 });
 
 
+Route::get('mail', function() {
+    $permit = App\Models\Permit::findorfail(4);
+    $data = [
+        'permit' => $permit,
+        'status' => $permit->status,
+        'user' => $permit->user,
+    ];
+    return (new App\Mail\ChangeStatus($data))->render();
+});
+
+
 require __DIR__.'/auth.php';

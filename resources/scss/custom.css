@@ -1643,7 +1643,6 @@ input[type=file].style::before {
 	border-radius: 5px;
 	padding: 10px;
 	white-space: nowrap;
-	-webkit-user-select: none;
 	cursor: pointer;
 	font-size: 17px;
 	outline: none;
