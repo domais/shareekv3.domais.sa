@@ -1,7 +1,7 @@
 
 <script>
 	function handleAction(id, model, icon, img , title, html , showConfirmButton , showCancelButton ,confirmButtonColor, confirmButtonText , cancelButtonText , time , bar , action , place , actionable , redirect , textarea) {
-		console.log(textarea)
+		console.log(textarea,action)
 		Swal.fire({
 			title:              (title) ? title:false,
 			icon:               (icon) ? icon:false,
@@ -19,7 +19,9 @@
 			timer:              (time) ? time:false,
 			timerProgressBar:   (bar) ? bar:false,
 		}).then((result,place) => {
+			console.log("1");
 			if(actionable){
+				console.log("2",action);
 				if (result.isConfirmed) {
 					Livewire.dispatch(action, {
 						place: (place) ? place:'outside', 			// inside or outside
@@ -51,7 +53,7 @@
 			false, 			// bar
 			false, 			// actio
 			false, 			// place inside? 
-			false, 			// actionable 
+			true, 			// actionable 
 			false, 			// redirect
 			false, 			// textarea
 		);
@@ -59,6 +61,7 @@
 	}
 	
 	function AssignToMe(id,model) {
+		console.log(id,model);
 		handleAction(
 			id, 			// id,         
 			model, 			// model, 
@@ -74,9 +77,9 @@
 			false, 			// use need to take action ?
 			false, 			// timer before auto disaplear
 			false, 			// bar
-			false, 			// actio
-			false, 			// place inside? 
-			false, 			// actionable 
+			'AssignPermit_Dispatch', 			// action
+			true, 			// place inside? 
+			true, 			// actionable 
 			false, 			// redirect
 			false, 			// textarea
 		);

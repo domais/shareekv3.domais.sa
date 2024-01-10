@@ -132,7 +132,7 @@ function ArToEn($input) {
                 break;
             case 'AdminAssignToMe':
                 return[
-                    ['sweetalert'=> true , 'title' => 'إبدأ الدراسة', 'onclick' => 'AssignTome','class' => 'btn btn-secondary'],
+                    ['sweetalert'=> true , 'title' => 'إبدأ الدراسة', 'onclick' => 'AssignToMe','class' => 'btn btn-secondary'],
                 ];
                 break;
             case 'AdminIntialApproved':

@@ -67,8 +67,9 @@ class Index extends Component
     }
 
     #[On('AssignPermit_Dispatch')] 
-    public function AssignPermit($place, $id,$model)
+    public function AssignPermit($place,$redirect ,$id,$model)
     {
+       dd($place,$redirect,$id,$model);
        $permit = Permit::findorfail($id);
        $permit->status_id = 3;
        $permit->admin_id = auth()->id();
