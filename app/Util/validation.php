@@ -36,6 +36,7 @@ use Illuminate\Validation\Rules\Password;
             'need_support' => 'required|boolean',
             'lat' => 'required',
             'lng' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Permit\Traits;
 
 use App\Models\Draft;
+use App\Models\File;
 use App\Models\History;
 use App\Models\Partnership;
 use App\Models\Permit;
@@ -52,6 +53,13 @@ trait LiveChanges
     {
         unset($this->speakers[$index]);
     }
+
+    #[On('dateUpdated')] 
+    public function dateUpdated($id,$formattedDate)
+    {
+        $this->form->{$id} = $formattedDate;
+    }
+
     
     #[On('editorUpdated')] 
     public function editorUpdated($data)
@@ -92,7 +100,7 @@ trait LiveChanges
     }
 
 
-    public function savePermit($permitData,$speakers,$partnerships,$permit = null)
+    public function savePermit($permitData,$speakers,$partnerships,$permit = null,$image = null)
     {
         $permitData = array_map(function($value) {
             return $value === "" ? null : $value;
@@ -117,8 +125,17 @@ trait LiveChanges
             }
             else{
                 $permit = Permit::create($permitData);
+
                 $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
                 $permit->save();
+
+                $image = new File();
+                $image->name = $permit->order_number;
+                $image->use = 'adv';
+                $image->type = 'image';
+                $image->path = $permitData['image']->store('public/files/'.$permit->order_number.'/adv');
+
+                $permit->fileable()->save($image);
 
                 AddToHistory($permit->id,$permitData['status_id']);
                 ChangePermitStatus($permit);

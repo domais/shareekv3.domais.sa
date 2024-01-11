@@ -125,28 +125,30 @@
     </div><!-- /col-7 -->
 
 
-    <div class="col-5">
+    <div class="col-5" x-data="{start_date: '', end_date: ''}">
 
         <div class="row my-3">
             <div class="col-3 d-flex align-items-center">عدد الحضور</div>
-            <div class="col-9"><input type="text" x-bind:disabled="is_show_page" inputmode="numeric"
+            <div class="col-9"><input type="number" x-bind:disabled="is_show_page" inputmode="numeric"
                     class="form-control rounded text-left" wire:model="form.available_seats"></div>
         </div>
 
 
         <div class="row my-3">
             <div class="col-3 d-flex align-items-center">تاريخ البداية</div>
-            <div class="col-9"><input type="text" x-bind:disabled="is_show_page" value=""
-                    class="form-control rounded" dir="ltr" id="start_date" readonly wire:model.live="form.start_date"></div>
+            <div class="col-9">
+                <input type="text" x-bind:disabled="is_show_page"  x-model="start_date"
+                    class="form-control rounded" dir="ltr" id="start_date"  wire:model.live="form.start_date"></div>
         </div>
 
 
         <div class="row my-3">
             <div class="col-3 d-flex align-items-center">تاريخ النهاية</div>
-            <div class="col-9"><input type="text" x-bind:disabled="is_show_page" readonly class="form-control rounded" dir="ltr"
+            <div class="col-9">
+                <input type="text" x-bind:disabled="is_show_page" x-model="end_date" 
+                 class="form-control rounded" dir="ltr"
                     id="end_date" wire:model.live="form.end_date"></div>
         </div>
-
         <div class="row mt-3 mt-5">
             <div class="col-1"></div>
             <div class="col-11">
@@ -175,16 +177,25 @@ input[type=file]#AdvImg_input::before {
 
     document.addEventListener("DOMContentLoaded", function(event) {
 
-		$('#start_date,#end_date').datetimepicker({
-			format:'yy-m-d h:m A',
-			step:30,
-			minDate:0,
-			defaultDate:new Date(),
-			formatTime:'h:m A',
-			defaultTime:'05:00',
-			todayButton:false,
-			formatDate:'yy-m-d'
-		});
+        $('#start_date, #end_date').datetimepicker({
+            format: 'yy-m-d h:m ',
+            step: 30,
+            minDate: 0,
+            defaultDate: new Date(),
+            formatTime: 'h:m A',
+            defaultTime: '05:00',
+            todayButton: false,
+            formatDate: 'yy-m-d',
+            onClose: function (current_time, $input) {
+                var id = $input[0].id;
+                var date = new Date(current_time);
+                var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' + date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
+                console.log(id, formattedDate);
+                $('#' + id).val(formattedDate);
+                 Livewire.dispatch('dateUpdated', {'id':id, 'formattedDate':formattedDate});
+            }
+        });
+
 
         var toolbarOptions = [
             'clean',
@@ -232,30 +243,60 @@ input[type=file]#AdvImg_input::before {
 
     window.addEventListener('DOMContentLoaded', function() {
 
+        $("#AdvImg_input").on('change', (e)=> {
 
-		$("#AdvImg_input").on('change', (e)=> {
+            var image = document.querySelector('#AdvImg');
+            var fileType = e.target.files[0].type;
 
-			var image = document.querySelector('#AdvImg');
+            if(window.cropper1){
+                window.cropper1.destroy()
+            }
 
-			if(window.cropper1){
-				window.cropper1.destroy()
-			}
+            window.cropper1 = new Cropper(image, {
+                viewMode: 3,
+                dragMode: 'move',
+                autoCropArea: 1,
+                restore: false,
+                modal: false,
+                guides: false,
+                highlight: false,
+                cropBoxMovable: false,
+                cropBoxResizable: false,
+                toggleDragModeOnDblclick: false,
+                ready: function () {
+                    // This will be called when the cropper is ready
+                    var canvas = window.cropper1.getCroppedCanvas();
+                    canvas.toBlob(function(blob) {
+                        var file = new File([blob], "image.png", {type: fileType});
+                        // Upload a file
+                        @this.upload('form.image', file, (uploadedFilename) => {
+                            // Success callback...
+                          /*  Swal.fire({
+                                icon: 'success',
+                                title: 'تم تحميل الصورة بنجاح',
+                                text: null,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });*/
+                        }, () => {
+                            // Error callback...
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'خطأ',
+                                text: 'حدث خطأ أثناء التحميل',
+                                showConfirmButton: false,
 
-			window.cropper1 = new Cropper(image, {
-				viewMode: 3,
-				dragMode: 'move',
-				autoCropArea: 1,
-				restore: false,
-				modal: false,
-				guides: false,
-				highlight: false,
-				cropBoxMovable: false,
-				cropBoxResizable: false,
-				toggleDragModeOnDblclick: false,
-			});
-            
+                            });
+                        }, (event) => {
+                            // Progress callback...
+                            // event.detail.progress contains a number between 1 and 100 as the upload progresses
+          
+                        })
+                    });
+                }
+            });
 
-			window.cropper1.replace(URL.createObjectURL(e.target.files[0]))
+            window.cropper1.replace(URL.createObjectURL(e.target.files[0]))
 
         });
     });

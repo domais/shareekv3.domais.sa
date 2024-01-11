@@ -34,6 +34,8 @@ class Inputs extends Component
     public $is_show_page = false;
     public $histories =  [];
 
+    //files
+
     public function mount()
     {
         if ($this->draft) {
@@ -101,11 +103,6 @@ class Inputs extends Component
 
     }
 
-    #[On('fileSelected')] 
-    public function fileSelected($image)
-    {
-       dd($image);
-    }
 
     public function render()
     {

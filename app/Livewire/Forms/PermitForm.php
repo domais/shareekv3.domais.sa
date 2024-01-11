@@ -17,10 +17,11 @@ class PermitForm extends Form
     public $litrary_children_id = "";
     public $title;
     public $description;
-    public $start_date = "2024-01-15 12:00PM";
-    public $end_date = "2024-01-15 03:00PM";
+    public $start_date = "";
+    public $end_date = "";
     public $available_seats;
     public $event_location = "";
+    public $image;
 
 
 
