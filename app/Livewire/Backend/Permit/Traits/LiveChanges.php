@@ -111,6 +111,7 @@ trait LiveChanges
         
         DB::transaction(function () use ($permitData,$speakers,$permit,$partnerships) {
             if ($permit) {
+                // update permit
                 $permitData['status_id'] = 3;
                 $order_number = $permit->order_number;
                 $permitData['order_number'] = $order_number;
@@ -124,18 +125,38 @@ trait LiveChanges
 
             }
             else{
+                // create permit
                 $permit = Permit::create($permitData);
 
                 $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
                 $permit->save();
 
+                // start files upload
+
                 $image = new File();
                 $image->name = $permit->order_number;
                 $image->use = 'adv';
                 $image->type = 'image';
-                $image->path = $permitData['image']->store('public/files/'.$permit->order_number.'/adv');
+                $image->path = $permitData['image_adv']->store('files/'.$permit->order_number.'/adv');
 
                 $permit->fileable()->save($image);
+
+                if ($permitData['event_location'] == 2) {
+                    $approval_file = new File();
+                    $approval_file->name = $permit->order_number;
+                    $approval_file->use = 'approval_letter';
+                    $approval_file->type = 'pdf';
+                    $approval_file->path = $permitData['approval_file']->store('files/'.$permit->order_number.'/approval_letter');
+                    $permit->fileable()->save($approval_file);
+
+                    $location_image = new File();
+                    $location_image->name = $permit->order_number;
+                    $location_image->use = 'location_image';
+                    $location_image->type = 'image';
+                    $location_image->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image');
+                    $permit->fileable()->save($location_image);
+
+                }
 
                 AddToHistory($permit->id,$permitData['status_id']);
                 ChangePermitStatus($permit);

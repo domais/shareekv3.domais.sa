@@ -1,6 +1,8 @@
 <div
   x-data="{location: @entangle('form.event_location').live}"
+  x-init="$watch('location', value => { if (value == 1) updateMarkerPosition({{auth()->user()->owner->lat}}, {{auth()->user()->owner->lng}}); })"
 >
+
 	<div class="row">
 		<div class="col-5">
 			<div class="row my-3">
@@ -18,15 +20,28 @@
 			</div>
 			<div class="row my-3" x-show="location == 2">
 				<div class="col-4 d-flex align-items-center">خطاب الموافقة</div>
-				<div class="col-8"><input type="file" class="form-control"></div>
+				@if ($this->permit  && $this->permit->event_location == 2 && $this->is_show_page)
+					<div class="col-8"><a href="{{asset('storage/'.$this->permit->fileable->where('use','approval_letter')->first()->path)}}" target="_blank" class="btn btn-primary">عرض الملف</a></div>
+				@else
+				<div class="col-8"><input type="file" wire:model="form.approval_file" class="form-control"></div>
+				@endif
 			</div>
 			<div class="row my-3">
 				<div class="col-4 d-flex align-items-center">إحداثيات المكان</div>
 				<div class="col-8"><input type="text" id="location" dir="ltr" placeholder="حدد المكان على الخريطة" disabled class="form-control text-start"></div>
 			</div>
-			<input type="file" class="style image mx-auto mb-3" id="LocImg_input" x-show="location == 2">
+			<input type="file"  x-bind:disabled="is_show_page"  class="style image mx-auto mb-3" id="LocImg_input" x-show="location == 2">
 			<div class="DropArea" style="height: 311px" x-show="location == 2">
-				<img id="LocImg" src="{{asset('img/pexel.png')}}" alt="Picture">
+				@if ($this->permit  && $this->permit->event_location == 2 && $this->is_show_page)
+					<img id="LocImg" wire:model="form.location_image" src="{{asset('storage/'.$this->permit->fileable->where('use','location_image')->first()->path)}}" alt="Picture">
+				@else
+				 @if ($this->permit  && $this->permit->event_location == 2 && !$this->is_show_page)
+				 	<img id="LocImg" wire:model="form.location_image" src="{{asset('storage/'.$this->permit->fileable->where('use','location_image')->first()->path)}}" alt="Picture">
+				 @else
+				 <img id="LocImg" wire:model="form.location_image" src="{{asset('img/pexel.png')}}" alt="Picture">
+
+				 @endif
+				@endif
 			</div><!-- /DropArea -->
 		</div>
 		<div class="col-7">
@@ -43,6 +58,8 @@ input[type=file]#LocImg_input::before {
 <script async defer src="https://maps.googleapis.com/maps/api/js?callback=start&amp;key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&amp;language=ar&amp;region=SA"></script>
 <script>
 	let map;
+	let marker; // Declare marker variable outside the function
+
 	function start(){
 		console.log('Google\'s Map loaded 👍')
 	}
@@ -57,7 +74,7 @@ input[type=file]#LocImg_input::before {
 
 		map.setOptions({ styles: [{ featureType: "landscape", stylers: [{ visibility: "off" }], }, { featureType: "poi", stylers: [{ visibility: "off" }] }, { featureType: "landscape", stylers: [{ visibility: "off" }] }] });
 
-		var marker = new google.maps.Marker({ position: position, url: 'https://maps.google.com/?q=' + position.lat + ',' + position.lng + '', map });
+		marker = new google.maps.Marker({ position: position, url: 'https://maps.google.com/?q=' + position.lat + ',' + position.lng + '', map });
 
 		google.maps.event.addListener(marker, 'click', function () {
 			window.open(this.url, '_tab')
@@ -78,7 +95,15 @@ input[type=file]#LocImg_input::before {
 			updateInput(lat, lng)
 		});
 	}
-	
+
+	function updateMarkerPosition(lat, lng) 
+	{
+		var newPosition = new google.maps.LatLng(lat, lng);
+		marker.setPosition(newPosition);
+		map.setCenter(newPosition);
+	}
+
+
 	function updateInput(lat, lng) {
 		// Rahmani: هنا تاخد اللوكيشن إللي حدده المستخدم
 		//Domais : done thnx
@@ -103,30 +128,68 @@ input[type=file]#LocImg_input::before {
 	window.addEventListener('DOMContentLoaded', function() {
 
 
-$("#LocImg_input").on('change', (e)=> {
 
-	var image = document.querySelector('#LocImg');
 
-	if(window.cropper2){
-		window.cropper2.destroy()
-	}
+		$("#LocImg_input").on('change', (e)=> {
 
-	window.cropper2 = new Cropper(image, {
-		viewMode: 3,
-		dragMode: 'move',
-		autoCropArea: 1,
-		restore: false,
-		modal: false,
-		guides: false,
-		highlight: false,
-		cropBoxMovable: false,
-		cropBoxResizable: false,
-		toggleDragModeOnDblclick: false,
-	});
+		var image = document.querySelector('#LocImg');
+		var fileType = e.target.files[0].type;
 
-	window.cropper2.replace(URL.createObjectURL(e.target.files[0]))
+		if(window.cropper2){
+			window.cropper2.destroy()
+		}
 
-});
+		window.cropper2 = new Cropper(image, {
+			viewMode: 3,
+			dragMode: 'move',
+			autoCropArea: 1,
+			restore: false,
+			modal: false,
+			guides: false,
+			highlight: false,
+			cropBoxMovable: false,
+			cropBoxResizable: false,
+			toggleDragModeOnDblclick: false,
+			ready: function () {
+				// This will be called when the cropper is ready
+				var canvas = window.cropper2.getCroppedCanvas();
+				canvas.toBlob(function(blob) {
+					var file = new File([blob], "image.png", {type: fileType});
+					// Upload a file
+					@this.upload('form.location_image', file, (uploadedFilename) => {
+						console.log(uploadedFilename);
+						// Success callback...
+					/*  Swal.fire({
+							icon: 'success',
+							title: 'تم تحميل الصورة بنجاح',
+							text: null,
+							showConfirmButton: false,
+							timer: 1500
+						});*/
+					}, () => {
+						// Error callback...
+						Swal.fire({
+							icon: 'error',
+							title: 'خطأ',
+							text: 'حدث خطأ أثناء التحميل',
+							showConfirmButton: false,
+
+						});
+					}, (event) => {
+						// Progress callback...
+						// event.detail.progress contains a number between 1 and 100 as the upload progresses
+						console.log(event.detail.progress);
+
+					})
+				});
+			}
+		});
+
+		window.cropper2.replace(URL.createObjectURL(e.target.files[0]))
+
+		});
+
+
 });
 
 </script>

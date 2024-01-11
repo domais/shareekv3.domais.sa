@@ -20,7 +20,7 @@ use Illuminate\Validation\Rules\Password;
         
     }
 
-     function newPermit()
+    function newPermit()
     {
         return [
             'order_number' => 'required|unique:permits,order_number',
@@ -36,7 +36,9 @@ use Illuminate\Validation\Rules\Password;
             'need_support' => 'required|boolean',
             'lat' => 'required',
             'lng' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_adv' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'approval_file' => 'nullable|required_if:event_location,2|mimes:pdf|max:2048',
+            'location_image' => 'nullable|required_if:event_location,2|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 

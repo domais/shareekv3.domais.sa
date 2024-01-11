@@ -161,10 +161,16 @@ return [
         'available_seats' => 'المقاعد المتاحة',
         'lat' => 'خط العرض',
         'lng' => 'خط الطول',
+        'approval_file' => 'ملف الموافقة',
+        'location_image' => 'صورة الموقع',
+        'image_adv' => 'صورة الإعلان',
     ],
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'approval_file' => [
+            'required_if' => 'حقل ملف الموافقة مطلوب عندما يكون موقع الحدث  خارجي.',
+        ],
+        'location_image' => [
+            'required_if' => 'حقل صورة الموقع مطلوب عندما يكون موقع الحدث  خارجي.',
         ],
     ],
 ];

@@ -152,10 +152,17 @@
         <div class="row mt-3 mt-5">
             <div class="col-1"></div>
             <div class="col-11">
-                <input type="file" class="style image mx-auto mb-3" id="AdvImg_input">
+                <input type="file" x-bind:disabled="is_show_page"  class="style image mx-auto mb-3" id="AdvImg_input">
+                @if ($this->permit)
                 <div class="DropArea" style="height: 360px">
-                    <img id="AdvImg" src="{{asset('img/pexel.png')}}" alt="Picture">
-                </div>
+                    <img id="AdvImg" src="{{asset('storage/'.$this->permit->fileable->where('use','adv')->first()->path)}}" alt="Picture">
+                </div>  
+                @else
+                    <div class="DropArea" style="height: 360px">
+                        <img id="AdvImg" src="{{asset('img/pexel.png')}}" alt="Picture">
+                    </div>   
+                @endif
+   
             </div>
         </div><!-- /col-5 -->
     </div>
@@ -195,6 +202,29 @@ input[type=file]#AdvImg_input::before {
                  Livewire.dispatch('dateUpdated', {'id':id, 'formattedDate':formattedDate});
             }
         });
+
+        @if ($this->permit) 
+            $(document).ready(function(){
+                var start_date = '{{ $this->permit->start_date }}'; // Use the start_date from the permit
+                var end_date = '{{ $this->permit->end_date }}'; // Use the start_date from the permit
+
+                console.log(start_date, end_date);
+
+                $('#start_date').datetimepicker({
+                    value:'{{ $this->permit->start_date }}',
+                    format:'Y-m-d H:i'            
+                });
+
+
+                $('#end_date').datetimepicker({
+                    value:'{{ $this->permit->end_date }}',
+                    format:'Y-m-d H:i'            
+                });
+
+    
+            });
+        @endif
+
 
 
         var toolbarOptions = [
@@ -269,7 +299,7 @@ input[type=file]#AdvImg_input::before {
                     canvas.toBlob(function(blob) {
                         var file = new File([blob], "image.png", {type: fileType});
                         // Upload a file
-                        @this.upload('form.image', file, (uploadedFilename) => {
+                        @this.upload('form.image_adv', file, (uploadedFilename) => {
                             // Success callback...
                           /*  Swal.fire({
                                 icon: 'success',

@@ -69,7 +69,6 @@ class Index extends Component
     #[On('AssignPermit_Dispatch')] 
     public function AssignPermit($place,$redirect ,$id,$model)
     {
-       dd($place,$redirect,$id,$model);
        $permit = Permit::findorfail($id);
        $permit->status_id = 3;
        $permit->admin_id = auth()->id();
@@ -81,16 +80,17 @@ class Index extends Component
     }
 
     #[On('RejectPermit_Dispatch')] 
-    public function RejectPermit($place, $id,$model)
+    public function RejectPermit($id,$model,$reason)
     {
+        
         $permit = Permit::findorfail($id);
         $permit->status_id = 10;
         $permit->save();
 
-        AddToHistory($permit->id,$permit->status_id);
+        AddToHistory($permit->id,$permit->status_id,null,$reason);
 
 
-        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
     
     #[On('IntialApproved_Dispatch')] 

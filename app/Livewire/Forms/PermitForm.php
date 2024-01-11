@@ -21,7 +21,9 @@ class PermitForm extends Form
     public $end_date = "";
     public $available_seats;
     public $event_location = "";
-    public $image;
+    public $image_adv;
+    public $approval_file;
+    public $location_image;
 
 
 

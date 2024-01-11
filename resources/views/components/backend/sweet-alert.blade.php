@@ -115,27 +115,29 @@
 	
 	
 	// رفض طلب للآدمن
-	function Act_AdminRejectPermit(id,model) {
-		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'رفض التصريح', 
-			'أنت على وشك رفض التصريح ، لرفض التصريح ، جيب عليك ذكر سبب الرفض في الخانة بالأسف ثم الضغط على (رفض الطلب)',
-			true, 			// show Confirm Button
-			true, 			// show Cancel Button
-			'red', 			// confirm Button Color 	default = #456496
-			'رفض الطلب',     // confirm Button Text 		default = موافق
-			false,          // cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
-			false, 			// timer before auto disaplear
-			false, 			// bar
-			false, 			// actio
-			false, 			// place inside? 
-			false, 			// actionable 
-			true, 			// textarea
-		);
+	function Act_AdminRejectPermit(id, model) {
+		Swal.fire({
+			title: 'رفض التصريح',
+			text: 'أنت على وشك رفض التصريح ، لرفض التصريح ، جيب عليك ذكر سبب الرفض في الخانة بالأسف ثم الضغط على (رفض الطلب)',
+			icon: 'question',
+			input: 'textarea',
+			inputPlaceholder: 'أدخل سبب الرفض هنا',
+			showCancelButton: true,
+			confirmButtonText: 'رفض الطلب',
+			cancelButtonText: 'إلغاء',
+			confirmButtonColor: '#456496',
+		}).then((result) => {
+			if (result.isConfirmed && result.value) {
+				// Perform the action when the user clicks the confirm button
+				// You can replace 'RejectPermit_Dispatch' with the actual function you want to call
+				//RejectPermit_Dispatch(id, model, result.value);
+				Livewire.dispatch('RejectPermit_Dispatch', {
+					id: id,
+					model: model,
+					reason: result.value
+				})
+			}
+		});
 	}
 	
 	
