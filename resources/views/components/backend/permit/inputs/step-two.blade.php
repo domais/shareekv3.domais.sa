@@ -1,14 +1,11 @@
 <div
-  x-data="{location: @entangle('form.event_location').live}"
+  x-data="{location: @entangle('form.event_location').live,lat: @entangle('form.lat').live,lng: @entangle('form.lng').live}"
   x-init="$watch('location',
    value => {
-	if (value == 1) {
-		@if(auth()->user()->hasRole('SuperAdmin'))
-			updateMarkerPosition({{$this->permit->user->owner->lat}}, {{$this->permit->user->owner->lng}});
-		@else
-			updateMarkerPosition({{auth()->user()->owner->lat}}, {{auth()->user()->owner->lng}});
-		@endif
-	}"
+	 if (value == 1)
+	 updateMarkerPosition(lat, lng);
+	 alert('hello world')
+	 })"
 >
 
 	<div class="row">

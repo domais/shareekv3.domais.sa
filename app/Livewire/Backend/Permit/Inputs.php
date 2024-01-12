@@ -56,14 +56,16 @@ class Inputs extends Component
             if (!empty($this->permit->partnerships)) {
                 $this->partnerships = $this->permit->partnerships->toArray();
             }
-
-         
         }   
 
         $this->is_show_page = Route::currentRouteName() == 'permit.show';
 
         if ($this->is_show_page && $this->permit) {
             $this->histories = $this->permit->history()->orderBy('created_at', 'Desc')->get();
+        }
+        if (is_null($this->permit)) {
+            $this->form->lat = auth()->user()->owner->lat;
+            $this->form->lng = auth()->user()->owner->lng;
         }
     }   
 

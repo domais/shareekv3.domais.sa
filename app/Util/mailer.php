@@ -14,28 +14,25 @@ function ChangePermitStatus($permit)
     ];
 
     switch ($permit->status_id) {
+        // تحت الدراسة
         case 2:
             $admins = Role::where('name', 'SuperAdmin')->first()->users;
-            $userEmail = $permit->user->email;
 
             $recipients = $admins->pluck('email')->toArray(); // Get all admin emails
-            $recipients[] = $userEmail; // Add user email to the recipients array
-
             Mail::to($recipients)->send(new ChangeStatus($data));
-            break;
+        break;
 
+        //  موافقة مبدأية
         case 3:
-            $admin = $permit->admin->email;
-            Mail::to($admin)->send(new ChangeStatus($data));
+            $user = $permit->user->email;
+            Mail::to($user)->send(new ChangeStatus($data));
             break;
 
+        //  موافقة نهائية
         case 4:
-            $admin = $permit->admin->email;
             $user = $permit->user->email;
 
-            $recipients = [$admin, $user];
-
-            Mail::to($recipients)->send(new ChangeStatus($data));
-            break;
+            Mail::to($user)->send(new ChangeStatus($data));
+        break;
     }
 }
