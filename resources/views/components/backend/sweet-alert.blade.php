@@ -166,26 +166,22 @@
 
 	// تشغيل بدون تصريح للآدمن
 	function Act_ApproveWithoutPirmet(id,model) {
-		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'تشغيل بدون تصريح', 
-			'لتشغيل المبادرة بدون تصريح ، يجب عليك ذكر السبب في الأسفل وأنت تتحمل المسؤولية لتبعات هذا القرار',
-			true, 			// show Confirm Button
-			true, 			// show Cancel Button
-			'red', 			// confirm Button Color 	default = #456496
-			'تشغيل بدون تصريح',     // confirm Button Text 		default = موافق
-			false,          // cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
-			false, 			// timer before auto disaplear
-			false, 			// bar
-			false, 			// actio
-			false, 			// place inside? 
-			false, 			// actionable 
-			true, 			// textarea
-		);
+		console.log(id,model);
+		Swal.fire({
+			title: 'تشغيل بدون تصريح',
+			text: 'لتشغيل المبادرة بدون تصريح ، يجب عليك ذكر السبب في الأسفل وأنت تتحمل المسؤولية لتبعات هذا القرار',
+			icon: 'question',
+			input: 'textarea',
+			showCancelButton: true,
+			confirmButtonColor: 'red',
+			confirmButtonText: 'تشغيل بدون تصريح',
+			cancelButtonText: 'إلغاء',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Dispatch the event to Livewire
+				Livewire.dispatch('Act_ApproveWithoutPirmet', {id:id, model:model, reason: result.value});
+			}
+		});
 	}
 	
 

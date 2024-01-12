@@ -98,10 +98,27 @@ class Index extends Component
 
         Event::create($permit->toArray());
 
+        AddToHistory($permit->id,$permit->status_id);
         ChangePermitStatus($permit);
 
         
         $this->redirect(route('event.index'));
+    }
+
+    #[On('Act_ApproveWithoutPirmet')] 
+    public function Act_ApproveWithoutPirmet($id, $model, $reason)
+    {
+        $permit = Permit::find($id);
+        $permit->status_id = 5;
+        $permit->save();
+
+        Event::create($permit->toArray());
+
+        
+        AddToHistory($permit->id,$permit->status_id,null,$reason);
+        ChangePermitStatus($permit);
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
 
     #[On('DeletePermit_Dispatch')] 
