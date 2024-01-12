@@ -10,6 +10,7 @@ use App\Models\Permit;
 use App\Models\Speaker;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 
@@ -122,6 +123,39 @@ trait LiveChanges
 
                 AddToHistory($permit->id,$permitData['status_id'],true);
                 ChangePermitStatus($permit);
+
+                    // Handle files
+                foreach ($permit->fileable as $file) {
+                    switch ($file->use) {
+                        case 'adv':
+                            if (!is_string($permitData['image_adv'])) {
+                                Storage::delete('public/'.$file->path);
+                                $file->path = $permitData['image_adv']->store('files/'.$permit->order_number.'/adv','public');
+                            }
+                            break;
+                        case 'approval_letter':
+                            if ($permitData['event_location'] == 2 && !is_string($permitData['approval_file'])) {
+                                Storage::delete($file->path);
+                                $file->path = $permitData['approval_file']->store('files/'.$permit->order_number.'/approval_letter');
+                            }elseif ($permitData['event_location'] == 1) {
+                                Storage::delete($file->path);
+                                $file->delete();
+                            }
+                            break;
+                        case 'location_image':
+                            if ($permitData['event_location'] == 2 && !is_string($permitData['location_image'])) {
+                                Storage::delete($file->path);
+                                $file->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image');
+                            } elseif ($permitData['event_location'] == 1) {
+                                Storage::delete($file->path);
+                                $file->delete();
+                            }
+                            break;
+                    }
+                    $file->save();
+                }
+
+
 
             }
             else{

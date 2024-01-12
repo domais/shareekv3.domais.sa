@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 
     function newUser() 
@@ -36,9 +37,39 @@ use Illuminate\Validation\Rules\Password;
             'need_support' => 'required|boolean',
             'lat' => 'required',
             'lng' => 'required',
-            'image_adv' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'approval_file' => 'nullable|required_if:event_location,2|mimes:pdf|max:2048',
-            'location_image' => 'nullable|required_if:event_location,2|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_adv' => ['required', function ($attribute, $value, $fail) {
+                if (is_string($value)) {
+                    if (!Storage::exists($value)) {
+                        $fail($attribute.' must be a valid file path.');
+                    }
+                } else {
+                    if (!$value->isValid() || !in_array($value->getMimeType(), ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/svg'])) {
+                        $fail($attribute.' must be a valid image file.');
+                    }
+                }
+            }],
+            'approval_file' => ['nullable', 'required_if:event_location,2', function ($attribute, $value, $fail) {
+                if (is_string($value)) {
+                    if (!Storage::exists($value)) {
+                        $fail($attribute.' must be a valid file path.');
+                    }
+                } else {
+                    if (!$value->isValid() || $value->getMimeType() != 'application/pdf') {
+                        $fail($attribute.' must be a valid PDF file.');
+                    }
+                }
+            }],
+            'location_image' => ['nullable', 'required_if:event_location,2', function ($attribute, $value, $fail) {
+                if (is_string($value)) {
+                    if (!Storage::exists($value)) {
+                        $fail($attribute.' must be a valid file path.');
+                    }
+                } else {
+                    if (!$value->isValid() || !in_array($value->getMimeType(), ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/svg'])) {
+                        $fail($attribute.' must be a valid image file.');
+                    }
+                }
+            }],
         ];
     }
 
