@@ -4,7 +4,6 @@
    value => {
 	 if (value == 1)
 	 updateMarkerPosition(lat, lng);
-	 alert('hello world')
 	 })"
 >
 

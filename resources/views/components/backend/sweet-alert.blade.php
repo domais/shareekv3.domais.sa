@@ -89,29 +89,25 @@
 	
 
 	// موافقة مبدأية للآدمن
-	function IntialApproved(id,model) {
-		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'موافقة مبدأية', 
-			'بالضغط على (موافقة مبدأية) سيتم تنبيه الشريك بأنه تمت الموافقة المبدأية على طلب التصريح ، هل أنت متأكد؟',
-			true, 			// show Confirm Button
-			true, 			// show Cancel Button
-			false, 			// confirm Button Color 	default = #456496
-			'موافقة مبدأية', 			// confirm Button Text 		default = موافق
-			false, 		 // cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
-			false, 			// timer before auto disaplear
-			false, 			// bar
-			false, 			// actio
-			false, 			// place inside? 
-			false, 			// actionable 
-			false, 			// redirect
-			false, 			// textarea
-		);
-	}
+	function IntialApproved(id, model) {
+    Swal.fire({
+        title: 'موافقة مبدأية',
+        text: 'بالضغط على (موافقة مبدأية) سيتم تنبيه الشريك بأنه تمت الموافقة المبدأية على طلب التصريح ، هل أنت متأكد؟',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#456496',
+        confirmButtonText: 'موافقة مبدأية',
+        cancelButtonText: 'إلغاء',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Handle the action when the user clicks on 'موافقة مبدأية'
+			Livewire.dispatch('IntialApproved_Dispatch', {
+					id: id,
+					model: model,
+				})
+        }
+    });
+}
 	
 	
 	// رفض طلب للآدمن
@@ -143,6 +139,8 @@
 	
 	// تشغيل الفعالية للآدمن
 	function FinalApprove(id,model) {
+		console.log(id,model);
+
 		handleAction(
 			id, 			// id,         
 			model, 			// model, 

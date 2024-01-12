@@ -12,7 +12,13 @@
                     <small>{{$item->user->name}}</small>
                     {{-- Rahmani: if admin => show caffee name / else hide --}}
                 </div>
+                @if ($item->literary)
                 <div class="type mb-3">{{$item->literary->parent->name}} > {{$item->literary->name}}</div>
+                @else
+                <div class="type mb-3">مساهمة</div>
+
+                @endif
+                
                 <div class="number">
                     <span>رقم الطلب : {{$item->order_number}}</span>
                     <small>{{ $item->created_at->diffForHumans() }}</small>            
@@ -37,7 +43,7 @@
                     @endif
 
                     @if($button['type'] == 'modal')
-                        <a class="{{ $button['class'] }}" data-bs-toggle="modal" data-bs-target="#{{ $button['modal'] }}">{!! $button['title'] !!}</a>
+                        <a class="{{ $button['class'] }}" wire:click="selected({{$item->id}})" data-bs-toggle="modal" data-bs-target="#{{ $button['modal'] }}">{!! $button['title'] !!}</a>
                     @endif
 
                     @if($button['type'] == 'switch')

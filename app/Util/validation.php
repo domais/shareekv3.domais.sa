@@ -28,7 +28,7 @@ use Illuminate\Validation\Rules\Password;
             'user_id' => 'required|exists:users,id',
             'event_type_id' => 'required|exists:event_types,id',
             'event_location' => 'required|in:1,2',
-            'literary_id' => 'required|exists:literaries,id',
+            'literary_id' => 'nullable|exists:literaries,id',
             'status_id' => 'required|exists:statuses,id',
             'description' => 'required',
             'start_date' => 'required|date',

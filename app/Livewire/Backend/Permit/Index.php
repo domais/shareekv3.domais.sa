@@ -3,20 +3,29 @@
 namespace App\Livewire\Backend\Permit;
 
 use App\Models\Draft;
+use App\Models\Event;
+use App\Models\File;
 use App\Models\Permit;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
+    use WithFileUploads;
+
     public $drafts = [];
     public $new_orders = [];
     public $pending = [];
     public $approved = [];
     public $rejected = [];
     public $role = 0;
+    public $selected_id = 0;
+    public $permitNumber;
+    public $permitFile;
 
     public function mount()
     {
@@ -37,6 +46,62 @@ class Index extends Component
             $this->pending = $this->new_orders->concat($this->pending);
             $this->role = 2;
         }
+    }
+
+    public function selected($id)
+    {
+        $this->selected_id = $id;
+    }
+    
+
+    public function approvePermit()
+    {
+        try {
+            // Validate the input
+            $validator = Validator::make([
+                'selected_id' => $this->selected_id,
+                'permitNumber' => $this->permitNumber,
+                'permitFile' => $this->permitFile,
+            ], [
+                'selected_id' => 'required|exists:permits,id',
+                'permitNumber' => 'required',
+                'permitFile' => 'required|file|mimes:pdf',
+            ]);
+            if ($validator->fails()) {
+                // Handle validation failure
+                throw new \Exception($validator->errors()->first());
+            }
+    
+            // Find the permit
+            $permit = Permit::find($this->selected_id);
+    
+            // Update the permit number
+            $permit->permit_number = $this->permitNumber;
+            $permit->status_id = 5;
+            $permit->save();
+    
+            // Store the file
+            $path = $this->permitFile->store('files/'.$permit->order_number.'/permit_file','public');
+            // Create a new file record
+            $approval_file = new File();
+            $approval_file->name = $permit->order_number;
+            $approval_file->use = 'permit_file';
+            $approval_file->type = 'pdf';
+            $approval_file->path = $path;
+
+            $permit->fileable()->save($approval_file);
+        } catch (\Exception $e) {
+            // Handle the exception
+            dd($e->getMessage());
+        }
+
+
+        Event::create($permit->toArray());
+
+        ChangePermitStatus($permit);
+
+        
+        $this->redirect(route('event.index'));
     }
 
     #[On('DeletePermit_Dispatch')] 
@@ -75,6 +140,7 @@ class Index extends Component
        $permit->save();
 
        AddToHistory($permit->id,$permit->status_id);
+       ChangePermitStatus($permit);
 
        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
@@ -87,6 +153,7 @@ class Index extends Component
         $permit->status_id = 10;
         $permit->save();
 
+        ChangePermitStatus($permit);
         AddToHistory($permit->id,$permit->status_id,null,$reason);
 
 
@@ -94,7 +161,7 @@ class Index extends Component
     }
     
     #[On('IntialApproved_Dispatch')] 
-    public function IntialApproved($place, $id,$model)
+    public function IntialApproved($id,$model)
     {
         $permit = Permit::findorfail($id);
         $permit->status_id = 4;
@@ -104,7 +171,7 @@ class Index extends Component
         ChangePermitStatus($permit);
 
 
-        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
     
 

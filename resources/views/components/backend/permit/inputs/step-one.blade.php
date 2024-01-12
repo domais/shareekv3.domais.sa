@@ -76,7 +76,7 @@
         </div>
 
 
-        <div class="row my-3">
+        <div class="row my-3"  x-show="event_type_id == 1">
             <div class="col-3 d-flex align-items-center">نوع الأدب</div>
             <div class="col-9">
                 <select class="form-control rounded" wire:model.live="form.literary_id" x-bind:disabled="is_show_page">

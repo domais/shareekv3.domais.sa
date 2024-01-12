@@ -66,6 +66,8 @@ class Inputs extends Component
         if (is_null($this->permit)) {
             $this->form->lat = auth()->user()->owner->lat;
             $this->form->lng = auth()->user()->owner->lng;
+
+          //  dd($this->form->lat,$this->form->lng);
         }
     }   
 

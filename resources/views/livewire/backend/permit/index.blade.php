@@ -84,7 +84,7 @@
 
 
     <!-- مودال اعتماد تشغيل فعالية -->
-    <div class="modal fade" id="Permit-Admin-Final-Approval-Modal" tabindex="-1">
+    <div wire:ignore class="modal fade" id="Permit-Admin-Final-Approval-Modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -94,16 +94,16 @@
                 <div class="modal-body">
                     <div class="row mt-2">
                         <div class="col-3 d-flex align-items-center">رقم التصريح</div>
-                        <div class="col-8"><input type="text" class="form-control" id="PermitNumber"></div>
+                        <div class="col-8"><input type="text" wire:model="permitNumber" class="form-control" id="PermitNumber"></div>
                     </div>
                     <div class="row mt-4">
                         <div class="col-3 d-flex align-items-center">نسخ التصريح</div>
-                        <div class="col-8"><input type="file" class="form-control" id="PermitPDF"></div>
+                        <div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-success" onclick="FinalApprove(1,2)">اعتماد</button>
+                    <button type="button" class="btn btn-success" wire:click="approvePermit">اعتماد</button>
                 </div>
             </div>
         </div>

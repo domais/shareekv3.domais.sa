@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('order_number')->unique();
+            $table->string('permit_number')->nullable()->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id')->nullable()->comment('admin who approved the permit');
 
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->string('targeted_audience');
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside');
-            $table->unsignedBigInteger('literary_id');
+            $table->unsignedBigInteger('literary_id')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->string('title');
             $table->longText('description');
