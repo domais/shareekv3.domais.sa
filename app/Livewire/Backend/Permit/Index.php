@@ -96,7 +96,20 @@ class Index extends Component
         }
 
 
-        Event::create($permit->toArray());
+        $event = Event::create($permit->toArray());
+
+        $speakers = $permit->speakers;
+        $partnerships = $permit->partnerships;
+
+        foreach ($speakers as $speaker) {
+            $speaker->event_id = $event->id;
+            $speaker->save();
+        }
+
+        foreach ($partnerships as $partnership) {
+            $partnership->event_id = $event->id;
+            $partnership->save();
+        }
 
         AddToHistory($permit->id,$permit->status_id);
         ChangePermitStatus($permit);
