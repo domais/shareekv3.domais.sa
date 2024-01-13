@@ -186,29 +186,31 @@
 	
 
 	// مشاركة فعالية لجميع المستخدمين
-	function Act_ShareEvent(id,model) {
-		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			false, 			// icon , 
-			'share.png', 	// img located => public/img/alert/ 
-			'مشاركة الفعالية', 
-			'انسخ الرابط التالي وقم بمشاركته مع الآخرين<br><input type="text" class="form-control text-center mt-3" dir="ltr" value="{{url('uuu')}}" />',
-			false, 			// show Confirm Button
-			true, 			// show Cancel Button
-			false, 			// confirm Button Color 	default = #456496
-			false, 			// confirm Button Text 		default = موافق
-			'إغلاق', 		 // cancel Button Text  		default = إلغاء
-			false, 			// use need to take action ?
-			false, 			// timer before auto disaplear
-			false, 			// bar
-			false, 			// actio
-			false, 			// place inside? 
-			false, 			// actionable 
-			false, 			// redirect
-			false, 			// textarea
-		);
-	}
+	function Act_ShareEvent(id, model) {
+    console.log(id, model);
+    var url = window.location.origin + '/permit/show/' + id;
+    handleAction(
+        id,             // id,         
+        model,          // model, 
+        false,          // icon , 
+        'share.png',    // img located => public/img/alert/ 
+        'مشاركة الفعالية', 
+        'انسخ الرابط التالي وقم بمشاركته مع الآخرين<br><input type="text" class="form-control text-center mt-3" dir="ltr" value="' + url + '" />',
+        false,          // show Confirm Button
+        true,           // show Cancel Button
+        false,          // confirm Button Color    default = #456496
+        false,          // confirm Button Text     default = موافق
+        'إغلاق',        // cancel Button Text      default = إلغاء
+        false,          // use need to take action ?
+        false,          // timer before auto disaplear
+        false,          // bar
+        false,          // actio
+        false,          // place inside? 
+        false,          // actionable 
+        false,          // redirect
+        false,          // textarea
+    );
+}
 	
 	
 	

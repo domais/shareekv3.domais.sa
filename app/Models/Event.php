@@ -60,5 +60,10 @@ class Event extends Model
     {
         return $this->belongsTo(Literary::class);
     }
+
+    public function fileable()
+    {
+        return $this->morphMany(File::class, 'fileable');    
+    }
     
 }

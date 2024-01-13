@@ -36,6 +36,7 @@ return new class extends Migration
             $table->boolean('need_support')->default(0);
             $table->double('lat');
             $table->double('lng');
+            $table->json('links')->nullable();
 
             $table->softDeletes();
 

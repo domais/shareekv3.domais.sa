@@ -69,7 +69,7 @@
 
 
     <!-- مودال رفع توثيق الشريك -->
-    <div class="modal fade" id="Event-User-Upload-Tawtheeq-Modal" tabindex="-1" aria-labelledby="tawtheeqLabel" aria-hidden="true">
+    <div wire:ignore class="modal fade" id="Event-User-Upload-Tawtheeq-Modal" tabindex="-1" aria-labelledby="tawtheeqLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -92,7 +92,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                <button type="button" class="btn btn-success">ارسال التوثيق</button>
+                <button type="button" class="btn btn-success" onclick="approveEvent()">ارسال التوثيق</button>
             </div>
         </div>
         </div>
@@ -104,7 +104,7 @@
 
 
     <!-- مودال اعتماد تشغيل فعالية -->
-    <div class="modal fade" id="FinalApproval" tabindex="-1" aria-labelledby="FinalApprovalLabel" aria-hidden="true">
+    <div wire:ignore class="modal fade" id="FinalApproval" tabindex="-1" aria-labelledby="FinalApprovalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -142,6 +142,9 @@
 
 <script>
 
+    var files = [];
+    var links = [];
+ 
     document.addEventListener("DOMContentLoaded", function() {
         Dropzone.autoDiscover = false
         new Dropzone('.dropzone',{
@@ -150,11 +153,29 @@
             dictRemoveFile:'x',
             thumbnailWidth:130,
             thumbnailHeight:130,
-            removedfile: function(file) {
-               // Rahmani: add Ajax to remove image from server 
-                file.previewElement.remove()
-                console.log('Delete this file',file)
+            init: function() {
+                this.on('addedfile', function(file) {
+                    files.push(file); // Add file to files array
+                    console.log('Number of files:', files.length);
+                    @this.uploadMultiple('photos', files, successCallback, errorCallback, progressCallback)
+
+                });
+                this.on('queuecomplete', function() {
+                    // Upload multiple files
+                    //
+                });
+                this.on('removedfile', function(file) {
+                    var index = files.findIndex(f => f.name === file.name);
+                    if (index !== -1) {
+                        // Remove the file from the files array
+                        files.splice(index, 1);
+                    }
+                    console.log('Number of files:', files.length);
+                    @this.uploadMultiple('photos', files, successCallback, errorCallback, progressCallback)
+
+                });
             }
+
         })
         $('.AddLink').on('click',()=>{
             var i = $('.modal .links .row').length;
@@ -165,6 +186,46 @@
         $(document).on('click','.RemoveLink', function(){
             $(this).parent().parent().remove()
         })
+
+        // Get all URLs
+        links = $('.modal .links input[name="link[]"]').map(function() {
+            return $(this).val();
+        }).get();
+
+
     })
+
+    function approveEvent()
+    {
+        // Get all URLs
+        var links = $('input[name="link[]"]').map(function() {
+            return $(this).val();
+        }).get();
+
+        @this.set('links', links);
+
+        Livewire.dispatch('saveEventImages');
+    }
+
+    // Define the success callback
+    var successCallback = function(file, response) {
+        /*console.log('File ' + file.name + ' uploaded successfully');
+        console.log('Server response:', response);*/
+    };
+
+    // Define the error callback
+    var errorCallback = function(file, errorMessage, xhr) {
+       
+        if (xhr) {
+            console.log('XHR:', xhr);
+        }
+    };
+
+    // Define the progress callback
+    var progressCallback = function(file, progress, bytesSent) {
+        /*console.log('Upload progress for file ' + file.name + ': ' + progress + '%');
+        console.log('Bytes sent:', bytesSent);*/
+    };
+
 
 </script>
