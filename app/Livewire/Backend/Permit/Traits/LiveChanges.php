@@ -8,6 +8,7 @@ use App\Models\History;
 use App\Models\Partnership;
 use App\Models\Permit;
 use App\Models\Speaker;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -194,6 +195,20 @@ trait LiveChanges
 
                 AddToHistory($permit->id,$permitData['status_id']);
                 ChangePermitStatus($permit);
+
+                /*    
+                    $fileName = $permitData['image_adv']->getClientOriginalName();
+                    $filePath = 'rahmaniDjamel/' . Auth::id() ;
+            
+                    // Upload the image to DigitalOcean Spaces
+                    $path = Storage::disk('digitalocean')->putFileAs($filePath, $permitData['image_adv'], $fileName, 'public');
+
+                    $url = Storage::disk('digitalocean')->url($path);
+
+
+                    dd($path,$url);
+                */
+
 
             }
 
