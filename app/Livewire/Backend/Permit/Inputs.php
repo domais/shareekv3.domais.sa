@@ -35,6 +35,7 @@ class Inputs extends Component
     public $Litrary_childes = [];
     public $is_show_page = false;
     public $histories =  [];
+    public $selectedSpeakers = [];
 
     //files
 

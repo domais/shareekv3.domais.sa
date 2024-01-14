@@ -9,7 +9,20 @@
 
 >
 
+
+
     <div class="col-5">
+        <div class="row my-2">
+            <div class="col-4 d-flex align-items-center">إختر متحدث موجود من قبل</div>
+            <div class="col-8">
+                <select class="js-example-basic-multiple form-control rounded" name="states[]" multiple="multiple">
+                    <option value="AL">Alabama</option>
+                    <option value="WY">Wyoming</option>
+                </select>
+            </div>
+              
+        </div>
+
         <div class="row my-2">
             <div class="col-4 d-flex align-items-center">الاسم الثلاثي</div>
             <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.name" class="form-control rounded"></div>
@@ -105,3 +118,11 @@
     </div>
     </div>
 </div>
+<script>
+    window.addEventListener("DOMContentLoaded", function(event) {
+
+        $(window).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    });
+</script>
