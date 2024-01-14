@@ -30,7 +30,7 @@
 				<div class="col-8"><input type="file" wire:model="form.approval_file" class="form-control"></div>
 				@endif
 			</div>
-			<div class="row my-3">
+			<div class="row my-3" x-show="location == 2">
 				<div class="col-4 d-flex align-items-center">إحداثيات المكان</div>
 				<div class="col-8"><input type="text" id="location" dir="ltr" placeholder="حدد المكان على الخريطة" disabled class="form-control text-start"></div>
 			</div>
