@@ -14,7 +14,7 @@ body {
 	margin: 0;
 	padding: 0;
 	background-color: #edf2f9 !important;
-	background: url('https://shareek-jamal.domais.sa.me/img/bg3.png') repeat-x center -105px;
+	background: url('https://new.myeventksa.com/img/bg3.png') repeat-x center -105px;
 	min-height: calc(100vh - 10px) !important;
 	/* background-size: contain; */
 }
@@ -39,7 +39,7 @@ header .logo {
 	height: 60px;
 	width: 109px;
 	margin-left: 20px;
-	background: url('https://shareek-jamal.domais.sa.me/img/logoDark.png') no-repeat center;
+	background: url('https://new.myeventksa.com/img/logoDark.png') no-repeat center;
 	background-size: contain;
 }
 
@@ -1501,7 +1501,7 @@ tr.action td {
 	background-color: #edf2f9 !important;
 	background: none;
 	background-size: contain;
-	background: url('https://shareek-jamal.domais.sa.me/img//bg3.png') repeat-x center 30px, url('https://shareek-jamal.domais.sa.me/img//extendedBG2.png') no-repeat center bottom 80px;
+	background: url('https://new.myeventksa.com/img//bg3.png') repeat-x center 30px, url('https://new.myeventksa.com/img//extendedBG2.png') no-repeat center bottom 80px;
 }
 
 .light header {
@@ -1521,7 +1521,7 @@ tr.action td {
 	color: #2a536b !important;
 }
 .light header .logo{
-	background: url('https://shareek-jamal.domais.sa.me/img/logoLight.png') no-repeat center;
+	background: url('https://new.myeventksa.com/img/logoLight.png') no-repeat center;
 	background-size: contain;
 }
 
@@ -1700,7 +1700,7 @@ label.dropzone1 {
     aspect-ratio: 1;
     width: 100%;
     text-align: center;
-    background: #d9dfe7 url('https://shareek-jamal.domais.sa.me/img/dropzone.png') no-repeat center center;
+    background: #d9dfe7 url('https://new.myeventksa.com/img/dropzone.png') no-repeat center center;
     border-radius: 10px;
     overflow: hidden;
     border: 4px #a4b0bf dashed;
