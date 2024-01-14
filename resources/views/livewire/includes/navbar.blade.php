@@ -28,7 +28,7 @@
 
 				<li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link px-2 link-light">المساعدة</a></li>
 
-				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">الإعدادات</a></li>
+				{{-- <li class="nav-item"><a href="#" class="nav-link px-2 link-light">الإعدادات</a></li> --}}
 			</ul>
 
 
@@ -48,8 +48,8 @@
 					</span>
 				</div>
 				<ul class="dropdown-menu text-small">
-					<li><a class="dropdown-item" href="#">ملفي الشخصي</a></li>
-					<li><hr class="dropdown-divider"></li>
+					{{-- <li><a class="dropdown-item" href="#">ملفي الشخصي</a></li>
+					<li><hr class="dropdown-divider"></li> --}}
 					<li><button class="dropdown-item text-danger" wire:click="logout">تسجيل الخروج</button></li>
 
 				</ul>
