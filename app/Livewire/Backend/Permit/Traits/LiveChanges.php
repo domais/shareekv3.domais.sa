@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 
@@ -29,6 +30,12 @@ trait LiveChanges
     {
         try {
             $this->speakerForm->validate();
+        
+            if (!$this->speakerForm->twitter && !$this->speakerForm->instagram && !$this->speakerForm->linkedin) {
+                $validator = Validator::make([], []); // empty data and rules
+                $validator->errors()->add('socials', 'يجب أن يكون هناك رابط واحد على الأقل لوسائل التواصل الاجتماعي (تويتر ، إنستجرام ، لينكدين)');                throw new ValidationException($validator);
+            }
+            
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
             return;

@@ -81,9 +81,9 @@ use Illuminate\Validation\Rules\Password;
             'email' => 'required|email|max:255',
             'nationality' => 'required|string|max:255',
             'type' => 'required|in:كاتب,ناشط ثقافي',
-            'twitter' => 'nullable|string|max:255',
-            'instagram' => 'nullable|string|max:255',
-            'linkedin' => 'nullable|string|max:255',
+            'twitter' => 'nullable|url|max:255',
+            'instagram' => 'nullable|url|max:255',
+            'linkedin' => 'nullable|url|max:255',
         ];
     }
 

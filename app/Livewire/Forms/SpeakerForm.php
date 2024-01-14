@@ -21,6 +21,9 @@ class SpeakerForm extends Form
     public function rules()
     {
         return newSpeaker();
+
     }
+
+
     
 }
