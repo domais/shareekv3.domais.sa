@@ -5,7 +5,7 @@
 			<a href="{{url('/')}}" class="logo d-flex align-items-center mb-2 mb-lg-0 link-light text-decoration-none"></a>
 
 			<ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">الرئيسية</a></li>
+				{{-- <li class="nav-item"><a href="#" class="nav-link px-2 link-light">الرئيسية</a></li> --}}
 
 				<li class="nav-item">
 					<a href="{{route('event.index')}}" class="nav-link px-2 link-light {{ is_active('event.index') ? 'active' : '' }}">المبادرات</a>
