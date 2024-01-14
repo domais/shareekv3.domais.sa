@@ -1965,8 +1965,8 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
     border-radius: 7px;
 }
 .xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option {
-    direction: ltr;
-    text-align: left;
+    direction: rtl;
+    text-align: right;
 }
 .xdsoft_datetimepicker .xdsoft_label > .xdsoft_select > div > .xdsoft_option:hover {
     color: #fff;
@@ -1978,12 +1978,22 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
 }
 .xdsoft_datetimepicker .xdsoft_month {
 	width: 80px;
-    text-align: left;
+    text-align: right;
 }
 .xdsoft_datetimepicker .xdsoft_year {
     width: 60px;
     margin-left: 5px;
 }
+.xdsoft_datetimepicker .xdsoft_label {
+    font-weight: 500;
+}
+/* .xdsoft_datetimepicker .xdsoft_next {
+	float: right !important;
+}
+.xdsoft_datetimepicker .xdsoft_prev {
+	float: left !important;
+} */
+
 .xdsoft_datetimepicker .xdsoft_label i {
     opacity: 0.5;
     background-position: -92px -19px;
