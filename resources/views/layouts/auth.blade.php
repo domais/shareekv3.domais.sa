@@ -21,7 +21,7 @@
 
 					<img src="{{asset('img/logoDark.png')}}" class="mb-5" width="300" />
 
-					<h1 class="my-5 fs-2 text-light">أهلاًس بصناع الثقافة والأدب !</h1>
+					<h1 class="my-5 fs-2 text-light">أهلاً بصناع الثقافة والأدب !</h1>
 
 					<p class="mb-4 opacity-70 text-light">
 						هنا كلام لطيف ممكن نستغله في تحفيز مستخدمي النظام
