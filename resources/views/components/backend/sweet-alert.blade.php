@@ -60,6 +60,28 @@
 		);
 	
 	}
+
+	function Act_AdminApprove(id,model)
+	{
+		Swal.fire({
+			title: 'توثيق المبادرة',
+			text: 'سيتم الموافقة على المبادرة هل أنت متأكد؟',
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonColor: 'green',
+			confirmButtonText: 'نعم، وافق',
+			cancelButtonText: 'إلغاء',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Perform the action associated with the 'Confirm' button here.
+				Livewire.dispatch('Act_AdminApprove', {
+					id: id,
+					model: model,
+				})
+			}
+		});
+
+	}
 	
 
 	// إبدا دراسة الطلب للآدمن

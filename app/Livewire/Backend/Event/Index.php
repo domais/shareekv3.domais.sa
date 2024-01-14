@@ -27,6 +27,21 @@ class Index extends Component
     {
         $this->selected_id = $id;
     }
+
+    #[On('Act_AdminApprove')] 
+    public function Act_AdminApprove($id,$model)
+    {
+        $event = Event::findorfail($id);
+
+        $event->status_id = 9;
+        $event->save();
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
+
+    }
+
+
     #[On('saveEventImages')] 
     public function saveEventImages()
     {
@@ -62,6 +77,8 @@ class Index extends Component
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
+
+    
 
     public function save()
     {

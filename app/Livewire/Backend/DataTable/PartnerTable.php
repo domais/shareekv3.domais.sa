@@ -78,11 +78,14 @@ class PartnerTable extends DataTableComponent
     {
         return [
             Column::make("Id", "id")
+                ->hideIf(true)
                 ->sortable(),
             Column::make("الإسم", "name")
                 ->searchable()
                 ->sortable(),
+
             Column::make("رقم السجل", "CR")
+            ->hideIf(true)
                 ->searchable()
                 ->sortable(),
             Column::make("المدينة", "city")

@@ -175,7 +175,7 @@ function ArToEn($input) {
 
 			case 'AskForClose':
 				return[
-					['type' => 'sweetalert' , 'title' => 'طلب إغلاق', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-secondary'],
+					//['type' => 'sweetalert' , 'title' => 'طلب إغلاق', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-secondary'],
 				];
 			break;
 
@@ -189,8 +189,8 @@ function ArToEn($input) {
 
 			case 'Approval':
 				return[
-					['type' => 'sweetalert' , 'title' => 'إعتماد التوثيق', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-warning'],
-					['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+					['type' => 'sweetalert' , 'title' => 'إعتماد التوثيق', 'onclick' => 'Act_AdminApprove', 'class' => 'btn btn-warning'],
+					//['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
 
 				];
 			break;
