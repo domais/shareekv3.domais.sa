@@ -239,7 +239,7 @@
 			Swal.fire({
 				title: 'معلومات الشريك',
 				html: `<ul>
-						<li>المالك: ${event[0].owner}</li>
+						<li>المسؤول: ${event[0].owner}</li>
 						<li> عدد التصاريح: ${event[0].permitCounter}</li>
 						<li> عدد المبادرات: ${event[0].eventCounter}</li>
 					</ul>`,

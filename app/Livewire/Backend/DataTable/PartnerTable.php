@@ -89,7 +89,7 @@ class PartnerTable extends DataTableComponent
                 ->sortable(),
             Column::make("الصنف", "class")
                 ->sortable(),
-            Column::make("إسم المالك", "owner.name")
+            Column::make("اسم المسؤول", "owner.name")
                 ->sortable(),
 
             Column::make("تاريخ الإضافة", "created_at")

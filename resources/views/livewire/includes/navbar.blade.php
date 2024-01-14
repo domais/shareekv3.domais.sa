@@ -9,12 +9,12 @@
 
 				<li class="nav-item">
 					<a href="{{route('event.index')}}" class="nav-link px-2 link-light {{ is_active('event.index') ? 'active' : '' }}">المبادرات</a>
-					<span class="badge text-bg-danger rounded-pill">1</span>
+					{{-- <span class="badge text-bg-danger rounded-pill">1</span> --}}
 				</li>
 
 				<li class="nav-item">
 					<a href="{{route('permit.index')}}" class="nav-link px-2 link-light {{ is_active('permit.index') ? 'active' : '' }}">التصاريح</a>
-					<span class="badge text-bg-danger rounded-pill">3</span>
+					{{-- <span class="badge text-bg-danger rounded-pill">3</span> --}}
 				</li>
 
 				@role('SuperAdmin')
