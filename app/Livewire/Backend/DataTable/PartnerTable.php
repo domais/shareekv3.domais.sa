@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 
 class PartnerTable extends DataTableComponent
 {
@@ -82,6 +82,15 @@ class PartnerTable extends DataTableComponent
             Column::make("Id", "id")
                 ->hideIf(true)
                 ->sortable(),
+
+            ImageColumn::make('الشعار')
+                ->location(
+                    fn($row) => 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png'
+                )
+                ->attributes(fn($row) => [
+                    'class' => 'rounded-circle w-25 h-25',
+                    'alt' =>  ' Avatar',
+                ]),
             Column::make("الإسم", "name")
                 ->searchable()
                 ->sortable(),
@@ -95,13 +104,25 @@ class PartnerTable extends DataTableComponent
             Column::make("الصنف", "class")
                 ->sortable(),
             Column::make("اسم المسؤول", "owner.name")
-                ->sortable(),
+            ->format(function($value, $column, $row) {
 
-            Column::make("تاريخ الإضافة", "created_at")
-                ->format(function($value, $column, $row) {
-                    return Carbon::parse($value)->translatedFormat('l، d F Y');
-            })
-            ->sortable(),
+                return $column->owner->name. '<br>' . $column->owner->phone ;
+            })->html()->sortable(),
+
+            Column::make("التصاريح", "owner_id")
+            ->format(function($value, $column, $row) {
+    
+                $counter = $column->owner->permits->count();
+                return $counter;
+            }),
+
+ 
+            Column::make("المبادرات", "owner_id")
+            ->format(function($value, $column, $row) {
+    
+                $counter = $column->owner->events->count();
+                return $counter;
+            }),
 
             Column::make(__(''), 'id')
             ->view('Tableactions.index')

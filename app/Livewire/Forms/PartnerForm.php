@@ -2,7 +2,9 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\File;
 use App\Models\Partner;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -12,19 +14,19 @@ class PartnerForm extends Form
     public $CR;
     public $city;
     public $status = "";
-    public $lat;
-    public $lng;
+    public $coordinates; // This will store both lat and lng
     public $class;
+    public $logo;
 
     public function rules()
     {
         return [
             'partner_name' => ['required', 'string', 'max:255'],
-            'CR' => ['required', 'numeric'],
+            'CR' => ['nullable', 'numeric'],
             'city' => ['required', 'string', 'in:الرياض,جدة,مكة,أبها'],
-            'lat' => ['required', 'numeric'],
-            'lng' => ['required', 'numeric'],
+            'coordinates' => ['required', 'string', 'regex:/^-?\d{1,3}\.\d+,-?\d{1,3}\.\d+$/'],
             'class' => ['required', 'string', 'in:أ,ب,ج,د'],
+            'logo' => ['required', 'image'],
         ];
     }
 
@@ -35,10 +37,24 @@ class PartnerForm extends Form
         $partner->status = 0;
         $partner->name = $this->partner_name;
         $partner->city = $this->city;
-        $partner->lat = $this->lat;
-        $partner->lng = $this->lng;
+        $partner->coordinates = $this->coordinates;
         $partner->class = $this->class;
         $partner->CR = $this->CR;
         $partner->save();
+
+        $path = $this->logo->store('files/logos/'.$partner->id,'digitalocean');
+        $document = new File();
+        $document->name = $partner->name;
+        $document->use = 'logo';
+        $document->type = 'image';
+        $document->path = $path;
+        $partner->fileable()->save($document);
+
+        $imageUrl = Storage::disk('digitalocean')->url($path);
+
+        dd($imageUrl);
+
+
+
     }
 }

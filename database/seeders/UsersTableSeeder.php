@@ -68,8 +68,7 @@ class UsersTableSeeder extends Seeder
             'owner_id' => $partner1->id,
             'name' => 'فابريكا دي كافيه',
             'city' => 'الرياض',
-            'lat' => 24.830973,
-            'lng' => 46.659908,
+            'coordinates' => '21.559637,39.131173',
             'class' => 'أ',
             'CR' => 7007455674,
         ]);
@@ -86,8 +85,7 @@ class UsersTableSeeder extends Seeder
             'owner_id' => $partner2->id,
             'name' => 'هاف مليون',
             'city' => 'الرياض',
-            'lat' => 21.559637,
-            'lng' => 39.131173,
+            'coordinates' => '21.559637,39.131173',
             'class' => 'أ',
             'CR' => 7017333890,
         ]);
@@ -106,8 +104,7 @@ class UsersTableSeeder extends Seeder
             'owner_id' => $partner3->id,
             'name' => 'ثلث',
             'city' => 'جدة',
-            'lat' => 21.631101,
-            'lng' => 39.133647,
+            'coordinates' => '21.559637,39.131173',
             'class' => 'أ',
             'CR' => 70037801129,
         ]);

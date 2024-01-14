@@ -19,10 +19,9 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('city');
-            $table->double('lat');
-            $table->double('lng');
+            $table->string('coordinates');
             $table->enum('class',['أ','ب','ج','د']);
-            $table->BigInteger('CR');
+            $table->BigInteger('CR')->nullable();
             $table->integer('points')->default(2);
             // logo to table file 
             $table->timestamps();

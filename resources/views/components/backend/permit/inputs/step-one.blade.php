@@ -221,6 +221,7 @@
         });
 
         @if ($this->permit)
+        console.log('permit');
             $(document).ready(function() {
                 var start_date =
                 '{{ $this->permit->start_date }}'; // Use the start_date from the permit
@@ -230,13 +231,13 @@
 
                 $('#start_date').datetimepicker({
                     value: '{{ $this->permit->start_date }}',
-                    format: 'Y-m-d H:i'
+                    format: 'Y-m-d h:i A'
                 });
 
 
                 $('#end_date').datetimepicker({
                     value: '{{ $this->permit->end_date }}',
-                    format: 'Y-m-d H:i'
+                    format: 'Y-m-d h:i A'
                 });
 
 

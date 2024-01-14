@@ -164,6 +164,8 @@ return [
         'approval_file' => 'ملف الموافقة',
         'location_image' => 'صورة الموقع',
         'image_adv' => 'صورة الإعلان',
+        'coordinates' => 'الإحداثيات',
+        'logo' => 'الشعار',
     ],
     'custom' => [
         'approval_file' => [

@@ -154,7 +154,7 @@ trait LiveChanges
                         case 'approval_letter':
                             if ($permitData['event_location'] == 2 && !is_string($permitData['approval_file'])) {
                                 Storage::delete($file->path);
-                                $file->path = $permitData['approval_file']->store('files/'.$permit->order_number.'/approval_letter');
+                                $file->path = $permitData['approval_file']->store('files/'.$permit->order_number.'/approval_letter','public');
                             }elseif ($permitData['event_location'] == 1) {
                                 Storage::delete($file->path);
                                 $file->delete();
@@ -163,7 +163,7 @@ trait LiveChanges
                         case 'location_image':
                             if ($permitData['event_location'] == 2 && !is_string($permitData['location_image'])) {
                                 Storage::delete($file->path);
-                                $file->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image');
+                                $file->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image','public');
                             } elseif ($permitData['event_location'] == 1) {
                                 Storage::delete($file->path);
                                 $file->delete();

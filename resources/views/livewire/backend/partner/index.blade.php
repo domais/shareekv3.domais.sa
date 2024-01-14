@@ -56,13 +56,10 @@
                         </div>
                         <div class="modal-body">
                                 <div class="mb-3">
-                                    <input type="text" wire:model="Uform.name" class="form-control text-start" id="userName" placeholder="اسم المنشأة / اسم الشريك">
+                                    <input type="text" wire:model="Pform.partner_name" class="form-control text-start" id="partnerName" placeholder="اسم المنشأة / اسم الشريك">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" wire:model="Pform.CR" dir="ltr" class="form-control text-start" id="partnerCR" placeholder="الرقم الموحد (700)">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" wire:model="Pform.partner_name" class="form-control text-start" id="partnerName" placeholder="الشخص المسؤول">
+                                    <input type="text" wire:model="Uform.name" class="form-control text-start" id="userName" placeholder="الشخص المسؤول" >
                                 </div>
                                 <div class="mb-3">
                                     <input type="email" wire:model="Uform.email" dir="ltr" class="form-control text-start" id="userEmail" placeholder="البريد الإلكتروني">
@@ -74,19 +71,21 @@
                                     <input type="text" wire:model="Pform.city" class="form-control text-start" id="partnerCity" placeholder="المدينة">
                                 </div>
                                 <div class="mb-3">
-                                    <input type="text" wire:model="Pform.lat" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
+                                    <input type="text" wire:model="Pform.coordinates" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
                                 </div>
-                                <div class="mb-3">
-                                    <input type="text" dir="ltr" wire:model="Pform.lng" class="form-control text-start" id="partnerLng">
-                                </div>
+                        
                                 <div class="mb-3">
                                     <select class="form-select" id="partnerClass" wire:model.live="Pform.class">
-                                        <option selected disabled>إختر الفئة ...</option>
+                                        <option selected disabled value="">إختر الفئة ...</option>
                                         <option value="أ">أ</option>
                                         <option value="ب">ب</option>
                                         <option value="ج">ج</option>
                                         <option value="د">د</option>
                                     </select>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="file" wire:model="Pform.logo" name="" id="">
+
                                 </div>
                         </div>
                         <div class="modal-footer">

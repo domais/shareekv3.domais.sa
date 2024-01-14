@@ -6,9 +6,12 @@ use App\Livewire\Forms\PartnerForm;
 use App\Livewire\Forms\UserForm;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
+    use WithFileUploads;    
+    
     public UserForm $Uform;
     public PartnerForm $Pform;
     public $ValidationErrors = [];
