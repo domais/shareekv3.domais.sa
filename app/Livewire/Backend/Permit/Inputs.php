@@ -9,8 +9,10 @@ use App\Livewire\Forms\SpeakerForm;
 use App\Mail\ChangeStatus;
 use App\Models\Draft;
 use App\Models\Permit;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -86,6 +88,17 @@ class Inputs extends Component
                 $this->errors[] = "يجب إضافة متحدث واحد على الأقل" ;
                 return;
             }
+            if ($status == 2) {
+                $startDate = Carbon::parse($this->form->start_date);
+                $now = Carbon::now();
+                $difference = $now->diffInDays($startDate, false);
+            
+                if ($difference < 5) {
+                    $validator = Validator::make([], []); // empty data and rules
+                    $validator->errors()->add('start_date', 'يجب أن يكون تاريخ البداية بعد خمسة أيام على الأقل من الآن');
+                    throw new ValidationException($validator);
+                }
+            }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
             return;
@@ -100,6 +113,7 @@ class Inputs extends Component
             $this->saveDraft($permitData, $this->draft,$this->speakers,$this->partnerships);
         }
         else{
+
             
             $this->savePermit($permitData, $this->speakers,$this->partnerships,$this->permit);
             
