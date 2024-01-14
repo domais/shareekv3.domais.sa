@@ -15,6 +15,8 @@ class SpeakerForm extends Form
     public $twitter;
     public $instagram;
     public $linkedin;
+    public $reservations = false;
+    public $reward = false;
 
     public function rules()
     {

@@ -26,6 +26,9 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
+            $table->boolean('reservations')->default(false);
+            $table->boolean('reward')->default(false);
+
         
             $table->timestamps();
         });

@@ -112,6 +112,14 @@ trait LiveChanges
         $permitData['status_id'] =  2;
         
         DB::transaction(function () use ($permitData,$speakers,$permit,$partnerships) {
+            $needSupport = collect($speakers)->contains(function ($speaker) {
+                return $speaker['reservations'] || $speaker['reward'];
+            });
+            
+            if ($needSupport) {
+                $permitData['need_support'] = true;
+            }
+
             if ($permit) {
                 // update permit
                 $permitData['status_id'] = 3;
@@ -225,6 +233,8 @@ trait LiveChanges
                 $speaker->twitter = $item['twitter'];
                 $speaker->linkedin = $item['linkedin'];
                 $speaker->partner_id = auth()->user()->owner->id;
+                $speaker->reservations = $item['reservations'];
+                $speaker->reward = $item['reward'];
                 $speaker->save();
             }
             
