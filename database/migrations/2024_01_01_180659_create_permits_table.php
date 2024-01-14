@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('end_date')->nullable();
 
             $table->bigInteger('available_seats');
             $table->boolean('need_support')->default(0);
@@ -49,6 +49,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('permits');
-        
+
     }
 };

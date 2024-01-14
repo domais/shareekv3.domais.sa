@@ -17,11 +17,15 @@ class Partner extends Model
         'lat',
         'lng',
         'owner_id',
-     
     ];
 
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable');
     }
 }

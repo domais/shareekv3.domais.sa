@@ -133,9 +133,10 @@ class LiteraryTableSeeder extends Seeder
                 'name'   => 'مانهوا',
                 'parent_id' => 6
             ],
- 
-
-            
+            [
+                'id'     => 26,
+                'name'   => 'NA',
+            ]
         ];
 
         foreach ($categories as $category) {
@@ -144,6 +145,6 @@ class LiteraryTableSeeder extends Seeder
                 'parent_id' => $category['parent_id'] ?? null,
             ]);
         }
-    
+
     }
 }

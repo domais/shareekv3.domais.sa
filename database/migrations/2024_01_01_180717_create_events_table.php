@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            
+
             $table->string('order_number')->unique();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id')->nullable()->comment('admin who approved the permit');
@@ -28,12 +28,13 @@ return new class extends Migration
             $table->string('title');
             $table->longText('description');
             $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('end_date')->nullable();
 
             $table->bigInteger('available_seats');
             $table->boolean('need_support')->default(0);
             $table->double('lat');
             $table->double('lng');
+            $table->string('source')->nullable();
 
             $table->softDeletes();
 

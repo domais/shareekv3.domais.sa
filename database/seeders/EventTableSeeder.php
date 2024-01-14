@@ -2,9 +2,14 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Event;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class EventTableSeeder extends Seeder
 {
@@ -54,7 +59,7 @@ class EventTableSeeder extends Seeder
             'lng' => 0.0,
         ]);
 
-                //قائمة 1
+        //قائمة 1
         $event3 = Event::create([
             'order_number' => '240003',
             'user_id' => 3,
@@ -73,8 +78,8 @@ class EventTableSeeder extends Seeder
             'lat' => 0.0,
             'lng' => 0.0,
         ]);
-        
-            //قائمة 2
+
+        //قائمة 2
         $event4 = Event::create([
             'order_number' => '240004',
             'user_id' => 3,
@@ -94,7 +99,7 @@ class EventTableSeeder extends Seeder
             'lng' => 0.0,
         ]);
 
-             //بانتظار التوثيق 1
+        //بانتظار التوثيق 1
         $event5 = Event::create([
             'order_number' => '240005',
             'user_id' => 3,
@@ -113,8 +118,8 @@ class EventTableSeeder extends Seeder
             'lat' => 0.0,
             'lng' => 0.0,
         ]);
-        
-            // بانتظار التصريح 2
+
+        // بانتظار التصريح 2
         $event6 = Event::create([
             'order_number' => '240006',
             'user_id' => 3,
@@ -135,7 +140,7 @@ class EventTableSeeder extends Seeder
         ]);
 
 
-            // مراجعة التوثيق 1
+        // مراجعة التوثيق 1
         $event7 = Event::create([
             'order_number' => '240007',
             'user_id' => 3,
@@ -154,8 +159,8 @@ class EventTableSeeder extends Seeder
             'lat' => 0.0,
             'lng' => 0.0,
         ]);
-        
-          //  مراجعة التوثيق  2
+
+        //  مراجعة التوثيق  2
         $event8 = Event::create([
             'order_number' => '240008',
             'user_id' => 3,
@@ -174,5 +179,8 @@ class EventTableSeeder extends Seeder
             'lat' => 0.0,
             'lng' => 0.0,
         ]);
+
+
+
     }
 }
