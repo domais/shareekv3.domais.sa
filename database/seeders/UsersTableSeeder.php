@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
     {
         $superAdmin = User::create([
             'name'      => 'أحمد بوخمسين',
-            'email'     => 'rahmanidja8@gmail.com',
+            'email'     => 'eng.ahmed_alghamdi@outlook.com',
             'phone'     => '0555555551',
             'password'  => Hash::make(123456),
         ]);

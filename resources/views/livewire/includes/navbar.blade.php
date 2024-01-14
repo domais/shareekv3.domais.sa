@@ -17,9 +17,11 @@
 					<span class="badge text-bg-danger rounded-pill">3</span>
 				</li>
 
-				<li class="nav-item">
-					<a href="{{route('partner.index')}}" class="nav-link px-2 link-light {{ is_active('partner.index') ? 'active' : '' }}">الشركاء</a>
-				</li>
+				@role('SuperAdmin')
+					<li class="nav-item">
+						<a href="{{route('partner.index')}}" class="nav-link px-2 link-light {{ is_active('partner.index') ? 'active' : '' }}">الشركاء</a>
+					</li>
+				@endrole	
 
 				<li class="nav-item"><a href="#" class="nav-link px-2 link-light">دعم الشريك</a></li>
 

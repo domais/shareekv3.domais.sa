@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\DataTable;
 
+use App\Exports\PartnerExcel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Partner;
@@ -9,6 +10,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class PartnerTable extends DataTableComponent
 {
@@ -17,6 +20,23 @@ class PartnerTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+    }
+
+    public array $bulkActions = [
+        'exportSelected' => 'Excel',
+    ];
+
+    public function exportSelected()
+    {
+        foreach($this->getSelected() as $item)
+        {
+            $users = $this->getSelected();
+
+            $this->clearSelected();
+        
+          return Excel::download(new PartnerExcel($users), 'الشركاء.xlsx');
+            // These are strings since they came from an HTML element
+        }
     }
 
     #[On('partner-details')] 
