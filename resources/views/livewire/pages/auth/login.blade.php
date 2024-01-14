@@ -68,7 +68,7 @@ x-data="{errors: @entangle('errors').live}"
 	<form wire:submit="login">
 		<h3 class="fs-3 fw-bold text-center">دخول الأعضاء</h3>
 
-		<input placeholder="البريد الإلكتروني أو رقم الجوال" wire:model="form.email" autocomplete="username" type="email" class="form-control my-3 text-center">		
+		<input placeholder="البريد الإلكتروني" wire:model="form.email" autocomplete="username" type="email" class="form-control my-3 text-center">		
 
 		<input placeholder="كلمة المرور" type="password" wire:model="form.password" class="form-control my-3 text-center">
 
@@ -78,6 +78,6 @@ x-data="{errors: @entangle('errors').live}"
 	</form>
 	<div class="border-top pt-4 mt-4 d-flex justify-content-between">
 		<a href="#" class="text-dark text-decoration-none">نسيت كلمة المرور؟</a>
-		<a href="{{route('register')}}" class="text-dark text-decoration-none">تسجيل حساب جديد</a>
+		{{-- <a href="{{route('register')}}" class="text-dark text-decoration-none">تسجيل حساب جديد</a> --}}
 	</div>
 </div>
