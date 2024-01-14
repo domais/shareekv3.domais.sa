@@ -15,7 +15,7 @@
 				<li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
 			</ol>
 			<div class="links">
-				<a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a>
+				{{-- <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a> --}}
 
 				@if ($role == 2)
 					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>

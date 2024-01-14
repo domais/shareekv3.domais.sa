@@ -15,7 +15,7 @@
                 <li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
             </ol>
             <div class="links">
-                <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a>
+                {{-- <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a> --}}
 
                 {{-- Rahmani: make this work as $role == 2 --}}
                 @if (auth()->user()->hasRole('User'))
