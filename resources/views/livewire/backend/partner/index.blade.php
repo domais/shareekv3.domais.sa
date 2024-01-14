@@ -13,17 +13,40 @@
         }
     });
     ">
-    
+
+
+
+	<nav aria-label="breadcrumb" class="my-5">
+		<div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
+			<ol class="breadcrumb breadcrumb-chevron m-0">
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis" href="#">
+						<i class="fa-solid fa-house"></i>
+					</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="link-body-emphasis text-decoration-none" href="{{route('partner.index')}}">الشركاء</a>
+				</li>
+			</ol>
+			<div class="links">
+                <button type="button" class="btn btn-brand float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    أضف شريك جديد
+                </button>
+			</div>
+		</div>
+	</nav>
+
+
+
+
     <div class="container my-3">
         <div class="row">
             <div class="col-12">
-            <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    أضف شريك جديد
-                </button>
+
+                <livewire:backend.data-table.partner-table />
 
 
-                                <!-- Modal -->
+                <!-- Modal -->
                 <div wire:ignore class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
@@ -32,54 +55,42 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                                <h5>معلومات المالك</h5>
                                 <div class="mb-3">
-                                    <label for="userName" class="form-label">الإسم الكامل</label>
-                                    <input type="text" wire:model="Uform.name" class="form-control" id="userName">
+                                    <input type="text" wire:model="Uform.name" class="form-control text-start" id="userName" placeholder="اسم المنشأة / اسم الشريك">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="userEmail" class="form-label">البريد الإلكتروني</label>
-                                    <input type="email" wire:model="Uform.email" class="form-control" id="userEmail">
+                                    <input type="text" wire:model="Pform.CR" dir="ltr" class="form-control text-start" id="partnerCR" placeholder="الرقم الموحد (700)">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="userPhone" class="form-label">رقم الهاتف</label>
-                                    <input type="tel" wire:model="Uform.phone" class="form-control" id="userPhone">
-                                </div>
-                        
-                                <h5>معلومات الشريك</h5>
-                                <div class="mb-3">
-                                    <label for="partnerName" class="form-label">إسم</label>
-                                    <input type="text" wire:model="Pform.partner_name" class="form-control" id="partnerName">
+                                    <input type="text" wire:model="Pform.partner_name" class="form-control text-start" id="partnerName" placeholder="الشخص المسؤول">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="partnerCity" class="form-label">المدينة</label>
-                                    <input type="text" wire:model="Pform.city" class="form-control" id="partnerCity">
+                                    <input type="email" wire:model="Uform.email" dir="ltr" class="form-control text-start" id="userEmail" placeholder="البريد الإلكتروني">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="partnerLat" class="form-label">lat</label>
-                                    <input type="number" wire:model="Pform.lat" step="any" class="form-control" id="partnerLat">
+                                    <input type="tel" wire:model="Uform.phone" dir="ltr" class="form-control text-start" id="userPhone" placeholder="رقم الجوال">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="partnerLng" class="form-label">lng</label>
-                                    <input type="number" step="any" wire:model="Pform.lng" class="form-control" id="partnerLng">
+                                    <input type="text" wire:model="Pform.city" class="form-control text-start" id="partnerCity" placeholder="المدينة">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="partnerClass" class="form-label">القسم</label>
+                                    <input type="text" wire:model="Pform.lat" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" dir="ltr" wire:model="Pform.lng" class="form-control text-start" id="partnerLng">
+                                </div>
+                                <div class="mb-3">
                                     <select class="form-select" id="partnerClass" wire:model.live="Pform.class">
-                                        <option selected>إختر</option>
+                                        <option selected disabled>إختر الفئة ...</option>
                                         <option value="أ">أ</option>
                                         <option value="ب">ب</option>
                                         <option value="ج">ج</option>
                                         <option value="د">د</option>
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="partnerCR" class="form-label">السجل التجاري</label>
-                                    <input type="number" wire:model="Pform.CR" class="form-control" id="partnerCR">
-                                </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>
                             <button type="button" wire:click="save"  class="btn btn-success">حفظ</button>
                         </div>
                     </div>
@@ -90,5 +101,4 @@
         </div>
       </div>
 
-    <livewire:backend.data-table.partner-table />
 </div>
