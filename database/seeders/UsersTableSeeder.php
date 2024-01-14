@@ -16,27 +16,51 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         $superAdmin = User::create([
-            'name'      => 'أحمد بوخمسين',
-            'email'     => 'eng.ahmed_alghamdi@outlook.com',
+            'name'      => 'مريم محمد',
+            'email'     => 'm.mohammad@nextlevel.com.sa',
             'phone'     => '0555555551',
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin2 = User::create([
-            'name'      => 'أحمد الغامدي',
-            'email'     => 'hxhdono34@gmail.com',  
+            'name'      => 'ألآء المعيذر',
+            'email'     => 'a.almuaither@nextlevel.com.sa',  
             'phone'     => '0555555552',
+            'password'  => Hash::make(123456),
+        ]);
+
+        $superAdmin3 = User::create([
+            'name'      => 'أحمد بو خمسين',
+            'email'     => 'bukhamseen.ahmed@gmail.com',  
+            'phone'     => '0555555553',
+            'password'  => Hash::make(123456),
+        ]);
+
+        $superAdmin4 = User::create([
+            'name'      => 'أحمد الغامدي',
+            'email'     => 'eng.ahmed_alghamdi@outlook.com',  
+            'phone'     => '0555555554',
+            'password'  => Hash::make(123456),
+        ]);
+
+        $superAdmin5 = User::create([
+            'name'      => 'أحمد الغامدي',
+            'email'     => 'admin@gmail.com',  
+            'phone'     => '0555555754',
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin->addRole(1); 
         $superAdmin2->addRole(1); 
+        $superAdmin3->addRole(1); 
+        $superAdmin4->addRole(1);
+        $superAdmin5->addRole(1);
 
 
         $partner1  = User::create([
-            'name'      => 'عبدالله الفوزان',
-            'email'     => 'hxhdono11@gmail.com',
-            'phone'     => '0555555553',
+            'name'      => 'مريم محمد',
+            'email'     => 'maryamhaidar777@gmail.com',
+            'phone'     => '0555555555',
             'password'  => Hash::make(123456),
         ]);
 
@@ -52,9 +76,9 @@ class UsersTableSeeder extends Seeder
 
 
         $partner2  = User::create([
-            'name'      => 'تركي المالح',
-            'email'     => 'partner2@gmail.com',
-            'phone'     => '0555555554',
+            'name'      => 'أحمد بوخمسين',
+            'email'     => 'ahmed@quant.com',
+            'phone'     => '0555555556',
             'password'  => Hash::make(123456),
         ]);
 
@@ -70,9 +94,9 @@ class UsersTableSeeder extends Seeder
 
 
         $partner3  = User::create([
-            'name'      => 'منيرة الحمود',
-            'email'     => 'partner3@gmail.com',
-            'phone'     => '0555555555',
+            'name'      => 'أحمد الغامدي',
+            'email'     => 'eng.ahmed.alghamdi2020@gamil.com',
+            'phone'     => '0555555557',
             'password'  => Hash::make(123456),
         ]);
 
@@ -93,8 +117,8 @@ class UsersTableSeeder extends Seeder
         $partner3->addRole(2); 
 
         $guest  = User::create([
-            'name'      => 'أحمد محمود',
-            'email'     => 'guest@gmail.com',
+            'name'      => 'شريك تجريبي',
+            'email'     => 'partner@gmail.com',
             'phone'     => '0555555577',
             'password'  => Hash::make(123456),
         ]);
