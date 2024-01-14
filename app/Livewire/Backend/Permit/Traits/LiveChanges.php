@@ -5,6 +5,7 @@ namespace App\Livewire\Backend\Permit\Traits;
 use App\Models\Draft;
 use App\Models\File;
 use App\Models\History;
+use App\Models\Partner;
 use App\Models\Partnership;
 use App\Models\Permit;
 use App\Models\Speaker;
@@ -97,6 +98,7 @@ trait LiveChanges
             $draft->order_number = date('y').str_pad($draft->id, 5, '0', STR_PAD_LEFT);
             $draft->speakers = json_encode($speakers);
             $draft->partnership = json_encode($partnerships);
+
         } else {
             $order_number = $draft->order_number;
             $permitData['order_number'] = $order_number;
@@ -180,6 +182,16 @@ trait LiveChanges
 
                 $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
                 $permit->save();
+
+                $user = auth()->user();
+                $partner = Partner::where('owner_id', $user->id)->first();
+                
+                if ($partner) {
+                    if ($partner->points > 0) {
+                        $partner->points--;
+                        $partner->save();
+                    }
+                }
 
                 // start files upload
 

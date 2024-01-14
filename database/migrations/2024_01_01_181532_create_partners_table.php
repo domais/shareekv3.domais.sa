@@ -23,6 +23,7 @@ return new class extends Migration
             $table->double('lng');
             $table->enum('class',['أ','ب','ج','د']);
             $table->BigInteger('CR');
+            $table->integer('points')->default(2);
             // logo to table file 
             $table->timestamps();
         });
