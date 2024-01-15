@@ -85,8 +85,7 @@ class PartnerTable extends DataTableComponent
 
             ImageColumn::make('الشعار')
                 ->location(
-                    fn($row) => 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png'
-                )
+                    fn($row) => $row->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $row->fileable->path : 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png'                )
                 ->attributes(fn($row) => [
                     'class' => 'rounded-circle w-25 h-25',
                     'alt' =>  ' Avatar',
