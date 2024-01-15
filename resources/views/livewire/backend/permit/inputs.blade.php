@@ -111,6 +111,3 @@
 
 	</div><!-- /row -->
 </div>
-@asset 
-
-@endasset

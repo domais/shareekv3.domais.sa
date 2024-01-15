@@ -12,7 +12,7 @@
 
 
     <div class="col-5">
-        <div class="row my-2">
+        {{-- <div class="row my-2">
             <div class="col-4 d-flex align-items-center">إختر متحدث موجود من قبل</div>
             <div class="col-8">
                 <select class="js-example-basic-multiple form-control rounded" name="states[]" multiple="multiple">
@@ -21,7 +21,7 @@
                 </select>
             </div>
               
-        </div>
+        </div> --}}
 
         <div class="row my-2">
             <div class="col-4 d-flex align-items-center">الاسم الثلاثي</div>

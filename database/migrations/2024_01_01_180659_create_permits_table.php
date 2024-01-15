@@ -29,8 +29,8 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->string('title');
             $table->longText('description');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->string('start_date');
+            $table->string('end_date');
 
             $table->bigInteger('available_seats');
             $table->boolean('need_support')->default(0);
