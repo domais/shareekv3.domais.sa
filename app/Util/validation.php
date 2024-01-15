@@ -35,8 +35,8 @@ use Illuminate\Validation\Rules\Password;
             'end_date' => 'required|date|after_or_equal:start_date',
             'available_seats' => 'required|integer',
             'need_support' => 'required|boolean',
-            'lat' => 'required',
-            'lng' => 'required',
+            // 'lat' => 'required',
+            // 'lng' => 'required',
             'image_adv' => ['required', function ($attribute, $value, $fail) {
                 if (is_string($value)) {
                     if (!Storage::exists($value)) {
