@@ -6,9 +6,12 @@ use App\Livewire\Forms\TicketForm;
 use App\Models\Ticket;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
+    use WithFileUploads;
+
     public $tickets = [];
     public $errors = [];
     public TicketForm $form;
@@ -24,7 +27,7 @@ class Index extends Component
         }
         
     }
-    public function store()
+    public function save()
     {
         try {
             $this->form->validate();
@@ -35,6 +38,8 @@ class Index extends Component
 
         $this->form->store();
         $this->form->reset();
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
 
         
         

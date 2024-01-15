@@ -63,6 +63,7 @@ return [
              'region' => env('DIGITALOCEAN_SPACES_REGION'), 
              'bucket' => env('DIGITALOCEAN_SPACES_BUCKET'),
              'endpoint' => env('DIGITALOCEAN_ENDPOINT'),
+             'visibility' => true
          ],
 
     ],

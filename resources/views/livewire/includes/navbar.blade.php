@@ -26,7 +26,7 @@
 				{{-- <li class="nav-item"><a href="#" class="nav-link px-2 link-light">دعم الشريك</a></li> --}}
 
 
-					{{-- <li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link px-2 link-light">المساعدة</a></li> --}}
+				<li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link px-2 link-light">المساعدة</a></li>
 
 				{{-- <li class="nav-item"><a href="#" class="nav-link px-2 link-light">الإعدادات</a></li> --}}
 			</ul>

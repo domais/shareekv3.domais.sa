@@ -16,6 +16,11 @@ class Ticket extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function fileable()
+    {
+        return $this->morphMany(File::class, 'fileable');    
+    }
 }
 
     
