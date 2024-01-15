@@ -27,7 +27,7 @@
         </div>
 
 
-        <div class="row my-3">
+        <div class="row my-3" x-show="event_type_id == 1">
 
             <div class="col-3 d-flex align-items-center">
                 <span x-text="event_type_id == 1 ? 'نوع الفعالية' : 'نوع المساهمة' "></span>

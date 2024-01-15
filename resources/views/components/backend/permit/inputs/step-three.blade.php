@@ -31,7 +31,7 @@
 
         <div class="row my-2">
             <div class="col-4 d-flex align-items-center">رقم الجوال</div>
-            <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.phone" id="phone" dir="ltr" class="form-control text-end rounded"></div>
+            <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.phone" id="phone" dir="ltr" class="form-control text-end rounded" placeholder="05xxxxxx"></div>
         </div>
 
 
@@ -89,11 +89,11 @@
     </div>
 
     <div class="col-1"></div>
-    <div class="col-6">
-        <div class=" row my-2">
+    <div class="col-6 pe-4">
+        <div class=" row my-2 mx-0">
             <template x-for="(speaker,index) in speakers">
 
-                <div class="card p-2 mx-1 mb-2" style="width: 100%">
+                <div class="card p-2 mx-1 mb-2">
                     <div class="card-body d-flex justify-space-between align-items-center p-0">
                         <h5 class="card-title float-start mb-0 me-auto" x-text="speaker.name"></h5>
                         <div class="float-end d-flex align-items-center">
