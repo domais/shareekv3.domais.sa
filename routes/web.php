@@ -61,6 +61,7 @@ Route::get('mail', function() {
         'status' => $permit->status,
         'user' => $permit->user,
     ];
+    Mail::to('m@domais.sa')->send(new App\Mail\ChangeStatus($data));
     return (new App\Mail\ChangeStatus($data))->render();
 });
 
