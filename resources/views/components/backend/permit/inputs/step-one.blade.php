@@ -138,7 +138,7 @@
             <div class="col-3 d-flex align-items-center">تاريخ البداية</div>
             <div class="col-9">
                 <input type="text" x-bind:disabled="is_show_page" x-model="start_date" class="form-control rounded" autocomplete="off"
-                    dir="ltr" id="start_date" wire:model.live="form.start_date">
+                    id="start_date" wire:model.live="form.start_date">
             </div>
         </div>
 
@@ -183,65 +183,22 @@
     var quillContent = '';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-
-        $('#start_date, #end_date').datetimepicker({
-            i18n: {
-                ar: {
-                    months: [
-                        'جانوري', 'فبراير', 'مارس', 'أبريل',
-                        'مايو', 'جون', 'جولاي', 'أغسطس',
-                        'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر',
-                    ],
-                    days: [
-                        "احد", "اثنين", "ثلاثاء", "Mi",
-                        "Do", "Fr", "Sa.",
-                    ]
-                }
-            },
-            format: 'Y-m-d h:i A',
-            step: 30,
-            minDate: 0,
-            formatTime: 'h:i A',
-            todayButton: false,
-            defaultDate: new Date(),
-            defaultTime: '05:00',
-            onClose: function(current_time, $input) {
-                var id = $input[0].id;
-                var date = new Date(current_time);
-                var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString()
-                    .padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' +
-                    date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-                // $('#' + id).val(formattedDate);
-                Livewire.dispatch('dateUpdated', {
-                    'id': id,
-                    'formattedDate': formattedDate
-                });
-            }
-        });
-
-        @if ($this->permit)
-        console.log('permit');
-            $(document).ready(function() {
-                var start_date =
-                '{{ $this->permit->start_date }}'; // Use the start_date from the permit
-                var end_date = '{{ $this->permit->end_date }}'; // Use the start_date from the permit
-
-                console.log(start_date, end_date);
-
-                $('#start_date').datetimepicker({
-                    value: '{{ $this->permit->start_date }}',
-                    format: 'Y-m-d h:i A'
-                });
-
-
-                $('#end_date').datetimepicker({
-                    value: '{{ $this->permit->end_date }}',
-                    format: 'Y-m-d h:i A'
-                });
-
-
+        function initDatePicker(id) {
+            const element = document.getElementById(id);
+            flatpickr(element, {
+                "locale": "ar",
+                enableTime: true,
+                time_24hr: true,
+                altInput: true,
+                altFormat: "Y-m-d h:i K",
+                dateFormat: "Y-m-d H:i",
             });
-        @endif
+        }
+
+        initDatePicker('start_date');
+        initDatePicker('end_date');
+
+  
 
 
 

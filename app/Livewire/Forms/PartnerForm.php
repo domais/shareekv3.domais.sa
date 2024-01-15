@@ -42,7 +42,8 @@ class PartnerForm extends Form
         $partner->CR = $this->CR;
         $partner->save();
 
-        $path = $this->logo->store('files/logos/'.$partner->id,'digitalocean');
+        $path = Storage::disk('digitalocean')->putFile('files/logos/'.$partner->id, $this->logo, 'public');
+
         $document = new File();
         $document->name = $partner->name;
         $document->use = 'logo';
@@ -50,11 +51,6 @@ class PartnerForm extends Form
         $document->path = $path;
         $partner->fileable()->save($document);
 
-        $imageUrl = Storage::disk('digitalocean')->url($path);
-
-        dd($imageUrl);
-
-
-
+       // $imageUrl = Storage::disk('digitalocean')->url($path);
     }
 }

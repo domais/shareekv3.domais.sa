@@ -8,6 +8,9 @@ import Cropper from 'cropperjs'
 import datetimepicker from 'jquery-datetimepicker'
 import Dropzone from "dropzone";
 import select2 from 'select2';
+import flatpickr from "flatpickr";
+import { Arabe } from "flatpickr/dist/l10n/ar.js";
+
 
 select2();
 
@@ -22,3 +25,4 @@ window.Dropzone = Dropzone
 window.datetimepicker = datetimepicker
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 window.select2 = select2
+window.flatpickr = flatpickr

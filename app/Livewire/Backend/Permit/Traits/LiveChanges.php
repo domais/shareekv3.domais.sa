@@ -25,6 +25,20 @@ trait LiveChanges
         if ($this->form->literary_id) {
            $this->Litrary_childes =  getChildes($this->form->literary_id);
         }
+        if ($this->form->event_location) {
+            if ($this->form->event_location == 1) {
+                if (auth()->user()->hasRole('User')) {
+                    # code...
+                    $coordinates = explode(',', auth()->user()->owner->coordinates);
+                    $this->form->lat = $coordinates[0];
+                    $this->form->lng = $coordinates[1];  
+                }
+                else{
+
+                }
+                        
+            }
+        }
     }
 
     public function addSpeaker()
@@ -127,6 +141,10 @@ trait LiveChanges
             
             if ($needSupport) {
                 $permitData['need_support'] = true;
+            }
+            
+            if ($permitData['event_type_id'] == 2) {
+                $permitData['category_id'] = 1;
             }
 
             if ($permit) {
