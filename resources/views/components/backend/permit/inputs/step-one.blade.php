@@ -210,8 +210,7 @@
                 var date = new Date(current_time);
                 var formattedDate = date.getFullYear() + '-' + (date.getMonth() + 1).toString()
                     .padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0') + ' ' +
-                    date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString()
-                    .padStart(2, '0');
+                    date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
                 // $('#' + id).val(formattedDate);
                 Livewire.dispatch('dateUpdated', {
                     'id': id,
