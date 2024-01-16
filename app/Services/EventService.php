@@ -188,7 +188,7 @@ class EventService implements EventServiceInterface
     {
         $lat = $data['lat'] ?? null;
         $lng = $data['lng'] ?? null;
-        $radius = $data['radius'] ?? 30;
+        $radius = $data['radius'] ?? 30; // km
 
         // check if lat and lng are in Saudi Arabia
         if ($lat < 15 || $lat > 35 || $lng < 34 || $lng > 56) {

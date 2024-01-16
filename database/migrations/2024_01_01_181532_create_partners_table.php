@@ -20,10 +20,10 @@ return new class extends Migration
             // logo to table file
             $table->string('name')->nullable();
             $table->string('city')->nullable();
-            $table->double('lat');
-            $table->double('lng');
+            $table->double('lat')->nullable();
+            $table->double('lng')->nullable();
             $table->enum('class',['أ','ب','ج','د'])->nullable();
-            $table->string('coordinates');
+            $table->string('coordinates')->nullable();
             $table->integer('points')->default(2);
             $table->bigInteger('CR')->nullable();
             $table->string('source')->nullable();
