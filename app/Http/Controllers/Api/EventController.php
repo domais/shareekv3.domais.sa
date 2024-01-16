@@ -58,4 +58,24 @@ class EventController extends Controller
     {
         return $this->eventService->userEvents($request->user(), $request->all());
     }
+
+    /**
+     * Get Literaries with count of related upcoming events
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function literaries(Request $request)
+    {
+        return $this->eventService->literaries($request->all());
+    }
+
+    /**
+     * Get city by lat and lng
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCity(Request $request)
+    {
+        // return $this->eventService->nearbyEvents($request->all());
+    }
 }

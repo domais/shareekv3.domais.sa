@@ -2,20 +2,19 @@
 
 namespace App\Console\Commands;
 
-use Throwable;
-use Illuminate\Bus\Batch;
 use App\Jobs\MigrateBatchJob;
 use Illuminate\Console\Command;
+use App\Jobs\MigrateGuestBatchJob;
 use Illuminate\Support\Facades\Bus;
 
-class MigrateFirebase extends Command
+class MigrateGuestsCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:migrate';
+    protected $signature = 'app:migrate-guests';
 
     /**
      * The console command description.
@@ -29,19 +28,16 @@ class MigrateFirebase extends Command
      */
     public function handle()
     {
-
-        $json = file_get_contents(public_path('firebase_data/Events.json'));
+        $json = file_get_contents(public_path('firebase_data/EventGuests.json'));
         $data = json_decode($json);
 
+
         Bus::batch(collect($data)->chunk(100)->map(function ($chunk) {
-            // $this->info('Migrating chunk count: ' . $chunk->count() . ' ...');
-            return new MigrateBatchJob($chunk);
+            return new MigrateGuestBatchJob($chunk);
         }))
-        ->dispatch();
+            ->onQueue('migrate-guests')
+            ->dispatch();
 
         $this->info('Migrating data ...');
     }
 }
-
-
-// set global max_allowed_packet=268435456;

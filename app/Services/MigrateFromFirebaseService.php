@@ -42,7 +42,7 @@ class MigrateFromFirebaseService
         // $this->partners();
     }
 
-    public function user($name, $email, $phone, $avatar): User
+    public function user($name, $email, $phone, $avatar, $guest = false): User
     {
         $randomPassword = Str::random(8);
 
@@ -56,14 +56,20 @@ class MigrateFromFirebaseService
             'email' => 'nullable|email|unique:users',
         ]);
 
+        $source = $guest ? 'firebase-guest' : 'firebase';
+
         // Create User
         $user = User::updateOrCreate(
             ['phone' => $phone, 'email' => $email],
-            ['name' => $name, 'password' => Hash::make($randomPassword), 'source' => 'firebase']
+            ['name' => $name, 'password' => Hash::make($randomPassword), 'source' => $source]
         );
 
         // assign role based 2
-        $user->syncRoles([2]);
+        if ($guest && $user->wasRecentlyCreated) {
+            $user->syncRoles([3]);
+        } else {
+            $user->syncRoles([2]);
+        }
 
         if ($user->wasRecentlyCreated && isset($avatar) && $avatar) {
             \Log::info('Avatar: ' . $avatar);
@@ -315,6 +321,39 @@ class MigrateFromFirebaseService
                     ->first();
                 $partner = $this->partner($item, $user);
                 \Log::info('Partner: #' . $partner->id . ' ' . $partner->name);
+            }
+        });
+    }
+
+    public function guests($chunk)
+    {
+        // Chunk data to 100
+        $chunk->each(function ($item) {
+            if (!isset($item->event_id)) {
+                return;
+            }
+            $event = Event::where('order_number', $item->event_id)->first();
+            $validEmail = filter_var($item->email, FILTER_VALIDATE_EMAIL);
+            if (!$validEmail) {
+                return;
+            }
+            $user = User::where('email', $item->email)->first();
+            if (!$user) {
+                \Log::info('Guest: ' . $item->email);
+                $user = User::updateOrCreate([
+                    'email' => $item->email,
+                    'phone' => $item->phone,
+                ], [
+                    'name' => $item->name,
+                    'password' => Hash::make(Str::random(8)),
+                    'source' => 'firebase-guest'
+                ]);
+
+                $user->syncRoles([3]);
+            }
+            if ($event) {
+                $event->guests()->sync([$user->id => ['type' => 'going']]);
+                \Log::info('Guest: #' . $event->id . ' ' . $event->title);
             }
         });
     }

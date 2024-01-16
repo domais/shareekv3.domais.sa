@@ -35,4 +35,11 @@ interface EventServiceInterface
      * @param data array
      */
     public function userEvents(\App\Models\User $user, array $data): \Illuminate\Http\JsonResponse;
+
+    /**
+     * Get Literaries with count of related upcoming events
+     * @param data array
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function literaries(array $data): \Illuminate\Http\JsonResponse;
 }

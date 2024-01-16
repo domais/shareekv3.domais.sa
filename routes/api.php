@@ -46,6 +46,9 @@ Route::prefix('events')
         // middleware auth:sanctum
         Route::get('/user', [\App\Http\Controllers\Api\EventController::class, 'user'])
             ->middleware('auth:sanctum')->name('user');
+        Route::get('/literaries', [\App\Http\Controllers\Api\EventController::class, 'literaries'])
+            ->name('literaries');
+        Route::get('/city', [\App\Http\Controllers\Api\EventController::class, 'getCity'])->name('city');
         Route::get('/{event}', [\App\Http\Controllers\Api\EventController::class, 'show'])->name('show');
     });
 

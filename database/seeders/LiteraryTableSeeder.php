@@ -136,6 +136,7 @@ class LiteraryTableSeeder extends Seeder
             [
                 'id'     => 26,
                 'name'   => 'NA',
+                'status' => 0,
             ]
         ];
 
@@ -143,8 +144,8 @@ class LiteraryTableSeeder extends Seeder
             Literary::create([
                 'name' => $category['name'],
                 'parent_id' => $category['parent_id'] ?? null,
+                'status' => $category['status'] ?? 1,
             ]);
         }
-
     }
 }
