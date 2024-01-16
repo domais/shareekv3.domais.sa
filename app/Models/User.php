@@ -25,6 +25,9 @@ class User extends Authenticatable implements LaratrustUser
         'email',
         'password',
         'phone',
+        'source',
+        'gender',
+        'age'
     ];
 
     /**
@@ -75,5 +78,25 @@ class User extends Authenticatable implements LaratrustUser
     public function tickets()
     {
         return $this->hasMany(Ticket::class);
+    }
+
+    public function image()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
+
+    public function emailVerifications()
+    {
+        return $this->hasMany(EmailVerification::class);
+    }
+
+    public function guestEvents()
+    {
+        return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id');
+    }
+
+    public function guestEventsGoing()
+    {
+        return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id')->wherePivot('type', 'going');
     }
 }

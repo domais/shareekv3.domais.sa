@@ -19,5 +19,8 @@ class Literary extends Model
         return $this->belongsTo(Literary::class, 'parent_id');
     }
 
-    
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

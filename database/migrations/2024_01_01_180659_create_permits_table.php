@@ -29,8 +29,8 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->string('title');
             $table->longText('description');
-            $table->string('start_date');
-            $table->string('end_date');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date')->nullable();
 
             $table->bigInteger('available_seats');
             $table->boolean('need_support')->default(0);
@@ -50,6 +50,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('permits');
-        
+
     }
 };

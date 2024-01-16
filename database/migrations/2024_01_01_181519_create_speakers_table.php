@@ -14,15 +14,16 @@ return new class extends Migration
         Schema::create('speakers', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('permit_id');
+            $table->unsignedBigInteger('permit_id')->nullable();
             $table->unsignedBigInteger('event_id')->nullable();
 
             $table->unsignedBigInteger('partner_id');
-            $table->string('name');
-            $table->bigInteger('phone');
-            $table->string('email');
-            $table->string('nationality');
-            $table->enum('type',['كاتب','شاعر','راوي','ناشط ثقافي']);
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('city')->nullable();
+            $table->enum('type',['كاتب','شاعر','راوي','ناشط ثقافي'])->nullable();
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->string('linkedin')->nullable();
@@ -30,6 +31,8 @@ return new class extends Migration
             $table->boolean('reward')->default(false);
 
         
+            $table->string('source')->nullable();
+
             $table->timestamps();
         });
     }

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Event extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
+    protected $guarded = ['id'];
 
     protected $fillable = [
         'order_number',
@@ -30,7 +31,7 @@ class Event extends Model
         'lat',
         'lng',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -63,7 +64,22 @@ class Event extends Model
 
     public function fileable()
     {
-        return $this->morphMany(File::class, 'fileable');    
+        return $this->morphMany(File::class, 'fileable');
     }
-    
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
+
+
+    public function guests()
+    {
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id');
+    }
+
+    public function guestsGoing()
+    {
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->wherePivot('type', 'going');
+    }
 }

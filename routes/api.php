@@ -19,9 +19,54 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/events/{type}', [EventController::class, 'index'])->where('type', 'scheduled|active');
 
-Route::get('/event', [EventController::class, 'show']);
+// Auth routes
+Route::prefix('auth')
+    ->group(function () {
+        Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login'])->name('login');
+        Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register'])->name('register');
+        Route::post('verify', [\App\Http\Controllers\Api\AuthController::class, 'verify'])->name('verify');
+        Route::post(
+            'resend',
+            [\App\Http\Controllers\Api\AuthController::class, 'resendEmailVerification']
+        )->name('resend');
+
+        // middleware auth:sanctum
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout'])->name('logout');
+        });
+    });
+
+// Event routes
+// Auth routes
+Route::prefix('events')
+    ->group(function () {
+        Route::get('/upcoming', [\App\Http\Controllers\Api\EventController::class, 'upcoming'])->name('upcoming');
+        Route::get('/past', [\App\Http\Controllers\Api\EventController::class, 'past'])->name('past');
+        Route::get('/map', [\App\Http\Controllers\Api\EventController::class, 'map'])->name('map');
+        // middleware auth:sanctum
+        Route::get('/user', [\App\Http\Controllers\Api\EventController::class, 'user'])
+            ->middleware('auth:sanctum')->name('user');
+        Route::get('/literaries', [\App\Http\Controllers\Api\EventController::class, 'literaries'])
+            ->name('literaries');
+        Route::get('/city', [\App\Http\Controllers\Api\EventController::class, 'getCity'])->name('city');
+        Route::get('/{event}', [\App\Http\Controllers\Api\EventController::class, 'show'])->name('show');
+    });
+
+Route::prefix('event-guests')
+    ->group(function () {
+        Route::post('/book-event', [\App\Http\Controllers\Api\EventGuestController::class, 'book'])
+            ->middleware('auth:sanctum')
+            ->name('book');
+        Route::post('/cancel-event', [\App\Http\Controllers\Api\EventGuestController::class, 'cancel'])
+            ->middleware('auth:sanctum')
+            ->name('cancel');
+        // middleware guest
+        Route::post('/book-as-guest', [\App\Http\Controllers\Api\EventGuestController::class, 'bookAsGuest'])
+            ->name('bookAsGuest')->middleware('guest');
 
 
-
+        // Route::get('test', function () {
+        //     echo 'test';
+        // })->middleware('guest');
+    });

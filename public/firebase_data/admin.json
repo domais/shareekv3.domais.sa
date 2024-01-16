@@ -1,0 +1,444 @@
+[
+  {
+    "Partner_management": true,
+    "admin_mail": "majed.rashad@gmail.com",
+    "Report_management": true,
+    "Phone": "",
+    "Partner_support": false,
+    "New_admin": false,
+    "time": {
+      "seconds": 1697452083,
+      "nanoseconds": 902000000
+    },
+    "name": "majed",
+    "admin": true,
+    "user_Ref": {
+      "email": "majed.rashad@gmail.com",
+      "created_time": {
+        "seconds": 1697452082,
+        "nanoseconds": 932000000
+      },
+      "display_name": "majed",
+      "Admin": true,
+      "photo_url": "",
+      "uid": "lNOFEScMPNZu0SDYUO1N76cJDbu2"
+    },
+    "Img_admin": "",
+    "Event_management": true,
+    "ads_management": true,
+    "Staff_management": true,
+    "Event_run_management": true,
+    "sup_admin": true,
+    "Event_accept_management": true,
+    "id": "168XqB4b9YUQQZhm1GmD"
+  },
+  {
+    "user_Ref": {
+      "livel_user": "فئة أ",
+      "photo_url": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/cms_uploads%2FUsers%2F1697379742206000%2F5962-6.jpg?alt=media&token=b60badef-5f8e-4804-9757-3eed9b4e7b2e",
+      "email": "admin5@admin5.com",
+      "phone_number": "5555121",
+      "display_name": "محمد ",
+      "created_time": {
+        "seconds": 1697375824,
+        "nanoseconds": 786000000
+      },
+      "uid": "svTekRkEvKYrB0buy6UWwEn97d83",
+      "city_user": "",
+      "Admin": true,
+      "Cafi_name": "سكيتش ( وسم قهوتي )",
+      "Cafi_map": {
+        "latitude": 28.4297292,
+        "longitude": 36.5728399
+      }
+    },
+    "Event_management": true,
+    "admin": true,
+    "Partner_management": true,
+    "ads_management": false,
+    "Report_management": false,
+    "name": "محمد ",
+    "New_admin": false,
+    "Event_run_management": true,
+    "admin_mail": "admin5@admin5.com",
+    "time": {
+      "seconds": 1692803234,
+      "nanoseconds": 347000000
+    },
+    "Phone": "5555121",
+    "Staff_management": true,
+    "Event_accept_management": true,
+    "sup_admin": true,
+    "Img_admin": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FsvTekRkEvKYrB0buy6UWwEn97d83%2Fuploads%2F1692803491588000.jpg?alt=media&token=966dc179-bfb5-41af-b0c2-dfc52cb0ea89",
+    "Partner_support": true,
+    "id": "1753GoteGEjywyNR01dB"
+  },
+  {
+    "Phone": "000000000000",
+    "Partner_management": true,
+    "Partner_support": true,
+    "user_Ref": {
+      "uid": "YZUOODAN6VfeUgIW0tSZsiOUhG82",
+      "Admin": true,
+      "phone_number": "000000000000",
+      "display_name": "م/أحمد الغامدي",
+      "email": "eng.ahmed.alghamdi2020@gmail.com",
+      "created_time": {
+        "seconds": 1697977293,
+        "nanoseconds": 166000000
+      }
+    },
+    "time": {
+      "seconds": 1697444367,
+      "nanoseconds": 881000000
+    },
+    "Event_run_management": true,
+    "ads_management": true,
+    "name": "م/أحمد الغامدي",
+    "sup_admin": true,
+    "Img_admin": "",
+    "Staff_management": false,
+    "Event_accept_management": true,
+    "admin": true,
+    "Event_management": true,
+    "admin_mail": "‫eng.ahmed.alghamdi2020@gmail.com",
+    "Report_management": true,
+    "New_admin": false,
+    "id": "1PeymrSMHJWkHkBgJYeb"
+  },
+  {
+    "Event_management": true,
+    "admin": true,
+    "Phone": "",
+    "time": {
+      "seconds": 1699201733,
+      "nanoseconds": 811000000
+    },
+    "Partner_management": true,
+    "Staff_management": true,
+    "Img_admin": "",
+    "New_admin": false,
+    "ads_management": true,
+    "name": "n.altukhaim",
+    "Partner_support": true,
+    "user_Ref": {
+      "uid": "SdlhRAMIJeY3nSFqD6HHn3xO3J02",
+      "Admin": true,
+      "email": "n.altukhaim@nextlevel.com.sa",
+      "created_time": {
+        "seconds": 1699201732,
+        "nanoseconds": 785000000
+      },
+      "photo_url": "",
+      "display_name": "n.altukhaim"
+    },
+    "admin_mail": "n.altukhaim@nextlevel.com.sa",
+    "Report_management": true,
+    "Event_accept_management": true,
+    "sup_admin": true,
+    "Event_run_management": true,
+    "id": "B3BPXZ9e0v3STmOq95mV"
+  },
+  {
+    "Event_accept_management": true,
+    "sup_admin": false,
+    "Phone": "",
+    "New_admin": false,
+    "user_Ref": {
+      "email": "nora@al.com",
+      "created_time": {
+        "seconds": 1699250922,
+        "nanoseconds": 199000000
+      },
+      "Admin": true,
+      "phone_number": "",
+      "uid": "KDj8LJY8lcgbjHIWMBRtEBLG3Js1",
+      "display_name": "reema ",
+      "photo_url": ""
+    },
+    "admin": true,
+    "time": {
+      "seconds": 1699250923,
+      "nanoseconds": 400000000
+    },
+    "Event_management": true,
+    "Partner_support": false,
+    "admin_mail": "nora@al.com",
+    "name": "reema ",
+    "Staff_management": true,
+    "ads_management": true,
+    "Report_management": false,
+    "Img_admin": "",
+    "Partner_management": false,
+    "Event_run_management": true,
+    "id": "JUBHFeOmaKcaZdLuQ8q4"
+  },
+  {
+    "Staff_management": true,
+    "admin_mail": "maryamhaidar777@gmail.com",
+    "admin": true,
+    "name": "maryam ",
+    "Event_accept_management": true,
+    "Partner_management": false,
+    "sup_admin": false,
+    "Event_management": true,
+    "Report_management": false,
+    "time": {
+      "seconds": 1697040409,
+      "nanoseconds": 765000000
+    },
+    "Phone": "",
+    "ads_management": false,
+    "Partner_support": false,
+    "Img_admin": "",
+    "user_Ref": {
+      "uid": "3j3BCSm64mND9hEerx6InkwmTDc2",
+      "phone_number": "",
+      "display_name": "maryam ",
+      "created_time": {
+        "seconds": 1697040408,
+        "nanoseconds": 699000000
+      },
+      "photo_url": "",
+      "email": "maryamhaidar777@gmail.com",
+      "Admin": true
+    },
+    "Event_run_management": true,
+    "New_admin": false,
+    "id": "LFXF8pZWH9wQmfoQ35RU"
+  },
+  {
+    "user_Ref": {
+      "created_time": {
+        "seconds": 1695410515,
+        "nanoseconds": 919000000
+      },
+      "photo_url": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2F92Td7tfpaFakj8PEhnWf77OWR352%2Fuploads%2F1695410430250000.png?alt=media&token=25f47cd3-a1be-479f-b09f-2bef78bc1201",
+      "display_name": "Maryam ",
+      "uid": "lRCWtBMMt1Ud8zcIVQ0QiqJQqEI3",
+      "Admin": true,
+      "phone_number": "",
+      "email": "m.mohammad@nextlevel.com.sa"
+    },
+    "New_admin": false,
+    "Event_management": true,
+    "Report_management": true,
+    "Partner_management": true,
+    "Staff_management": true,
+    "Event_accept_management": true,
+    "sup_admin": true,
+    "Phone": "",
+    "name": "Maryam ",
+    "Event_run_management": true,
+    "time": {
+      "seconds": 1695410516,
+      "nanoseconds": 956000000
+    },
+    "admin": true,
+    "Partner_support": true,
+    "Img_admin": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2F92Td7tfpaFakj8PEhnWf77OWR352%2Fuploads%2F1695410430250000.png?alt=media&token=25f47cd3-a1be-479f-b09f-2bef78bc1201",
+    "ads_management": true,
+    "admin_mail": "m.mohammad@nextlevel.com.sa",
+    "id": "Nj9aAc6G0cTP0YjGroz1"
+  },
+  {
+    "ads_management": false,
+    "Report_management": false,
+    "admin_mail": "n.abdulmunem@nextlevel.com.sa",
+    "Event_accept_management": true,
+    "user_Ref": {
+      "created_time": {
+        "seconds": 1697980549,
+        "nanoseconds": 288000000
+      },
+      "display_name": "نورا العبدالمنعم",
+      "phone_number": "551211615",
+      "Admin": true,
+      "photo_url": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FlRCWtBMMt1Ud8zcIVQ0QiqJQqEI3%2Fuploads%2F1697980540748000.png?alt=media&token=d4993828-7b62-40d9-8bbf-78ea184df855",
+      "email": "n.abdulmunem@nextlevel.com.sa",
+      "uid": "9oFaKu29CAefRNH9w0VizXwIouD3"
+    },
+    "Phone": "551211615",
+    "sup_admin": false,
+    "admin": true,
+    "Partner_support": false,
+    "time": {
+      "seconds": 1697980550,
+      "nanoseconds": 874000000
+    },
+    "Img_admin": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FlRCWtBMMt1Ud8zcIVQ0QiqJQqEI3%2Fuploads%2F1697980540748000.png?alt=media&token=d4993828-7b62-40d9-8bbf-78ea184df855",
+    "Event_management": true,
+    "New_admin": false,
+    "Staff_management": false,
+    "Event_run_management": true,
+    "name": "نورا العبدالمنعم",
+    "Partner_management": true,
+    "id": "OMz8eOjOsGszjlLjQhym"
+  },
+  {
+    "user_Ref": {
+      "created_time": {
+        "seconds": 1700390470,
+        "nanoseconds": 341000000
+      },
+      "email": "am.alkhalifah@moc.gov.sa",
+      "photo_url": "",
+      "display_name": "عبدالرحمن",
+      "Admin": true,
+      "uid": "xHJABzF8gAPv30mJVgLVbkuVwis1"
+    },
+    "admin_mail": "am.alkhalifah@moc.gov.sa",
+    "Img_admin": "",
+    "admin": true,
+    "name": "عبدالرحمن",
+    "time": {
+      "seconds": 1700390471,
+      "nanoseconds": 499000000
+    },
+    "id": "OiVJKhsUHOcWp70OSpfC"
+  },
+  {
+    "Img_admin": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FlRCWtBMMt1Ud8zcIVQ0QiqJQqEI3%2Fuploads%2F1695410585043000.png?alt=media&token=03b51124-adae-4a0a-9286-1bc180126476",
+    "sup_admin": true,
+    "name": "bukhamseen.ahmed",
+    "Phone": "",
+    "New_admin": false,
+    "Report_management": true,
+    "Partner_management": true,
+    "admin_mail": "bukhamseen.ahmed@gmail.com",
+    "ads_management": true,
+    "Partner_support": true,
+    "Event_run_management": false,
+    "time": {
+      "seconds": 1695410590,
+      "nanoseconds": 906000000
+    },
+    "admin": true,
+    "user_Ref": {
+      "admin_Partner": true,
+      "admin_in": true,
+      "email": "bukhamseen.ahmed@gmail.com",
+      "admin_Staff": true,
+      "admin_Evint_in": true,
+      "display_name": "bukhamseen.ahmed",
+      "admin_Report": true,
+      "uid": "LooSpSFoP0gQ1Z2sjJ4rpfETQU03",
+      "admin_Event_Accept": true,
+      "created_time": {
+        "seconds": 1695410589,
+        "nanoseconds": 937000000
+      },
+      "phone_number": "",
+      "photo_url": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FlRCWtBMMt1Ud8zcIVQ0QiqJQqEI3%2Fuploads%2F1695410585043000.png?alt=media&token=03b51124-adae-4a0a-9286-1bc180126476",
+      "Admin": true,
+      "admin_Event_Run": true,
+      "admin_Ads": true
+    },
+    "Event_accept_management": false,
+    "Staff_management": true,
+    "Event_management": false,
+    "id": "Sf4bR4EINPG5JNXzfAua"
+  },
+  {
+    "Partner_management": false,
+    "ads_management": false,
+    "Report_management": false,
+    "New_admin": false,
+    "Phone": "",
+    "admin": true,
+    "time": {
+      "seconds": 1695410363,
+      "nanoseconds": 895000000
+    },
+    "Event_accept_management": true,
+    "Img_admin": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FsvTekRkEvKYrB0buy6UWwEn97d83%2Fuploads%2F1695410355981000.png?alt=media&token=66e1d35b-d199-482a-b8c4-f5951b3d5336",
+    "Event_management": true,
+    "user_Ref": {
+      "Admin": true,
+      "email": "a.almuaither@nextlevel.com.sa",
+      "phone_number": "",
+      "created_time": {
+        "seconds": 1695410362,
+        "nanoseconds": 864000000
+      },
+      "display_name": "a.almuaither",
+      "photo_url": "https://firebasestorage.googleapis.com/v0/b/domais-events-management.appspot.com/o/users%2FsvTekRkEvKYrB0buy6UWwEn97d83%2Fuploads%2F1695410355981000.png?alt=media&token=66e1d35b-d199-482a-b8c4-f5951b3d5336",
+      "uid": "92Td7tfpaFakj8PEhnWf77OWR352"
+    },
+    "sup_admin": false,
+    "Partner_support": true,
+    "admin_mail": "a.almuaither@nextlevel.com.sa",
+    "Staff_management": true,
+    "Event_run_management": true,
+    "name": "a.almuaither",
+    "id": "luW3S6rqoeVdEUrKadGC"
+  },
+  {
+    "sup_admin": false,
+    "Partner_management": false,
+    "Report_management": false,
+    "Img_admin": "",
+    "time": {
+      "seconds": 1699202179,
+      "nanoseconds": 902000000
+    },
+    "user_Ref": {
+      "email": "r.alajmi@nextlevel.com.sa",
+      "Admin": true,
+      "photo_url": "",
+      "display_name": "r.alajmi",
+      "phone_number": "",
+      "uid": "yTIZvtTfHYUsVAybh2BQLTUS3vi1",
+      "created_time": {
+        "seconds": 1699202178,
+        "nanoseconds": 801000000
+      }
+    },
+    "admin_mail": "r.alajmi@nextlevel.com.sa",
+    "Event_run_management": true,
+    "Event_accept_management": true,
+    "admin": true,
+    "ads_management": false,
+    "name": "r.alajmi",
+    "Staff_management": true,
+    "Event_management": true,
+    "Partner_support": true,
+    "New_admin": false,
+    "Phone": "",
+    "id": "tWvl1eYUgMqrkQtuKdt9"
+  },
+  {
+    "admin_mail": "R.almefleh@nextlevel.com.sa",
+    "Staff_management": true,
+    "admin": true,
+    "ads_management": true,
+    "Partner_management": true,
+    "Event_accept_management": true,
+    "user_Ref": {
+      "display_name": "ريناد المفلح",
+      "uid": "OEKZ8K3UEcZUwSx9eoAiNCI4MhD2",
+      "photo_url": "",
+      "phone_number": "533211227",
+      "Admin": true,
+      "created_time": {
+        "seconds": 1697458774,
+        "nanoseconds": 44000000
+      },
+      "email": "r.almefleh@nextlevel.com.sa"
+    },
+    "Event_run_management": true,
+    "Phone": "533211227",
+    "time": {
+      "seconds": 1697458774,
+      "nanoseconds": 906000000
+    },
+    "sup_admin": true,
+    "New_admin": false,
+    "Partner_support": false,
+    "Report_management": true,
+    "name": "ريناد المفلح",
+    "Img_admin": "",
+    "Event_management": true,
+    "id": "ws4iX7VaX95krEmESgMz"
+  }
+]

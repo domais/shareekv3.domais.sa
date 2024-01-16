@@ -14,16 +14,21 @@ return new class extends Migration
         Schema::create('partners', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('owner_id');
-            $table->integer('status')->default(0); 
+            $table->integer('status')->default(0);
             // 0 => pending , 1 => approved , 2 => rejected
 
-            $table->string('name');
-            $table->string('city');
+            // logo to table file
+            $table->string('name')->nullable();
+            $table->string('city')->nullable();
+            $table->double('lat');
+            $table->double('lng');
+            $table->enum('class',['أ','ب','ج','د'])->nullable();
             $table->string('coordinates');
-            $table->enum('class',['أ','ب','ج','د']);
-            $table->BigInteger('CR')->nullable();
             $table->integer('points')->default(2);
-            // logo to table file 
+            $table->bigInteger('CR')->nullable();
+            $table->string('source')->nullable();
+
+            // logo to table file
             $table->timestamps();
         });
     }

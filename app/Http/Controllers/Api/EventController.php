@@ -3,54 +3,79 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Models\File;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class EventController extends Controller
 {
-    public function index($type)
-    {
-        if ($type == 'scheduled') {
-            $events = Event::where('status_id', 5)->with(['speakers', 'partnerships'])->get()->toArray();
-        }
-        if ($type == 'active') {
-            $events = Event::where('status_id', 6)->with(['speakers', 'partnerships'])->get()->toArray();
-        }
-    
-        foreach ($events as &$event) {
-            $files = File::where('name', $event['order_number'])->get()->toArray();
-            $event['files'] = $files;
-        }
-    
-        return response()->json([
-            'type' => $type,
-            'data' => $events,
-        ]);
+
+    public function __construct(
+        public \App\Contracts\EventServiceInterface $eventService
+    ) {
     }
 
-    public function show(Request $request)
+    /**
+     * upcoming events
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function upcoming(Request $request)
     {
-        try {
-            $validator = Validator::make($request->all(), [
-                'order_number' => 'required|exists:events,order_number',
-            ]);
-    
-            if ($validator->fails()) {
-                throw new ValidationException($validator);
-            }
-    
-            $event = Event::where('order_number', $request->order_number)->with(['speakers', 'partnerships'])->first()->toArray();
-            $files = File::where('name', $event['order_number'])->get()->toArray();
-            $event['files'] = $files;
-    
-            return response()->json([
-                'data' => $event,
-            ]);
-        } catch (ValidationException $e) {
-            return response()->json($e->errors(), 400);
-        }
+        return $this->eventService->upcomingEvents($request->all());
+    }
+
+    /**
+     * past events
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function past(Request $request)
+    {
+        return $this->eventService->pastEvents($request->all());
+    }
+
+    /**
+     * show event
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Request $request, \App\Models\Event $event)
+    {
+        return $this->eventService->showEvent($event);
+    }
+
+    /**
+     * map events
+     */
+    public function map(Request $request)
+    {
+        return $this->eventService->mapEvents($request->all());
+    }
+
+    /**
+     * Authenticated user events past and upcoming
+     */
+    public function user(Request $request)
+    {
+        return $this->eventService->userEvents($request->user(), $request->all());
+    }
+
+    /**
+     * Get Literaries with count of related upcoming events
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function literaries(Request $request)
+    {
+        return $this->eventService->literaries($request->all());
+    }
+
+    /**
+     * Get city by lat and lng
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getCity(Request $request)
+    {
+        // return $this->eventService->nearbyEvents($request->all());
     }
 }

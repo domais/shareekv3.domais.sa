@@ -133,17 +133,19 @@ class LiteraryTableSeeder extends Seeder
                 'name'   => 'مانهوا',
                 'parent_id' => 6
             ],
- 
-
-            
+            [
+                'id'     => 26,
+                'name'   => 'NA',
+                'status' => 0,
+            ]
         ];
 
         foreach ($categories as $category) {
             Literary::create([
                 'name' => $category['name'],
                 'parent_id' => $category['parent_id'] ?? null,
+                'status' => $category['status'] ?? 1,
             ]);
         }
-    
     }
 }

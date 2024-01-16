@@ -17,7 +17,6 @@ class Partner extends Model
         'lat',
         'lng',
         'owner_id',
-     
     ];
 
     public function owner()
@@ -27,6 +26,11 @@ class Partner extends Model
 
     public function fileable()
     {
-        return $this->morphOne(File::class, 'fileable');    
+        return $this->morphOne(File::class, 'fileable');
+    }
+
+    public function image(): \Illuminate\Database\Eloquent\Relations\MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable');
     }
 }
