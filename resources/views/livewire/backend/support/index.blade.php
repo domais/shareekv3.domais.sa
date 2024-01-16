@@ -52,7 +52,7 @@
 		/>
 
 		<x-backend.kanban-column 
-			name="{{ auth()->user()->hasRole('User') ? 'موافق عليه مبدأيا' : 'بإنتظار تصريح الهيئة' }}"
+			name="الحالة النهائية"
 			count="{{ count($approved) }}"
 			:data="$approved"
 			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('archiveSupport') :  [] "

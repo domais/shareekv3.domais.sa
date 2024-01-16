@@ -36,7 +36,10 @@ class Index extends Component
             
         })->get(); 
 
-        $this->rejectd = Support::where('status_id', 3)->get();
+        $this->rejectd = Permit::where('need_support', 1)
+            ->whereHas('support', function ($query) {
+                $query->where('status_id', 15);
+            })->get();
 
 
         $this->approved = Permit::where('need_support', 1)
@@ -96,6 +99,17 @@ class Index extends Component
     {
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
+    }
+
+
+
+    #[On('RejectPermit_Dispatch')] 
+    public function RejectPermit_Dispatch($id,$model,$reason)
+    {
+        $permit = Permit::findorfail($id);
+        $permit->support->update(['status_id' => 15]);
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
