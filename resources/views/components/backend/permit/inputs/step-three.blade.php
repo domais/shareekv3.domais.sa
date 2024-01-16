@@ -1,10 +1,12 @@
-<div    class="row"
+<div    
+class="row"
         x-data="{
             speakers: @entangle('speakers').live,
             removeSpeaker: function(index) {
                 this.speakers.splice(index, 1);
             }
-        }"     
+        }"
+        x-init=""
 
 
 >
@@ -92,26 +94,24 @@
     <div class="col-6 pe-4">
         <div class=" row my-2 mx-0">
             <template x-for="(speaker,index) in speakers">
-
                 <div class="card p-2 mx-1 mb-2">
                     <div class="card-body d-flex justify-space-between align-items-center p-0">
                         <h5 class="card-title float-start mb-0 me-auto" x-text="speaker.name"></h5>
                         <div class="float-end d-flex align-items-center">
                             <div class="form-check form-switch">
-                                <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward">
+                                <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
                                 <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_1'">
                                     مكافأة
                                 </label>
                             </div>
                             <div class="form-check form-switch mx-3">
-                                <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_2'" x-model="speaker.reservations">
+                                <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_2'" x-model="speaker.reservations" x-on:change="changeStatus(index, 'reservations')">
                                 <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_2'">
                                     حجوزات
                                 </label>
                             </div>
                         </div>
                         <button class="btn btn-danger float-end" x-bind:disabled="is_show_page" x-on:click="removeSpeaker(index)">×</button>
-            
                     </div>
                 </div>
             </template>
@@ -125,4 +125,13 @@
             $('.js-example-basic-multiple').select2();
         });
     });
+
+
+    function changeStatus(index, status) {
+            Livewire.dispatch('changeSpeakerStatus', 
+            {
+                index:index,
+                status:status
+            });
+    }
 </script>

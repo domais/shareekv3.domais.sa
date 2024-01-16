@@ -42,7 +42,7 @@ class PartnerForm extends Form
         $partner->CR = $this->CR;
         $partner->save();
 
-        $path = Storage::disk('digitalocean')->putFile('files/logos/'.$partner->id, $this->logo, 'public');
+        $path = Storage::putFile('files/logos/'.$partner->id, $this->logo, 'public');
 
         $document = new File();
         $document->name = $partner->name;

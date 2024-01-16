@@ -71,6 +71,12 @@ class Permit extends Model
         return $this->hasMany(History::class);
     }
 
+
+    public function support()
+    {
+        return $this->hasOne(Support::class);
+    }
+
     public function fileable()
     {
         return $this->morphMany(File::class, 'fileable');    

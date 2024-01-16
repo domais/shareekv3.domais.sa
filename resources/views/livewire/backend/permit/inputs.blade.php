@@ -28,7 +28,7 @@
 	</nav>
 
 
-	<div class="row" x-data="{errors: @entangle('errors').live,is_show_page: @entangle('is_show_page').live}" x-init="
+	<div class="row" x-data="{errors: @entangle('errors').live,is_show_page: @entangle('is_show_page').live  ,start_date: '', end_date: ''}" x-init="
 		$watch('errors', value => {
 
 			if (value.length > 0) {

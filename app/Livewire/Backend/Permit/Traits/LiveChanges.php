@@ -9,6 +9,7 @@ use App\Models\Partner;
 use App\Models\Partnership;
 use App\Models\Permit;
 use App\Models\Speaker;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -40,23 +41,55 @@ trait LiveChanges
             }
         }
     }
+    #[On('changeSpeakerStatus')] 
+    public function changeSpeakerStatus($index, $status)
+    {
+        try {
+            $startDate = Carbon::parse($this->form->start_date);
+            $now = Carbon::now();
+    
+            if ($status == 'reservations' && $now->diffInDays($startDate) < 10) {
+                $this->speakers[$index]['reservations'] = false;
+                $validator = Validator::make([], []); // empty data and rules
+                $validator->errors()->add('start_date', 'لا يمكنك الحجز إلا إذا كان تاريخ البدء بعد 10 أيام على الأقل');
+                throw new ValidationException($validator);
+            }
+    
+            if ($status == 'reward' && $now->diffInDays($startDate) < 5) {
+                $this->speakers[$index]['reward'] = false;
+                $validator = Validator::make([], []); // empty data and rules
+                $validator->errors()->add('start_date', 'لا يمكنك المكافأة إلا إذا كان تاريخ البدء بعد 5 أيام على الأقل');
+                throw new ValidationException($validator);
+            }
+        } catch (ValidationException $th) {
+            $this->errors = $th->validator->errors()->all();
+            return;
+        }
+    }
 
     public function addSpeaker()
     {
         try {
+            if ($this->form->start_date == null) {
+                $validator = Validator::make([], []); // empty data and rules
+                $validator->errors()->add('start_date', 'لا يمكنك إضافة متحدث حتى تحدد تاريخ البدء');
+                throw new ValidationException($validator);
+            }
+    
             $this->speakerForm->validate();
-        
+    
             if (!$this->speakerForm->twitter && !$this->speakerForm->instagram && !$this->speakerForm->linkedin) {
                 $validator = Validator::make([], []); // empty data and rules
-                $validator->errors()->add('socials', 'يجب أن يكون هناك رابط واحد على الأقل لوسائل التواصل الاجتماعي (تويتر ، إنستجرام ، لينكدين)');                throw new ValidationException($validator);
+                $validator->errors()->add('socials', 'يجب أن يكون هناك رابط واحد على الأقل لوسائل التواصل الاجتماعي (تويتر ، إنستجرام ، لينكدين)');
+                throw new ValidationException($validator);
             }
-            
+    
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
             return;
         }
         $this->speakers[] = $this->speakerForm->toArray();
-
+    
         $this->speakerForm->reset(); 
     }
 
@@ -256,6 +289,27 @@ trait LiveChanges
 
 
             }
+
+            if ($permit->need_support == 1) {
+                $support = $permit->support;
+
+                if ($support) {
+                    $support->status_id = 12;
+                    $support->save();
+                    
+                }
+                else {
+                    $support = $permit->support()->create([
+                        'status_id' => 11,
+                        'order_number' => $permit->order_number,
+                    ]);
+                }
+              
+               
+            }
+
+
+
 
 
             foreach ($speakers as $key => $item) {

@@ -125,7 +125,7 @@
     </div><!-- /col-7 -->
 
 
-    <div class="col-5" x-data="{ start_date: '', end_date: '' }">
+    <div class="col-5">
 
         <div class="row my-3">
             <div class="col-3 d-flex align-items-center">عدد الحضور</div>

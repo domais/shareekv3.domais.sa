@@ -89,24 +89,25 @@ class Inputs extends Component
                 $this->errors[] = "يجب إضافة متحدث واحد على الأقل" ;
                 return;
             }
-            /*
-            need it later 
+         
             if ($status == 2) {
                 $startDate = Carbon::parse($this->form->start_date);
                 $now = Carbon::now();
                 $difference = $now->diffInDays($startDate, false);
             
-                if ($difference < 5) {
+                if ($difference < 3) {
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('start_date', 'يجب أن يكون تاريخ البداية بعد خمسة أيام على الأقل من الآن');
                     throw new ValidationException($validator);
                 }
+                   /*
+                 later 
                 if (auth()->user()->hasRole('User') && auth()->user()->owner->points == 0) {
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('points', 'ليس لديك رصيد كافي لإضافة تصريح');
                     throw new ValidationException($validator);
-                }
-            }*/
+                }*/
+            }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
             return;
