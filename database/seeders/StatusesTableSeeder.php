@@ -97,9 +97,16 @@ class StatusesTableSeeder extends Seeder
 
             [
                 'id'           => 14,
+                'name'         => 'مؤرشف',
+                'description'  => 'تم توثيق الطلب من قبل الشريك وموظفي NextLevel ومؤرشف'
+            ],
+
+            [
+                'id'           => 15,
                 'name'         => 'معاد لتعديل',
                 'description'  => 'تم إرسالها للشريك للتعديل'
             ],
+            
         ];
 
         foreach($statuses as $status){

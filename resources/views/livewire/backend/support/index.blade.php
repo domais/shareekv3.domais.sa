@@ -30,11 +30,11 @@
 			name="طلبات جديدة"
 			count="{{count($requests)}}" 
 			:data="$requests"
-			:buttons="KanbanButtons('PermitAdminNewOrders')"
+			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminNewSupport')  "
 		/>
 
 
-
+        
 		<x-backend.kanban-column
 			name="معاد للتعديل"
 			count="{{count($rejectd)}}"
@@ -48,14 +48,14 @@
 			name="تحت الدراسة" 
 			count="{{count($initial_approve)}}" 
 			:data="$initial_approve" 
-			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('PermitUserReview') : KanbanButtons('PermitAdminReview')  "
+			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminNewSupportUnderStudy')  "
 		/>
 
 		<x-backend.kanban-column 
 			name="{{ auth()->user()->hasRole('User') ? 'موافق عليه مبدأيا' : 'بإنتظار تصريح الهيئة' }}"
 			count="{{ count($approved) }}"
 			:data="$approved"
-			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminAwatingApproval')  "
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('archiveSupport') :  [] "
 		/>
 
 	</div>
@@ -63,35 +63,26 @@
 
 
 
-
-
-
-
-
-
-
-
-    <!-- مودال اعتماد تشغيل فعالية -->
-    <div wire:ignore class="modal fade" id="Permit-Admin-Final-Approval-Modal" tabindex="-1">
+    <div wire:ignore class="modal fade" id="Support-User-Upload-Tawtheeq-Modal" tabindex="-1" aria-labelledby="FinalApprovalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">اعتماد الفعالية</h1>
+                    <h1 class="modal-title fs-5" id="FinalApprovalLabel">ارفاق الوصل</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="row mt-2">
-                        <div class="col-3 d-flex align-items-center">رقم التصريح</div>
-                        <div class="col-8"><input type="text" wire:model="permitNumber" class="form-control" id="PermitNumber"></div>
+                        <div class="col-3 d-flex align-items-center">رقم الوصل</div>
+                        <div class="col-8"><input type="text" class="form-control" id="PermitNumber"></div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-3 d-flex align-items-center">نسخ التصريح</div>
-                        <div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF"></div>
+                        <div class="col-3 d-flex align-items-center">الوصل</div>
+                        <div class="col-8"><input type="file" wire:model="file" class="form-control" id="PermitPDF"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-success" wire:click="approvePermit">اعتماد</button>
+                    <button type="button" class="btn btn-success" wire:click="save">اعتماد</button>
                 </div>
             </div>
         </div>

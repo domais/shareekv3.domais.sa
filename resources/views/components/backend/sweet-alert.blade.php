@@ -108,6 +108,58 @@
 			false, 			// textarea
 		);
 	}
+
+	function Act_AdminStartStudySupport(id,model) 
+	{
+		handleAction(
+			id, 			// id,         
+			model, 			// model, 
+			'question', 	// icon , 
+			false, 	        // img located => public/img/alert/ 
+			'بدء دراسة الطلب؟', 
+			'بالضغط على (إبدا الدراسة) سيتحول الطلب إلى قائمة (تحت الدراسة) لديك وسيختفي من عند باقي الموظفين ، متأكد؟',
+			true, 			// show Confirm Button
+			true, 			// show Cancel Button
+			false, 			// confirm Button Color 	default = #456496
+			'إبدأ الدراسة', 	// confirm Button Text 		default = موافق
+			false, 			// cancel Button Text  		default = إلغاء
+			false, 			// timer before auto disaplear
+			false, 			// bar
+			'Act_AdminStartStudySupport', 			// action
+			true, 			// place inside? 
+			true, 			// actionable 
+			false, 			// redirect
+			false, 			// textarea
+		);
+
+		
+	}
+
+	function Act_AdminStartStudySupportarchive(id,model) 
+	{
+
+		handleAction(
+			id, 			// id,         
+			model, 			// model, 
+			'question', 	// icon , 
+			false, 	        // img located => public/img/alert/ 
+			'أرشفة الدعم ؟', 
+			'بالضغط على (أرشفة ) سيتحول الطلب إلى قائمة (الأرشيف )  وسيختفي ، متأكد؟',
+			true, 			// show Confirm Button
+			true, 			// show Cancel Button
+			false, 			// confirm Button Color 	default = #456496
+			'أرشفة', 	// confirm Button Text 		default = موافق
+			false, 			// cancel Button Text  		default = إلغاء
+			false, 			// timer before auto disaplear
+			false, 			// bar
+			'Act_AdminStartStudySupportarchive', 			// action
+			true, 			// place inside? 
+			true, 			// actionable 
+			false, 			// redirect
+			false, 			// textarea
+		);
+		
+	}
 	
 
 	// موافقة مبدأية للآدمن
@@ -144,6 +196,31 @@
 			confirmButtonText: 'رفض الطلب',
 			cancelButtonText: 'إلغاء',
 			confirmButtonColor: '#456496',
+		}).then((result) => {
+			if (result.isConfirmed && result.value) {
+				// Perform the action when the user clicks the confirm button
+				// You can replace 'RejectPermit_Dispatch' with the actual function you want to call
+				//RejectPermit_Dispatch(id, model, result.value);
+				Livewire.dispatch('RejectPermit_Dispatch', {
+					id: id,
+					model: model,
+					reason: result.value
+				})
+			}
+		});
+	}
+
+	function Act_AdminRejectSupport(id, model) {
+		Swal.fire({
+			title: 'رفض الدعم',
+			text: 'أنت على وشك رفض الدعم ، لرفض الدعم ، جيب عليك ذكر سبب الرفض في الخانة بالأسف ثم الضغط على (رفض الطلب)',
+			icon: 'question',
+			input: 'textarea',
+			inputPlaceholder: 'أدخل سبب الرفض هنا',
+			showCancelButton: true,
+			confirmButtonText: 'رفض الطلب',
+			cancelButtonText: 'إلغاء',
+			confirmButtonColor: '#FF0000',
 		}).then((result) => {
 			if (result.isConfirmed && result.value) {
 				// Perform the action when the user clicks the confirm button

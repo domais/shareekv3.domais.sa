@@ -195,6 +195,25 @@ function ArToEn($input) {
 				];
 			break;
 
+			case 'PermitAdminNewSupport':
+				return [
+					['type' => 'sweetalert' , 'title' => 'إبدأ الدراسة', 'onclick' => 'Act_AdminStartStudySupport','class' => 'btn btn-secondary'],
+				];
+			break;
+
+			case 'PermitAdminNewSupportUnderStudy':
+				return [
+					['type' => 'modal' , 'title' => 'قبول', 'modal' => 'Support-User-Upload-Tawtheeq-Modal', 'class' => 'btn btn-success'],
+					['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_AdminRejectSupport', 'class' => 'btn btn-outline-danger'],
+
+				];
+			break;
+			
+			case 'archiveSupport':
+				return [
+					['type' => 'sweetalert' , 'title' => 'أرشفة', 'onclick' => 'Act_AdminStartStudySupportarchive','class' => 'btn btn-success'],
+				];
+
 
 
 		}
