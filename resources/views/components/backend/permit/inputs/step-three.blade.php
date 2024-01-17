@@ -1,12 +1,19 @@
 <div    
 class="row"
-        x-data="{
-            speakers: @entangle('speakers').live,
-            removeSpeaker: function(index) {
-                this.speakers.splice(index, 1);
-            }
-        }"
-        x-init=""
+x-data="{
+    speakers: @entangle('speakers').live,
+    removeSpeaker: function(index) {
+        this.speakers.splice(index, 1);
+    },
+    openModal: function(index) {
+        const speaker = this.speakers[index];
+        Swal.fire({
+            title: speaker.name,
+            text: `Email: ${speaker.email}\nPhone: ${speaker.phone}`,
+            icon: 'info',
+        });
+    }
+}"
 
 
 >
@@ -96,8 +103,7 @@ class="row"
             <template x-for="(speaker,index) in speakers">
                 <div class="card p-2 mx-1 mb-2">
                     <div class="card-body d-flex justify-space-between align-items-center p-0">
-                        <h5 class="card-title float-start mb-0 me-auto" x-text="speaker.name"></h5>
-                        <div class="float-end d-flex align-items-center">
+                        <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='blue';" onmouseout="this.style.color='black';"></a>                            <div class="float-end d-flex align-items-center">
                             <div class="form-check form-switch">
                                 <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
                                 <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_1'">
