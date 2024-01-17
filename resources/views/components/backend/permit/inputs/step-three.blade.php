@@ -7,7 +7,6 @@ x-data="{
         this.speakers.splice(index, 1);
     },
     openModal: function(index) {
-        console.log(this.speakers[index])
         this.Selectedspeaker = this.speakers[index];
     }
 }"

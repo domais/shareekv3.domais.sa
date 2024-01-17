@@ -140,7 +140,7 @@
                 <input type="text" x-bind:disabled="is_show_page" value="{{ $this->permit ? $this->permit->start_date : '' }}" x-model="start_date" class="form-control rounded" autocomplete="off"
                     id="start_date" wire:model.live="form.start_date">
             </div>
-        </div>
+        </div> 
 
 
         <div class="row my-3">
