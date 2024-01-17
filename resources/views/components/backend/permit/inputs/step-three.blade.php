@@ -2,21 +2,41 @@
 class="row"
 x-data="{
     speakers: @entangle('speakers').live,
+    Selectedspeaker: {},
     removeSpeaker: function(index) {
         this.speakers.splice(index, 1);
     },
     openModal: function(index) {
-        const speaker = this.speakers[index];
-        Swal.fire({
-            title: speaker.name,
-            text: `Email: ${speaker.email}\nPhone: ${speaker.phone}`,
-            icon: 'info',
-        });
+        console.log(this.speakers[index])
+        this.Selectedspeaker = this.speakers[index];
     }
 }"
-
-
 >
+
+<!-- Modal -->
+<div class="modal fade" id="speakerdetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel" x-text="Selectedspeaker.name"></h5>          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p><strong>الاسم:</strong> <span x-text="Selectedspeaker.name"></span></p>
+            <p><strong>البريد الإلكتروني:</strong> <span x-text="Selectedspeaker.email"></span></p>
+            <p><strong>رقم الهاتف:</strong> <span x-text="Selectedspeaker.phone"></span></p>
+            <p><strong>الجنسية:</strong> <span x-text="Selectedspeaker.nationality"></span></p>
+            <p><strong>الصفة:</strong> <span x-text="Selectedspeaker.type"></span></p>
+            <p><strong>الحجوزات:</strong> <i :class="{'fas fa-check text-success': Selectedspeaker.reservations, 'fas fa-times text-danger': !Selectedspeaker.reservations}"></i></p>
+            <p><strong>المكافآت:</strong> <i :class="{'fas fa-check text-success': Selectedspeaker.reward, 'fas fa-times text-danger': !Selectedspeaker.reward}"></i></p>
+            <div>
+                <a x-show="Selectedspeaker.twitter" :href="Selectedspeaker.twitter" target="_blank" class="text-twitter"><i class="fab fa-twitter"></i></a>
+                <a x-show="Selectedspeaker.instagram" :href="Selectedspeaker.instagram" target="_blank" class="text-instagram"><i class="fab fa-instagram" style="color: #E1306C;"></i></a>
+                <a x-show="Selectedspeaker.linkedin" :href="Selectedspeaker.linkedin" target="_blank" class="text-linkedin"><i class="fab fa-linkedin" style="color: #0A66C2;"></i></a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -103,7 +123,8 @@ x-data="{
             <template x-for="(speaker,index) in speakers">
                 <div class="card p-2 mx-1 mb-2">
                     <div class="card-body d-flex justify-space-between align-items-center p-0">
-                        <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='blue';" onmouseout="this.style.color='black';"></a>                            <div class="float-end d-flex align-items-center">
+                        <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='blue';" onmouseout="this.style.color='black';" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
+                        <div class="float-end d-flex align-items-center">
                             <div class="form-check form-switch">
                                 <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
                                 <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_1'">
