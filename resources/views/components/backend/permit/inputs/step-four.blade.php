@@ -1,12 +1,33 @@
 <section>
     <div class="content-wrapper"
         x-data="{
+            ps: {},
             partnerships: @entangle('partnerships').live,
             removePartnership: function(index) {
                 this.partnerships.splice(index, 1);
+            },
+            openModalPartner: function(index) {
+                console.log(this.partnerships[index])
+                this.ps = this.partnerships[index];
             }
-        }"     
-    >
+        }">
+        <!-- Modal -->
+        <div class="modal fade" id="partnerDetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" x-text="ps.name"></h5>          
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>الاسم:</strong> <span x-text="ps.name"></span></p>
+                    <p><strong>النوع:</strong> <span x-text="ps.type"></span></p>
+                    <p><strong>الوصف:</strong> <span x-text="ps.description"></span></p>
+                </div>
+            </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-6">
                 <div class="row my-3">
@@ -54,8 +75,7 @@
 
                         <div class="card p-2 mx-1 mb-2" style="width: 100%">
                             <div class="card-body d-flex justify-space-between align-items-center p-0">
-                                <h5 class="card-title float-start mb-0 me-auto" x-text="partnership.name"></h5>
-                                <button class="btn btn-danger float-end" x-bind:disabled="is_show_page" x-on:click="removePartnership(index)">×</button>
+                                <a role="button" class="card-title float-start mb-0 me-auto" x-text="partnership.name" @click="openModalPartner(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='blue';" onmouseout="this.style.color='black';" data-bs-toggle="modal" data-bs-target="#partnerDetails"></a>                                <button class="btn btn-danger float-end" x-bind:disabled="is_show_page" x-on:click="removePartnership(index)">×</button>
                             </div>
                         </div>
                     </template>

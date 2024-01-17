@@ -304,9 +304,14 @@ trait LiveChanges
                         'order_number' => $permit->order_number,
                     ]);
                 }
-              
-               
             }
+            else {
+                $support = $permit->support;
+                if ($support) {
+                    $permit->support->delete();
+                }
+            }
+            
 
 
 
