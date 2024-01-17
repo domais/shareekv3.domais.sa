@@ -125,15 +125,19 @@ class MigrateFromFirebaseService
 
         \Log::info('Class: ' . $class);
 
-        $partner = Partner::updateOrCreate([
-            'owner_id' => $user->id,
-            'name' => $item->Cafi_name ?? null,
-            'city' => $item->city_user ?? null,
-            'lat' => $item->Cafi_map->latitude ?? 0.0,
-            'lng' => $item->Cafi_map->longitude ?? 0.0,
-            'class' => $class,
-            'source' => 'firebase'
-        ]);
+        $partner = Partner::firstOrCreate(
+            [
+                'owner_id' => $user->id,
+            ],
+            [
+                'name' => $item->Cafi_name ?? null,
+                'city' => $item->city_user ?? null,
+                'lat' => $item->Cafi_map->latitude ?? 0.0,
+                'lng' => $item->Cafi_map->longitude ?? 0.0,
+                'class' => $class,
+                'source' => 'firebase'
+            ]
+        );
 
 
         if ($partner->wasRecentlyCreated && isset($item->cafi_logo) && $item->cafi_logo) {
