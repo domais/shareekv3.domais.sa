@@ -48,8 +48,8 @@
 					</span>
 				</div>
 				<ul class="dropdown-menu text-small">
-					{{-- <li><a class="dropdown-item" href="#">ملفي الشخصي</a></li>
-					<li><hr class="dropdown-divider"></li> --}}
+					 <li><a class="dropdown-item" href="#">ملفي الشخصي</a></li>
+					 <li><hr class="dropdown-divider"></li> 
 					<li><button class="dropdown-item text-danger" wire:click="logout">تسجيل الخروج</button></li>
 
 				</ul>
