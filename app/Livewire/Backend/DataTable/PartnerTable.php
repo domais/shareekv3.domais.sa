@@ -21,7 +21,6 @@ class PartnerTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setColumnSelectStatus(false);
-
     }
 
     public array $bulkActions = [
@@ -30,32 +29,26 @@ class PartnerTable extends DataTableComponent
 
     public function exportSelected()
     {
-        foreach($this->getSelected() as $item)
-        {
+        foreach ($this->getSelected() as $item) {
             $users = $this->getSelected();
 
             $this->clearSelected();
-        
-          return Excel::download(new PartnerExcel($users), 'الشركاء.xlsx');
+
+            return Excel::download(new PartnerExcel($users), 'الشركاء.xlsx');
             // These are strings since they came from an HTML element
         }
     }
 
-    #[On('partner-details')] 
+    #[On('partner-details')]
     public function PartnerDetails($id)
     {
-        $owner = Partner::find($id)->owner;
+        $partner = Partner::find($id);
 
-        $permitCounter = $owner->permits->count();
+        $permitCounter = $partner->owner->permits->count();
 
-        $eventCounter = $owner->events->count();
+        $eventCounter = $partner->owner->events->count();
 
-       // dd($owner, $permitCounter, $eventCounter);
-
-        $this->dispatch('show-partner-details',['owner' => $owner->name, 'permitCounter' =>  $permitCounter, 'eventCounter' => $eventCounter]);
-
-
-        
+        $this->dispatch('show-partner-details', ['partner' => $partner, 'permitCounter' =>  $permitCounter, 'eventCounter' => $eventCounter]);
     }
 
     public function filters(): array
@@ -66,13 +59,12 @@ class PartnerTable extends DataTableComponent
                     '' => 'الكل',
                     'أ' => 'أ',
                     'ب' => 'ب',
-                    'د' => 'د',
                     'ج' => 'ج',
                 ])
-            
-                ->filter(function(Builder $builder, string $value) {
+
+                ->filter(function (Builder $builder, string $value) {
                     $builder->where('class', $value);
-                }),   
+                }),
         ];
     }
 
@@ -85,8 +77,9 @@ class PartnerTable extends DataTableComponent
 
             ImageColumn::make('الشعار')
                 ->location(
-                    fn($row) => $row->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $row->fileable->path : 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png'                )
-                ->attributes(fn($row) => [
+                    fn ($row) => $row->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $row->fileable->path : 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png'
+                )
+                ->attributes(fn ($row) => [
                     'class' => 'rounded-circle w-25 h-25',
                     'alt' =>  ' Avatar',
                 ]),
@@ -95,7 +88,7 @@ class PartnerTable extends DataTableComponent
                 ->sortable(),
 
             Column::make("رقم السجل", "CR")
-            ->hideIf(true)
+                ->hideIf(true)
                 ->searchable()
                 ->sortable(),
             Column::make("المدينة", "city")
@@ -103,28 +96,28 @@ class PartnerTable extends DataTableComponent
             Column::make("الصنف", "class")
                 ->sortable(),
             Column::make("اسم المسؤول", "owner.name")
-            ->format(function($value, $column, $row) {
+                ->format(function ($value, $column, $row) {
 
-                return $column->owner->name. '<br>' . $column->owner->phone ;
-            })->html()->sortable(),
+                    return $column->owner->name . '<br>' . $column->owner->phone;
+                })->html()->sortable(),
 
             Column::make("التصاريح", "owner_id")
-            ->format(function($value, $column, $row) {
-    
-                $counter = $column->owner->permits->count();
-                return $counter;
-            }),
+                ->format(function ($value, $column, $row) {
 
- 
+                    $counter = $column->owner->permits->count();
+                    return $counter;
+                }),
+
+
             Column::make("المبادرات", "owner_id")
-            ->format(function($value, $column, $row) {
-    
-                $counter = $column->owner->events->count();
-                return $counter;
-            }),
+                ->format(function ($value, $column, $row) {
+
+                    $counter = $column->owner->events->count();
+                    return $counter;
+                }),
 
             Column::make(__(''), 'id')
-            ->view('Tableactions.index')
+                ->view('Tableactions.index')
 
         ];
     }

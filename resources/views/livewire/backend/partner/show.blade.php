@@ -2,7 +2,7 @@
 
 
 
-    
+
 	<nav aria-label="breadcrumb" class="my-5">
 		<div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
 			<ol class="breadcrumb breadcrumb-chevron m-0">
@@ -22,11 +22,11 @@
 
 
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-danger mx-2" wire:click="changeStatus(2)">رفض</button>
-        <button type="button" class="btn btn-success" wire:click="changeStatus(1)">قبول</button>
+        {{-- <button type="button" class="btn btn-danger mx-2" wire:click="changeStatus(2)">رفض</button>
+        <button type="button" class="btn btn-success" wire:click="changeStatus(1)">قبول</button> --}}
       </div>
 
-    <!--  
+    <!--
         Domais
         user informatiotion : $owner,
         partner information : $partner,
@@ -44,7 +44,7 @@
         <!-- tickets -->
     @endforeach
     <hr class="my-5">
-    
+
     <div class="container py-4">
 
         @foreach ($permits as $index => $item)

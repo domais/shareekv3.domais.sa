@@ -38,6 +38,8 @@ class PartnerForm extends Form
         $partner->name = $this->partner_name;
         $partner->city = $this->city;
         $partner->coordinates = $this->coordinates;
+        $partner->lat = explode(',', $this->coordinates)[0];
+        $partner->lng = explode(',', $this->coordinates)[1];
         $partner->class = $this->class;
         $partner->CR = $this->CR;
         $partner->save();

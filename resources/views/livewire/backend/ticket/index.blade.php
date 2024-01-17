@@ -21,11 +21,18 @@
 
 
 
-			
+
 		@if(count($this->tickets) > 0)
-			@foreach($this->tickets as $ticket)
-			<div><a href="">{{$ticket->subject}}</a></div>
-			@endforeach
+			<div class="row g-2 g-lg-3">
+                <div class="col-12 col-lg-6">
+                    @foreach($this->tickets as $ticket)
+                    <div><a href="">{{$ticket->subject}}</a></div>
+                    @endforeach
+                </div>
+                <div class="col-12 col-lg-6">
+                {{-- FAQS Inqlucde --}}
+                @include('livewire.backend.ticket.faqs')
+                </div>
 		@else
 		<div class="w-100 text-center">
 			<img src="{{asset('img/404.png')}}" class="mx-auto" width="400"><br><br>
@@ -77,7 +84,7 @@
 				</div>
 				<div class="row mb-2" x-show="open == 3">
 					<div class="col-3 d-flex align-items-center">
-						رقم التصريح 
+						رقم التصريح
 						<span class="text-danger">*</span>
 					</div>
 					<div class="col-9">
@@ -90,7 +97,7 @@
 						المرفقات
 					</div>
 					<div class="col-9">
-						<input type="file" class="form-control text-center" multiple wire:model="form.files">
+						<input type="file" class="form-control text-center" wire:model="form.files">
 					</div>
 
 				</div>
@@ -103,6 +110,6 @@
 	</div>
 
 
-	
+
 </div>
 </div>

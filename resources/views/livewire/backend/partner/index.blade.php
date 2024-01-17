@@ -73,14 +73,13 @@
                                 <div class="mb-3">
                                     <input type="text" wire:model="Pform.coordinates" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
                                 </div>
-                        
+
                                 <div class="mb-3">
                                     <select class="form-select" id="partnerClass" wire:model.live="Pform.class">
-                                        <option selected disabled value="">إختر الفئة ...</option>
+                                        <option selected value="">إختر الفئة ...</option>
                                         <option value="أ">أ</option>
                                         <option value="ب">ب</option>
                                         <option value="ج">ج</option>
-                                        <option value="د">د</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">

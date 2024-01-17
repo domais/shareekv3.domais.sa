@@ -10,8 +10,8 @@ use Livewire\WithFileUploads;
 
 class Index extends Component
 {
-    use WithFileUploads;    
-    
+    use WithFileUploads;
+
     public UserForm $Uform;
     public PartnerForm $Pform;
     public $ValidationErrors = [];
@@ -21,7 +21,6 @@ class Index extends Component
         try {
             $this->Uform->validate();
             $this->Pform->validate();
-        
         } catch (ValidationException $th) {
             $this->ValidationErrors = $th->validator->errors()->all();
             return;
@@ -32,8 +31,6 @@ class Index extends Component
         $this->Pform->save($user);
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
-
-        
     }
 
 

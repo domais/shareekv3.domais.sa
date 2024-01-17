@@ -10,7 +10,7 @@ use Livewire\Form;
 
 class TicketForm extends Form
 {
-    
+
     public $request_type;
     public $permit_number;
     public $subject;
@@ -49,14 +49,14 @@ class TicketForm extends Form
 
             $ticket->fileable()->save($approval_file);
 
-            $docUrl = Storage::disk('digitalocean')->url($path);
+            $docUrl = Storage::url($path);
 
         }
 
-       
+
 
        // dd($docUrl);
-        
-    
+
+
     }
 }

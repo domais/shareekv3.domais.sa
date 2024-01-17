@@ -39,11 +39,11 @@
 	// حذف التصريح لليوزر
 	function Act_UserDeletePermit(id, model) {
 		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'حذف التصريح؟', 
+			id, 			// id,
+			model, 			// model,
+			'question', 	// icon ,
+			false, 	        // img located => public/img/alert/
+			'حذف التصريح؟',
 			'سيتم حذف التصريح ولايمكنك التراجع ، هل أنت متأكد؟',
 			true, 			// show Confirm Button
 			true, 			// show Cancel Button
@@ -53,12 +53,12 @@
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			false, 			// actio
-			false, 			// place inside? 
-			true, 			// actionable 
+			false, 			// place inside?
+			true, 			// actionable
 			false, 			// redirect
 			false, 			// textarea
 		);
-	
+
 	}
 
 	function Act_AdminApprove(id,model)
@@ -82,17 +82,17 @@
 		});
 
 	}
-	
+
 
 	// إبدا دراسة الطلب للآدمن
 	function Act_AdminStartStudy(id,model) {
 		console.log(id,model);
 		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'بدء دراسة الطلب؟', 
+			id, 			// id,
+			model, 			// model,
+			'question', 	// icon ,
+			false, 	        // img located => public/img/alert/
+			'بدء دراسة الطلب؟',
 			'بالضغط على (إبدا الدراسة) سيتحول الطلب إلى قائمة (تحت الدراسة) لديك وسيختفي من عند باقي الموظفين ، متأكد؟',
 			true, 			// show Confirm Button
 			true, 			// show Cancel Button
@@ -102,21 +102,21 @@
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			'AssignPermit_Dispatch', 			// action
-			true, 			// place inside? 
-			true, 			// actionable 
+			true, 			// place inside?
+			true, 			// actionable
 			false, 			// redirect
 			false, 			// textarea
 		);
 	}
 
-	function Act_AdminStartStudySupport(id,model) 
+	function Act_AdminStartStudySupport(id,model)
 	{
 		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'بدء دراسة الطلب؟', 
+			id, 			// id,
+			model, 			// model,
+			'question', 	// icon ,
+			false, 	        // img located => public/img/alert/
+			'بدء دراسة الطلب؟',
 			'بالضغط على (إبدا الدراسة) سيتحول الطلب إلى قائمة (تحت الدراسة) لديك وسيختفي من عند باقي الموظفين ، متأكد؟',
 			true, 			// show Confirm Button
 			true, 			// show Cancel Button
@@ -126,24 +126,24 @@
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			'Act_AdminStartStudySupport', 			// action
-			true, 			// place inside? 
-			true, 			// actionable 
+			true, 			// place inside?
+			true, 			// actionable
 			false, 			// redirect
 			false, 			// textarea
 		);
 
-		
+
 	}
 
-	function Act_AdminStartStudySupportarchive(id,model) 
+	function Act_AdminStartStudySupportarchive(id,model)
 	{
 
 		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'أرشفة الدعم ؟', 
+			id, 			// id,
+			model, 			// model,
+			'question', 	// icon ,
+			false, 	        // img located => public/img/alert/
+			'أرشفة الدعم ؟',
 			'بالضغط على (أرشفة ) سيتحول الطلب إلى قائمة (الأرشيف )  وسيختفي ، متأكد؟',
 			true, 			// show Confirm Button
 			true, 			// show Cancel Button
@@ -153,14 +153,14 @@
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			'Act_AdminStartStudySupportarchive', 			// action
-			true, 			// place inside? 
-			true, 			// actionable 
+			true, 			// place inside?
+			true, 			// actionable
 			false, 			// redirect
 			false, 			// textarea
 		);
-		
+
 	}
-	
+
 
 	// موافقة مبدأية للآدمن
 	function IntialApproved(id, model) {
@@ -182,8 +182,8 @@
         }
     });
 }
-	
-	
+
+
 	// رفض طلب للآدمن
 	function Act_AdminRejectPermit(id, model) {
 		Swal.fire({
@@ -234,18 +234,18 @@
 			}
 		});
 	}
-	
-	
+
+
 	// تشغيل الفعالية للآدمن
 	function FinalApprove(id,model) {
 		console.log(id,model);
 
 		handleAction(
-			id, 			// id,         
-			model, 			// model, 
-			'question', 	// icon , 
-			false, 	        // img located => public/img/alert/ 
-			'تشغيل المبادرة؟', 
+			id, 			// id,
+			model, 			// model,
+			'question', 	// icon ,
+			false, 	        // img located => public/img/alert/
+			'تشغيل المبادرة؟',
 			'بالضغط على (تشغيل) ، سيتحول هذا التصريح إلى مبادرة مجدولة ويستطيع الناسب بدء حجزها ، هل أنت متأكد؟',
 			true, 			// show Confirm Button
 			true, 			// show Cancel Button
@@ -255,13 +255,13 @@
 			false, 			// timer before auto disaplear
 			false, 			// bar
 			false, 			// actio
-			false, 			// place inside? 
-			false, 			// actionable 
+			false, 			// place inside?
+			false, 			// actionable
 			false, 			// redirect
 			false, 			// textarea
 		);
 	}
-	
+
 
 	// تشغيل بدون تصريح للآدمن
 	function Act_ApproveWithoutPirmet(id,model) {
@@ -282,18 +282,18 @@
 			}
 		});
 	}
-	
+
 
 	// مشاركة فعالية لجميع المستخدمين
 	function Act_ShareEvent(id, model) {
     console.log(id, model);
     var url = window.location.origin + '/permit/show/' + id;
     handleAction(
-        id,             // id,         
-        model,          // model, 
-        false,          // icon , 
-        'share.png',    // img located => public/img/alert/ 
-        'مشاركة الفعالية', 
+        id,             // id,
+        model,          // model,
+        false,          // icon ,
+        'share.png',    // img located => public/img/alert/
+        'مشاركة الفعالية',
         'انسخ الرابط التالي وقم بمشاركته مع الآخرين<br><input type="text" class="form-control text-center mt-3" dir="ltr" value="' + url + '" />',
         false,          // show Confirm Button
         true,           // show Cancel Button
@@ -304,17 +304,17 @@
         false,          // timer before auto disaplear
         false,          // bar
         false,          // actio
-        false,          // place inside? 
-        false,          // actionable 
+        false,          // place inside?
+        false,          // actionable
         false,          // redirect
         false,          // textarea
     );
 }
-	
-	
-	
+
+
+
 		// Rahmani: let's disscuss this
-		//Domais : Here to change tO BE FOR ALL CRUD OPERATIONS 
+		//Domais : Here to change tO BE FOR ALL CRUD OPERATIONS
 		document.addEventListener('livewire:init', () => {
 		Livewire.on('DeletePermit_Response', (event) => {
 			var data = event[0];
@@ -324,7 +324,7 @@
 				icon: data.icon,
 				timerProgressBar: true,
 				showConfirmButton: false,
-				timer:4000					
+				timer:4000
 			})
 			setTimeout(() => {
 				if(data.place == 'inside')
@@ -335,10 +335,13 @@
 		})
 
 		Livewire.on('show-partner-details', (event) => {
+            console.log(event);
 			Swal.fire({
 				title: 'معلومات الشريك',
-				html: `<ul>
-						<li>المسؤول: ${event[0].owner}</li>
+				html: `<ul class="list-unstyled" style="text-align:right">
+						<li>اسم الشريك: ${event[0].partner.name}</li>
+						<li>المسؤول: ${event[0].partner.owner.name}</li>
+						<li>الفئة: ${event[0].partner.class}</li>
 						<li> عدد التصاريح: ${event[0].permitCounter}</li>
 						<li> عدد المبادرات: ${event[0].eventCounter}</li>
 					</ul>`,
