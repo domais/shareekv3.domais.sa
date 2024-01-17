@@ -137,7 +137,7 @@
         <div class="row my-3">
             <div class="col-3 d-flex align-items-center">تاريخ البداية</div>
             <div class="col-9">
-                <input type="text" x-bind:disabled="is_show_page" x-model="start_date" class="form-control rounded" autocomplete="off"
+                <input type="text" x-bind:disabled="is_show_page" value="{{ $this->permit ? $this->permit->start_date : '' }}" x-model="start_date" class="form-control rounded" autocomplete="off"
                     id="start_date" wire:model.live="form.start_date">
             </div>
         </div>
@@ -147,7 +147,7 @@
             <div class="col-3 d-flex align-items-center">تاريخ النهاية</div>
             <div class="col-9">
                 <input type="text" x-bind:disabled="is_show_page" x-model="end_date" class="form-control rounded" autocomplete="off"
-                    dir="ltr" id="end_date" wire:model.live="form.end_date">
+                    dir="ltr" value="{{ $this->permit ? $this->permit->end_date : '' }}" id="end_date" wire:model.live="form.end_date">
             </div>
         </div>
         <div class="row mt-3 mt-5">
@@ -183,20 +183,22 @@
     var quillContent = '';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-        function initDatePicker(id) {
-            const element = document.getElementById(id);
-            flatpickr(element, {
-                "locale": "ar",
-                enableTime: true,
-                time_24hr: true,
-                altInput: true,
-                altFormat: "Y-m-d h:i K",
-                dateFormat: "Y-m-d H:i",
-            });
-        }
 
-        initDatePicker('start_date');
-        initDatePicker('end_date');
+    function initDatePicker(id, value = null) {
+        const element = document.getElementById(id);
+        flatpickr(element, {
+            "locale": "ar",
+            enableTime: true,
+            time_24hr: true,
+            altInput: true,
+            altFormat: "Y-m-d h:i K",
+            dateFormat: "Y-m-d H:i",
+            defaultDate: value,
+        });
+    }
+
+    initDatePicker('start_date');
+    initDatePicker('end_date');
 
   
 

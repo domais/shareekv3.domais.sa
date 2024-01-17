@@ -51,14 +51,14 @@ trait LiveChanges
             if ($status == 'reservations' && $now->diffInDays($startDate) < 10) {
                 $this->speakers[$index]['reservations'] = false;
                 $validator = Validator::make([], []); // empty data and rules
-                $validator->errors()->add('start_date', 'لا يمكنك الحجز إلا إذا كان تاريخ البدء بعد 10 أيام على الأقل');
+                $validator->errors()->add('start_date', 'لا يمكنك طلب الدعم اللوجيستي إلا إذا كان تاريخ بداية المبادرة بعد 10 أيام على الأقل');
                 throw new ValidationException($validator);
             }
     
-            if ($status == 'reward' && $now->diffInDays($startDate) < 5) {
+            if ($status == 'reward' && $now->diffInDays($startDate) < 2) {
                 $this->speakers[$index]['reward'] = false;
                 $validator = Validator::make([], []); // empty data and rules
-                $validator->errors()->add('start_date', 'لا يمكنك المكافأة إلا إذا كان تاريخ البدء بعد 5 أيام على الأقل');
+                $validator->errors()->add('start_date', 'لا يمكنك  طلب المكافأة إلا إذا كان تاريخ بداية المبادرة بعد يومين  على الأقل');
                 throw new ValidationException($validator);
             }
         } catch (ValidationException $th) {

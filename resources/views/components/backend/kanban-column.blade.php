@@ -24,7 +24,9 @@
                     <small>{{ $item->created_at->diffForHumans() }}</small>            
                 </div>
                 @if ($edit == 1)
-                    <div class="my-3 alert alert-warning p-2">هنا تظهر ملاحظات المشرف ليقوم الشريك بتعديلها</div>  
+                    <div class="my-3 alert alert-warning p-2">
+                     {{$item->history->last()->descreption ?? 'لم يحدد السبب'}}    
+                    </div>  
                 @endif
             </div>
             <div class="d-flex justify-content-between mt-3">
