@@ -18,14 +18,14 @@ class RolesTableSeeder extends Seeder
                    // Admin - Only admin can delete stuff.
         $SuperAdmin = Role::create([
                     'name' => 'SuperAdmin',
-                    'display_name' => 'مستخدم',
+                    'display_name' => 'مدير النظام',
                     'description' => 'كامل الصلاحيات',
                     // Add permissions for deletion
         ]);
         
         $user = Role::create([
                     'name' => 'User',
-                    'display_name' => 'مدير مقهى',
+                    'display_name' => 'شريك',
                     'description' => 'صلاحيات في حدود العمليات',
                     'is_admin' => false,
                     // Add permissions for deletion
