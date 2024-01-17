@@ -1,8 +1,3 @@
-    <h1 class="fs-3 fw-bold mt-4 mb-2">الأسئلة الشائعة</h1>
-    <p class="mb-4">جمعنا لكم في هذه الصفحة أغلب الاسئلة التي تتكرر علينا. إذا لم تجد إجابة لسؤالك هنا أو احتجت لدعم فني مباشر
-        يمكنك فتح تذكرة (دعم فني) بالضغط <a class="btn btn-brand text-white" role="button" href="#">هنا</a><br>
-        أو التواصل معنا من خلال رقم الجوال <a href="tel:0533211227">0533211227</a> او من خلال البريد الإلكتروني <a href="mailto:info@literarypartner.org">info@literarypartner.org</a>
-        آخر تحديث 2024-01-01</p>
 
     <div class="accordion accordion-flush" id="accordionFAQ">
         <div class="accordion-item">

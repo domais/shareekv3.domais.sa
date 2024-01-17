@@ -1,21 +1,32 @@
-<div class="container" x-data="{  errors: @entangle('validationErrors')  }" x-init="
-        $watch('errors', value => {
+<div class="container" x-data="{  
+	errors: @entangle('errors').live,
+	tickets: @entangle('tickets').live,
+	selectedTicket: {},
+	openModal: function(index) {
+		console.log(this.tickets[index]);
+		this.selectedTicket = this.tickets[index];
+	},
+}" x-init="
+	$watch('errors', value => {
 
-            if (value.length > 0) {
-                const errorMessage = value.join('<br>');
-                Swal.fire({
-                    icon: 'error',
-                    title: 'يوجد بيانات ناقصة',
-                    showConfirmButton: false,
-                    html: errorMessage  // Use 'html' to display formatted text
-                });
-                errors = []
-            }
-        });
-    ">
-	<h1 class="fs-3 fw-bold mt-4 mb-2">تذاكر الدعم الفني
-		<a class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">إنشاء تذكرة</a>
-	</h1>
+		if (value.length > 0) {
+			const errorMessage = value.join('<br>');
+			Swal.fire({
+				icon: 'error',
+				title: 'يوجد بيانات ناقصة',
+				showConfirmButton: false,
+				html: errorMessage  // Use 'html' to display formatted text
+			});
+			errors = []
+		}
+	});
+">
+		
+			<h1 class="fs-3 fw-bold mt-4 mb-2">تذاكر الدعم الفني
+				@if ($this->user->hasRole('User'))
+					<a class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">إنشاء تذكرة</a>
+				@endif
+			</h1>
 	<p class="mb-4 clearfix">سيقوم فريقنا بخدمتك من خلال فتح تذكرة دعم فني وسيقوم فريقنا بالرد عليها ويمكنك متابعتها ، هذا النص يحتاج إلى تعديل لكلام أفضل</p>
 	<div class="listContainer">
 
@@ -24,11 +35,13 @@
 
 		@if(count($this->tickets) > 0)
 			<div class="row g-2 g-lg-3">
-                <div class="col-12 col-lg-6">
-                    @foreach($this->tickets as $ticket)
-                    <div><a href="">{{$ticket->subject}}</a></div>
-                    @endforeach
-                </div>
+				<div class="col-12 col-lg-6">
+					@foreach($this->tickets as $index => $ticket)
+						<div>
+							<a role="button" href="#" @click="openModal({{ $index }})" data-bs-toggle="modal" data-bs-target="#ModalShow">{{ $ticket['subject'] }}</a>
+						</div>
+					@endforeach
+				</div>
                 <div class="col-12 col-lg-6">
                 {{-- FAQS Inqlucde --}}
                 @include('livewire.backend.ticket.faqs')
@@ -48,8 +61,8 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">إنشاء تذكرة دعم فني</h5>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h5 class="modal-title" id="exampleModalLabel">إنشاء تذكرة دعم فني</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>		
 			</div>
 			<div class="modal-body">
 				<div class="row mb-2">
@@ -112,4 +125,31 @@
 
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalShow" tabindex="-1" aria-labelledby="ModalShowLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="ModalShowLabel" x-text="selectedTicket.subject"></h5>
+			 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<p><strong>الموضوع:</strong> <span x-text="selectedTicket.subject"></span></p>
+			<p><strong>الوصف:</strong> <span x-text="selectedTicket.description"></span></p>
+			@if (auth()->user()->hasRole('SuperAdmin'))
+				<p><strong>المستخدم:</strong> <span x-text="selectedTicket.user.name"></span></p>
+			@endif
+			<div x-data="{ reply: selectedTicket.reply, isAdmin: {{ auth()->user()->hasRole('SuperAdmin') ? 'true' : 'false' }} }">
+				<textarea class="form-control" id="reply" rows="3" x-show="isAdmin && !reply" placeholder="اكتب ردا"></textarea>
+				<p x-show="reply"><strong>الرد:</strong> <span x-text="reply"></span></p>
+			</div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+		  <button type="button" class="btn btn-primary">حفظ</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 </div>

@@ -22,8 +22,12 @@ return new class extends Migration
             $table->longText('description');
             $table->longText('additional_info')->nullable();
             $table->tinyInteger('status')->default(0);
+            $table->string('reply')->nullable();
+            $table->unsignedBigInteger('replied_by')->nullable();
+
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('replied_by')->references('id')->on('users')->onDelete('cascade');
 
 
             $table->timestamps();

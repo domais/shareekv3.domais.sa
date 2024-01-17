@@ -14,16 +14,16 @@ class Index extends Component
 
     public $tickets = [];
     public $errors = [];
+    public $user;
     public TicketForm $form;
 
     public function mount()
     {
-        if (auth()->user()->hasRole('User')) {
-           
-            $this->tickets = auth()->user()->tickets;
-
+        $this->user = auth()->user();
+        if ($this->user->hasRole('User')) {
+            $this->tickets = $this->user->tickets->toArray();
         } else {
-            $this->tickets = Ticket::all();
+            $this->tickets = Ticket::with('user')->get()->toArray();
         }
         
     }

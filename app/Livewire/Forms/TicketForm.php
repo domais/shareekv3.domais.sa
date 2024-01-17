@@ -39,7 +39,7 @@ class TicketForm extends Form
 
         foreach ($this->files as $key => $file) {
             # code...
-            $path = $file->store('files/'.$ticket->id.'/tickets','digitalocean');
+            $path = $file->store('files/'.$ticket->id.'/tickets','public');
             // Create a new file record
             $approval_file = new File();
             $approval_file->name = $this->request_type;
