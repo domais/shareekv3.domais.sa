@@ -33,25 +33,26 @@
 
 
 
-		@if(count($this->tickets) > 0)
+		
 			<div class="row g-2 g-lg-3">
 				<div class="col-12 col-lg-6">
-					@foreach($this->tickets as $index => $ticket)
+					@forelse($this->tickets as $index => $ticket)
 						<div>
 							<a role="button" href="#" @click="openModal({{ $index }})" data-bs-toggle="modal" data-bs-target="#ModalShow">{{ $ticket['subject'] }}</a>
 						</div>
-					@endforeach
+						@empty
+
+						<div class="w-100 text-center">
+							<img src="{{asset('img/404.png')}}" class="mx-auto" width="400"><br><br>
+							لايوجد لديك أي تذاكر حتى الآن
+						</div>
+
+					@endforelse
 				</div>
                 <div class="col-12 col-lg-6">
                 {{-- FAQS Inqlucde --}}
                 @include('livewire.backend.ticket.faqs')
                 </div>
-		@else
-		<div class="w-100 text-center">
-			<img src="{{asset('img/404.png')}}" class="mx-auto" width="400"><br><br>
-			لايوجد لديك أي تذاكر حتى الآن
-		</div>
-		@endif
 	</div>
 
 
@@ -127,7 +128,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="ModalShow" tabindex="-1" aria-labelledby="ModalShowLabel" aria-hidden="true">
+<div x-data="{  isAdmin: {{ auth()->user()->hasRole('SuperAdmin') ? 'true' : 'false' }} }" wire:ignore class="modal fade" id="ModalShow" tabindex="-1" aria-labelledby="ModalShowLabel" aria-hidden="true">
 	<div class="modal-dialog">
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -140,14 +141,14 @@
 			@if (auth()->user()->hasRole('SuperAdmin'))
 				<p><strong>المستخدم:</strong> <span x-text="selectedTicket.user.name"></span></p>
 			@endif
-			<div x-data="{ reply: selectedTicket.reply, isAdmin: {{ auth()->user()->hasRole('SuperAdmin') ? 'true' : 'false' }} }">
-				<textarea class="form-control" id="reply" rows="3" x-show="isAdmin && !reply" placeholder="اكتب ردا"></textarea>
-				<p x-show="reply"><strong>الرد:</strong> <span x-text="reply"></span></p>
+			<div >
+				<textarea class="form-control" id="reply" rows="3" x-show="isAdmin && !selectedTicket.reply" x-model="selectedTicket.reply" placeholder="اكتب ردا"></textarea>
+				<p x-show="selectedTicket.reply"><strong>الرد:</strong> <span x-text="selectedTicket.reply"></span></p>
 			</div>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-		  <button type="button" class="btn btn-primary">حفظ</button>
+		  <button  @click="$dispatch('replyticket', { data: selectedTicket })"  x-show="isAdmin && !selectedTicket.reply"  type="button" class="btn btn-primary">حفظ</button>
 		</div>
 	  </div>
 	</div>

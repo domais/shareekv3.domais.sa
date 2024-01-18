@@ -166,6 +166,7 @@ return [
         'image_adv' => 'صورة الإعلان',
         'coordinates' => 'الإحداثيات',
         'logo' => 'الشعار',
+        'reply' => 'الرد'
     ],
     'custom' => [
         'approval_file' => [
