@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
-            $table->enum('class',['أ','ب','ج','د'])->nullable();
+            $table->enum('class',['أ','ب','ج'])->nullable();
             $table->string('coordinates')->nullable();
             $table->integer('points')->default(2);
             $table->bigInteger('CR')->nullable();
