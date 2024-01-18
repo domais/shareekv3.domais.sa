@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect('/i');
 });
+
 
 Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () {
 
@@ -35,7 +36,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/show/{permit}', Inputs::class)->name('show');
     });
 
-    Route::namespace('Partner')->prefix('partner')->middleware('role:SuperAdmin')->as('partner.')->group(function() {
+    Route::namespace('Partner')->prefix('partner')->middleware('role:SuperAdmin')->as('partner.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
 
@@ -89,7 +90,8 @@ Route::get('/test', function () {
     // 2024-01-16 00:52:15
     // dd(\Carbon\Carbon::now()->subHours(4)->format('Y-m-d H:i:s'));
     $users = \DB::table('users')->where(
-        'source', 'firebase-guests'
+        'source',
+        'firebase-guests'
     )->get();
     dd($users);
     // $users->each(function ($user) {
