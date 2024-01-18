@@ -13,7 +13,7 @@ use Illuminate\Mail\Mailables\Headers;
 use Illuminate\Support\Str;
 
 
-class ChangeStatus extends Mailable
+class ChangeStatus extends Mailable implements ShouldQueue
 {
 	use Queueable, SerializesModels;
 
@@ -57,7 +57,7 @@ class ChangeStatus extends Mailable
 
 	public function headers()
 	{
-		// Rahmani: do the email 
+		// Rahmani: do the email
 		$email = 'm@domais.sa';
 		return new Headers(
 			messageId: Str::random(15)."@hvc-sa.org",
