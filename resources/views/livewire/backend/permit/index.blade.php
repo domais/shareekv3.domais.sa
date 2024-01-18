@@ -1,4 +1,20 @@
-<div>
+<div
+x-data="{errors: @entangle('errors').live}" x-init="
+		$watch('errors', value => {
+
+			if (value.length > 0) {
+				const errorMessage = value.join('<br>');
+				Swal.fire({
+					icon: 'error',
+					title: 'خطأ في التحقق',
+					showConfirmButton: false,
+					html: errorMessage  // Use 'html' to display formatted text
+				});
+				errors = [];
+			}
+		});
+	"
+>
 
 
 	<nav aria-label="breadcrumb" class="my-5">
