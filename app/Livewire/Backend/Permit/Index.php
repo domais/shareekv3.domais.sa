@@ -22,6 +22,7 @@ class Index extends Component
     public $pending = [];
     public $approved = [];
     public $rejected = [];
+    public $errors = [];
     public $role = 0;
     public $selected_id = 0;
     public $permitNumber;
@@ -92,7 +93,8 @@ class Index extends Component
             $permit->fileable()->save($approval_file);
         } catch (\Exception $e) {
             // Handle the exception
-            dd($e->getMessage());
+            $this->errors[] = $e->getMessage();
+            return;
         }
 
 

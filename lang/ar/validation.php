@@ -166,7 +166,9 @@ return [
         'image_adv' => 'صورة الإعلان',
         'coordinates' => 'الإحداثيات',
         'logo' => 'الشعار',
-        'reply' => 'الرد'
+        'reply' => 'الرد',
+        'permitNumber' => 'رقم التصريح',
+        'permitFile' => 'نسخ التصريح'
     ],
     'custom' => [
         'approval_file' => [
