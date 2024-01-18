@@ -55,6 +55,5 @@ class PartnerForm extends Form
 
         $imageUrl = Storage::disk('do')->url($path);
 
-        dd($imageUrl);
     }
 }
