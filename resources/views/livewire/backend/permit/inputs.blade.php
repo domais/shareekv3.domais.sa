@@ -26,6 +26,39 @@
 			</div>
 		</div>
 	</nav>
+	@if (auth()->user()->hasRole('SuperAdmin') && $is_show_page)
+
+	<div class="container my-2">
+		<div class="row">
+			<div class="col-10">
+				<div class="card" style="">
+					<div class="row g-0">
+						<div class="col-sm-1">
+							@if ($permit->user->owner->image)
+							<img src="https://nextlevel.ams3.digitaloceanspaces.com/{{$permit->user->owner->image->path}}" class="card-img-top h-100" alt="...">
+
+							@else
+							<img src="{{asset('img/default_avatar.png')}}" class="card-img-top" style="height: 120px; width:80px;">	
+							@endif
+						</div>
+						<div class="col-sm-5">
+							<div class="card-body">
+								<h4>معلومات الشريك</h4>
+								<h5 class="card-title">إسم الشريك : {{$permit->user->owner->name}}</h5>
+								<ul class="card-text">
+									<li>البريد الإلكتروني: {{$permit->user->email}}</li>
+									<li>الهاتف: {{$permit->user->phone}}</li> <!-- Make sure phone attribute is available -->
+								</ul>								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	@endif
+
 
 
 	<div class="row" x-data="{errors: @entangle('errors').live,is_show_page: @entangle('is_show_page').live  ,start_date: '', end_date: ''}" x-init="
