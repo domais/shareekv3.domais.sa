@@ -139,16 +139,18 @@
 			<p><strong>الموضوع:</strong> <span x-text="selectedTicket.subject"></span></p>
 			<p><strong>الوصف:</strong> <span x-text="selectedTicket.description"></span></p>
 			@if (auth()->user()->hasRole('SuperAdmin'))
+			<template x-if="selectedTicket.user">
 				<p><strong>المستخدم:</strong> <span x-text="selectedTicket.user.name"></span></p>
+			</template>
 			@endif
 			<div >
-				<textarea class="form-control" id="reply" rows="3" x-show="isAdmin && !selectedTicket.reply" x-model="selectedTicket.reply" placeholder="اكتب ردا"></textarea>
-				<p x-show="selectedTicket.reply"><strong>الرد:</strong> <span x-text="selectedTicket.reply"></span></p>
+				<textarea class="form-control" id="reply" rows="3" x-show="isAdmin && selectedTicket.status == 0" x-model="selectedTicket.reply" placeholder="اكتب ردا"></textarea>
+				<p x-show="selectedTicket.status == 1"><strong>الرد:</strong> <span x-text="selectedTicket.reply"></span></p>
 			</div>
 		</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
-		  <button  @click="$dispatch('replyticket', { data: selectedTicket })"  x-show="isAdmin && !selectedTicket.reply"  type="button" class="btn btn-primary">حفظ</button>
+		  <button  @click="$dispatch('replyticket', { data: selectedTicket })"  x-show="isAdmin && selectedTicket.status == 0"  type="button" class="btn btn-primary">حفظ</button>
 		</div>
 	  </div>
 	</div>

@@ -49,6 +49,7 @@ class Index extends Component
 
         $ticket = Ticket::findorfail($data['id']);
         $ticket->reply = $data['reply'];
+        $ticket->status = 1;
         $ticket->save();
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
 
