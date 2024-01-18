@@ -2,6 +2,12 @@
 <div class="column">
     <div class="head">
         <div class="fw-bold">{{$name}} <span>{{$count}}</span></div>
+        @if ($name == 'منتهية وبإنتظار توثيق الشريك')
+        <button class="btn btn-danger" onclick="fireSwal()">
+            <i class="fas fa-bell"></i>
+        </button>
+            
+        @endif
     </div>
     <div class="body">
         @foreach ($data as $item)
@@ -64,3 +70,15 @@
         @endforeach
     </div><!-- /body -->
 </div><!-- /column -->
+<script>
+    function fireSwal() {
+        Swal.fire({
+            'icon': 'success',
+            'title': 'تمت العملية بنجاح',
+            'text': 'تمت العملية بنجاح',
+            'timerProgressBar': true,
+            'showConfirmButton': false,
+            'timer': 4000,
+        });
+    }
+</script>
