@@ -62,8 +62,7 @@ function ArToEn($input) {
 						->where('end_date', '>=', $now)
 						->get();
 					} elseif($status == 7) {
-						$events[$status] = Event::where('status_id', $status)
-						->where('user_id', $user->id)
+						$events[$status] = Event::where('user_id', $user->id)
 						->where('status_id', '<>', 8)
 						->where('end_date', '<', $now)
 						->get();
