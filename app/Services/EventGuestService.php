@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
-use App\Contracts\EventGuestServiceInterface;
-use App\Http\Resources\EventResource;
 use App\Models\User;
+use App\Mail\BookedMail;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\EventResource;
+use App\Contracts\EventGuestServiceInterface;
+use App\Mail\ThanksMail;
 
 class EventGuestService implements EventGuestServiceInterface
 {
@@ -40,6 +43,8 @@ class EventGuestService implements EventGuestServiceInterface
             // else, attach the user to the event
             $event->guests()->attach($user);
         }
+
+        Mail::to($user)->send(new BookedMail($event, $user->name));
 
         return response()->json([
             'message' => 'Event booked successfully',
@@ -85,6 +90,9 @@ class EventGuestService implements EventGuestServiceInterface
 
             // attach the user to the event
             $event->guests()->attach($user->id);
+
+            Mail::to($user)->send(new ThanksMail($user->name));
+            Mail::to($user)->send(new BookedMail($event, $user->name));
 
             \DB::commit();
             return response()->json([
