@@ -50,9 +50,27 @@ function ArToEn($input) {
 
 		if($role == 'User') {
 			if($is_event) {
+				$now = now();
 				foreach($statusesEvent as $status) {
-					$events[$status] = Event::where('status_id', $status)
-					->where('user_id', $user->id)->get();
+					if($status == 5) {
+						$events[$status] = Event::where('user_id', $user->id)
+						->where('start_date', '>', $now)
+						->get();
+					} elseif($status == 6) {
+						$events[$status] = Event::where('user_id', $user->id)
+						->where('start_date', '<=', $now)
+						->where('end_date', '>=', $now)
+						->get();
+					} elseif($status == 7) {
+						$events[$status] = Event::where('status_id', $status)
+						->where('user_id', $user->id)
+						->where('status_id', '<>', 8)
+						->where('end_date', '<', $now)
+						->get();
+					} elseif($status == 8) {
+						$events[$status] = Event::where('status_id', $status)
+						->where('user_id', $user->id)->get();
+					}
 				}
 			} else {
 				foreach($statuses as $status) {
@@ -62,9 +80,26 @@ function ArToEn($input) {
 			}
 		} else {
 			if($is_event) {
+				$now = now();
 				foreach($statusesEvent as $status) {
-					$events[$status] = Event::where('status_id', $status)
-					->where('admin_id', $user->id)->get();
+					if($status == 5) {
+						$events[$status] = Event::where('admin_id', $user->id)
+						->where('start_date', '>', $now)
+						->get();
+					} elseif($status == 6) {
+						$events[$status] = Event::where('admin_id', $user->id)
+						->where('start_date', '<=', $now)
+						->where('end_date', '>=', $now)
+						->get();
+					}elseif($status == 7) {
+						$events[$status] = Event::where('admin_id', $user->id)
+						->where('status_id', '<>', 8)
+						->where('end_date', '<', $now)
+						->get();
+					} elseif($status == 8) {
+						$events[$status] = Event::where('status_id', $status)
+						->where('admin_id', $user->id)->get();
+					}
 				}
 			} else {
 				foreach($statuses as $status) {
