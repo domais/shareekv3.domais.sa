@@ -9,7 +9,9 @@
             <div class="click" onclick="window.location = '{{route('permit.show',$item->id)}}'">
                 <div class="name">
                     <div>{{$item->title}}</div>
-                    <small>{{$item->user->name}}</small>
+                    @if (auth()->user()->hasRole('SuperAdmin'))
+                     <small>{{$item->user->name}}/{{$item->user ? $item->user->owner->name : ''}}</small>
+                    @endif
                     {{-- Rahmani: if admin => show caffee name / else hide --}}
                 </div>
                 @if ($item->literary)
