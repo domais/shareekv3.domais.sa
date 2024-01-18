@@ -94,13 +94,13 @@ class Inputs extends Component
                 $startDate = Carbon::parse($this->form->start_date);
                 $now = Carbon::now();
                 $difference = $now->diffInDays($startDate, false);
-            
+                /*
                 if ($difference < 3) {
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('start_date', 'يجب أن يكون تاريخ البداية بعد خمسة أيام على الأقل من الآن');
                     throw new ValidationException($validator);
                 }
-                   /*
+                  
                  later 
                 if (auth()->user()->hasRole('User') && auth()->user()->owner->points == 0) {
                     $validator = Validator::make([], []); // empty data and rules
