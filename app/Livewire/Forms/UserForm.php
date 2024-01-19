@@ -23,7 +23,7 @@ class UserForm extends Form
         ];
     }
 
-    public function save()
+    public function save($role = null)
     {
         $user = new User();
         $user->name = $this->name;
@@ -32,7 +32,13 @@ class UserForm extends Form
         $user->password = Hash::make(123456);
         $user->save();
 
-        $user->addRole(2);
+        if ($role == null) {
+            # code...
+            $user->addRole(2);
+        }
+        else {
+            $user->addRole(1);
+        }
 
         return $user;
     }

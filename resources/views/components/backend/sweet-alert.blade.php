@@ -352,5 +352,27 @@
 				showConfirmButton: false,
 			});
 		})
+
+		Livewire.on('delete-user', (event) => {
+            Swal.fire({
+                title: event.title || "تأكيـــد الحذف",
+                text: event.text || "حذف هذا العنصر سيؤدي الى حذف العناصر التابعة له",
+                icon: event.icon || "warning",
+                showCancelButton: true,
+                confirmButtonColor: event.confirmButtonColor || "#ef4444",
+                cancelButtonColor: "#5eead4",
+                confirmButtonText: "تأكيد",
+                cancelButtonText: 'إلغاء',
+                customClass: {
+                    // Add Tailwind CSS classes for styling the modal
+                    popup: 'dark:bg-gray-700 dark:text-white border-2 border-green-500 border-dashed ',
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatch('delete-item',event); // Trigger Livewire method for deletion
+                }
+            });
+        });
+		
 	})
 	</script>
