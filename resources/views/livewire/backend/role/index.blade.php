@@ -61,6 +61,21 @@ $watch('errors', value => {
                                     <div class="mb-3">
                                         <input type="tel" wire:model="Uform.phone" dir="ltr" class="form-control text-start" id="userPhone" placeholder="رقم الجوال">
                                     </div>
+
+                                    <div class="row">
+                                        @foreach($permissions as $index => $permission)
+                                            <div class="col-6">
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" id="permission-{{ $permission->id }}" wire:model="selectedPermissions.{{ $permission->id }}">
+                                                    <label class="form-check-label" for="permission-{{ $permission->id }}">{{ $permission->display_name }}</label>
+                                                </div>
+                                            </div>
+                                            @if (($index + 1) % 2 == 0)
+                                                </div><div class="row">
+                                            @endif
+                                        @endforeach
+                                    </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>

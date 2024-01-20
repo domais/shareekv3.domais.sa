@@ -13,12 +13,11 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run(): void
     {
-
         // Permit CRUD permissions
-        Permission::create(['name' => 'permit.create', 'display_name' => 'إضافة صلاحية']);
-        Permission::create(['name' => 'permit.read', 'display_name' => 'قراءة معلومات صلاحية']);
-        Permission::create(['name' => 'permit.update', 'display_name' => 'تحديث صلاحية']);
-        Permission::create(['name' => 'permit.delete', 'display_name' => 'حذف صلاحية']);
+        Permission::create(['name' => 'role.index', 'display_name' => 'إدارة الصلاحيات و المستخدمين']);
+        Permission::create(['name' => 'partner.create', 'display_name' => 'إضافة شريك']);
+        Permission::create(['name' => 'permit.update', 'display_name' => 'تعديل على الصلاحيات']);
+        Permission::create(['name' => 'event.delete', 'display_name' => 'تعديل على المبادرات']);
 
     }
 }
