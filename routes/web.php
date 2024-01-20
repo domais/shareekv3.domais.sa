@@ -58,6 +58,11 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/', Index::class)->name('index');
     });
 
+    Route::namespace('Announcement')->prefix('announcement')->as('announcement.')->group(function () {
+
+        Route::get('/', Index::class)->name('index');
+    });
+
     Route::namespace('Profile')->prefix('profile')->as('profile.')->group(function () {
 
         Route::get('/', Index::class)->name('index');

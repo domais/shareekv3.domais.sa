@@ -24,35 +24,35 @@ class UsersTableSeeder extends Seeder
 
         $superAdmin2 = User::create([
             'name'      => 'ألآء المعيذر',
-            'email'     => 'a.almuaither@nextlevel.com.sa',  
+            'email'     => 'a.almuaither@nextlevel.com.sa',
             'phone'     => '0555555552',
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin3 = User::create([
             'name'      => 'أحمد بو خمسين',
-            'email'     => 'bukhamseen.ahmed@gmail.com',  
+            'email'     => 'bukhamseen.ahmed@gmail.com',
             'phone'     => '0555555553',
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin4 = User::create([
             'name'      => 'أحمد الغامدي',
-            'email'     => 'eng.ahmed_alghamdi@outlook.com',  
+            'email'     => 'eng.ahmed_alghamdi@outlook.com',
             'phone'     => '0555555554',
             'password'  => Hash::make(123456),
         ]);
 
         $superAdmin5 = User::create([
             'name'      => 'أحمد الغامدي',
-            'email'     => 'admin@gmail.com',  
+            'email'     => 'admin@gmail.com',
             'phone'     => '0555555754',
             'password'  => Hash::make(123456),
         ]);
 
-        $superAdmin->addRole(1); 
-        $superAdmin2->addRole(1); 
-        $superAdmin3->addRole(1); 
+        $superAdmin->addRole(1);
+        $superAdmin2->addRole(1);
+        $superAdmin3->addRole(1);
         $superAdmin4->addRole(1);
         $superAdmin5->addRole(1);
 
@@ -115,9 +115,9 @@ class UsersTableSeeder extends Seeder
             'CR' => 70037801129,
         ]);
 
-        $partner1->addRole(2); 
-        $partner2->addRole(2); 
-        $partner3->addRole(2); 
+        $partner1->addRole(2);
+        $partner2->addRole(2);
+        $partner3->addRole(2);
 
         $guest  = User::create([
             'name'      => 'شريك تجريبي',
@@ -126,8 +126,6 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make(123456),
         ]);
 
-        $guest->addRole(3); 
-
-
+        $guest->addRole(3);
     }
 }
