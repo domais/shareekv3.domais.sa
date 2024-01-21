@@ -20,9 +20,6 @@ Route::get('/', function () {
     return redirect('/i');
 });
 
-Route::get('/i/{any}', function () {
-    return view('homepage');
-})->where('any','.*');
 
 Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () {
 
