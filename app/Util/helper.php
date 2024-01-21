@@ -81,7 +81,7 @@ function ArToEn($input) {
 		} else {
 			if($is_event) {
 				$now = now();
-				dd($now->format('Y-m-d H:i'));
+				//dd($now->format('Y-m-d H:i'));
 
 				foreach($statusesEvent as $status) {
 					if($status == 5) {
