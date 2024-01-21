@@ -311,6 +311,11 @@
     );
 }
 
+		function show_images_urls(id,model)
+		{
+			Livewire.dispatch('show_images_urls', {id:id, model:model});
+		}
+
 
 
 		// Rahmani: let's disscuss this
@@ -408,5 +413,34 @@
             });
         });
 
+		Livewire.on('show-images', (data) => {
+			// Create a list of images
+			console.log(data);
+			let imagesList = '';
+			data[0]['images'].forEach((image, index) => {
+				imagesList += `
+					<a href="${window.location.origin}/storage/${image}" target="_blank">
+						<img src="${window.location.origin}/storage/${image}" alt="Image ${index + 1}" style="width: 100px; height: 100px; object-fit: cover;">
+					</a>
+					<br>
+				`;
+			});
+
+			// Create a list of video links
+			let videoLinks = '';
+			data[0]['links'].forEach((link, index) => {
+				videoLinks += `<a href="${link}" target="_blank">فيديو ${index + 1}</a><br>`;
+			});
+
+			// Show the Swal
+			Swal.fire({
+				title: data[0]['event'],
+				html: `
+					${imagesList}
+					${videoLinks}
+				`,
+				showConfirmButton: false,
+			});
+		});
 	})
 	</script>

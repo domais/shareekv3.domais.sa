@@ -227,7 +227,7 @@ function ArToEn($input) {
 			case 'Approval':
 				return[
 					['type' => 'sweetalert' , 'title' => 'إعتماد التوثيق', 'onclick' => 'Act_AdminApprove', 'class' => 'btn btn-warning'],
-					//['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+					['type' => 'sweetalert' , 'title' => 'إطلاع', 'onclick' => 'show_images_urls', 'class' => 'btn btn-secondary'],
 
 				];
 			break;

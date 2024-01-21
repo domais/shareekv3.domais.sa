@@ -111,6 +111,9 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 15]);
 
+        AddToHistory($permit->id,$permit->status_id,null,$reason);
+
+
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 
