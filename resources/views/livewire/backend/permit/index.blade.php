@@ -51,15 +51,16 @@ x-data="{errors: @entangle('errors').live}" x-init="
 		/>
 		@endrole
 
-		@permission('permit.read')
+		
+		@role('SuperAdmin')
 
-		<x-backend.kanban-column 
-			name="طلبات جديدة"
-			count="{{count($new_orders)}}" 
-			:data="$new_orders"
-			:buttons="KanbanButtons('PermitAdminNewOrders')"
-		/>
-		@endpermission
+			<x-backend.kanban-column 
+				name="طلبات جديدة"
+				count="{{count($new_orders)}}" 
+				:data="$new_orders"
+				:buttons="KanbanButtons('PermitAdminNewOrders')"
+			/>
+		@endrole
 
 
 

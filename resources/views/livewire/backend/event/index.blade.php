@@ -52,6 +52,7 @@
             name="{{ !auth()->user()->hasRole('User') ? 'منتهية وبإنتظار توثيق الشريك' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
+            permission="event-update"
             :buttons="auth()->user()->hasRole('User') ? KanbanButtons('EventUserUploadTawtheeq') : KanbanButtons('AskForClose')"
 
          />
@@ -60,6 +61,7 @@
             name="{{ !auth()->user()->hasRole('User') ? 'مراجعة التوثيق' : 'المشرف يراجع التوثيق' }}"
             count="{{count($Waiting_for_approval)}}" 
             :data="$Waiting_for_approval"
+            permission="event-update"
             :buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('Approval') "
         />
 

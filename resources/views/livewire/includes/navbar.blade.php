@@ -49,13 +49,13 @@
 				</div>
 				<ul class="dropdown-menu text-small">
 					 <li><a class="dropdown-item" href="{{route('profile.index')}}">ملفي الشخصي</a></li>
-					 @role('SuperAdmin')
+					 @if (havePermission(auth()->user(),'role-index'))
 						<li>
 							<a class="dropdown-item" href="{{route('adminstrator.index')}}">
 								الصلاحيات والمستخدمين 
 							</a>
-						</li>
-					@endrole
+						</li>	 
+					 @endif
 
 					 <li><hr class="dropdown-divider"></li> 
 					<li><button class="dropdown-item text-danger" wire:click="logout">تسجيل الخروج</button></li>

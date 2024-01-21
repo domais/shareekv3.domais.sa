@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Partner;
+use App\Models\Permission;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $superAdmin = User::create([
+        $superAdmin1 = User::create([
             'name'      => 'مريم محمد',
             'email'     => 'm.mohammad@nextlevel.com.sa',
             'phone'     => '0555555551',
@@ -50,11 +51,22 @@ class UsersTableSeeder extends Seeder
             'password'  => Hash::make(123456),
         ]);
 
-        $superAdmin->addRole(1); 
+        $superAdmin1->addRole(1); 
         $superAdmin2->addRole(1); 
         $superAdmin3->addRole(1); 
         $superAdmin4->addRole(1);
         $superAdmin5->addRole(1);
+
+        $permissions = Permission::all();
+
+        $permissionIds = $permissions->pluck('id')->toArray();
+        
+        for ($i = 1; $i <= 5; $i++) {
+            ${"superAdmin$i"}->syncPermissions($permissionIds);
+        }
+
+
+
 
 
         $partner1  = User::create([

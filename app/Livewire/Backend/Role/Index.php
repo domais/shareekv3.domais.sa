@@ -45,7 +45,11 @@ class Index extends Component
 
         $user = $this->Uform->save(2);
 
+
+
         $user->syncPermissions($selectedPermissionIds);
+
+        //dd($selectedPermissionIds);
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
