@@ -5,6 +5,7 @@ namespace App\Livewire\Backend\Event;
 use App\Models\Event;
 use App\Models\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -21,6 +22,7 @@ class Index extends Component
     public $selected_id = 0;
     public $photos  = [];
     public $links = [];
+    public $ValidationErrors = [];
 
 
     public function selected($id)
@@ -46,14 +48,19 @@ class Index extends Component
     public function saveEventImages()
     {
         try {
-            //code...
+            if (empty($this->photos)) {
+                $validator = Validator::make([], []); // empty data and rules
+                $validator->errors()->add('photos', 'الصور مطلوبة');
+                throw new ValidationException($validator);
+            }
+        
             $this->validate([
                 'photos.*' => 'required|image',
                 'links.*' => 'required|url',
             ]);
             
         } catch (ValidationException $th) {
-            dd($th->validator->errors()->all());
+            $this->ValidationErrors = $th->validator->errors()->all();
             return;
         }
 
