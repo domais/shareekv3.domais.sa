@@ -21,9 +21,11 @@
 					<li class="nav-item">
 						<a href="{{route('partner.index')}}" class="nav-link px-2 link-light {{ is_active('partner.index') ? 'active' : '' }}">الشركاء</a>
 					</li>
-				@endrole	
+				@endrole
 
-				<li class="nav-item"><a href="{{route('support.index')}}" class="nav-link px-2 link-light {{ is_active('support.index') ? 'active' : '' }}">دعم الشريك</a></li> 
+				<li class="nav-item"><a href="{{route('support.index')}}" class="nav-link px-2 link-light {{ is_active('support.index') ? 'active' : '' }}">دعم الشريك</a></li>
+
+				<li class="nav-item"><a href="{{route('announcement.index')}}" class="nav-link px-2 link-light {{ is_active('announcement.index') ? 'active' : '' }}">التعميمات</a></li>
 
 
 				<li class="nav-item"><a href="{{route('ticket.index')}}" class="nav-link px-2 link-light">المساعدة</a></li>
@@ -52,12 +54,12 @@
 					 @if (havePermission(auth()->user(),'role-index'))
 						<li>
 							<a class="dropdown-item" href="{{route('adminstrator.index')}}">
-								الصلاحيات والمستخدمين 
+								الصلاحيات والمستخدمين
 							</a>
 						</li>	 
 					 @endif
 
-					 <li><hr class="dropdown-divider"></li> 
+					 <li><hr class="dropdown-divider"></li>
 					<li><button class="dropdown-item text-danger" wire:click="logout">تسجيل الخروج</button></li>
 
 				</ul>

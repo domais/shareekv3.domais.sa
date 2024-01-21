@@ -333,6 +333,21 @@
 					window.location.reload()
 			},4000)
 		})
+		Livewire.on('announcement_modal', (event) => {
+			var data = event[0];
+			Swal.fire({
+				title: data.title,
+				html: data.text,
+				icon: data.icon,
+				timerProgressBar: true,
+				showConfirmButton: false,
+				timer:4000
+			}).then((result) => {
+                const modal = document.getElementById('announcementModal');
+                const modalInstance = bootstrap.Modal.getInstance(modal);
+                modalInstance.hide();
+            })
+		})
 
 		Livewire.on('show-partner-details', (event) => {
             console.log(event);
@@ -344,6 +359,25 @@
 						<li>الفئة: ${event[0].partner.class}</li>
 						<li> عدد التصاريح: ${event[0].permitCounter}</li>
 						<li> عدد المبادرات: ${event[0].eventCounter}</li>
+					</ul>`,
+				imageUrl: 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png',
+				imageWidth: 400,
+				imageHeight: 200,
+				imageAlt: 'Custom image',
+				showConfirmButton: false,
+			})
+		})
+
+		Livewire.on('show-announcement-details', (announcement) => {
+            console.log(announcement);
+			Swal.fire({
+				title: 'معلومات الشريك',
+				html: `<ul class="list-unstyled" style="text-align:right">
+						<li>العنوان: ${announcement[0].title}</li>
+						<li>البيان: ${announcement[0].description}</li>
+						<li>تاريخ البدء: ${announcement[0].start_at}</li>
+						<li>تاريخ الإنتهاء: ${announcement[0].end_at}</li>
+						<li>الحالة: ${announcement[0].is_active}</li>
 					</ul>`,
 				imageUrl: 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png',
 				imageWidth: 400,
@@ -373,6 +407,6 @@
                 }
             });
         });
-		
+
 	})
 	</script>
