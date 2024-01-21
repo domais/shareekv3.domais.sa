@@ -23,7 +23,7 @@
                 @if ($item->literary)
                 <div class="type mb-3">فعالية</div>
 
-                <div class="type mb-3">{{-- {{$item->literary->parent->name}}  --}} > {{$item->literary->name}}</div>
+                <div class="type mb-3">{{-- {{$item->literary->parent->name}}   > --}} {{$item->literary->name}}</div>
                 @else
                 <div class="type mb-3">مساهمة</div>
 
