@@ -71,6 +71,9 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
     Route::namespace('Role')->prefix('adminstrators')->middleware('checkPermission:role-index')->as('adminstrator.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
+        Route::get('/{user}', Edit::class)->name('edit');
+
+
     });
 });
 

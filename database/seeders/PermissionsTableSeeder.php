@@ -16,7 +16,8 @@ class PermissionsTableSeeder extends Seeder
         // Permit CRUD permissions
         Permission::create(['name' => 'role-index', 'display_name' => 'إدارة الصلاحيات و المستخدمين']);
         Permission::create(['name' => 'partner-create', 'display_name' => 'إضافة شريك']);
-        Permission::create(['name' => 'permit-update', 'display_name' => 'تعديل على الصلاحيات']);
+        Permission::create(['name' => 'permit-update', 'display_name' => 'تعديل على التصاريح']);
+        Permission::create(['name' => 'support-update', 'display_name' => 'تعديل على دعم الشريك']);
         Permission::create(['name' => 'event-update', 'display_name' => 'تعديل على المبادرات']);
 
     }

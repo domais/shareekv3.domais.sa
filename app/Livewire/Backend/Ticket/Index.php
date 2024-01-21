@@ -27,7 +27,15 @@ class Index extends Component
         } else {
             $this->tickets = Ticket::with('user')->get()->toArray();
         }
-        
+    
+        foreach ($this->tickets as &$ticket) {
+            $ticketModel = Ticket::find($ticket['id']);
+            if ($ticketModel->fileable) {
+                $ticket['file'] = $ticketModel->fileable->toArray();
+            }
+        }
+
+      //  dd($this->tickets);
     }
     #[On('replyticket')] 
     public function replyticket($data)

@@ -119,7 +119,7 @@
                         <div class="col-8"><input type="text" class="form-control" id="PermitNumber"></div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-3 d-flex align-items-center">نسخ التصريح</div>
+                        <div class="col-3 d-flex align-items-center">ملف التصريح</div>
                         <div class="col-8"><input type="file" class="form-control" id="PermitPDF"></div>
                     </div>
                 </div>

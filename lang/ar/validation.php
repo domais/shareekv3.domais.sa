@@ -168,7 +168,7 @@ return [
         'logo' => 'الشعار',
         'reply' => 'الرد',
         'permitNumber' => 'رقم التصريح',
-        'permitFile' => 'نسخ التصريح'
+        'permitFile' => 'ملف التصريح'
     ],
     'custom' => [
         'approval_file' => [

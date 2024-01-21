@@ -105,7 +105,7 @@ x-data="{errors: @entangle('errors').live}" x-init="
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">اعتماد الفعالية</h1>
+                    <h1 class="modal-title fs-5">تشغيل</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -114,7 +114,7 @@ x-data="{errors: @entangle('errors').live}" x-init="
                         <div class="col-8"><input type="text" wire:model="permitNumber" class="form-control" id="PermitNumber"></div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-3 d-flex align-items-center">نسخ التصريح</div>
+                        <div class="col-3 d-flex align-items-center">ملف التصريح</div>
                         <div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF"></div>
                     </div>
                 </div>
