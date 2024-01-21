@@ -10,6 +10,7 @@ use Livewire\Form;
 
 class UserForm extends Form
 {
+    public ?User $user;
     public $name;
     public $email;
     public $phone;
@@ -41,5 +42,25 @@ class UserForm extends Form
         }
 
         return $user;
+    }
+
+    public function setForm($user)
+    {
+        $this->user = $user;
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->phone = $user->phone;
+    }
+
+    public function update()
+    {
+        $validatedData = $this->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|unique:users,phone,' . $this->user->id,
+            'email' => 'required|email|unique:users,email,' . $this->user->id,
+        ]);
+    
+        // Update the user with the validated data
+        $this->user->update($validatedData);
     }
 }

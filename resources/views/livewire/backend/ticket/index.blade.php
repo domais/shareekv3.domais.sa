@@ -27,7 +27,7 @@
 					<a class="btn btn-success float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">إنشاء تذكرة</a>
 				@endif
 			</h1>
-	<p class="mb-4 clearfix">سيقوم فريقنا بخدمتك من خلال فتح تذكرة دعم فني وسيقوم فريقنا بالرد عليها ويمكنك متابعتها ، هذا النص يحتاج إلى تعديل لكلام أفضل</p>
+	<p class="mb-4 clearfix">سيقوم فريقنا بخدمتك من خلال فتح تذكرة دعم فني وسيقوم  بالرد عليها ويمكنك متابعتها من خلال هذه الصفحة </p>
 	<div class="listContainer">
 
 
@@ -37,16 +37,32 @@
 			<div class="row g-2 g-lg-3">
 				<div class="col-12 col-lg-6">
 					@forelse($this->tickets as $index => $ticket)
-						<div>
-							<a role="button" href="#" @click="openModal({{ $index }})" data-bs-toggle="modal" data-bs-target="#ModalShow">{{ $ticket['subject'] }}</a>
+						<div class="notification-list notification-list--unread">
+							<div class="notification-list_content">
+								<div class="notification-list_detail">
+									<h3 class="fw-bold">
+										<a role="button" href="#" @click="openModal({{ $index }})" data-bs-toggle="modal" data-bs-target="#ModalShow">{{ $ticket['subject'] }}</a>
+									</h3>
+									@if (auth()->user()->hasRole('SuperAdmin'))
+										<p class="text-muted">
+											{{$ticket['user']['name']}}
+										</p>
+									@endif
+									@if (!empty($ticket['file']))
+									
+										<p>
+											<a href="{{'storage/'.$ticket['file'][0]['path']}}" target="_blank" class="text-decoration-none">عرض المرفقات</a>
+										</p>
+									@endif
+								</div>
+							</div>
+							<time class="notification-list_date" datetime="">{{\Carbon\Carbon::parse($ticket['created_at'])->diffForHumans()}}</time>
 						</div>
-						@empty
-
+					@empty
 						<div class="w-100 text-center">
 							<img src="{{asset('img/404.png')}}" class="mx-auto" width="400"><br><br>
 							لايوجد لديك أي تذاكر حتى الآن
 						</div>
-
 					@endforelse
 				</div>
                 <div class="col-12 col-lg-6">

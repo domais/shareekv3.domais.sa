@@ -52,6 +52,7 @@
             name="{{ !auth()->user()->hasRole('User') ? 'منتهية وبإنتظار توثيق الشريك' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
+            permission="event-update"
             :buttons="auth()->user()->hasRole('User') ? KanbanButtons('EventUserUploadTawtheeq') : KanbanButtons('AskForClose')"
 
          />
@@ -60,6 +61,7 @@
             name="{{ !auth()->user()->hasRole('User') ? 'مراجعة التوثيق' : 'المشرف يراجع التوثيق' }}"
             count="{{count($Waiting_for_approval)}}" 
             :data="$Waiting_for_approval"
+            permission="event-update"
             :buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('Approval') "
         />
 
@@ -117,7 +119,7 @@
                         <div class="col-8"><input type="text" class="form-control" id="PermitNumber"></div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-3 d-flex align-items-center">نسخ التصريح</div>
+                        <div class="col-3 d-flex align-items-center">ملف التصريح</div>
                         <div class="col-8"><input type="file" class="form-control" id="PermitPDF"></div>
                     </div>
                 </div>

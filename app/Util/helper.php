@@ -6,6 +6,7 @@ use App\Models\EventType;
 use App\Models\History;
 use App\Models\Literary;
 use App\Models\Permit;
+use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,8 @@ function ArToEn($input) {
 		} else {
 			if($is_event) {
 				$now = now();
+				//dd($now->format('Y-m-d H:i'));
+
 				foreach($statusesEvent as $status) {
 					if($status == 5) {
 						$events[$status] = Event::where('admin_id', $user->id)
@@ -318,4 +321,17 @@ function ArToEn($input) {
 		$history->edited = $edited;
 
 		$history->save();
+	}
+
+	function havePermission(User $user, $search)
+	{
+		$permissions = $user->permissions;
+	
+		foreach ($permissions as $permission) {
+			if ($permission->name == $search) {
+				return true;
+			}
+		}
+	
+		return false;
 	}

@@ -21,7 +21,7 @@
 					
 				@endif
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
-					<button class="btn btn-brand"  wire:click="store(2)">إرسال الطلب</button>
+					<button class="btn btn-brand" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>				
 				@endif
 			</div>
 		</div>

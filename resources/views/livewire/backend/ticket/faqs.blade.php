@@ -462,7 +462,7 @@
             <div id="flush-collapse_14" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
                 <div class="accordion-body">
                     نعم ، بالتأكيد !<br>
-                    يمكنك فتح تذكرة (دعم فني) بالضغط <a class="btn btn-brand text-white" role="button">هنا</a> ، أو التواصل معنا من خلال رقم الجوال <a href="tel:0533211227">0533211227</a> او من خلال البريد الإلكتروني <a href="mailto:info@literarypartner.org">info@literarypartner.org</a>
+                    يمكنك  التواصل معنا من خلال رقم الجوال <a href="tel:0533211227">0533211227</a> او من خلال البريد الإلكتروني <a href="mailto:info@literarypartner.org">info@literarypartner.org</a>
                 </div>
             </div>
         </div>
