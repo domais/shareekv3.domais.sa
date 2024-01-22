@@ -9,7 +9,8 @@
         @if (auth()->user()->hasRole('SuperAdmin'))
             <div class="row my-3">
                 <div class="col-3 d-flex align-items-center">الشريك</div>
-                <div class="col-9">{{$this->permit->user->owner->name}} / {{$this->permit->user->name}}</div> <!-- Rahmani: Fix this -->
+                <div class="col-9">{{ $this->permit->user->owner->name }} / {{ $this->permit->user->name }}</div>
+                <!-- Rahmani: Fix this -->
             </div>
         @endif
 
@@ -129,39 +130,42 @@
 
         <div class="row my-3">
             <div class="{{ $this->is_show_page ? 'col-4' : 'col-3' }} d-flex align-items-center">عدد الحضور</div>
-            <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}"><input type="number" x-bind:disabled="is_show_page" inputmode="numeric"
-                    class="form-control rounded text-left" wire:model="form.available_seats"></div>
+            <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}"><input type="number"
+                    x-bind:disabled="is_show_page" inputmode="numeric" class="form-control rounded text-left"
+                    wire:model="form.available_seats"></div>
         </div>
 
 
         <div class="row my-3">
             <div class="{{ $this->is_show_page ? 'col-4' : 'col-3' }} d-flex align-items-center">تاريخ البداية</div>
             <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}">
-                <input type="text" x-bind:disabled="is_show_page" value="{{ $this->permit ? $this->permit->start_date : '' }}" x-model="start_date" class="form-control rounded" autocomplete="off"
-                    id="start_date" wire:model.live="form.start_date">
+                <input type="text" x-bind:disabled="is_show_page"
+                    value="{{ $this->permit ? $this->permit->start_date : '' }}" x-model="start_date"
+                    class="form-control rounded" autocomplete="off" id="start_date" wire:model.live="form.start_date">
             </div>
-        </div> 
+        </div>
 
 
         <div class="row my-3">
             <div class="{{ $this->is_show_page ? 'col-4' : 'col-3' }} d-flex align-items-center">تاريخ النهاية</div>
             <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}">
-                <input type="text" x-bind:disabled="is_show_page" x-model="end_date" class="form-control rounded" autocomplete="off"
-                    dir="ltr" value="{{ $this->permit ? $this->permit->end_date : '' }}" id="end_date" wire:model.live="form.end_date" >
+                <input type="text" x-bind:disabled="is_show_page" x-model="end_date" class="form-control rounded"
+                    autocomplete="off" dir="ltr" value="{{ $this->permit ? $this->permit->end_date : '' }}"
+                    id="end_date" wire:model.live="form.end_date">
             </div>
         </div>
         <div class="row mt-3 mt-5">
             <div class="col-1"></div>
             <div class="col-11">
-                
+
                 @if ($this->permit)
-                    <div class="DropArea" style="height: 360px">
+                    <div class="DropArea" style="height: 360px;background:none ">
                         <img id="AdvImg"
-                            src="{{ asset('storage/' . $this->permit->fileable->where('use', 'adv')->first()->path) }}"
-                            alt="Picture">
+                            src="{{ asset('storage/' . $this->permit->fileable->where('use', 'adv')->first()->path) }}">
                     </div>
                 @else
-                    <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3" id="AdvImg_input">
+                    <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3"
+                        id="AdvImg_input">
                     <div class="DropArea" style="height: 360px">
                         <img id="AdvImg" src="{{ asset('img/pexel.png') }}" alt="Picture">
                     </div>
@@ -184,76 +188,74 @@
     var quillContent = '';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-    function initDatePicker(id, value = null) {
-        const element = document.getElementById(id);
-        flatpickr(element, {
-            "locale": "ar",
-            enableTime: true,
-            minDate: new Date().fp_incr(2), // Rahmani: هنا تقدر تضيف عدد الأيام حسب الإعدادات
-            altInput: true,
-            altFormat: "Y-m-d h:i K",
-            dateFormat: "Y-m-d H:i",
-            defaultDate: value,
-            minTime: "07:00",
-            maxTime: "00:00",
-        });
-    }
+        function initDatePicker(id, value = null) {
+            const element = document.getElementById(id);
+            flatpickr(element, {
+                "locale": Arabic,
+                enableTime: true,
+                minDate: new Date().fp_incr(2), // Rahmani: هنا تقدر تضيف عدد الأيام حسب الإعدادات
+                altInput: true,
+                altFormat: "Y-m-d h:i K",
+                dateFormat: "Y-m-d H:i",
+                defaultDate: value,
+                minTime: "07:00",
+                maxTime: "00:00",
+            });
+        }
 
-    initDatePicker('start_date');
-    initDatePicker('end_date');
+        initDatePicker('start_date');
+        initDatePicker('end_date');
 
-  
 
-    @if(!$this->is_show_page)
 
-        var toolbarOptions = [
-            'clean',
-            {
-                'list': 'ordered'
-            },
-            {
-                'list': 'bullet'
-            },
-            {
-                'background': []
-            },
-            {
-                'color': []
-            },
-            {
-                align: ''
-            },
-            {
-                align: 'center'
-            },
-            {
-                align: 'right'
-            },
-            'underline',
-            'bold',
-        ];
+        @if (!$this->is_show_page)
 
-        var quill = new Quill('#editor', {
-            modules: {
-                syntax: false,
-                toolbar: toolbarOptions
-            },
-            theme: 'snow'
-        });
+            var toolbarOptions = [
+                'clean',
+                {
+                    'list': 'ordered'
+                },
+                {
+                    'list': 'bullet'
+                },
+                {
+                    'background': []
+                },
+                {
+                    'color': []
+                },
+                {
+                    align: ''
+                },
+                {
+                    align: 'center'
+                },
+                {
+                    align: 'right'
+                },
+                'underline',
+                'bold',
+            ];
 
-        quill.format('direction', 'rtl')
-        quill.format('align', 'right')
+            var quill = new Quill('#editor', {
+                modules: {
+                    syntax: false,
+                    toolbar: toolbarOptions
+                },
+                theme: 'snow'
+            });
 
-        quill.on('text-change', function(delta, oldDelta, source) {
-            if (source == 'user') {
-                quillContent = quill.root.innerHTML
-                Livewire.dispatch('editorUpdated', {
-                    data: quillContent
-                })
-            }
-        });
+            quill.format('direction', 'rtl')
+            quill.format('align', 'right')
 
-        
+            quill.on('text-change', function(delta, oldDelta, source) {
+                if (source == 'user') {
+                    quillContent = quill.root.innerHTML
+                    Livewire.dispatch('editorUpdated', {
+                        data: quillContent
+                    })
+                }
+            });
         @endif
 
     })
@@ -300,12 +302,12 @@
                         @this.upload('form.image_adv', file, (uploadedFilename) => {
                             // Success callback...
                             /*  Swal.fire({
-                                  icon: 'success',
-                                  title: 'تم تحميل الصورة بنجاح',
-                                  text: null,
-                                  showConfirmButton: false,
-                                  timer: 1500
-                              });*/
+                            	icon: 'success',
+                            	title: 'تم تحميل الصورة بنجاح',
+                            	text: null,
+                            	showConfirmButton: false,
+                            	timer: 1500
+                            });*/
                         }, () => {
                             // Error callback...
                             Swal.fire({

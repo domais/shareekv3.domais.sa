@@ -5,11 +5,10 @@ import Quill from 'quill';
 import * as bootstrap from 'bootstrap';
 import 'sweetalert2/src/sweetalert2.scss';
 import Cropper from 'cropperjs';
-import datetimepicker from 'jquery-datetimepicker';
 import Dropzone from "dropzone";
 import select2 from 'select2';
 import flatpickr from "flatpickr";
-import { Arabe } from "flatpickr/dist/l10n/ar.js";
+import { Arabic } from "flatpickr/dist/l10n/ar.js";
 
 
 select2();
@@ -22,10 +21,10 @@ window.bootstrap = bootstrap;
 window.jQuery = window.$ = $;
 window.axios = axios;
 window.Dropzone = Dropzone;
-window.datetimepicker = datetimepicker;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.select2 = select2;
 window.flatpickr = flatpickr;
+window.Arabic = Arabic;
 
 const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
