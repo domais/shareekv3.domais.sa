@@ -573,6 +573,11 @@ nav .topbar {
 	text-align: center;
 }
 
+.kanban .column .head small{
+	font-weight: 500 !important;
+	opacity: .7;
+}
+
 .kanban .column .head .seach {
 	display: inline-block;
 	padding: 5px 10px;
@@ -607,6 +612,9 @@ nav .topbar {
 
 .kanban .column .item .number span {
 	font-size: 15px !important;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .kanban .column .item .number small {

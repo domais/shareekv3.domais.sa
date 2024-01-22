@@ -65,7 +65,7 @@ x-data="{errors: @entangle('ValidationErrors').live}" x-init="
           />
 
           <x-backend.kanban-column 
-            name="{{ !auth()->user()->hasRole('User') ? 'منتهية وبإنتظار توثيق الشريك' : 'بإنتظارك لتوثيق الفعالية' }}"
+            name="{{ !auth()->user()->hasRole('User') ? 'منتهية <small>بإنتظار توثيق الشريك</small>' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
             permission="event-update"
