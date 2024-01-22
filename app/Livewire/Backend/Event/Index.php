@@ -64,17 +64,29 @@ class Index extends Component
     #[On('saveEventImages')] 
     public function saveEventImages()
     {
+      //  dd($this->photos, $this->links, $this->selected_id);
         try {
-            if (empty($this->photos)) {
+            if (empty($this->photos) && (empty($this->links) || count(array_filter($this->links)) == 0)) {
+                // Both photos and links are empty
                 $validator = Validator::make([], []); // empty data and rules
                 $validator->errors()->add('photos', 'الصور مطلوبة');
+                $validator->errors()->add('links', 'الروابط مطلوبة');
                 throw new ValidationException($validator);
+            } else {
+                // At least one of photos or links exists
+                if (!empty($this->photos)) {
+                    // Photos exist, validate them
+                    $this->validate([
+                        'photos.*' => 'required|image',
+                    ]);
+                }
+                if (!empty($this->links) && count(array_filter($this->links)) > 0) {
+                    // Links exist and are not empty, validate them
+                    $this->validate([
+                        'links.*' => 'required|url',
+                    ]);
+                }
             }
-        
-            $this->validate([
-                'photos.*' => 'required|image',
-                'links.*' => 'required|url',
-            ]);
             
         } catch (ValidationException $th) {
             $this->ValidationErrors = $th->validator->errors()->all();
