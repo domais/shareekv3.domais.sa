@@ -46,6 +46,9 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
     Route::namespace('Event')->prefix('event')->as('event.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
+
+    //    Route::get('/show/{permit}', Inputs::class)->name('show');
+
     });
 
     Route::namespace('Ticket')->prefix('ticket')->as('ticket.')->group(function () {
