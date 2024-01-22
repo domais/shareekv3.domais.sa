@@ -45,7 +45,7 @@ class EventCollection extends ResourceCollection
                 'event_type' => $event->eventType->name,
                 'category_id' => $event->category_id,
                 'event_location' => $event->event_location == 1 ? 'داخلي' : 'خارجي',
-                'literary' => $event->literary->name,
+                'literary' => optional($event->literary)->name ?? 'لم يحدد النوع',
                 'status_id' => $event->status->name,
                 'available_seats' => $event->available_seats,
                 'guest_count' => $event->guestsGoing->count(),
