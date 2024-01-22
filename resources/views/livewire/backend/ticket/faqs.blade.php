@@ -469,21 +469,6 @@
 
 
 
-        <div class="accordion-item">
-
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_15">
-                    اتوقع نحتاج نضيف شي بخصوص الدعم الإضافي
-                </button>
-            </h2>
-            <div id="flush-collapse_15" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
-                <div class="accordion-body">
-
-                </div>
-            </div>
-        </div>
-
-
 
     </div>
 

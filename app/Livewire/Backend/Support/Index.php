@@ -61,7 +61,7 @@ class Index extends Component
         try {
             //code...
             $this->validate([
-                'file' => 'required|file|mimes:pdf|max:1024',
+               // 'file' => 'required|file|mimes:pdf|max:1024',
             ]);
             
         } catch (ValidationException $th) {

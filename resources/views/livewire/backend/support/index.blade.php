@@ -73,11 +73,7 @@
                 <div class="modal-body">
                     <div class="row mt-2">
                         <div class="col-3 d-flex align-items-center">رقم الوصل</div>
-                        <div class="col-8"><input type="text" class="form-control" id="PermitNumber"></div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-3 d-flex align-items-center">الوصل</div>
-                        <div class="col-8"><input type="file" wire:model="file" class="form-control" id="PermitPDF"></div>
+                        <div class="col-8"><input type="text"  class="form-control" id="PermitNumber"></div>
                     </div>
                 </div>
                 <div class="modal-footer">
