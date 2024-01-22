@@ -35,11 +35,10 @@ x-data="{  errors: @entangle('validationErrors')  }" x-init="
                     @endif
                     
                     
-                    <div class="px-4 mt-1">
-                        <ul class="fonts">
-                            <li>تاريخ الانضمام: {{ \Carbon\Carbon::parse(auth()->user()->created_at)->diffForHumans() }}</li>                            <li>البريد الإلكتروني: {{ auth()->user()->email }}</li>
-                            <li>الهاتف المحمول: {{ auth()->user()->phone }}</li>
-                        </ul>
+                    <div class="px-4 my-5">
+                            تاريخ الانضمام: {{ \Carbon\Carbon::parse(auth()->user()->created_at)->diffForHumans() }}<br>
+                            البريد الإلكتروني: {{ auth()->user()->email }}<br>
+                            الهاتف المحمول: {{ auth()->user()->phone }}
                     </div>
                 
                     <div class="buttons">
@@ -62,23 +61,23 @@ x-data="{  errors: @entangle('validationErrors')  }" x-init="
             </div>
             <div class="modal-body">
                 <div class="row mt-2">
-                    <div class="col-3 d-flex align-items-center">الإسم</div>
-                    <div class="col-8"><input type="text" wire:model="name" class="form-control" id="name"></div>
+                    <div class="col-5 d-flex align-items-center">الإسم</div>
+                    <div class="col-7"><input type="text" wire:model="name" class="form-control" id="name"></div>
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-3 d-flex align-items-center">البريد الإلكتروني</div>
-                    <div class="col-8"><input type="email" wire:model="email" class="form-control" id="email"></div>
+                    <div class="col-5 d-flex align-items-center">البريد الإلكتروني</div>
+                    <div class="col-7"><input type="email" wire:model="email" class="form-control" id="email"></div>
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-3 d-flex align-items-center">رقم الهاتف</div>
-                    <div class="col-8"><input type="email" wire:model="phone" class="form-control" id="email"></div>
+                    <div class="col-5 d-flex align-items-center">رقم الهاتف</div>
+                    <div class="col-7"><input type="email" wire:model="phone" class="form-control" id="email"></div>
                 </div>
             
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>
             <button type="button" wire:click="updateInformation" class="btn btn-primary">حفظ</button>
             </div>
         </div>
@@ -95,23 +94,23 @@ x-data="{  errors: @entangle('validationErrors')  }" x-init="
                 </div>
                 <div class="modal-body">
                     <div class="row mt-2">
-                        <div class="col-3 d-flex align-items-center">كلمة السر الحالية</div>
-                        <div class="col-8"><input type="password" wire:model="current_password" class="form-control" id="current_password"></div>
+                        <div class="col-5 d-flex align-items-center">كلمة السر الحالية</div>
+                        <div class="col-7"><input type="password" wire:model="current_password" class="form-control" id="current_password"></div>
                     </div>
     
                     <div class="row mt-2">
-                        <div class="col-3 d-flex align-items-center">كلمة السر الجديدة</div>
-                        <div class="col-8"><input type="password" wire:model="password" class="form-control" id="password"></div>
+                        <div class="col-5 d-flex align-items-center">كلمة السر الجديدة</div>
+                        <div class="col-7"><input type="password" wire:model="password" class="form-control" id="password"></div>
                     </div>
     
                     <div class="row mt-2">
-                        <div class="col-3 d-flex align-items-center">تأكيد كلمة السر الجديدة</div>
-                        <div class="col-8"><input type="password" wire:model="password_confirmation" class="form-control" id="password_confirmation"></div>
+                        <div class="col-5 d-flex align-items-center">تأكيد كلمة السر الجديدة</div>
+                        <div class="col-7"><input type="password" wire:model="password_confirmation" class="form-control" id="password_confirmation"></div>
                     </div>
                 
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>
                 <button type="button" wire:click="updatePassword" class="btn btn-primary">حفظ</button>
                 </div>
             </div>

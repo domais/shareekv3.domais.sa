@@ -75,14 +75,26 @@ class PartnerTable extends DataTableComponent
                 ->hideIf(true)
                 ->sortable(),
 
-            ImageColumn::make('الشعار')
-                ->location(
-                    fn ($row) => $row->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $row->fileable->path : asset('img/default_avatar.png')
-                    )
-                ->attributes(fn ($row) => [
-                    'class' => 'rounded-circle w-25 h-25',
-                    'alt' =>  ' Avatar',
-                ]),
+                // Rahmani: انا اخفيتها مؤقتا ولي رجعة لها
+
+            // ImageColumn::make('الشعار')
+            // ->location(
+            //     fn ($row) => $row->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $row->fileable->path : asset('img/default_avatar.png')
+            //     )
+            // ->attributes(fn ($row) => [
+            //     'class' => 'rounded-circle w-25 h-25',
+            // ]),
+
+
+            // Column::make("الشعار", "owner.name")
+            // ->format(function ($value, $column, $row) {
+
+            //     $img = $column->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $column->fileable->path : asset('img/default_avatar.png');
+
+            //     return '<img src="'.$img.'" class="rounded-circle w-25 h-25">';
+
+            // })->html(),
+
             Column::make("الإسم", "name")
                 ->searchable()
                 ->sortable(),
@@ -95,18 +107,18 @@ class PartnerTable extends DataTableComponent
                 ->sortable(),
             Column::make("الصنف", "class")
                 ->sortable(),
-            Column::make("اسم المسؤول", "owner.name")
+            Column::make("المسؤول", "owner.name")
                 ->format(function ($value, $column, $row) {
 
-                    return $column->owner->name . '<br>' . $column->owner->phone;
+                    return $column->owner->name . '<br><a href="tel:0'.$column->owner->phone.'" class="text-decoration-none">0' . $column->owner->phone . '</a><a href="https://wa.me/966'.$column->owner->phone.'" target="_tab"><img class="ms-2" src="'.asset('img/whatsapp.png').'" height="20"></a>';
                 })->html()->sortable(),
 
             Column::make("التصاريح", "owner_id")
                 ->format(function ($value, $column, $row) {
 
                     $counter = $column->owner->permits->count();
-                    return $counter;
-                }),
+                    return '<div class="text-center">'.$counter.'</div>';
+                })->html()->sortable(),
 
 
             Column::make("المبادرات", "owner_id")
@@ -114,7 +126,10 @@ class PartnerTable extends DataTableComponent
 
                     $counter = $column->owner->events->count();
                     return $counter;
-                }),
+                })
+                ->attributes(fn($row) => [
+                    'class' => 'text-center',
+                ])->sortable(),
 
             Column::make(__(''), 'id')
                 ->view('Tableactions.index')

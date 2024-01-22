@@ -3,12 +3,12 @@
     "css": [
       "assets/app-QIo8MdOz.css"
     ],
-    "file": "assets/app-Ae_uhWcy.js",
+    "file": "assets/app-Vk2st8o8.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-NG4GwfJn.css",
+    "file": "assets/app-eWnleHiR.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
   }

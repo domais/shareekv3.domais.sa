@@ -9,7 +9,7 @@
         @if (auth()->user()->hasRole('SuperAdmin'))
             <div class="row my-3">
                 <div class="col-3 d-flex align-items-center">الشريك</div>
-                <div class="col-9">مقهى النرجس / عبدالله الفوزان</div> <!-- Rahmani: Fix this -->
+                <div class="col-9">{{$this->permit->user->owner->name}} / {{$this->permit->user->name}}</div> <!-- Rahmani: Fix this -->
             </div>
         @endif
 
@@ -115,7 +115,7 @@
         <div class="row mt-4">
             <div class="col-3 d-flex align-items-center">وصف المبادرة</div>
             <div class="col-9 h-100" wire:ignore>
-                <div id="editor">
+                <div id="editor" class="{{ $this->is_show_page ? 'disabled' : '' }}">
                     {!! $this->form->description !!}
                 </div>
             </div>
@@ -128,15 +128,15 @@
     <div class="col-5">
 
         <div class="row my-3">
-            <div class="col-3 d-flex align-items-center">عدد الحضور</div>
-            <div class="col-9"><input type="number" x-bind:disabled="is_show_page" inputmode="numeric"
+            <div class="{{ $this->is_show_page ? 'col-4' : 'col-3' }} d-flex align-items-center">عدد الحضور</div>
+            <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}"><input type="number" x-bind:disabled="is_show_page" inputmode="numeric"
                     class="form-control rounded text-left" wire:model="form.available_seats"></div>
         </div>
 
 
         <div class="row my-3">
-            <div class="col-3 d-flex align-items-center">تاريخ البداية</div>
-            <div class="col-9">
+            <div class="{{ $this->is_show_page ? 'col-4' : 'col-3' }} d-flex align-items-center">تاريخ البداية</div>
+            <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}">
                 <input type="text" x-bind:disabled="is_show_page" value="{{ $this->permit ? $this->permit->start_date : '' }}" x-model="start_date" class="form-control rounded" autocomplete="off"
                     id="start_date" wire:model.live="form.start_date">
             </div>
@@ -144,17 +144,16 @@
 
 
         <div class="row my-3">
-            <div class="col-3 d-flex align-items-center">تاريخ النهاية</div>
-            <div class="col-9">
+            <div class="{{ $this->is_show_page ? 'col-4' : 'col-3' }} d-flex align-items-center">تاريخ النهاية</div>
+            <div class="{{ $this->is_show_page ? 'col-8' : 'col-9' }}">
                 <input type="text" x-bind:disabled="is_show_page" x-model="end_date" class="form-control rounded" autocomplete="off"
-                    dir="ltr" value="{{ $this->permit ? $this->permit->end_date : '' }}" id="end_date" wire:model.live="form.end_date">
+                    dir="ltr" value="{{ $this->permit ? $this->permit->end_date : '' }}" id="end_date" wire:model.live="form.end_date" >
             </div>
         </div>
         <div class="row mt-3 mt-5">
             <div class="col-1"></div>
             <div class="col-11">
-                <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3"
-                    id="AdvImg_input">
+                
                 @if ($this->permit)
                     <div class="DropArea" style="height: 360px">
                         <img id="AdvImg"
@@ -162,6 +161,7 @@
                             alt="Picture">
                     </div>
                 @else
+                    <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3" id="AdvImg_input">
                     <div class="DropArea" style="height: 360px">
                         <img id="AdvImg" src="{{ asset('img/pexel.png') }}" alt="Picture">
                     </div>
@@ -180,20 +180,22 @@
 <script>
     // start of Quill Editor ============================================
 
+
     var quillContent = '';
 
     document.addEventListener("DOMContentLoaded", function(event) {
-
     function initDatePicker(id, value = null) {
         const element = document.getElementById(id);
         flatpickr(element, {
             "locale": "ar",
             enableTime: true,
-            time_24hr: true,
+            minDate: new Date().fp_incr(2), // Rahmani: هنا تقدر تضيف عدد الأيام حسب الإعدادات
             altInput: true,
             altFormat: "Y-m-d h:i K",
             dateFormat: "Y-m-d H:i",
             defaultDate: value,
+            minTime: "07:00",
+            maxTime: "00:00",
         });
     }
 
@@ -202,7 +204,7 @@
 
   
 
-
+    @if(!$this->is_show_page)
 
         var toolbarOptions = [
             'clean',
@@ -250,6 +252,9 @@
                 })
             }
         });
+
+        
+        @endif
 
     })
     // End of Quill Editor =============================================

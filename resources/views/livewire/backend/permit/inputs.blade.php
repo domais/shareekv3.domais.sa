@@ -10,7 +10,11 @@
 				<li class="breadcrumb-item">
 					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
 				</li>
+				@if($is_show_page)
+				<li class="breadcrumb-item active" aria-current="page">عرض معلومات التصريح رقم {{$permit->order_number}}</li>
+				@else
 				<li class="breadcrumb-item active" aria-current="page">إنشاء تصريح جديد</li>
+				@endif
 			</ol>
 			<div class="links">
 				@if (!$permit)
@@ -28,20 +32,20 @@
 	</nav>
 	@if (auth()->user()->hasRole('SuperAdmin') && $is_show_page)
 
-	<div class="container my-2">
+	<div class="container my-2 d-none">
 		<div class="row">
 			<div class="col-10">
 				<div class="card" style="">
 					<div class="row g-0">
-						<div class="col-sm-1">
+						<div class="col-2 p-3 align-items-center">
 							@if ($permit->user->owner->image)
-							<img src="https://nextlevel.ams3.digitaloceanspaces.com/{{$permit->user->owner->image->path}}" class="card-img-top h-100" alt="...">
+							<img src="https://nextlevel.ams3.digitaloceanspaces.com/{{$permit->user->owner->image->path}}" class="w-100">
 
 							@else
-							<img src="{{asset('img/default_avatar.png')}}" class="card-img-top" style="height: 120px; width:80px;">	
-							@endif
+							<img src="{{asset('img/default_avatar.png')}}" class="w-100">	
+							@endif								
 						</div>
-						<div class="col-sm-5">
+						<div class="col-10">
 							<div class="card-body">
 								<h4>معلومات الشريك</h4>
 								<h5 class="card-title">إسم الشريك : {{$permit->user->owner->name}}</h5>
@@ -78,21 +82,22 @@
 	">
 		<!-- Rahmani: col-9 ماعدا ذلك خليه col-12 👇🏻 خلي هذا update أو create إذا كان الصفحة  -->
 		<!-- <div class="col-9"> -->
-			<div class="{{ $is_show_page ? 'col-9' : 'col-12' }}" wire:ignore>			<ul class="nav nav-tabs" id="eventWizard" role="tablist">
-				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">المعلومات العامة</button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location-tab-pane" type="button" role="tab" aria-controls="location-tab-pane" aria-selected="false">المكان</button>
-				</li>
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
-				</li>
+			<div class="{{ $is_show_page ? 'col-9' : 'col-12' }}" wire:ignore>
+				<ul class="nav nav-tabs" id="eventWizard" role="tablist">
+					<li class="nav-item" role="presentation">
+						<button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general-tab-pane" type="button" role="tab" aria-controls="general-tab-pane" aria-selected="true">المعلومات العامة</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location-tab-pane" type="button" role="tab" aria-controls="location-tab-pane" aria-selected="false">المكان</button>
+					</li>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
+					</li>
 
-				<li class="nav-item" role="presentation">
-					<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
-				</li>
-			</ul>
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
+					</li>
+				</ul>
 
 
 
