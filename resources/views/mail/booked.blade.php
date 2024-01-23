@@ -13,12 +13,12 @@
         تفاصيل التسجيل:
     </p>
 
-    <img src="{{$image}}" alt="{{$event->name}}" />
+    <img src="{{$image}}" alt="{{$event->title}}" />
 
     <ul style="text-right">
-        <li>اسم الفعالية: <strong>{{$event->name}}</strong></li>
+        <li>اسم الفعالية: <strong>{{$event->title}}</strong></li>
         <li>التاريخ: <strong>{{$event->start_date}}</strong></li>
-        <li>المكان: <strong>{{optional($event->user->owner)->name}}, {{optional($event->user->owner)->city}} <a target="_blank" href="https://maps.google.com/?q={{$event->user->owner->lat . ',' . $event->user->owner->lng}}"></a></strong></li>
+        <li>المكان: <strong>{{optional($event->user->owner)->name}}, {{optional($event->user->owner)->city}} <a target="_blank" href="https://maps.google.com/?q={{$event->user->owner->lat . ',' . $event->user->owner->lng}}">Google map</a></strong></li>
     </ul>
 
     <p>
