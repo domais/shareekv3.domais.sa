@@ -31,7 +31,7 @@ Route::post('/survey/speaker/{token}', [SurveyController::class, 'speaker'])->na
 
 Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () {
 
-    Route::namespace('Permit')->prefix('permit')->as('permit.')->group(function () {
+    Route::namespace('Permit')->prefix('permit')->as('permit.')->middleware('checkpassword')->group(function () {
 
         Route::get('/', Index::class)->name('index');
 
@@ -44,14 +44,14 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/show/{permit}', Inputs::class)->name('show');
     });
 
-    Route::namespace('Partner')->prefix('partner')->middleware('role:SuperAdmin')->as('partner.')->group(function () {
+    Route::namespace('Partner')->prefix('partner')->middleware('role:SuperAdmin')->middleware('checkpassword')->as('partner.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
 
         Route::get('/{partner}', Show::class)->name('show');
     });
 
-    Route::namespace('Event')->prefix('event')->as('event.')->group(function () {
+    Route::namespace('Event')->prefix('event')->middleware('checkpassword')->as('event.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
 
@@ -59,19 +59,19 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
     });
 
-    Route::namespace('Ticket')->prefix('ticket')->as('ticket.')->group(function () {
+    Route::namespace('Ticket')->prefix('ticket')->middleware('checkpassword')->as('ticket.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
     });
 
-    Route::namespace('Support')->prefix('support')->as('support.')->group(function () {
+    Route::namespace('Support')->prefix('support')->middleware('checkpassword')->as('support.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
 
         Route::get('/show/{permit}', Show::class)->name('show');
     });
 
-    Route::namespace('Announcement')->prefix('announcement')->as('announcement.')->group(function () {
+    Route::namespace('Announcement')->prefix('announcement')->middleware('checkpassword')->as('announcement.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
     });
@@ -81,12 +81,12 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/', Index::class)->name('index');
     });
 
-    Route::namespace('Survey')->prefix('survey')->as('survey.')->group(function () {
+    Route::namespace('Survey')->prefix('survey')->middleware('checkpassword')->as('survey.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
     });
 
-    Route::namespace('Role')->prefix('adminstrators')->middleware('checkPermission:role-index')->as('adminstrator.')->group(function () {
+    Route::namespace('Role')->prefix('adminstrators')->middleware('checkpassword')->middleware('checkPermission:role-index')->as('adminstrator.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
         Route::get('/{user}', Edit::class)->name('edit');

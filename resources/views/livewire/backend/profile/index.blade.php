@@ -1,5 +1,16 @@
 <div class="container mt-5"
-x-data="{  errors: @entangle('validationErrors')  }" x-init="
+x-data="{  errors: @entangle('validationErrors').live  }" x-init="
+
+        if (errors.length > 0) {
+                const errorMessage = errors.join('<br>');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'يوجد بيانات ناقصة',
+                    showConfirmButton: false,
+                    html: errorMessage  // Use 'html' to display formatted text
+                });
+                errors = []
+        }
         $watch('errors', value => {
 
             if (value.length > 0) {

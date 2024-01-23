@@ -24,7 +24,15 @@ class Index extends Component
         $this->user = auth()->user();
         $this->name = $this->user->name;
         $this->email = $this->user->email;
-        $this->phone = $this->user->phone; 
+        $this->phone = $this->user->phone;
+        
+        if (session()->has('errors')) {
+            $errors = session()->get('errors');
+            if ($errors->has('password')) {
+                $this->validationErrors[] = $errors->first('password');
+            }
+        }
+
     }
     public function updateInformation() {
 
