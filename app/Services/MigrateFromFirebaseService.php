@@ -175,15 +175,15 @@ class MigrateFromFirebaseService
             $status = 7;
         }
 
-        if ($event->event_Send && !$event->reject_evint) {
+        if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
             $status = 2;
         }
 
-        if ($event->sup_post) {
+        if (isset($event->sup_post) && $event->sup_post) {
             $status = 3;
         }
 
-        if ($event->verification) {
+        if (isset($event->verification) && $event->verification) {
             $status = 8;
         }
 
