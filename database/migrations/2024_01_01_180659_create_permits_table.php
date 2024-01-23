@@ -36,7 +36,7 @@ return new class extends Migration
             $table->boolean('need_support')->default(0);
             $table->double('lat')->default(21.443);
             $table->double('lng')->default(39.333);
-            $table->sting('source')->nullable();
+            $table->string('source')->nullable();
 
             $table->softDeletes();
 
