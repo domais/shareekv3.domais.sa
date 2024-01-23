@@ -13,7 +13,7 @@ use Laratrust\Traits\HasRolesAndPermissions;
 
 class User extends Authenticatable implements LaratrustUser
 {
-    use HasApiTokens, HasFactory, Notifiable,HasRolesAndPermissions,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRolesAndPermissions, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -57,22 +57,22 @@ class User extends Authenticatable implements LaratrustUser
 
     public function permits()
     {
-        return $this->hasMany(Permit::class,'user_id');
+        return $this->hasMany(Permit::class, 'user_id');
     }
 
     public function assignedpermits()
     {
-        return $this->hasMany(Permit::class,'admin_id');
+        return $this->hasMany(Permit::class, 'admin_id');
     }
 
     public function events()
     {
-        return $this->hasMany(Event::class,'user_id');
+        return $this->hasMany(Event::class, 'user_id');
     }
 
     public function assignedevents()
     {
-        return $this->hasMany(Event::class,'admin_id');
+        return $this->hasMany(Event::class, 'admin_id');
     }
 
     public function tickets()
@@ -98,5 +98,10 @@ class User extends Authenticatable implements LaratrustUser
     public function guestEventsGoing()
     {
         return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id')->wherePivot('type', 'going');
+    }
+
+    public function surveys()
+    {
+        return $this->morphMany(Survey::class, 'surveyable');
     }
 }

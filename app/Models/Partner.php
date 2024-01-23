@@ -17,6 +17,7 @@ class Partner extends Model
         'lat',
         'lng',
         'owner_id',
+        'source'
     ];
 
     public function owner()

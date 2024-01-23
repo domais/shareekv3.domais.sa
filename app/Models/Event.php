@@ -30,6 +30,7 @@ class Event extends Model
         'need_support',
         'lat',
         'lng',
+        'source'
     ];
 
     public function user()

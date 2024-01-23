@@ -27,8 +27,4 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.select2 = select2;
 window.flatpickr = flatpickr;
 
-const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-// update id="timezone" in the form
-$("#timezone").dispatchEvent(new Event('input')).val(timezone);
 

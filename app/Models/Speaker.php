@@ -15,4 +15,8 @@ class Speaker extends Model
         return $this->belongsTo(Permit::class);
     }
 
+    public function surveys()
+    {
+        return $this->morphMany(Survey::class, 'surveyable');
+    }
 }

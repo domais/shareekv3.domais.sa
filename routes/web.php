@@ -4,6 +4,7 @@ use App\Mail\UpdatePasswordMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,13 @@ Route::get('/', function () {
     return redirect('/i');
 });
 
+// Survey Guest, Speaker /survey/guest/{token} /survey/speaker/{token}
+Route::get('/survey/{type}/{token}', [SurveyController::class, 'index'])->name('survey');
+Route::get('/survey/completed', [SurveyController::class, 'completed'])->name('survey.completed');
+
+// guest.survey
+Route::post('/survey/guest/{token}', [SurveyController::class, 'guest'])->name('guest.survey');
+Route::post('/survey/speaker/{token}', [SurveyController::class, 'speaker'])->name('speaker.survey');
 
 Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () {
 
@@ -72,8 +80,6 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
         Route::get('/', Index::class)->name('index');
         Route::get('/{user}', Edit::class)->name('edit');
-
-
     });
 });
 
@@ -96,17 +102,17 @@ require __DIR__ . '/auth.php';
 Route::get('/test', function () {
 
     // delete any job name migrate-guests
-    $job = \DB::table('jobs')->where('queue', 'migrate-guests')->delete();
-    $jobFail = \DB::table('failed_jobs')->delete();
+    // $job = \DB::table('jobs')->where('queue', 'migrate-guests')->delete();
+    // $jobFail = \DB::table('failed_jobs')->delete();
 
     // delete users create from 5h ago force delete it
     // 2024-01-16 00:52:15
     // dd(\Carbon\Carbon::now()->subHours(4)->format('Y-m-d H:i:s'));
-    $users = \DB::table('users')->where(
-        'source',
-        'firebase-guests'
-    )->get();
-    dd($users);
+    // $users = \DB::table('users')->where(
+    //     'source',
+    //     'firebase-guests'
+    // )->get();
+    // dd($users);
     // $users->each(function ($user) {
     //     $user->forceDelete();
     // });
@@ -117,4 +123,20 @@ Route::get('/test', function () {
     //     $service = new \App\Services\MigrateFromFirebaseService();
     //     $service->guests($chunk);
     // });
+
+    $user = \App\Models\User::where('email', 'gm.xerk@gmail.com')->first();
+
+    $token = md5(uniqid(rand(), true));
+
+    $user->surveys()->create([
+        'token' => $token,
+        'expire_at' => \Carbon\Carbon::now()->addDays(7),
+        'event_id' => 1,
+        'type' => 'speaker'
+    ]);
+
+    $event = \App\Models\Event::find(1);
+
+    // Send Survey Mail
+    Mail::to($user)->send(new \App\Mail\SurveyMail($token, $event, $user, 'speaker'));
 });
