@@ -212,7 +212,7 @@ class MigrateFromFirebaseService
             'title' => $item->Event_name,
             'description' => $item->Event_Des,
             'user_id' => $user->id,
-            'admin_id' => 1,
+            'admin_id' => 4,
             'event_type_id' => $eventTypeId,
             'event_location' => $item->Event_cat === 'داخلية' ? 1 : 2,
             'start_date' => Carbon::createFromTimestamp($item->Start_time->seconds),
