@@ -29,6 +29,7 @@ class Permit extends Model
         'need_support',
         'lat',
         'lng',
+        'source'
     ];
 
     public function user()
@@ -65,7 +66,7 @@ class Permit extends Model
     {
         return $this->hasMany(Partnership::class);
     }
-    
+
     public function history()
     {
         return $this->hasMany(History::class);
@@ -79,9 +80,9 @@ class Permit extends Model
 
     public function fileable()
     {
-        return $this->morphMany(File::class, 'fileable');    
+        return $this->morphMany(File::class, 'fileable');
     }
 
- 
-    
+
+
 }

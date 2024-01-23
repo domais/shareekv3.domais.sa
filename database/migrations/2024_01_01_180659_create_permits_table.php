@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('other')->nullable();
             $table->string('targeted_audience');
             $table->string('meeting_link')->nullable();
+            $table->string('targeted_audience')->nullable();
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside , 3 => online');
             $table->unsignedBigInteger('literary_id')->nullable();
@@ -37,6 +38,7 @@ return new class extends Migration
             $table->boolean('need_support')->default(0);
             $table->double('lat')->default(21.443);
             $table->double('lng')->default(39.333);
+            $table->string('source')->nullable();
 
             $table->softDeletes();
 

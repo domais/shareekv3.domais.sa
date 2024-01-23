@@ -11,6 +11,7 @@ use App\Models\Speaker;
 use App\Models\Literary;
 use Illuminate\Support\Str;
 use App\Mail\UpdatePasswordMail;
+use App\Models\Permit;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -149,8 +150,12 @@ class MigrateFromFirebaseService
         return $partner;
     }
 
-    private function getStatus($start, $end): int
+    private function getStatus($event): int
     {
+
+        $start = $event->Start_time->seconds;
+        $end = $event->End_time->seconds;
+
         // status 5 => مجدولة
         // status 6 => قائمة
         // status 7 => بانتظار التوثيق الشريك
@@ -169,13 +174,26 @@ class MigrateFromFirebaseService
         } elseif ($end->lt(now())) {
             $status = 7;
         }
+
+        if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
+            $status = 2;
+        }
+
+        if (isset($event->sup_post) && $event->sup_post) {
+            $status = 3;
+        }
+
+        if (isset($event->verification) && $event->verification) {
+            $status = 8;
+        }
+
         \Log::info('Status: ' . $status);
         return $status;
     }
 
     private function event($item, $user): Event
     {
-        $status = $this->getStatus($item->Start_time->seconds, $item->End_time->seconds);
+        $status = $this->getStatus($item);
 
         $type = $item->cheld_yang_Shear ?? $item->type_adab;
         \Log::info('Type: ' . $type);
@@ -194,7 +212,7 @@ class MigrateFromFirebaseService
             'title' => $item->Event_name,
             'description' => $item->Event_Des,
             'user_id' => $user->id,
-            'admin_id' => 1,
+            'admin_id' => 4,
             'event_type_id' => $eventTypeId,
             'event_location' => $item->Event_cat === 'داخلية' ? 1 : 2,
             'start_date' => Carbon::createFromTimestamp($item->Start_time->seconds),
@@ -212,6 +230,8 @@ class MigrateFromFirebaseService
             'source' => 'firebase'
         ]);
 
+        $this->permit($item, $event);
+
         // event is updated
         if ($event->wasRecentlyCreated && isset($item->Evint_img) &&  $item->Evint_img) {
             \Log::info('Image: ' . $item->Evint_img);
@@ -222,6 +242,30 @@ class MigrateFromFirebaseService
 
         \Log::info('Event: #' . $event->id . ' ' . $event->title);
         return $event;
+    }
+
+    private function permit($item, $event) {
+        Permit::updateOrCreate(['order_number' => $item->id], [
+            'order_number' => $item->id,
+            'user_id' => $event->user_id,
+            'admin_id' => $event->admin_id,
+            'event_type_id' => $event->event_type_id,
+            'category_id' => $event->category_id,
+            'other' => $event->other,
+            'targeted_audience' => $event->targeted_audience,
+            'event_location' => $event->event_location,
+            'literary_id' => $event->literary_id,
+            'status_id' => $event->status_id,
+            'title' => $event->title,
+            'description' => $event->description,
+            'start_date' => $event->start_date,
+            'end_date' => $event->end_date,
+            'available_seats' => $event->available_seats,
+            'need_support' => $event->need_support,
+            'lat' => $event->lat,
+            'lng' => $event->lng,
+            'source' => $event->source
+        ]);
     }
 
     function convert($string): int
@@ -291,42 +335,6 @@ class MigrateFromFirebaseService
                 'source' => 'firebase'
             ]);
         }
-    }
-
-    private function users()
-    {
-        $json = file_get_contents(public_path('firebase_data/Users.json'));
-        $data = json_decode($json);
-
-        // Chunk data to 100
-        $data = collect($data)->chunk(100)->each(function ($chunk) {
-            foreach ($chunk as $item) {
-                $user = $this->user(
-                    $item->display_name,
-                    $item->email,
-                    $item->phone_number,
-                    $item->photo_url
-                );
-                \Log::info('User: #' . $user->id . ' ' . $user->email);
-            }
-        });
-    }
-
-    private function partners()
-    {
-        $json = file_get_contents(public_path('firebase_data/Partner.json'));
-        $data = json_decode($json);
-
-        // Chunk data to 100
-        $data = collect($data)->chunk(100)->each(function ($chunk) {
-            foreach ($chunk as $item) {
-                $user = User::where('phone', $item->phone_number)
-                    ->where('email', $item->email)
-                    ->first();
-                $partner = $this->partner($item, $user);
-                \Log::info('Partner: #' . $partner->id . ' ' . $partner->name);
-            }
-        });
     }
 
     public function guests($chunk)

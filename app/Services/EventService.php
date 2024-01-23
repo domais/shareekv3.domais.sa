@@ -22,14 +22,35 @@ class EventService implements EventServiceInterface
     public function upcomingEvents(array $data): \Illuminate\Http\JsonResponse
     {
 
+        $lat = $data['lat'] ?? null;
+        $lng = $data['lng'] ?? null;
+        $radius = $data['radius'] ?? 100; // km
+
+        // check if lat and lng are in Saudi Arabia
+        if ($lat < 15 || $lat > 35 || $lng < 34 || $lng > 56) {
+            // Riyadh
+            $lat = 24.7136;
+            $lng = 46.6753;
+        }
+
         // Literary_id
         $data['type'] = $data['type'] ?? null;
 
-        $events = Event::when(!isset($data['date_range']), function ($query) {
-            return $query->whereDate('start_date', '>=', Carbon::now());
+        $events = Event::when(isset($lat) && isset($lng), function ($query) use ($lat, $lng, $radius) {
+            return $query->selectRaw('*, ( 6371 * acos( cos( radians(?) ) *
+            cos( radians( lat ) ) * cos( radians( lng ) - radians(?) ) + sin( radians(?) ) *
+            sin( radians( lat ) ) ) ) AS distance', [$lat, $lng, $lat])
+                ->having('distance', '<', $radius)
+                ->orderBy('distance');
         })
+            ->when(!isset($data['date_range']), function ($query) {
+                return $query->whereDate('start_date', '>=', Carbon::now());
+            })
             ->when(isset($data['date_range']), function ($query) use ($data) {
                 return $this->filterDateRangeEvents($data['date_range'], $query);
+            })
+            ->when(isset($data['targeted_audience']), function ($query) use ($data) {
+                return $query->where('targeted_audience', $data['targeted_audience']);
             })
             ->when(isset($data['type']), function ($query) use ($data) {
                 return $query->where('literary_id', $data['type']);
@@ -63,6 +84,9 @@ class EventService implements EventServiceInterface
             ->orderBy('start_date', 'desc')
             ->when(isset($data['type']), function ($query) use ($data) {
                 return $query->where('literary_id', $data['type']);
+            })
+            ->when(isset($data['targeted_audience']), function ($query) use ($data) {
+                return $query->where('targeted_audience', $data['targeted_audience']);
             })
             ->paginate($data['per_page'] ?? 10, ['*'], 'page', $data['page'] ?? 1);
 
