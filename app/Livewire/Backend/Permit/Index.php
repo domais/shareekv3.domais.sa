@@ -65,8 +65,8 @@ class Index extends Component
                 'permitFile' => $this->permitFile,
             ], [
                 'selected_id' => 'required|exists:permits,id',
-                'permitNumber' => 'required',
-                'permitFile' => 'required|file|mimes:pdf',
+                'permitNumber' => 'required|unique:permits,permit_number',
+                'permitFile' => 'required|file|image|mimes:jpeg,png,jpg',
             ]);
             if ($validator->fails()) {
                 // Handle validation failure

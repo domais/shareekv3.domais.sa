@@ -115,13 +115,10 @@ x-data="{errors: @entangle('errors').live}" x-init="
                     </div>
                     <div class="row mt-4">
                         <div class="col-3 d-flex align-items-center">ملف التصريح</div>
-                        <div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF"></div>
-                    </div>
-                </div>
+						<div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF" accept="image/png, image/jpeg, image/jpg"></div>                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-success" wire:click="approvePermit">اعتماد</button>
-                </div>
+					<button type="button" class="btn btn-success" wire:click="approvePermit" wire:loading.attr="disabled">اعتماد</button>                </div>
             </div>
         </div>
     </div>

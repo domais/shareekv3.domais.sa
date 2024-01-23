@@ -413,34 +413,46 @@
             });
         });
 
-		Livewire.on('show-images', (data) => {
-			// Create a list of images
-			console.log(data);
-			let imagesList = '';
-			data[0]['images'].forEach((image, index) => {
-				imagesList += `
-					<a href="${window.location.origin}/storage/${image}" target="_blank">
-						<img src="${window.location.origin}/storage/${image}" alt="Image ${index + 1}" style="width: 100px; height: 100px; object-fit: cover;">
-					</a>
-					<br>
-				`;
-			});
+			Livewire.on('show-images', (data) => {
+				let imagesList = '';
+				let downloadButton = '';
 
-			// Create a list of video links
-			let videoLinks = '';
-			data[0]['links'].forEach((link, index) => {
-				videoLinks += `<a href="${link}" target="_blank">فيديو ${index + 1}</a><br>`;
-			});
+				// Create a list of images and the download button if images array is not empty
+				if (data[0]['images'].length > 0) {
+					data[0]['images'].forEach((image, index) => {
+						imagesList += `
+							<a href="${window.location.origin}/storage/${image}" target="_blank">
+								<img src="${window.location.origin}/storage/${image}" alt="Image ${index + 1}" style="width: 100px; height: 100px; object-fit: cover;">
+							</a>
+							<br>
+						`;
+					});
 
-			// Show the Swal
-			Swal.fire({
-				title: data[0]['event'],
-				html: `
-					${imagesList}
-					${videoLinks}
-				`,
-				showConfirmButton: false,
+					downloadButton = '<button id="downloadImages" class="btn btn-primary">تحميل الصور</button>';
+				}
+
+				// Create a list of video links
+				let videoLinks = '';
+				data[0]['links'].forEach((link, index) => {
+					videoLinks += `<a href="${link}" target="_blank">فيديو ${index + 1}</a><br>`;
+				});
+
+				// Show the Swal
+				Swal.fire({
+					title: data[0]['event'],
+					html: `
+						${imagesList}
+						${videoLinks}
+						${downloadButton}
+					`,
+					showConfirmButton: false,
+					didOpen: () => {
+						console.log("hello");
+						$('#downloadImages').on('click', function() {
+							Livewire.dispatch('downloadImages', {images : data[0]['images']});
+						});
+					},
+				});
 			});
-		});
 	})
 	</script>

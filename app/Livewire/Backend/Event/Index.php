@@ -5,11 +5,13 @@ namespace App\Livewire\Backend\Event;
 use App\Models\Event;
 use App\Models\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use ZipArchive;
 
 class Index extends Component
 {
@@ -23,6 +25,7 @@ class Index extends Component
     public $photos  = [];
     public $links = [];
     public $ValidationErrors = [];
+    public $permit_number;
 
 
     public function selected($id)
@@ -34,6 +37,10 @@ class Index extends Component
     public function show_images_urls($id,$model)
     {
         $event = Event::findorfail($id);
+
+        $this->permit_number = $event->order_number;
+
+
     
         // Get only the paths from images
         $images = array_map(function ($image) {
@@ -58,6 +65,33 @@ class Index extends Component
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
 
+    }
+
+    #[On('downloadImages')] 
+    public function downloadImages()
+    {
+        $zipName = $this->permit_number . '.zip';
+        $folderPath = Storage::disk('public')->path('files/' . $this->permit_number . '/documenting');
+    
+        // Check if the directory exists
+        if (!is_dir($folderPath)) {
+            dd('Directory does not exist.');
+            return response()->json(['error' => 'Directory does not exist.']);
+        }
+    
+        $zip = new ZipArchive();
+    
+        if ($zip->open(public_path($zipName), ZipArchive::CREATE) === TRUE)
+        {
+            foreach (glob($folderPath . '/*') as $filePath)
+            {
+                $relativePath = basename($filePath);
+                $zip->addFile($filePath, $relativePath);
+            }
+            $zip->close();
+        }
+    
+        return response()->download(public_path($zipName))->deleteFileAfterSend(true);
     }
 
 
