@@ -45,6 +45,7 @@ class SurveyCommand extends Command
                     'token' => $token,
                     'expire_at' => Carbon::now()->addDays(7),
                     'event_id' => $event->id,
+                    'type' => 'speaker',
                 ]);
 
                 Mail::to($speaker->email)->send(new SurveyMail($token, $event, $speaker, 'speaker'));
@@ -56,6 +57,7 @@ class SurveyCommand extends Command
                     'token' => $token,
                     'expire_at' => Carbon::now()->addDays(7),
                     'event_id' => $event->id,
+                    'type' => 'guest',
                 ]);
                 Mail::to($guest->email)->send(new SurveyMail($token, $event, $guest, 'guest'));
             });
