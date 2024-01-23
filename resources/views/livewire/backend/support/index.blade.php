@@ -30,6 +30,7 @@
 			name="طلبات جديدة"
 			count="{{count($requests)}}" 
 			:data="$requests"
+			route="support"
 			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminNewSupport')  "
 		/>
 
@@ -40,6 +41,7 @@
 			count="{{count($rejectd)}}"
 			edit="1"
 			:data="$rejectd"
+			route="support"
 			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('PermitUserReturned') : []  "
 			type="rejected"
 		/>
@@ -48,6 +50,8 @@
 			name="تحت الدراسة" 
 			count="{{count($initial_approve)}}" 
 			:data="$initial_approve" 
+			route="support"
+
 			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminNewSupportUnderStudy')  "
 		/>
 
@@ -55,6 +59,7 @@
 			name="الحالة النهائية"
 			count="{{ count($approved) }}"
 			:data="$approved"
+			route="support"
 			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('archiveSupport') :  [] "
 		/>
 
@@ -63,26 +68,7 @@
 
 
 
-    <div wire:ignore class="modal fade" id="Support-User-Upload-Tawtheeq-Modal" tabindex="-1" aria-labelledby="FinalApprovalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="FinalApprovalLabel">ارفاق الوصل</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row mt-2">
-                        <div class="col-3 d-flex align-items-center">رقم الوصل</div>
-                        <div class="col-8"><input type="text"  class="form-control" id="PermitNumber"></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                    <button type="button" class="btn btn-success" wire:click="save">اعتماد</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 
 </div>

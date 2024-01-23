@@ -283,6 +283,12 @@
 		});
 	}
 
+	function Act_Admin_Support(id,model){
+		//console.log(id,model);
+		Livewire.dispatch('Act_Admin_Support', {id:id, model:model});
+
+	}
+
 
 	// مشاركة فعالية لجميع المستخدمين
 	function Act_ShareEvent(id, model) {

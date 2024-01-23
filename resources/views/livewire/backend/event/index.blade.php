@@ -53,6 +53,7 @@ x-data="{errors: @entangle('ValidationErrors').live}" x-init="
             name="مجدولة"
             count="{{count($scheduled)}}" 
             :data="$scheduled"
+            route="event"
             :buttons="KanbanButtons('EventShareLink') "
 
          />
@@ -61,6 +62,7 @@ x-data="{errors: @entangle('ValidationErrors').live}" x-init="
             name="قائمة"
             count="{{count($active)}}" 
             :data="$active"
+            route="event"
             :buttons="KanbanButtons('EventShareLink')"
           />
 
@@ -69,6 +71,7 @@ x-data="{errors: @entangle('ValidationErrors').live}" x-init="
             count="{{count($completed)}}" 
             :data="$completed"
             permission="event-update"
+            route="event"
             :buttons="auth()->user()->hasRole('User') ? KanbanButtons('EventUserUploadTawtheeq') : KanbanButtons('AskForClose')"
 
          />
@@ -78,6 +81,7 @@ x-data="{errors: @entangle('ValidationErrors').live}" x-init="
             count="{{count($Waiting_for_approval)}}" 
             :data="$Waiting_for_approval"
             permission="event-update"
+            route="event"
             :buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('Approval') "
         />
 

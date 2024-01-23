@@ -240,7 +240,7 @@ function ArToEn($input) {
 
 			case 'PermitAdminNewSupportUnderStudy':
 				return [
-					['type' => 'modal' , 'title' => 'قبول', 'modal' => 'Support-User-Upload-Tawtheeq-Modal', 'class' => 'btn btn-success'],
+					['type' => 'sweetalert' , 'title' => 'قبول', 'onclick' => 'Act_Admin_Support', 'class' => 'btn btn-success'],
 					['type' => 'sweetalert' , 'title' => 'رفض', 'onclick' => 'Act_AdminRejectSupport', 'class' => 'btn btn-outline-danger'],
 
 				];

@@ -56,30 +56,14 @@ class Index extends Component
     }
 
  
-    public function save()
+    #[On('Act_Admin_Support')] 
+    public function Act_Admin_Support($id,$model)
     {
-        try {
-            //code...
-            $this->validate([
-               // 'file' => 'required|file|mimes:pdf|max:1024',
-            ]);
-            
-        } catch (ValidationException $th) {
-            dd($th->validator->errors()->all());
-            return;
-        }
+            //dd($id,$model);
 
-            $support = Permit::findorfail($this->selected_id);
+            $support = Permit::findorfail($id);
 
             $support->support->update(['status_id' => 13]);
-
-            $path = $this->file->store('files/'.$support->order_number.'/documenting','public');
-            $document = new File();
-            $document->name = $support->order_number;
-            $document->use = 'documenting';
-            $document->type = 'pdf';
-            $document->path = $path;
-            $support->fileable()->save($document);
   
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));

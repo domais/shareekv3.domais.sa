@@ -1,4 +1,4 @@
-@props(['name' => '','count' => 0 , 'buttons' => [],'edit' => 0,'data' => [],'permission' => 'permit-update'])
+@props(['name' => '','count' => 0 , 'buttons' => [],'edit' => 0,'data' => [],'permission' => 'permit-update','route' => 'permit'])
 <div class="column">
     <div class="head">
         <div class="fw-bold">{!! html_entity_decode($name) !!} <span>{{$count}}</span></div>
@@ -12,7 +12,7 @@
     <div class="body">
         @foreach ($data as $item)
         <div class="item">
-            <div class="click" onclick="window.location = '{{route('permit.show',$item->id)}}'">
+            <div class="click" onclick="window.location = '{{route($route . '.show', $item->id)}}'">
                 <div class="name">
                     <div class="my-2">{{$item->title}}</div>
                     @if (auth()->user()->hasRole('SuperAdmin'))
