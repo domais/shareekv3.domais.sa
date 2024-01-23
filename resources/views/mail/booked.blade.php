@@ -13,21 +13,19 @@
         تفاصيل التسجيل:
     </p>
 
-    <p>لقد تم تغيير كلمة المرور الخاصة بك نظرًا لتحديث البيانات والحماية المستمرة</p>
+    <img src="{{$image}}" alt="{{$event->name}}" />
 
-    <img src="{{$event['image']}}" alt="{{$event['name']}}" />
-
-    <ul>
-        <li>التاريخ: <strong>{{$event['name']}}</strong></li>
-        <li>المكان: <strong>{{$event['date']}}</strong></li>
-        <li>اسم الفعالية: <strong>{{$event['partner']}}, {{$event['partner_zone']}} [Google Map]({{$event['location']}})</strong></li>
+    <ul style="text-right">
+        <li>اسم الفعالية: <strong>{{$event->name}}</strong></li>
+        <li>التاريخ: <strong>{{$event->start_date}}</strong></li>
+        <li>المكان: <strong>{{optional($event->user->owner)->name}}, {{optional($event->user->owner)->city}} <a target="_blank" href="https://maps.google.com/?q={{$event->user->owner->lat . ',' . $event->user->owner->lng}}"></a></strong></li>
     </ul>
 
     <p>
     نتطلع إلى رؤيتك في الفعالية ونتمنى لك تجربة ممتعة ومفيدة.
     </p>
 
-    <a href="https://localhost:8000/events/" >
+    <a href="{{config('app.url') . '/i/events/' . $event->id}}" class="btn btn-primary">
     تفاصيل الفعالية
     </a>
 

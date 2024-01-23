@@ -90,7 +90,7 @@ class EventGuestService implements EventGuestServiceInterface
 
             // attach the user to the event
             $event->guests()->attach($user->id);
-
+            
             Mail::to($user)->send(new ThanksMail($user->name));
             Mail::to($user)->send(new BookedMail($event, $user->name));
 
