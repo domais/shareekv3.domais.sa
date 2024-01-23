@@ -84,6 +84,7 @@ class UsersTableSeeder extends Seeder
             'lat' => '21.559637',
             'lng' => '39.131173',
             'class' => 'أ',
+            'points' => 20,
             'CR' => 7007455674,
         ]);
 
@@ -103,6 +104,7 @@ class UsersTableSeeder extends Seeder
             'lat' => '21.559637',
             'lng' => '39.131173',
             'class' => 'أ',
+            'points' => 20,
             'CR' => 7017333890,
         ]);
 
@@ -124,6 +126,7 @@ class UsersTableSeeder extends Seeder
             'lat' => '21.559637',
             'lng' => '39.131173',
             'class' => 'أ',
+            'points' => 20,
             'CR' => 70037801129,
         ]);
 

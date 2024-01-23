@@ -102,12 +102,12 @@ class Inputs extends Component
                     throw new ValidationException($validator);
                 }
                   
-                 later 
+                 later */
                 if (auth()->user()->hasRole('User') && auth()->user()->owner->points == 0) {
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('points', 'ليس لديك رصيد كافي لإضافة تصريح');
                     throw new ValidationException($validator);
-                }*/
+                }
             }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
@@ -125,8 +125,12 @@ class Inputs extends Component
         else{
 
             
-            $this->savePermit($permitData, $this->speakers,$this->partnerships,$this->permit);
-            
+            try {
+                $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit);
+            } catch (\Exception $e) {
+                $this->errors = [$e->getMessage()];
+                return;
+            }            
         }
         if ($this->draft) {
             session(['draft_to_delete' => $this->draft->id]);

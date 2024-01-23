@@ -169,9 +169,16 @@ trait LiveChanges
         $permitData['status_id'] =  2;
         
         DB::transaction(function () use ($permitData,$speakers,$permit,$partnerships) {
-            $needSupport = collect($speakers)->contains(function ($speaker) {
-                return $speaker['reservations'] || $speaker['reward'];
+            $needSupport = collect($speakers)->contains(function ($speaker) use (&$counter_speakers) {
+                if ($speaker['reservations'] || $speaker['reward']) {
+                    return true;
+                }
+                return false;
             });
+
+            $counter_speakers = array_reduce($speakers, function ($count, $speaker) {
+                return $count + ($speaker['reservations'] || $speaker['reward'] ? 1 : 0);
+            }, 0);
             
             if ($needSupport) {
                 $permitData['need_support'] = true;
@@ -246,10 +253,14 @@ trait LiveChanges
                 $partner = Partner::where('owner_id', $user->id)->first();
                 
                 if ($partner) {
-                    if ($partner->points > 0) {
-                        $partner->points--;
-                        $partner->save();
+                   // dd($partner->points,$counter_speakers,$speakers);
+                    $newPoints = $partner->points - $counter_speakers;
+                    if ($newPoints < 0) {
+                        throw new \Exception('نقاط غير كافية.');
                     }
+            
+                    $partner->points = $newPoints;
+                    $partner->save();
                 }
 
                 // start files upload
