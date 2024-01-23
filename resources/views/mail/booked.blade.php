@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <p>
+    <h3>
         مرحبًا {{$name}}
-    </p>
+    </h3>
 
     <p>نود أن نشكرك علي اهتمامك بفعاليات مبادرة الشريك الأدبي
 
@@ -15,7 +15,7 @@
 
     <img src="{{$image}}" alt="{{$event->title}}" width="320">
 
-    <ul style="text-align: right">
+    <ul style="text-align: right" dir="rtl">
         <li>اسم الفعالية: <strong>{{$event->title}}</strong></li>
         <li>التاريخ: <strong>{{$event->start_date}}</strong></li>
         <li>المكان: <strong>{{optional($event->user->owner)->name}}, {{optional($event->user->owner)->city}} <a target="_blank" href="https://maps.google.com/?q={{$event->user->owner->lat . ',' . $event->user->owner->lng}}">Google map</a></strong></li>
