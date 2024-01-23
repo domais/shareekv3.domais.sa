@@ -1,7 +1,7 @@
 @props(['name' => '','count' => 0 , 'buttons' => [],'edit' => 0,'data' => [],'permission' => 'permit-update'])
 <div class="column">
     <div class="head">
-        <div class="fw-bold">{{$name}} <span>{{$count}}</span></div>
+        <div class="fw-bold">{!! html_entity_decode($name) !!} <span>{{$count}}</span></div>
         @if ($name == 'منتهية وبإنتظار توثيق الشريك')
         <button class="btn btn-danger" onclick="fireSwal()">
             <i class="fas fa-bell"></i>
@@ -14,16 +14,16 @@
         <div class="item">
             <div class="click" onclick="window.location = '{{route('permit.show',$item->id)}}'">
                 <div class="name">
-                    <div>{{$item->title}}</div>
+                    <div class="my-2">{{$item->title}}</div>
                     @if (auth()->user()->hasRole('SuperAdmin'))
-                     <small>{{$item->user->name}}/{{$item->user ? $item->user->owner->name : ''}}</small>
+                     <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
                     @endif
                     {{-- Rahmani: if admin => show caffee name / else hide --}}
                 </div>
                 @if ($item->literary)
-                <div class="type mb-3">فعالية</div>
+                <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->name}}@endif</div>
 
-                <div class="type mb-3">{{-- {{$item->literary->parent->name}}   > --}} {{$item->literary->name}}</div>
+                {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
                 @else
                 <div class="type mb-3">مساهمة</div>
 

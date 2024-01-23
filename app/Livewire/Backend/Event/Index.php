@@ -30,6 +30,23 @@ class Index extends Component
         $this->selected_id = $id;
     }
 
+    #[On('show_images_urls')] 
+    public function show_images_urls($id,$model)
+    {
+        $event = Event::findorfail($id);
+    
+        // Get only the paths from images
+        $images = array_map(function ($image) {
+            return $image['path'];
+        }, $event->fileable->toArray());
+
+        $links = json_decode($event->links, true);
+
+    
+        // Dispatch the event with only the event name and the images paths
+        $this->dispatch('show-images', ['event' => $event->title, 'images' => $images,'links' => $links]);
+    }
+
     #[On('Act_AdminApprove')] 
     public function Act_AdminApprove($id,$model)
     {
@@ -47,17 +64,29 @@ class Index extends Component
     #[On('saveEventImages')] 
     public function saveEventImages()
     {
+      //  dd($this->photos, $this->links, $this->selected_id);
         try {
-            if (empty($this->photos)) {
+            if (empty($this->photos) && (empty($this->links) || count(array_filter($this->links)) == 0)) {
+                // Both photos and links are empty
                 $validator = Validator::make([], []); // empty data and rules
                 $validator->errors()->add('photos', 'الصور مطلوبة');
+                $validator->errors()->add('links', 'الروابط مطلوبة');
                 throw new ValidationException($validator);
+            } else {
+                // At least one of photos or links exists
+                if (!empty($this->photos)) {
+                    // Photos exist, validate them
+                    $this->validate([
+                        'photos.*' => 'required|image',
+                    ]);
+                }
+                if (!empty($this->links) && count(array_filter($this->links)) > 0) {
+                    // Links exist and are not empty, validate them
+                    $this->validate([
+                        'links.*' => 'required|url',
+                    ]);
+                }
             }
-        
-            $this->validate([
-                'photos.*' => 'required|image',
-                'links.*' => 'required|url',
-            ]);
             
         } catch (ValidationException $th) {
             $this->ValidationErrors = $th->validator->errors()->all();

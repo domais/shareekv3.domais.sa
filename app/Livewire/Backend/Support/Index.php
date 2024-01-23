@@ -61,7 +61,7 @@ class Index extends Component
         try {
             //code...
             $this->validate([
-                'file' => 'required|file|mimes:pdf|max:1024',
+               // 'file' => 'required|file|mimes:pdf|max:1024',
             ]);
             
         } catch (ValidationException $th) {
@@ -110,6 +110,9 @@ class Index extends Component
     {
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 15]);
+
+        AddToHistory($permit->id,$permit->status_id,null,$reason);
+
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }

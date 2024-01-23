@@ -81,6 +81,7 @@ class Inputs extends Component
 
     public function store($status)
     {
+       
         $this->form->user_id = auth()->user()->id;
 
         try {

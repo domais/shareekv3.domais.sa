@@ -20,6 +20,9 @@
 						<option value="2">خارجية</option>
 
 					</select>
+
+					<input type="text" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">
+					
 				</div>
 			</div>
 			<div class="row my-3" x-show="location == 2">
@@ -59,46 +62,82 @@ input[type=file]#LocImg_input::before {
 	content: 'اضغط هنا لأختيار صورة المكان'
 }
 </style>
-<script async defer src="https://maps.googleapis.com/maps/api/js?callback=start&amp;key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&amp;language=ar&amp;region=SA"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=start&key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&language=ar&region=SA"></script>
 <script>
 	let map;
 	let marker; // Declare marker variable outside the function
 
 	function start(){
 		console.log('Google\'s Map loaded 👍')
+		var input = document.getElementById('search-location');
+		var autocomplete = new google.maps.places.Autocomplete(input);
+
+		// Add event listener for selecting location from autocomplete
+		autocomplete.addListener('place_changed', function() {
+			var place = autocomplete.getPlace();
+			if (!place.geometry) {
+				// User entered the name of a Place that was not suggested and
+				// pressed the Enter key, or the Place Details request failed.
+				window.alert("No details available for input: '" + place.name + "'");
+				return;
+			}
+
+			// If the place has a geometry, then present it on a map.
+			if (place.geometry.viewport) {
+				map.fitBounds(place.geometry.viewport);
+			} else {
+				map.setCenter(place.geometry.location);
+				map.setZoom(17);  // Why 17? Because it looks good.
+			}
+
+			// Move the marker to the place where the user has selected
+			marker.setPosition(place.geometry.location);
+
+			// Update the input fields with the selected place's latitude and longitude
+			updateInput(place.geometry.location.lat(), place.geometry.location.lng());
+		});
 	}
+
+	
 	function initMap() {
-		var position = { lat: {{$this->form->lat ?? 21.4969389}}, lng: {{$this->form->lng ?? 39.2271579}} };
-		var myOptions = {
-			zoom: 17,
-			streetViewControl: false,
-			center: position
-		};
-		map = new google.maps.Map(document.querySelector(".map"), myOptions);
+    var position = { lat: {{$this->form->lat ?? 21.4969389}}, lng: {{$this->form->lng ?? 39.2271579}} };
+    var myOptions = {
+        zoom: 17,
+        streetViewControl: false,
+        center: position
+    };
+    map = new google.maps.Map(document.querySelector(".map"), myOptions);
 
-		map.setOptions({ styles: [{ featureType: "landscape", stylers: [{ visibility: "off" }], }, { featureType: "poi", stylers: [{ visibility: "off" }] }, { featureType: "landscape", stylers: [{ visibility: "off" }] }] });
+    map.setOptions({ styles: [{ featureType: "landscape", stylers: [{ visibility: "off" }], }, { featureType: "poi", stylers: [{ visibility: "off" }] }, { featureType: "landscape", stylers: [{ visibility: "off" }] }] });
 
-		marker = new google.maps.Marker({ position: position, url: 'https://maps.google.com/?q=' + position.lat + ',' + position.lng + '', map });
+    marker = new google.maps.Marker({ position: position, url: 'https://maps.google.com/?q=' + position.lat + ',' + position.lng + '', map });
 
-		google.maps.event.addListener(marker, 'click', function () {
-			window.open(this.url, '_tab')
-		});
+    google.maps.event.addListener(marker, 'click', function () {
+        window.open(this.url, '_tab')
+    });
 
-		google.maps.event.addListener(map, 'drag', function () {
-			marker.setPosition(map.getCenter())
-		});
+    google.maps.event.addListener(map, 'drag', function () {
+        marker.setPosition(map.getCenter())
+    });
 
-		// Add a "drag end" event handler
-		google.maps.event.addListener(map, 'zoom_changed', function () {
-			marker.setPosition(map.getCenter());
-		});
+    // Add a "drag end" event handler
+    google.maps.event.addListener(map, 'zoom_changed', function () {
+        marker.setPosition(map.getCenter());
+    });
 
-		google.maps.event.addListener(map, 'dragend', function () {
-			let lat = map.getCenter().lat()
-			let lng = map.getCenter().lng()
-			updateInput(lat, lng)
-		});
-	}
+    google.maps.event.addListener(map, 'dragend', function () {
+        let lat = map.getCenter().lat()
+        let lng = map.getCenter().lng()
+        updateInput(lat, lng)
+    });
+
+    // Add a "click" event listener to the map
+    google.maps.event.addListener(map, 'click', function(event) {
+        let clickedLocation = event.latLng;
+        marker.setPosition(clickedLocation);
+        updateInput(clickedLocation.lat(), clickedLocation.lng());
+    });
+}
 
 	function updateMarkerPosition(lat, lng) 
 	{

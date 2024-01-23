@@ -573,6 +573,11 @@ nav .topbar {
 	text-align: center;
 }
 
+.kanban .column .head small{
+	font-weight: 500 !important;
+	opacity: .7;
+}
+
 .kanban .column .head .seach {
 	display: inline-block;
 	padding: 5px 10px;
@@ -607,6 +612,9 @@ nav .topbar {
 
 .kanban .column .item .number span {
 	font-size: 15px !important;
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .kanban .column .item .number small {
@@ -1759,6 +1767,11 @@ label.dropzone1 {
 	background-color: #fff;
 }
 
+#editor.disabled{
+	background-color: #e9ecef;
+	padding: 5px;
+}
+
 .event-history ul {
 	background-color: #d9dfe7;
 	padding: 20px 10px;
@@ -2083,4 +2096,36 @@ div:where(.swal2-container) button:where(.swal2-styled).swal2-confirm:focus {
     width: 48px;
     border-radius: 5px;
     margin-left: 20px;
+}
+span.flatpickr-weekday {
+	font-size: 72% !important;
+	font-weight: 600 !important;	
+}
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+	font-size: 17px !important;
+	float: right;
+    direction: rtl;
+    margin: 3px 20px 0 0;
+}
+.flatpickr-current-month .numInputWrapper {
+    margin-top: 5px;
+}
+.flatpickr-weekdays {
+	margin-top: 8px;
+}
+.flatpickr-months .flatpickr-prev-month.flatpickr-prev-month, .flatpickr-months .flatpickr-next-month.flatpickr-prev-month {
+	right: 0 !important;
+}
+.flatpickr-months .flatpickr-prev-month.flatpickr-next-month, .flatpickr-months .flatpickr-next-month.flatpickr-next-month {
+	left: 0 !important;
+}
+.flatpickr-months svg{
+	transform: rotateY(180deg);
+}
+
+.flatpickr-months .flatpickr-next-month.flatpickr-next-month, .flatpickr-months .flatpickr-prev-month.flatpickr-next-month {
+    right: unset;
+}
+.flatpickr-months .flatpickr-prev-month.flatpickr-prev-month, .flatpickr-months .flatpickr-next-month.flatpickr-prev-month {
+    left: unset;
 }

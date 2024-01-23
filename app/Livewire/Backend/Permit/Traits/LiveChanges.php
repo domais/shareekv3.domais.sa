@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Permit\Traits;
 
 use App\Models\Draft;
+use App\Models\Event;
 use App\Models\File;
 use App\Models\History;
 use App\Models\Partner;
@@ -181,11 +182,18 @@ trait LiveChanges
             }
 
             if ($permit) {
+
+                $check_event_exist = Event::where('order_number', $permit->order_number)->exists();
+
+             
                 // update permit
-                $permitData['status_id'] = 3;
                 $order_number = $permit->order_number;
                 $permitData['order_number'] = $order_number;
-                $permit->update($permitData);
+                if (!$check_event_exist) {
+                    $permitData['status_id'] = 3;
+                    $permit->update($permitData);
+                }
+
                 $permit->speakers()->delete();
                 $permit->partnerships()->delete();
 
