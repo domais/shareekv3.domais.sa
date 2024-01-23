@@ -23,8 +23,11 @@ return new class extends Migration
             $table->string('category_id');
             $table->string('other')->nullable();
             $table->string('targeted_audience')->nullable();
+            $table->string('meeting_link')->nullable();
+            $table->integer('attendance')->default(0);
 
-            $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside');
+
+            $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside , 3 => online');
             $table->unsignedBigInteger('literary_id')->nullable();
             $table->unsignedBigInteger('status_id');
             $table->string('title');

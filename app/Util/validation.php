@@ -24,10 +24,11 @@ use Illuminate\Validation\Rules\Password;
     function newPermit()
     {
         return [
+            'meeting_link' => 'nullable|url|max:255',
             'order_number' => 'required|unique:permits,order_number',
             'user_id' => 'required|exists:users,id',
             'event_type_id' => 'required|exists:event_types,id',
-            'event_location' => 'required|in:1,2',
+            'event_location' => 'required|in:1,2,3',
             'literary_id' => 'nullable|exists:literaries,id',
             'status_id' => 'required|exists:statuses,id',
             'description' => 'required',

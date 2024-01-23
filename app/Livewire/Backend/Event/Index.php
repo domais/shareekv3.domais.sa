@@ -26,11 +26,17 @@ class Index extends Component
     public $links = [];
     public $ValidationErrors = [];
     public $permit_number;
+    public $selected_event;
+    public $attendance;
 
 
     public function selected($id)
     {
         $this->selected_id = $id;
+
+        $this->selected_event = Event::findorfail($this->selected_id)->toArray();
+
+     //   dd($this->selected_event->toArray());
     }
 
     #[On('show_images_urls')] 
@@ -131,6 +137,7 @@ class Index extends Component
 
         $event->links = json_encode($this->links);
         $event->status_id = 8;
+        $event->attendance = $this->attendance ? $this->attendance : 0;
         $event->save();
 
       

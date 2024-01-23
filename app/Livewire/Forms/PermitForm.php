@@ -24,6 +24,7 @@ class PermitForm extends Form
     public $image_adv;
     public $approval_file;
     public $location_image;
+    public $meeting_link;
 
 
 
@@ -52,9 +53,10 @@ class PermitForm extends Form
         // this 3 always required
         $this->title = $data->title;
         if ($data->literary) {
+            dd($data->literary);
             # code...
-            $this->literary_id = $data->literary->parent->id;
-            $this->litrary_children_id = $data->literary_id;
+            $this->literary_id = $data->literary->parent->id ?? "لم يحدد نوع الأدب";
+            $this->litrary_children_id = $data->literary_id ?? "لم يحدد نوع الفرعي الأدب";
         }
 
 

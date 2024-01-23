@@ -38,11 +38,21 @@
 						<option selected disabled value="">اختر ...</option>
 						<option value="1">داخلية</option>
 						<option value="2">خارجية</option>
+						<option value="3">افتراضي</option>
+
 
 					</select>
 
 					<input type="text" x-show="location == 2" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">
 					
+				</div>
+			</div>
+			<div class="row my-3" x-show="location == 3">
+				<div class="col-4 align-items-center">
+					رابط الاجتماع
+				</div>
+				<div class="col-8">
+					<input type="text"  class="form-control rounded" wire:model="form.meeting_link">
 				</div>
 			</div>
 			<div class="row my-3" x-show="location == 2">
