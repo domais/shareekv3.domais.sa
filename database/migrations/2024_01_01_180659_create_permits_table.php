@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('event_type_id');
             $table->string('category_id');
             $table->string('other')->nullable();
-            $table->string('targeted_audience');
+            $table->string('targeted_audience')->nullable();
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside');
             $table->unsignedBigInteger('literary_id')->nullable();
@@ -36,6 +36,7 @@ return new class extends Migration
             $table->boolean('need_support')->default(0);
             $table->double('lat')->default(21.443);
             $table->double('lng')->default(39.333);
+            $table->sting('source')->nullable();
 
             $table->softDeletes();
 
