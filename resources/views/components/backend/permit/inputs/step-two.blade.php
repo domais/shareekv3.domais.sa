@@ -1,9 +1,29 @@
 <div
-  x-data="{location: @entangle('form.event_location').live,lat: @entangle('form.lat').live,lng: @entangle('form.lng').live}"
-  x-init="$watch('location',
+  x-data="{location: @entangle('form.event_location').live,
+  lat: @entangle('form.lat').live,
+  lng: @entangle('form.lng').live,
+  index: 0,
+  oldlat: 0,
+  oldlng: 0,
+}"
+  x-init="
+  if(index == 0)
+  {
+	  oldlat = lat;
+	  oldlng = lng;
+	  index++;
+  }
+  $watch('location',
    value => {
 	 if (value == 1)
-	 updateMarkerPosition(lat, lng);
+	 {
+	 updateMarkerPosition(oldlat, oldlng);
+	 disableMap();
+	 }
+	 else
+	 {
+		allowMap();
+	 }
 	 })"
 >
 
@@ -21,7 +41,7 @@
 
 					</select>
 
-					<input type="text" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">
+					<input type="text" x-show="location == 2" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">
 					
 				</div>
 			</div>
@@ -66,6 +86,34 @@ input[type=file]#LocImg_input::before {
 <script>
 	let map;
 	let marker; // Declare marker variable outside the function
+
+	let mapInteractionsEnabled = true;
+
+	function disableMap() {
+		if (!mapInteractionsEnabled) return;
+		google.maps.event.clearListeners(map, 'drag');
+		google.maps.event.clearListeners(map, 'dragend');
+		google.maps.event.clearListeners(map, 'click');
+		mapInteractionsEnabled = false;
+	}
+
+	function allowMap() {
+		if (mapInteractionsEnabled) return;
+		google.maps.event.addListener(map, 'drag', function () {
+			marker.setPosition(map.getCenter())
+		});
+		google.maps.event.addListener(map, 'dragend', function () {
+			let lat = map.getCenter().lat()
+			let lng = map.getCenter().lng()
+			updateInput(lat, lng)
+		});
+		google.maps.event.addListener(map, 'click', function(event) {
+			let clickedLocation = event.latLng;
+			marker.setPosition(clickedLocation);
+			updateInput(clickedLocation.lat(), clickedLocation.lng());
+		});
+		mapInteractionsEnabled = true;
+	}
 
 	function start(){
 		console.log('Google\'s Map loaded 👍')
