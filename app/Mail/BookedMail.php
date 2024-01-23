@@ -22,8 +22,7 @@ class BookedMail extends Mailable implements ShouldQueue
     public function __construct(
         public $event,
         public string $name
-    )
-    {
+    ) {
         //
     }
 
@@ -44,6 +43,11 @@ class BookedMail extends Mailable implements ShouldQueue
     {
         return new Content(
             view: 'mail.booked',
+            with: [
+                'event' => $this->event,
+                'image' => $this->event->image ? url($this->event->image->path) : asset('img/default-event.png'),
+                'name' => $this->name
+            ]
         );
     }
 
