@@ -27,7 +27,7 @@ $watch('errors', value => {
 				</li>
 			</ol>
 			<div class="links">
-                <button type="button" class="btn btn-brand float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-brand float-end" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                     أضف إداري 
                 </button>
 			</div>
@@ -79,7 +79,7 @@ $watch('errors', value => {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>
-                                <button type="button" wire:click="save"  class="btn btn-success">حفظ</button>
+                                <button type="button" wire:click="save" wire:loading.attr="disabled"  class="btn btn-success">حفظ</button>
                             </div>
                         </div>
                         </div>

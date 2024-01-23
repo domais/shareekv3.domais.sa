@@ -37,7 +37,15 @@ class RolesTableSeeder extends Seeder
             'description' => 'صلاحيات في حدود العمليات',
             'is_admin' => false,
             // Add permissions for deletion
-]);
+        ]);
+
+        $Adminstrator = Role::create([
+            'name' => 'Adminstrator',
+            'display_name' => 'إداري',
+            'description' => 'صلاحيات في حدود العمليات',
+            'is_admin' => true,
+            // Add permissions for deletion
+        ]);
 
 
         $permissions = Permission::all();

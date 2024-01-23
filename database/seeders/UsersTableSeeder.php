@@ -52,10 +52,10 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $superAdmin1->addRole(1);
-        $superAdmin2->addRole(1);
-        $superAdmin3->addRole(1);
-        $superAdmin4->addRole(1);
-        $superAdmin5->addRole(1);
+        $superAdmin2->addRole(4);
+        $superAdmin3->addRole(4);
+        $superAdmin4->addRole(4);
+        $superAdmin5->addRole(4);
 
         $permissions = Permission::all();
 

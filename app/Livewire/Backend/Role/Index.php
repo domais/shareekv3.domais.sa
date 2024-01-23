@@ -3,7 +3,9 @@
 namespace App\Livewire\Backend\Role;
 
 use App\Livewire\Forms\UserForm;
+use App\Mail\WelcomeNewAdminMail;
 use App\Models\Permission;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
@@ -44,6 +46,9 @@ class Index extends Component
         }
 
         $user = $this->Uform->save(2);
+        
+        Mail::to($user->email)->send(new WelcomeNewAdminMail($user));
+
 
 
 

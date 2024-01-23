@@ -38,7 +38,7 @@ class UserForm extends Form
             $user->addRole(2);
         }
         else {
-            $user->addRole(1);
+            $user->addRole(4);
         }
 
         return $user;

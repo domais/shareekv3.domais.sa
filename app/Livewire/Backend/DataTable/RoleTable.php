@@ -16,7 +16,7 @@ class RoleTable extends DataTableComponent
     {
         return User::query()
             ->whereHas('roles', function ($query) {
-                $query->where('name', 'SuperAdmin');
+                $query->where('is_admin', true);
             });
     }
     public function configure(): void
