@@ -22,7 +22,6 @@ return new class extends Migration
             $table->unsignedBigInteger('event_type_id');
             $table->string('category_id');
             $table->string('other')->nullable();
-            $table->string('targeted_audience');
             $table->string('meeting_link')->nullable();
             $table->string('targeted_audience')->nullable();
 
