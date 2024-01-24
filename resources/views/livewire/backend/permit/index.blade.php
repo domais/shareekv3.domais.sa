@@ -62,7 +62,7 @@ x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
 		@endrole
 
 		
-		@role('SuperAdmin')
+		@role('SuperAdmin|Adminstrator')
 
 			<x-backend.kanban-column 
 				name="طلبات جديدة"
