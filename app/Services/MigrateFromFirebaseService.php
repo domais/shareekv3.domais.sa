@@ -11,6 +11,7 @@ use App\Models\Speaker;
 use App\Models\Literary;
 use Illuminate\Support\Str;
 use App\Mail\UpdatePasswordMail;
+use App\Models\File;
 use App\Models\Permit;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -230,14 +231,16 @@ class MigrateFromFirebaseService
             'source' => 'firebase'
         ]);
 
-        $this->permit($item, $event);
+        
 
         // event is updated
         if ($event->wasRecentlyCreated && isset($item->Evint_img) &&  $item->Evint_img) {
             \Log::info('Image: ' . $item->Evint_img);
             // morph file avatar to file table
-            $this->saveFile($item->Evint_img, 'image', 'location_image', $event);
+            $this->saveFile($item->Evint_img, 'image', 'adv', $event);
         }
+
+        $this->permit($item, $event);
 
 
         \Log::info('Event: #' . $event->id . ' ' . $event->title);
@@ -245,7 +248,7 @@ class MigrateFromFirebaseService
     }
 
     private function permit($item, $event) {
-        Permit::updateOrCreate(['order_number' => $item->id], [
+        $permit = Permit::updateOrCreate(['order_number' => $item->id], [
             'order_number' => $item->id,
             'user_id' => $event->user_id,
             'admin_id' => $event->admin_id,
@@ -266,6 +269,15 @@ class MigrateFromFirebaseService
             'lng' => $event->lng,
             'source' => $event->source
         ]);
+
+         if ($event->image) {
+            $newImage = $event->image->replicate();
+            $newImage->fileable_type = 'App\Models\Permit'; // Replace 'NewType' with the actual type
+            $newImage->fileable_id = $permit->id; // Replace 'NewId' with the actual ID
+            $newImage->save();     
+         }
+    
+
     }
 
     function convert($string): int

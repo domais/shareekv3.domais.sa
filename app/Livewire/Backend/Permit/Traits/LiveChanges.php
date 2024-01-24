@@ -270,7 +270,9 @@ trait LiveChanges
                 $image->name = $permit->order_number;
                 $image->use = 'adv';
                 $image->type = 'image';
-                $image->path = $permitData['image_adv']->store('files/'.$permit->order_number.'/adv','public');
+            
+                $image->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/adv', $permitData['image_adv'], 'public');
+
 
                 $permit->fileable()->save($image);
 
@@ -279,14 +281,17 @@ trait LiveChanges
                     $approval_file->name = $permit->order_number;
                     $approval_file->use = 'approval_letter';
                     $approval_file->type = 'pdf';
-                    $approval_file->path = $permitData['approval_file']->store('files/'.$permit->order_number.'/approval_letter','public');
+                    $approval_file->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/approval_letter', $permitData['approval_file'], 'public');
+
                     $permit->fileable()->save($approval_file);
 
                     $location_image = new File();
                     $location_image->name = $permit->order_number;
                     $location_image->use = 'location_image';
                     $location_image->type = 'image';
-                    $location_image->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image','public');
+                   // $location_image->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image','public');
+                    $location_image->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/location_image', $permitData['location_image'], 'public');
+
                     $permit->fileable()->save($location_image);
 
                 }
