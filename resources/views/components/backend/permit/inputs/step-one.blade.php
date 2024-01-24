@@ -161,8 +161,7 @@
                 @if ($this->permit)
                     <div class="DropArea" style="height: 360px;background:none ">
                         <img id="AdvImg"
-                            src="{{ asset('storage/' . $this->permit->fileable->where('use', 'adv')->first()->path) }}">
-                    </div>
+                        src="{{ $this->permit->fileable->where('use', 'adv')->first() ? asset('storage/' . $this->permit->fileable->where('use', 'adv')->first()->path) : '' }}">                    </div>
                 @else
                     <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3"
                         id="AdvImg_input">

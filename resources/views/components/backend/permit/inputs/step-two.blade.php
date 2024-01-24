@@ -70,11 +70,9 @@
 			<input type="file"  x-bind:disabled="is_show_page"  class="style image mx-auto mb-3" id="LocImg_input" x-show="location == 2">
 			<div class="DropArea" style="height: 311px" x-show="location == 2">
 				@if ($this->permit  && $this->permit->event_location == 2 && $this->is_show_page)
-					<img id="LocImg" wire:model="form.location_image" src="{{asset('storage/'.$this->permit->fileable->where('use','location_image')->first()->path)}}" alt="Picture">
-				@else
+				<img id="LocImg" wire:model="form.location_image" src="{{ $this->permit->fileable->where('use', 'location_image')->first() ? asset('storage/' . $this->permit->fileable->where('use', 'location_image')->first()->path) : '' }}" alt="Picture">				@else
 				 @if ($this->permit  && $this->permit->event_location == 2 && !$this->is_show_page)
-				 	<img id="LocImg" wire:model="form.location_image" src="{{asset('storage/'.$this->permit->fileable->where('use','location_image')->first()->path)}}" alt="Picture">
-				 @else
+				 <img id="LocImg" wire:model="form.location_image" src="{{ $this->permit->fileable->where('use', 'location_image')->first() ? asset('storage/' . $this->permit->fileable->where('use', 'location_image')->first()->path) : '' }}" alt="Picture">				 @else
 				 <img id="LocImg" wire:model="form.location_image" src="{{asset('img/pexel.png')}}" alt="Picture">
 
 				 @endif
