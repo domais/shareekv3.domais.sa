@@ -44,11 +44,15 @@ class PartnerTable extends DataTableComponent
     {
         $partner = Partner::find($id);
 
+        //dd($partner->fileable->path);
+
+        $image = $partner->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $partner->fileable->path : 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png';
+
         $permitCounter = $partner->owner->permits->count();
 
         $eventCounter = $partner->owner->events->count();
 
-        $this->dispatch('show-partner-details', ['partner' => $partner, 'permitCounter' =>  $permitCounter, 'eventCounter' => $eventCounter]);
+        $this->dispatch('show-partner-details', ['image' => $image,'partner' => $partner, 'permitCounter' =>  $permitCounter, 'eventCounter' => $eventCounter]);
     }
 
     public function filters(): array
