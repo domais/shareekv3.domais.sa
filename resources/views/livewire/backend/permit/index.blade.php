@@ -38,8 +38,10 @@ x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
 				@endif
 
 				<div class="btn-group" role="group" aria-label="View switcher">
-					<button type="button" class="btn btn-secondary" :class="{ 'btn-danger': view === 'kanban' }" @click="view = 'kanban'">عرض كقوائم</button>
-					<button type="button" class="btn btn-secondary" :class="{ 'btn-danger': view === 'table' }" @click="view = 'table'">عرض كجدول</button>
+					<button type="button" class="btn btn-outline-secondary" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
+						<span x-show="view === 'kanban'">عرض كجدول</span>
+						<span x-show="view === 'table'">عرض كقوائم</span>
+					</button>
 				</div>
 				
 

@@ -27,7 +27,6 @@ class PermitForm extends Form
     public $meeting_link;
 
 
-
     public $order_number = 0;
     public $user_id;
     public $status_id = 1;

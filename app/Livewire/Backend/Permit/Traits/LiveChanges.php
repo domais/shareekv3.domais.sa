@@ -247,6 +247,7 @@ trait LiveChanges
                 $permit = Permit::create($permitData);
 
                 $permit->order_number = date('y').str_pad($permit->id, 5, '0', STR_PAD_LEFT);
+                $permit->from_old_db = false;
                 $permit->save();
 
                 $user = auth()->user();

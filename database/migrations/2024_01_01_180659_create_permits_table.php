@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('other')->nullable();
             $table->string('meeting_link')->nullable();
             $table->string('targeted_audience')->nullable();
+            $table->boolean('from_old_db')->default(true);
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside , 3 => online');
             $table->unsignedBigInteger('literary_id')->nullable();

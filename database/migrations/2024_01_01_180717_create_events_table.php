@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('targeted_audience')->nullable();
             $table->string('meeting_link')->nullable();
             $table->integer('attendance')->default(0);
+            $table->boolean('from_old_db')->default(true);
+
 
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside , 3 => online');

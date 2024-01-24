@@ -28,6 +28,7 @@ class Index extends Component
     public $permit_number;
     public $selected_event;
     public $attendance;
+    public $number_files = 0;
 
 
     public function selected($id)
@@ -54,6 +55,11 @@ class Index extends Component
         }, $event->fileable->toArray());
 
         $links = json_decode($event->links, true);
+
+        if($links == [""] || $links == null)     $links = [];
+            
+
+  
 
     
         // Dispatch the event with only the event name and the images paths
@@ -165,6 +171,7 @@ class Index extends Component
 
     public function mount()
     {
+       // dd(count($this->photos));
         
         $events = getEvents(true);
         $this->scheduled = $events['5'];

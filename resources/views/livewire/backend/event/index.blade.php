@@ -1,20 +1,37 @@
 <div
 x-data="{errors: @entangle('ValidationErrors').live,
-        selected_event: @entangle('selected_event').live}" x-init="
-		$watch('errors', value => {
+        selected_event: @entangle('selected_event').live,
+        tawthik: true,
+        number_files: @entangle('number_files').live,
+        photos: @entangle('photos').live
+    }" x-init="
+        $watch('errors', value => {
 
-			if (value.length > 0) {
-				const errorMessage = value.join('<br>');
-				Swal.fire({
-					icon: 'error',
-					title: 'خطأ في التحقق',
-					showConfirmButton: false,
-					html: errorMessage  // Use 'html' to display formatted text
-				});
-				errors = [];
-			}
-		});
-	"
+            if (value.length > 0) {
+                const errorMessage = value.join('<br>');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ في التحقق',
+                    showConfirmButton: false,
+                    html: errorMessage  // Use 'html' to display formatted text
+                });
+                errors = [];
+            }
+        });
+
+        $watch('number_files', value => {
+            console.log(value);
+            tawthik = value === photos.length;
+        });
+        
+        $watch('photos', value => {
+           
+           
+           
+            console.log(value.length);
+            tawthik = number_files === value.length;
+        });
+    "
 >
 
 
@@ -106,7 +123,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
                 </form>
 
                
-                    <div class="Number_of_attendees" x-show="selected_event.event_location == 3">
+                    <div class="Number_of_attendees" x-show="selected_event && selected_event.event_location == 3">
                         <div class="mt-3 row mx-0">
                             <div class="col-3 px-0 d-flex align-items-center">عدد الحضور</div>
                             <div class="col-9">
@@ -133,7 +150,10 @@ x-data="{errors: @entangle('ValidationErrors').live,
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-                <button type="button" class="btn btn-success" onclick="approveEvent()">ارسال التوثيق</button>
+                <button type="button" class="btn btn-success" onclick="approveEvent()" x-bind:disabled="!tawthik">
+                    <span wire:loading.class="d-none">ارسال التوثيق</span>
+                    <span wire:loading class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
         </div>
@@ -196,15 +216,17 @@ x-data="{errors: @entangle('ValidationErrors').live,
             thumbnailWidth:130,
             thumbnailHeight:130,
             init: function() {
+
                 this.on('addedfile', function(file) {
                     files.push(file); // Add file to files array
                     console.log('Number of files:', files.length);
+                    @this.set('number_files', files.length);
+
                     @this.uploadMultiple('photos', files, successCallback, errorCallback, progressCallback)
 
                 });
                 this.on('queuecomplete', function() {
-                    // Upload multiple files
-                    //
+       
                 });
                 this.on('removedfile', function(file) {
                     var index = files.findIndex(f => f.name === file.name);
@@ -213,6 +235,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
                         files.splice(index, 1);
                     }
                     console.log('Number of files:', files.length);
+                    @this.set('number_files', files.length);
                     @this.uploadMultiple('photos', files, successCallback, errorCallback, progressCallback)
 
                 });
