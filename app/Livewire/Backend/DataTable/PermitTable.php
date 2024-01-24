@@ -6,10 +6,25 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Permit;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class PermitTable extends DataTableComponent
 {
-    protected $model = Permit::class;
+
+    public function builder(): Builder
+    {
+        if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Administrator')) {
+            return Permit::query()->where(function ($query) {
+                $query->where('admin_id', auth()->id())
+                      ->orWhereNull('admin_id');
+            });
+        } elseif (auth()->user()->hasRole('User')) {
+            return Permit::query()->where('user_id', auth()->id());
+        }
+    
+        return Permit::query();
+    }
 
     public function configure(): void
     {
