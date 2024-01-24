@@ -53,10 +53,10 @@ class PermitForm extends Form
         // this 3 always required
         $this->title = $data->title;
         if ($data->literary) {
-            dd($data->literary);
+           // dd($data->literary);
             # code...
-            $this->literary_id = $data->literary->parent->id ?? "لم يحدد نوع الأدب";
-            $this->litrary_children_id = $data->literary_id ?? "لم يحدد نوع الفرعي الأدب";
+            $this->literary_id = $data->literary->parent ? $data->literary->parent->id : $data->id;
+            $this->litrary_children_id = $data->literary_id ?? "";
         }
 
 
