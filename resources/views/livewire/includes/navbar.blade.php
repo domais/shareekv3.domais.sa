@@ -17,14 +17,14 @@
 					{{-- <span class="badge text-bg-danger rounded-pill">3</span> --}}
 				</li>
 
-				@role('SuperAdmin')
-					<li class="nav-item">
+				@role('SuperAdmin|Adminstrator')
+				<li class="nav-item">
 						<a href="{{route('partner.index')}}" class="nav-link px-2 link-light {{ is_active('partner.index') ? 'active' : '' }}">الشركاء</a>
 					</li>
 				@endrole
 
-				@role('SuperAdmin')
-					<li class="nav-item">
+				@role('SuperAdmin|Adminstrator')
+				<li class="nav-item">
 						<a href="{{route('survey.index')}}" class="nav-link px-2 link-light {{ is_active('survey.index') ? 'active' : '' }}">الاستبيانات</a>
 					</li>
 				@endrole
