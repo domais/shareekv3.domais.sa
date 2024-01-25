@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\SurveyController;
+use App\Models\Survey;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
     Route::namespace('Survey')->prefix('survey')->middleware('checkpassword')->as('survey.')->group(function () {
 
         Route::get('/', Index::class)->name('index');
+        Route::get('/{survey}', Show::class)->name('show');
     });
 
     Route::namespace('Role')->prefix('adminstrators')->middleware('checkpassword')->middleware('checkPermission:role-index')->as('adminstrator.')->group(function () {
@@ -134,19 +136,21 @@ Route::get('/test', function () {
     //     $service->guests($chunk);
     // });
 
-    $user = \App\Models\User::where('email', 'gm.xerk@gmail.com')->first();
+    return Survey::first()->surveyable->name;
 
-    $token = md5(uniqid(rand(), true));
+    // $user = \App\Models\User::where('email', 'gm.xerk@gmail.com')->first();
 
-    $user->surveys()->create([
-        'token' => $token,
-        'expire_at' => \Carbon\Carbon::now()->addDays(7),
-        'event_id' => 1,
-        'type' => 'speaker'
-    ]);
+    // $token = md5(uniqid(rand(), true));
 
-    $event = \App\Models\Event::find(1);
+    // $user->surveys()->create([
+    //     'token' => $token,
+    //     'expire_at' => \Carbon\Carbon::now()->addDays(7),
+    //     'event_id' => 1,
+    //     'type' => 'speaker'
+    // ]);
 
-    // Send Survey Mail
-    Mail::to($user)->send(new \App\Mail\SurveyMail($token, $event, $user, 'speaker'));
+    // $event = \App\Models\Event::find(1);
+
+    // // Send Survey Mail
+    // Mail::to($user)->send(new \App\Mail\SurveyMail($token, $event, $user, 'speaker'));
 });

@@ -39,7 +39,6 @@
                     type="range"
                     value="{{ old('speaker-rate-1') ?? 0 }}"
                     >
-                </label>
             </div>
             @error('speaker-rate-1')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -59,7 +58,6 @@
                     type="range"
                     value="{{ old('speaker-rate-2') ?? 0 }}"
                     >
-                </label>
             </div>
             @error('speaker-rate-2')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -79,7 +77,6 @@
                     type="range"
                     value="{{ old('speaker-rate-3') ?? 0 }}"
                     >
-                </label>
             </div>
             @error('speaker-rate-3')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -99,7 +96,6 @@
                     type="range"
                     value="{{ old('speaker-rate-4') ?? 0 }}"
                     >
-                </label>
             </div>
             @error('speaker-rate-4')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>

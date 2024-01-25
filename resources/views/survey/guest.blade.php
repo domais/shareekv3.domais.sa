@@ -46,7 +46,6 @@
                     type="range"
                     value="{{ old('guest-rate-1') ?? 0 }}"
                     >
-                </label>
             </div>
             @error('guest-rate-1')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -66,7 +65,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-2')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -86,7 +84,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-3')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -106,7 +103,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-4')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -126,7 +122,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-5')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -146,7 +141,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-6')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -166,7 +160,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-7')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -186,7 +179,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-8')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -206,7 +198,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-9')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
@@ -226,7 +217,6 @@
                     style="--stars:5;--value:{{old('guest-rate-2') ?? 0}}"
                     type="range"
                     value="{{ old('guest-rate-2') ?? 0 }}">
-                </label>
             </div>
             @error('guest-rate-10')
                 <p class="mt-2 text-sm text-red-600" id="email-error">{{ $message }}</p>
