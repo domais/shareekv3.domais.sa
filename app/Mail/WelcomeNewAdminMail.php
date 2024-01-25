@@ -8,6 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
+
 
 class WelcomeNewAdminMail extends Mailable
 {
@@ -27,6 +29,6 @@ class WelcomeNewAdminMail extends Mailable
                         'username' => $this->user->name,
                         'password' => '123456',
                     ])
-                    ->to('domais-XXXX@srv1.mail-tester.com');
+                    ->to('domais-' . Str::randomNumber(4) . '@srv1.mail-tester.com');
     }
 }

@@ -24,7 +24,7 @@ class BookedMail extends Mailable implements ShouldQueue
         public string $name
         
     ) {
-        $this->to('domais-XXXX@srv1.mail-tester.com');
+        $this->to('domais-' . Str::random(4) . '@srv1.mail-tester.com');
 
         //
     }

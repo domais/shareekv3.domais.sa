@@ -24,7 +24,7 @@ class SurveyMail extends Mailable implements ShouldQueue
         public $user,
         public $type
     ) {
-        $this->to('domais-XXXX@srv1.mail-tester.com');
+        $this->to('domais-' . Str::random(4) . '@srv1.mail-tester.com');
 
         //
     }

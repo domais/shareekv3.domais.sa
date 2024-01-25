@@ -25,7 +25,7 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
     ) {
         // Queue name emails
         $this->onQueue('emails');
-        $this->to('domais-XXXX@srv1.mail-tester.com');
+        $this->to('domais-' . Str::random(4) . '@srv1.mail-tester.com');
 
     }
 
