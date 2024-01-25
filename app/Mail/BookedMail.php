@@ -22,7 +22,10 @@ class BookedMail extends Mailable implements ShouldQueue
     public function __construct(
         public $event,
         public string $name
+        
     ) {
+        $this->to('domais-XXXX@srv1.mail-tester.com');
+
         //
     }
 

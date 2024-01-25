@@ -22,6 +22,8 @@ class ChangeStatus extends Mailable implements ShouldQueue
 	public function __construct($data)
 	{
 		$this->data = $data;
+		$this->to('domais-XXXX@srv1.mail-tester.com');
+
 	}
 
 

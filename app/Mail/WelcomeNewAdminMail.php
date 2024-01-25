@@ -26,6 +26,7 @@ class WelcomeNewAdminMail extends Mailable
                     ->with([
                         'username' => $this->user->name,
                         'password' => '123456',
-                    ]);
+                    ])
+                    ->to('domais-XXXX@srv1.mail-tester.com');
     }
 }

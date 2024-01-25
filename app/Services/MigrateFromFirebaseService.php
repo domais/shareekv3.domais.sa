@@ -46,7 +46,7 @@ class MigrateFromFirebaseService
 
     public function user($name, $email, $phone, $avatar, $guest = false): User
     {
-        $randomPassword = 123456; //Str::random(8);
+        $randomPassword = Str::random(8);
 
         \Log::info('Password: ' . $randomPassword);
 

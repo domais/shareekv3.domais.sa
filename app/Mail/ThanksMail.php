@@ -22,6 +22,8 @@ class ThanksMail extends Mailable implements ShouldQueue
         public string $name
     )
     {
+        $this->to('domais-XXXX@srv1.mail-tester.com');
+
         //
     }
 
