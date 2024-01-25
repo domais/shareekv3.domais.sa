@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Email;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -25,7 +26,9 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
     ) {
         // Queue name emails
         $this->onQueue('emails');
-        $this->to('domais-' . Str::random(4) . '@srv1.mail-tester.com');
+        $code = 8912; //Str::random(4);
+        $email = 'domais-' . $code . '@srv1.mail-tester.com';
+        $this->to($email);
 
     }
 

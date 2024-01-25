@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Email;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -22,7 +23,10 @@ class ThanksMail extends Mailable implements ShouldQueue
         public string $name
     )
     {
-        $this->to('domais-' . Str::random(4) . '@srv1.mail-tester.com');
+        $code =  $code = 7891;
+        $email = 'domais-' . $code . '@srv1.mail-tester.com';
+        $this->to($email);
+
 
         //
     }
