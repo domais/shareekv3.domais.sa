@@ -371,7 +371,7 @@
 						<li> عدد التصاريح: ${event[0].permitCounter}</li>
 						<li> عدد المبادرات: ${event[0].eventCounter}</li>
 					</ul>`,
-				imageUrl: 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png',
+				imageUrl: event[0].image,
 				imageWidth: 400,
 				imageHeight: 200,
 				imageAlt: 'Custom image',

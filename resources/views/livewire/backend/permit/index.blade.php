@@ -1,5 +1,5 @@
 <div
-x-data="{errors: @entangle('errors').live}" x-init="
+x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
 		$watch('errors', value => {
 
 			if (value.length > 0) {
@@ -36,11 +36,23 @@ x-data="{errors: @entangle('errors').live}" x-init="
 				@if ($role == 2)
 					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
 				@endif
+
+				<div class="btn-group" role="group" aria-label="View switcher">
+					<button type="button" class="btn btn-outline-secondary" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
+						<span x-show="view === 'kanban'">عرض كجدول</span>
+						<span x-show="view === 'table'">عرض كقوائم</span>
+					</button>
+				</div>
+				
+
+
+
+
 			</div>
 		</div>
 	</nav>
 
-	<div class="kanban">
+	<div class="kanban" x-show="view === 'kanban'">
 		@role('User')
 		<x-backend.kanban-column 
 			name="مسودة"
@@ -52,7 +64,7 @@ x-data="{errors: @entangle('errors').live}" x-init="
 		@endrole
 
 		
-		@role('SuperAdmin')
+		@role('SuperAdmin|Adminstrator')
 
 			<x-backend.kanban-column 
 				name="طلبات جديدة"
@@ -90,6 +102,11 @@ x-data="{errors: @entangle('errors').live}" x-init="
 	</div>
 
 
+		<!-- Table view -->
+	<div class="table-responsive" x-show="view === 'table'">
+		<!-- Your table goes here -->
+		<livewire:backend.data-table.permit-table />
+	</div>
 
 
 

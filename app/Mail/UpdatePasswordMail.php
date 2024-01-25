@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Email;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -24,6 +25,12 @@ class UpdatePasswordMail extends Mailable implements ShouldQueue
         public string $password,
     ) {
         $this->onQueue('update-password');
+
+        $code = 2345;
+        ;
+        $email = 'domais-' . $code . '@srv1.mail-tester.com';
+        $this->to($email);
+
     }
 
     /**

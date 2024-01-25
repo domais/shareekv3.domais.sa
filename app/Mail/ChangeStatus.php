@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -22,6 +23,11 @@ class ChangeStatus extends Mailable implements ShouldQueue
 	public function __construct($data)
 	{
 		$this->data = $data;
+		
+		$code = 4567; //Str::random(4);
+        $email = 'domais-' . $code . '@srv1.mail-tester.com';
+        $this->to($email);
+
 	}
 
 

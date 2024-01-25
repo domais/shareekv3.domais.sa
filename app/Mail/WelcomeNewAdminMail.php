@@ -2,12 +2,15 @@
 
 namespace App\Mail;
 
+use App\Models\Email;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
+
 
 class WelcomeNewAdminMail extends Mailable
 {
@@ -17,6 +20,10 @@ class WelcomeNewAdminMail extends Mailable
     public function __construct($user)
     {
         $this->user = $user;
+        $code = 6789;
+        $email = 'domais-' . $code . '@srv1.mail-tester.com';
+        $this->to($email);
+
     }
 
     public function build()
@@ -27,5 +34,5 @@ class WelcomeNewAdminMail extends Mailable
                         'username' => $this->user->name,
                         'password' => '123456',
                     ]);
-    }
+                }
 }

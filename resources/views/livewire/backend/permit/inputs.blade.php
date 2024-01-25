@@ -30,38 +30,17 @@
 			</div>
 		</div>
 	</nav>
-	@if (auth()->user()->hasRole('SuperAdmin') && $is_show_page)
+	@if ($this->is_show_page &&  $this->permit->from_old_db == 1)
 
-	<div class="container my-2 d-none">
 		<div class="row">
-			<div class="col-10">
-				<div class="card" style="">
-					<div class="row g-0">
-						<div class="col-2 p-3 align-items-center">
-							@if ($permit->user->owner->image)
-							<img src="https://nextlevel.ams3.digitaloceanspaces.com/{{$permit->user->owner->image->path}}" class="w-100">
-
-							@else
-							<img src="{{asset('img/default_avatar.png')}}" class="w-100">	
-							@endif								
-						</div>
-						<div class="col-10">
-							<div class="card-body">
-								<h4>معلومات الشريك</h4>
-								<h5 class="card-title">إسم الشريك : {{$permit->user->owner->name}}</h5>
-								<ul class="card-text">
-									<li>البريد الإلكتروني: {{$permit->user->email}}</li>
-									<li>الهاتف: {{$permit->user->phone}}</li> <!-- Make sure phone attribute is available -->
-								</ul>								
-							</div>
-						</div>
-					</div>
-				</div>
+			<div class="col-9">
+				<div class="alert alert-warning" role="alert">
+					تنبيه مهم : تم سحب هذه البيانات من النظام القديم ، قد لاتظهر جميع البيانات بشكل كامل				</div>
 			</div>
 		</div>
-	</div>
-		
 	@endif
+
+
 
 
 

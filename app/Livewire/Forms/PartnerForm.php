@@ -41,6 +41,7 @@ class PartnerForm extends Form
         $partner->lat = explode(',', $this->coordinates)[0];
         $partner->lng = explode(',', $this->coordinates)[1];
         $partner->class = $this->class;
+        $partner->points = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
         $partner->CR = $this->CR;
         $partner->save();
 

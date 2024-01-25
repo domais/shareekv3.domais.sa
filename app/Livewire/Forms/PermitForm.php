@@ -24,7 +24,7 @@ class PermitForm extends Form
     public $image_adv;
     public $approval_file;
     public $location_image;
-
+    public $meeting_link;
 
 
     public $order_number = 0;
@@ -52,9 +52,10 @@ class PermitForm extends Form
         // this 3 always required
         $this->title = $data->title;
         if ($data->literary) {
+           // dd($data->literary);
             # code...
-            $this->literary_id = $data->literary->parent->id;
-            $this->litrary_children_id = $data->literary_id;
+            $this->literary_id = $data->literary->parent ? $data->literary->parent->id : $data->id;
+            $this->litrary_children_id = $data->literary_id ?? "";
         }
 
 
@@ -71,13 +72,12 @@ class PermitForm extends Form
         $this->lat = $data->lat;
         $this->lng = $data->lng;
 
-        $this->image_adv = 'public/'.$data->fileable->where('use','adv')->first()->path ?? "";
-
+        $this->image_adv = $data->fileable->where('use','adv')->first() ? 'public/'.$data->fileable->where('use','adv')->first()->path : "";
         if ($data->event_location == 2) {
             # code...
-            $this->location_image = 'public/'.$data->fileable->where('use','location_image')->first()->path ?? "";
+            $this->location_image = $data->fileable->where('use','location_image')->first() ? 'public/'.$data->fileable->where('use','location_image')->first()->path : "";
 
-            $this->approval_file = 'public/'.$data->fileable->where('use','approval_letter')->first()->path ?? "";
+            $this->approval_file = $data->fileable->where('use','approval_letter')->first() ? 'public/'.$data->fileable->where('use','approval_letter')->first()->path : "";
         }
 
 

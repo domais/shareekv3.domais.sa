@@ -38,11 +38,21 @@
 						<option selected disabled value="">اختر ...</option>
 						<option value="1">داخلية</option>
 						<option value="2">خارجية</option>
+						<option value="3">افتراضي</option>
+
 
 					</select>
 
 					<input type="text" x-show="location == 2" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">
 					
+				</div>
+			</div>
+			<div class="row my-3" x-show="location == 3">
+				<div class="col-4 align-items-center">
+					رابط الاجتماع
+				</div>
+				<div class="col-8">
+					<input type="text"  class="form-control rounded" wire:model="form.meeting_link">
 				</div>
 			</div>
 			<div class="row my-3" x-show="location == 2">
@@ -60,11 +70,9 @@
 			<input type="file"  x-bind:disabled="is_show_page"  class="style image mx-auto mb-3" id="LocImg_input" x-show="location == 2">
 			<div class="DropArea" style="height: 311px" x-show="location == 2">
 				@if ($this->permit  && $this->permit->event_location == 2 && $this->is_show_page)
-					<img id="LocImg" wire:model="form.location_image" src="{{asset('storage/'.$this->permit->fileable->where('use','location_image')->first()->path)}}" alt="Picture">
-				@else
+				<img id="LocImg" wire:model="form.location_image" src="{{ $this->permit->fileable->where('use', 'location_image')->first() ? asset('storage/' . $this->permit->fileable->where('use', 'location_image')->first()->path) : '' }}" alt="Picture">				@else
 				 @if ($this->permit  && $this->permit->event_location == 2 && !$this->is_show_page)
-				 	<img id="LocImg" wire:model="form.location_image" src="{{asset('storage/'.$this->permit->fileable->where('use','location_image')->first()->path)}}" alt="Picture">
-				 @else
+				 <img id="LocImg" wire:model="form.location_image" src="{{ $this->permit->fileable->where('use', 'location_image')->first() ? asset('storage/' . $this->permit->fileable->where('use', 'location_image')->first()->path) : '' }}" alt="Picture">				 @else
 				 <img id="LocImg" wire:model="form.location_image" src="{{asset('img/pexel.png')}}" alt="Picture">
 
 				 @endif

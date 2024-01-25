@@ -26,11 +26,18 @@ class Index extends Component
     public $links = [];
     public $ValidationErrors = [];
     public $permit_number;
+    public $selected_event;
+    public $attendance;
+    public $number_files = 0;
 
 
     public function selected($id)
     {
         $this->selected_id = $id;
+
+        $this->selected_event = Event::findorfail($this->selected_id)->toArray();
+
+     //   dd($this->selected_event->toArray());
     }
 
     #[On('show_images_urls')] 
@@ -48,6 +55,11 @@ class Index extends Component
         }, $event->fileable->toArray());
 
         $links = json_decode($event->links, true);
+
+        if($links == [""] || $links == null)     $links = [];
+            
+
+  
 
     
         // Dispatch the event with only the event name and the images paths
@@ -131,6 +143,7 @@ class Index extends Component
 
         $event->links = json_encode($this->links);
         $event->status_id = 8;
+        $event->attendance = $this->attendance ? $this->attendance : 0;
         $event->save();
 
       
@@ -158,6 +171,7 @@ class Index extends Component
 
     public function mount()
     {
+       // dd(count($this->photos));
         
         $events = getEvents(true);
         $this->scheduled = $events['5'];
