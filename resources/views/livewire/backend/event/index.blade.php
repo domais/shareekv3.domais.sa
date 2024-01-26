@@ -3,7 +3,8 @@ x-data="{errors: @entangle('ValidationErrors').live,
         selected_event: @entangle('selected_event').live,
         tawthik: true,
         number_files: @entangle('number_files').live,
-        photos: @entangle('photos').live
+        photos: @entangle('photos').live,
+        view: 'kanban'
     }" x-init="
         $watch('errors', value => {
 
@@ -55,17 +56,26 @@ x-data="{errors: @entangle('ValidationErrors').live,
                 @if (auth()->user()->hasRole('User'))
                     <a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
                 @endif
+
+                <div class="btn-group" role="group" aria-label="View switcher">
+					<button type="button" class="btn btn-outline-secondary" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
+						<span x-show="view === 'kanban'">عرض كجدول</span>
+						<span x-show="view === 'table'">عرض كقوائم</span>
+					</button>
+				</div>
             </div>
         </div>
     </nav>
 
+    
 
 
 
 
 
 
-    <div class="kanban">
+
+    <div class="kanban" x-show="view === 'kanban'">
 
         <x-backend.kanban-column 
             name="مجدولة"
@@ -105,6 +115,12 @@ x-data="{errors: @entangle('ValidationErrors').live,
 
 
     </div>
+
+    		<!-- Table view -->
+	<div class="table-responsive" x-show="view === 'table'">
+		<!-- Your table goes here -->
+		<livewire:backend.data-table.event-table />
+	</div>
 
 
 

@@ -4,16 +4,28 @@ namespace App\Livewire\Backend\DataTable;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Permit;
-use App\Models\Status;
+use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\On;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
-class PermitTable extends DataTableComponent
+class EventTable extends DataTableComponent
 {
+    public function builder(): Builder
+    {
+        if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Administrator')) {
+            return Event::query()->where(function ($query) {
+                $query->where('admin_id', auth()->id())
+                      ->orWhereNull('admin_id');
+            });
+        } elseif (auth()->user()->hasRole('User')) {
+            return Event::query()->where('user_id', auth()->id());
+        }
+    
+        return Event::query();
+    }
 
 
     public function filters(): array
@@ -21,27 +33,40 @@ class PermitTable extends DataTableComponent
         return [
             
     
-            SelectFilter::make(__('حالة التصريح'))
+            SelectFilter::make(__('حالة المبادرة'))
             ->options([
                 '' => 'الكل',
-                '2' => 'طلبات جديدة',
-                '3' => 'تحت الدراسة',
-                '4' => 'بإنتظار التصريح',
-                '8' => 'مؤرشف',
+                '5' => 'مجدولة',
+                '6' => 'قائمة',
+                '7' => 'بانتظار التوثيق',
+                '8' => 'للمراجعة',
+                '9' => 'مؤرشف',
             ])
             ->filter(function(Builder $builder, string $value) {
 
-                if ($value === '2') {
-                    $builder->where('status_id', 2);
+                if ($value === '5') {
+                    $builder->where(function ($query) {
+                        $query->whereDate('start_date', '>=', now())
+                              ->whereDate('end_date', '>=', now());
+                    });
                 }
-                if ($value === '3') {
-                    $builder->where('status_id', 3);
+                if ($value === '6') {
+                    $builder->where(function ($query) {
+                        $query->whereDate('start_date', '<=', now())
+                              ->whereDate('end_date', '>=', now());
+                    });
                 }
-                if ($value === '4') {
-                    $builder->where('status_id', 4);
+                if ($value === '7') {
+                    $builder->whereDate('start_date', '<', now())
+                            ->whereDate('end_date', '<', now())
+                            ->where('status_id','!=',8);
+
                 }
                 if ($value === '8') {
-                    $builder->whereIn('status_id', [5,8]);
+                    $builder->where('status_id',8);
+                }
+                if ($value === '9') {
+                    $builder->where('status_id',9);
                 }
             }),
 
@@ -70,32 +95,20 @@ class PermitTable extends DataTableComponent
     }
 
 
-
-    public function builder(): Builder
-    {
-        if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Administrator')) {
-            return Permit::query()->where(function ($query) {
-                $query->where('admin_id', auth()->id())
-                      ->orWhereNull('admin_id');
-            });
-        } elseif (auth()->user()->hasRole('User')) {
-            return Permit::query()->where('user_id', auth()->id());
-        }
-    
-        return Permit::query();
-    }
-
     #[On('delete-item')] 
     public function deleteRole($id)
     {
 
-        $permit = Permit::findorfail($id);
+        $permit = Event::findorfail($id);
 
         $permit->delete();
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
 
     }
+
+
+
 
 
 
