@@ -77,12 +77,13 @@ class PermitTable extends DataTableComponent
             return Permit::query()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');
-            });
+            })->where('status_id', '!=', 8);
         } elseif (auth()->user()->hasRole('User')) {
-            return Permit::query()->where('user_id', auth()->id());
+            return Permit::query()->where('user_id', auth()->id())
+                                  ->where('status_id', '!=', 8);
         }
     
-        return Permit::query();
+        return Permit::query()->where('status_id', '!=', 8);
     }
 
     #[On('delete-item')] 
@@ -102,6 +103,8 @@ class PermitTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setColumnSelectStatus(false);
+
     }
 
     public function columns(): array
@@ -110,12 +113,19 @@ class PermitTable extends DataTableComponent
             Column::make("Id", "id")
                 ->hideIf(true)
                 ->sortable(),
-            Column::make("رقم التصريح", "order_number")
-                ->sortable(),
-            Column::make("اسم المستخدم", "user.name")
+                Column::make("رقم التصريح", "order_number")
+                ->searchable()
+                ->sortable()
+                ->format(
+                    fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('permit.show', $row->id).'">'.$row->order_number.'</a>'
+                    )
+                ->html(),
+            Column::make("اسم الشريك", "user.name")
+                ->searchable()
                 ->sortable(),
 
             Column::make("العنوان", "title")
+                    ->searchable()
                 ->sortable(),
 
             Column::make("تاريخ البداية", "start_date")

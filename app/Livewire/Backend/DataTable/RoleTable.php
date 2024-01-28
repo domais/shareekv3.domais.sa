@@ -22,6 +22,8 @@ class RoleTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setColumnSelectStatus(false);
+
     }
 
     #[On('delete-item')] 

@@ -115,6 +115,8 @@ class EventTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setColumnSelectStatus(false);
+
     }
 
     public function columns(): array
@@ -124,11 +126,19 @@ class EventTable extends DataTableComponent
                 ->hideIf(true)
                 ->sortable(),
             Column::make("رقم التصريح", "order_number")
-                ->sortable(),
-            Column::make("اسم المستخدم", "user.name")
+                ->searchable()
+                ->sortable()
+                ->format(
+                    fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('event.show', $row->id).'">'.$row->order_number.'</a>'
+                    )
+                ->html(),
+
+            Column::make("اسم الشريك", "user.name")
+                ->searchable()
                 ->sortable(),
 
             Column::make("العنوان", "title")
+                 ->searchable()
                 ->sortable(),
 
             Column::make("تاريخ البداية", "start_date")
@@ -142,7 +152,7 @@ class EventTable extends DataTableComponent
                 })
                 ->sortable(),
 
-            Column::make(__(''), 'id')
+            Column::make(__('الإجراءات'), 'id')
                 ->view('Tableactions.permits')
         ];
     }
