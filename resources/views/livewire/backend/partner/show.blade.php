@@ -1,59 +1,66 @@
-<div>
+<div class="row"
+    x-data="{errors: @entangle('ValidationErrors').live}" x-init="
+    $watch('errors', value => {
 
+        if (value.length > 0) {
+            const errorMessage = value.join('<br>');
+            Swal.fire({
+                icon: 'error',
+                title: 'خطأ في التحقق',
+                showConfirmButton: false,
+                html: errorMessage  // Use 'html' to display formatted text
+            });
+            errors = [];
+        }
+    });
+    ">
+    <div class="col-md-8 mb-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <form wire:submit="save">
 
+            <div class="mb-3">
+                <input type="text" wire:model="Pform.partner_name" class="form-control text-start" id="partnerName" placeholder="اسم المنشأة / اسم الشريك">
+            </div>
+            <div class="mb-3">
+                <input type="text" wire:model="Uform.name" class="form-control text-start" id="userName" placeholder="الشخص المسؤول" >
+            </div>
+            <div class="mb-3">
+                <input type="email" wire:model="Uform.email" dir="ltr" class="form-control text-start" id="userEmail" placeholder="البريد الإلكتروني">
+            </div>
+            <div class="mb-3">
+                <input type="tel" wire:model="Uform.phone" dir="ltr" class="form-control text-start" id="userPhone" placeholder="رقم الجوال">
+            </div>
+            <div class="mb-3">
+                <input type="text" wire:model="Pform.city" class="form-control text-start" id="partnerCity" placeholder="المدينة">
+            </div>
+            <div class="mb-3">
+                <input type="text" wire:model="Pform.coordinates" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
+            </div>
 
+            <div class="mb-3">
+                <select class="form-select" id="partnerClass" wire:model.live="Pform.class">
+                    <option selected value="">إختر الفئة ...</option>
+                    <option value="أ">أ</option>
+                    <option value="ب">ب</option>
+                    <option value="ج">ج</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input type="file" wire:model="Pform.logo" name="" id="">
+            </div>
 
-	<nav aria-label="breadcrumb" class="my-5">
-		<div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
-			<ol class="breadcrumb breadcrumb-chevron m-0">
-				<li class="breadcrumb-item">
-					<a class="link-body-emphasis" href="#">
-						<i class="fa-solid fa-house"></i>
-					</a>
-				</li>
-				<li class="breadcrumb-item">
-					<a class="link-body-emphasis text-decoration-none" href="{{route('partner.index')}}">الشركاء</a>
-				</li>
-				<li class="breadcrumb-item active" aria-current="page">{{ $partner->name }} </li>
-			</ol>
-		</div>
-	</nav>
+            <div class="mb-2">
+                <button type="submit" class="btn btn-success text-white">
+                    تأكيـد
+                </button>
+            </div>
 
-
-
-    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        {{-- <button type="button" class="btn btn-danger mx-2" wire:click="changeStatus(2)">رفض</button>
-        <button type="button" class="btn btn-success" wire:click="changeStatus(1)">قبول</button> --}}
+          </form>
+        </div>
       </div>
-
-    <!--
-        Domais
-        user informatiotion : $owner,
-        partner information : $partner,
-    -->
-
-    <h1>
-        {{ $partner->name }}
-    </h1>
-    <h2>
-        {{ $owner->email }}
-    </h2>
-
-
-    @foreach ($tickets as $index => $item)
-        <!-- tickets -->
-    @endforeach
-    <hr class="my-5">
-
-    <div class="container py-4">
-
-        @foreach ($permits as $index => $item)
-        <!-- permits -->
-        @endforeach
-
-        @foreach ($events as $index => $item)
-        <!-- events -->
-        @endforeach
-
     </div>
-</div>
+  
+    <div class="col-md-4 mb-4">
+    </div>
+  </div>

@@ -46,7 +46,10 @@ class PartnerTable extends DataTableComponent
 
         //dd($partner->fileable->path);
 
-        $image = $partner->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $partner->fileable->path : 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png';
+        $imagePath = $partner->fileable ? 'https://nextlevel.ams3.digitaloceanspaces.com/' . $partner->fileable->path : 'https://nextlevel.ams3.digitaloceanspaces.com/rahmaniDjamel/3/image.png';
+
+        $image = file_exists($imagePath) ? $imagePath : asset('img/default_avatar.png');
+
 
         $permitCounter = $partner->owner->permits->count();
 

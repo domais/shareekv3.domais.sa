@@ -19,6 +19,8 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'permit-update', 'display_name' => 'تعديل على التصاريح']);
         Permission::create(['name' => 'support-update', 'display_name' => 'تعديل على دعم الشريك']);
         Permission::create(['name' => 'event-update', 'display_name' => 'تعديل على المبادرات']);
+        Permission::create(['name' => 'event-delete', 'display_name' => 'حذف المبادرات']);
+
 
     }
 }

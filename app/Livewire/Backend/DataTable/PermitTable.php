@@ -77,13 +77,19 @@ class PermitTable extends DataTableComponent
             return Permit::query()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');
-            })->where('status_id', '!=', 8);
+            })->where('status_id', '!=', 8)
+            ->where('status_id', '!=', 7)
+            ->where('status_id', '!=', 5);
         } elseif (auth()->user()->hasRole('User')) {
             return Permit::query()->where('user_id', auth()->id())
-                                  ->where('status_id', '!=', 8);
+            ->where('status_id', '!=', 8)
+            ->where('status_id', '!=', 7)
+            ->where('status_id', '!=', 5);
         }
     
-        return Permit::query()->where('status_id', '!=', 8);
+        return Permit::query()->where('status_id', '!=', 8)
+        ->where('status_id', '!=', 7)
+        ->where('status_id', '!=', 5);
     }
 
     #[On('delete-item')] 
