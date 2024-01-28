@@ -2,16 +2,25 @@
 
 namespace App\Livewire\Backend\Partner;
 
+use App\Livewire\Forms\PartnerForm;
+use App\Livewire\Forms\UserForm;
 use App\Models\Partner;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Show extends Component
 {
+    use WithFileUploads;
     public Partner $partner;
     public $owner;
     public $events;
     public $permits;
     public $tickets;
+
+
+    public UserForm $Uform;
+    public PartnerForm $Pform;
+    public $ValidationErrors = [];
 
     public function mount()
     {
@@ -19,6 +28,10 @@ class Show extends Component
         $this->events = $this->owner->events->toArray();
         $this->permits = $this->owner->permits->toArray();
         $this->tickets = $this->owner->tickets;
+
+        $this->Uform->setForm($this->partner->owner);
+        $this->Pform->setForm($this->partner);
+
     }
 
     public function changeStatus($status)

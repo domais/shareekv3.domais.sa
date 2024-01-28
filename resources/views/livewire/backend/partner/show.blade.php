@@ -23,10 +23,10 @@
                 <input type="text" wire:model="Pform.partner_name" class="form-control text-start" id="partnerName" placeholder="اسم المنشأة / اسم الشريك">
             </div>
             <div class="mb-3">
-                <input type="text" wire:model="Uform.name" class="form-control text-start" id="userName" placeholder="الشخص المسؤول" >
+                <input type="text" wire:model.live="Uform.name" class="form-control text-start" id="userName" placeholder="الشخص المسؤول" >
             </div>
             <div class="mb-3">
-                <input type="email" wire:model="Uform.email" dir="ltr" class="form-control text-start" id="userEmail" placeholder="البريد الإلكتروني">
+                <input type="email" wire:model.live="Uform.email" dir="ltr" class="form-control text-start" id="userEmail" placeholder="البريد الإلكتروني">
             </div>
             <div class="mb-3">
                 <input type="tel" wire:model="Uform.phone" dir="ltr" class="form-control text-start" id="userPhone" placeholder="رقم الجوال">
@@ -61,6 +61,80 @@
       </div>
     </div>
   
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 bg-white">
+        <div class="pt-5 team4">
+              <div class="row">
+                <!-- column  -->
+                <div class="col-12 mb-4">
+                  <!-- Row -->
+                  <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center align-items-center">
+                        <img src="{{asset('img/default_avatar.png')}}" alt="wrapkit" class="img-fluid rounded-circle h-75 w-25" />
+                    </div>
+                    <div class="col-md-12 text-center">
+                      <div class="pt-2">
+                        <h5 class="mt-4 font-weight-medium mb-0">{{$this->Uform->name}}</h5>
+                        <h6 class="subtitle mb-3">{{$this->Pform->partner_name}}</h6>
+                        <p>{{$this->Uform->phone}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Row -->
+                </div>
+                <!-- column  -->
+
+
+
+    
+              </div>
+            </div>
+          </div>
     </div>
   </div>
+  @pushOnce('styles')
+
+  <style>
+
+@import url(//fonts.googleapis.com/css?family=Montserrat:300,500);
+.team4 {
+  font-family: "Montserrat", sans-serif;
+	color: #8d97ad;
+  font-weight: 300;
+}
+
+.team4 h1, .team4 h2, .team4 h3, .team4 h4, .team4 h5, .team4 h6 {
+  color: #3e4555;
+}
+
+.team4 .font-weight-medium {
+	font-weight: 500;
+}
+
+.team4 h5 {
+    line-height: 22px;
+    font-size: 18px;
+}
+
+.team4 .subtitle {
+    color: #8d97ad;
+    line-height: 24px;
+		font-size: 13px;
+}
+
+.team4 ul li a {
+  color: #8d97ad;
+  padding-right: 15px;
+  -webkit-transition: 0.1s ease-in;
+  -o-transition: 0.1s ease-in;
+  transition: 0.1s ease-in;
+}
+
+.team4 ul li a:hover {
+  -webkit-transform: translate3d(0px, -5px, 0px);
+  transform: translate3d(0px, -5px, 0px);
+	color: #316ce8;
+}
+
+</style>
+      
+  @endPushOnce

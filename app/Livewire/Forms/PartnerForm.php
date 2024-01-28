@@ -10,6 +10,7 @@ use Livewire\Form;
 
 class PartnerForm extends Form
 {
+    public ?Partner $partner;
     public $partner_name;
     public $CR;
     public $city;
@@ -28,6 +29,17 @@ class PartnerForm extends Form
             'class' => ['required', 'string', 'in:أ,ب,ج,د'],
             'logo' => ['required', 'image'],
         ];
+    }
+
+    public function setForm($parnter)
+    {
+        $this->partner = $parnter;
+        $this->partner_name = $parnter->name;
+        $this->CR = $parnter->CR;
+        $this->city = $parnter->city;
+        $this->coordinates = $parnter->coordinates;
+        $this->class = $parnter->class;
+
     }
 
     public function save($user)
