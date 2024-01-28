@@ -40,6 +40,49 @@ class PartnerForm extends Form
         $this->coordinates = $parnter->coordinates;
         $this->class = $parnter->class;
 
+        $this->logo = $parnter->image ? 'https://nextlevel.ams3.digitaloceanspaces.com/'.$parnter->image->path : null;
+
+    }
+
+    public function update()
+    {
+        $validatedData = $this->validate([
+            'partner_name' => 'required|string|max:255',
+            'CR' => 'nullable|numeric',
+            'city' => 'required|string|in:الرياض,جدة,مكة,أبها',
+            'coordinates' => 'required|string|regex:/^-?\d{1,3}\.\d+,-?\d{1,3}\.\d+$/',
+            'class' => 'required|string|in:أ,ب,ج,د',
+            'logo' => 'nullable|image',
+        ]);
+
+        $this->partner->name = $this->partner_name;
+        $this->partner->city = $this->city;
+        $this->partner->coordinates = $this->coordinates;
+        $this->partner->lat = explode(',', $this->coordinates)[0];
+        $this->partner->lng = explode(',', $this->coordinates)[1];
+        $this->partner->class = $this->class;
+        $this->partner->points = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
+        $this->partner->save();
+
+        if (!is_string($this->logo)) {
+            // Delete the old logo if it exists
+            if ($this->partner->image) {
+                Storage::disk('do')->delete($this->partner->fileable->path);
+                $this->partner->fileable()->delete();
+            }
+        
+            // Save the new logo
+            $path = Storage::disk('do')->putFile('files/logos/'.$this->partner->id, $this->logo, 'public');
+        
+            $document = new File();
+            $document->name = $this->partner->name;
+            $document->use = 'logo';
+            $document->type = 'image';
+            $document->path = $path;
+            $this->partner->fileable()->save($document);
+        
+            $imageUrl = Storage::disk('do')->url($path);
+        }
     }
 
     public function save($user)

@@ -61,7 +61,7 @@
       </div>
     </div>
   
-    <div class="col-md-4 bg-white">
+    <div class="col-md-4 bg-white h-50">
         <div class="pt-5 team4">
               <div class="row">
                 <!-- column  -->
@@ -69,14 +69,24 @@
                   <!-- Row -->
                   <div class="row">
                     <div class="col-md-12 d-flex justify-content-center align-items-center">
-                        <img src="{{asset('img/default_avatar.png')}}" alt="wrapkit" class="img-fluid rounded-circle h-75 w-25" />
-                    </div>
+                            @php
+                            $logo = $this->Pform->logo;
+                            $logoUrl = $logo 
+                                ? (is_string($logo) 
+                                    ? asset($logo) 
+                                    : (method_exists($logo, 'temporaryUrl') 
+                                        ? $logo->temporaryUrl() 
+                                        : asset('img/default_avatar.png')))
+                                : asset('img/default_avatar.png');
+                        @endphp
+                        <img src="{{ $logoUrl }}" alt="wrapkit" class="img-fluid rounded-circle h-75 w-50" />  
+                    </div>              
                     <div class="col-md-12 text-center">
-                      <div class="pt-2">
-                        <h5 class="mt-4 font-weight-medium mb-0">{{$this->Uform->name}}</h5>
-                        <h6 class="subtitle mb-3">{{$this->Pform->partner_name}}</h6>
-                        <p>{{$this->Uform->phone}}</p>
-                      </div>
+                        <div class="pt-2">
+                            <h5 class="mt-4 font-weight-medium mb-0">{{$this->Uform->name}}</h5>
+                            <h6 class="subtitle mb-3">{{$this->Pform->partner_name}}</h6>
+                            <p>{{$this->Uform->phone}}</p>
+                        </div>
                     </div>
                   </div>
                   <!-- Row -->
