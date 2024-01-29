@@ -27,16 +27,23 @@ class EventService implements EventServiceInterface
         $radius = $data['radius'] ?? 100; // km
 
         // check if lat and lng are in Saudi Arabia
-        if ($lat < 15 || $lat > 35 || $lng < 34 || $lng > 56) {
-            // Riyadh
-            $lat = 24.7136;
-            $lng = 46.6753;
-        }
+        // if ($lat < 15 || $lat > 35 || $lng < 34 || $lng > 56) {
+        //     // Riyadh
+        //     $lat = 24.7136;
+        //     $lng = 46.6753;
+        // }
 
         // Literary_id
         $data['type'] = $data['type'] ?? null;
 
-        $events = Event::when(!isset($data['date_range']), function ($query) {
+        $events = Event::when(isset($lat) && isset($lng), function ($query) use ($lat, $lng, $radius) {
+            return $query->selectRaw('*, ( 6371 * acos( cos( radians(?) ) *
+            cos( radians( lat ) ) * cos( radians( lng ) - radians(?) ) + sin( radians(?) ) *
+            sin( radians( lat ) ) ) ) AS distance', [$lat, $lng, $lat])
+                ->having('distance', '<', $radius)
+                ->orderBy('distance');
+        })
+            ->when(!isset($data['date_range']), function ($query) {
                 return $query->whereDate('start_date', '>=', Carbon::now());
             })
             ->when(isset($data['date_range']), function ($query) use ($data) {
