@@ -73,7 +73,11 @@ class PermitTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Administrator')) {
+        if (auth()->user()->hasRole('SuperAdmin')){
+            return Permit::query();
+
+        }
+        if (auth()->user()->hasRole('Administrator')) {
             return Permit::query()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');

@@ -15,7 +15,12 @@ class EventTable extends DataTableComponent
 {
     public function builder(): Builder
     {
-        if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Administrator')) {
+        if (auth()->user()->hasRole('SuperAdmin')){
+            return Event::query();
+
+        }
+
+        if (auth()->user()->hasRole('Administrator')) {
             return Event::query()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');
@@ -130,7 +135,7 @@ class EventTable extends DataTableComponent
                 ->hideIf(true)
                 ->sortable(),
 
-                
+
             Column::make("رقم التصريح", "order_number")
                 ->searchable()
                 ->sortable()
