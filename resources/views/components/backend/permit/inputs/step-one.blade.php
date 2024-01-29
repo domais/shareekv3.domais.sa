@@ -13,13 +13,6 @@
 				<!-- Rahmani: Fix this -->
 			</div>
 		@endif
-    <div class="col-7">
-        @if (auth()->user()->hasRole('SuperAdmin'))
-            <div class="row my-3">
-                <div class="col-3 d-flex align-items-center">الشريك</div>
-                <div class="col-9">{{ $this->permit->user->owner->name }} / {{ $this->permit->user->name }}</div>
-            </div>
-        @endif
 
 		<div class="row my-3">
 			<div class="col-3 d-flex align-items-center">نوع المبادرة</div>

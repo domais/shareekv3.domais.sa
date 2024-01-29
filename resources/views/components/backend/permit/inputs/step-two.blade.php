@@ -66,7 +66,7 @@ $watch('location',
             </div>
             <div class="row my-3" x-show="location == 2">
                 <div class="col-4 d-flex align-items-center">إحداثيات المكان</div>
-                <div class="col-8"><input type="text" id="location" dir="ltr" placeholder="حدد المكان على الخريطة" disabled class="form-control text-start"></div>
+                <div class="col-8"><input type="text" id="location" dir="ltr" placeholder="<< اسحب المؤشر عالخريطة لتحديد الموقع" disabled class="form-control text-start"></div>
             </div>
             <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3" id="LocImg_input" x-show="location == 2">
             <div class="DropArea" style="height: 311px" x-show="location == 2">
