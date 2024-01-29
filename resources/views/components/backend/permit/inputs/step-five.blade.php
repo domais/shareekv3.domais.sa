@@ -14,6 +14,7 @@
                         <th scope="col">الجوال</th>
                         <th scope="col">الفئة العمرية</th>
                         <th scope="col">النوع</th>
+                        <th scope="col">الحلية</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,8 @@
                             <td>{{$guest->phone}}</td>
                             <td>{{$guest->age}}</td>
                             <td>{{$guest->getAge()}}
+                            {{-- Pivot filed type --}}
+                            <td>{{$guest->pivot->type}}</td>
                         </tr>
                         @endforeach
                     </tbody>
