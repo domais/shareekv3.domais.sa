@@ -22,10 +22,10 @@
 					حفظ
 					@if(empty($draft)) كمسودة @endif
 				</button>
-					
+
 				@endif
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
-					<button class="btn btn-brand" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>				
+					<button class="btn btn-brand" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
 			</div>
 		</div>
@@ -76,6 +76,10 @@
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
 					</li>
+
+					<li class="nav-item" role="presentation">
+						<button class="nav-link" id="guest-tab" data-bs-toggle="tab" data-bs-target="#guest-tab-pane" type="button" role="tab" aria-controls="guest-tab-pane" aria-selected="false">قائمة الحضور</button>
+					</li>
 				</ul>
 
 
@@ -98,6 +102,10 @@
 					<x-backend.permit.inputs.step-four />
 				</div><!-- نهاية محتوى التاب -->
 
+                <div class="tab-pane fade" id="guest-tab-pane" role="tabpanel" aria-labelledby="guest-tab" tabindex="0">
+					<x-backend.permit.inputs.step-five />
+				</div><!-- نهاية محتوى التاب -->
+
 			</div>
 		</div>
 		<!-- : 👇🏻 ممن هنا d-none شيل update أو create إذا كان الصفحة  -->
@@ -115,7 +123,7 @@
 							<span class="d-block date">
 								{{ $item->created_at->format('Y-m-d') }}<br>
 								{{ $item->created_at->format('h:i') }} {{ $item->created_at->format('A') == 'PM' ? 'م' : 'ص' }}
-							</span>				
+							</span>
 						</div>
 						@if ($item->descreption)
 							<div class="edit">{{$item->descreption}}</div>

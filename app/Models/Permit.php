@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permit extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'order_number',
@@ -39,7 +39,7 @@ class Permit extends Model
 
     public function admin()
     {
-        return $this->belongsTo(User::class,'admin_id');
+        return $this->belongsTo(User::class, 'admin_id');
     }
 
     public function status()
@@ -83,6 +83,8 @@ class Permit extends Model
         return $this->morphMany(File::class, 'fileable');
     }
 
-
-
+    public function event()
+    {
+        return $this->hasOne(Event::class, 'order_number', 'order_number');
+    }
 }
