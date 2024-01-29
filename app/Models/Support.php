@@ -19,4 +19,9 @@ class Support extends Model
     {
         return $this->belongsTo(Permit::class);
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

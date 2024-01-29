@@ -83,7 +83,10 @@ class AnnouncementTable extends DataTableComponent
                 })
                 ->sortable(),
 
-            Column::make("الحالة", "is_active"),
+            Column::make("الحالة", "is_active")
+            ->format(function ($value, $column, $row) {
+                return $column->is_active ==  1 ? 'مفعل' : 'غير مفعل';
+            }),
 
 
             Column::make(__(''), 'id')
