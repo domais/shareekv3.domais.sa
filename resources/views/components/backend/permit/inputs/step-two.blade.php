@@ -41,6 +41,8 @@
 						<option value="3">افتراضي</option>
 					</select>
 
+					<p class="mt-3" x-show="location == 1">يظهر على الخريطة المقر الرسمي المسجل<br>لتغيير مقرك الرسمي ، تواصل معنا من خلال الدعم الفني</p>
+
 					<input type="text" x-show="location == 2" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">
 					
 				</div>
@@ -79,7 +81,7 @@
 		</div>
 		<div class="col-7">
 			<!-- Rahmani: لو حليت مشكلة الخرائد .. فعل السطر التالي -->
-			<div class="map" style="height: 562px"></div>
+			<div class="map" style="height: 562px" x-show="location == 1 || location == 2"></div>
 		</div>
 	</div>
 </div>
