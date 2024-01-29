@@ -58,12 +58,12 @@
                                     {{-- <input type="hidden" wire:model.defer="form.timezone" name="timezone" id="timezone"> --}}
                                     <input type="text"
                                     wire:model="form.title"
-                                    class="form-control text-start" id="title" placeholder="اكتب العنوان" />
+                                    class="form-control text-start" id="title" placeholder="عنوان التعميم" />
                                 </div>
                                 <div class="mb-3">
                                     <textarea
                                     wire:model="form.description"
-                                    class="form-control text-start" id="description" placeholder="ابينات"
+                                    class="form-control text-start" id="description" placeholder="ادخل وصف التعميم"
                                     rows="3"
                                     ></textarea>
                                 </div>
