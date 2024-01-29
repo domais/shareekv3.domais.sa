@@ -34,16 +34,22 @@ x-data="{  errors: @entangle('validationErrors').live  }" x-init="
                 
                 <div class="text-center">
                     @php
-                            if (auth()->user()->owner->fileable) {
-                                $userImage = auth()->user()->owner->fileable->path 
-                                ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . auth()->user()->owner->fileable->path) 
-                                : asset('img/default_avatar.png');
-                            }
-                            else {
-                                $userImage = asset('img/default_avatar.png');
-                            }
+                    if (auth()->user()->owner) {
+                        if ( auth()->user()->owner->fileable) {
+                            $userImage = auth()->user()->owner->fileable->path 
+                        ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . auth()->user()->owner->fileable->path) 
+                        : asset('img/default_avatar.png');
+                        }
+                        else {
+                            $userImage = asset('img/default_avatar.png');
+                        }
+        
+                    }
+                    else {
+                        $userImage = asset('img/default_avatar.png');
+                    }
 
-                    @endphp
+                @endphp
                     <img src="{{ $userImage }}" width="100" class="rounded-circle">
                 </div>
                 

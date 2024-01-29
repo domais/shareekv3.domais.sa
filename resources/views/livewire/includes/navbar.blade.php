@@ -43,10 +43,16 @@
 			<div class="dropdown text-end  d-flex flex-row-reverse align-items-center user-info">
 				<a class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 						@php
-						if (auth()->user()->owner->fileable) {
-							$userImage = auth()->user()->owner->fileable->path 
+						if (auth()->user()->owner) {
+							if ( auth()->user()->owner->fileable) {
+								$userImage = auth()->user()->owner->fileable->path 
 							? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . auth()->user()->owner->fileable->path) 
 							: asset('img/default_avatar.png');
+							}
+							else {
+								$userImage = asset('img/default_avatar.png');
+							}
+			
 						}
 						else {
 							$userImage = asset('img/default_avatar.png');

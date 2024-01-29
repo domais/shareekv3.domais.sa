@@ -40,6 +40,7 @@
                     <div class="col-3 d-flex align-items-center">نوع الجهة</div>
                     <div class="col-9">
                         <select class="form-control" wire:model="partnershipForm.type" x-bind:disabled="is_show_page">
+                            <option selected disabled value="">اختر ...</option>
                             <option value="نادي ثقافي">نادي ثقافي</option>       
                             <option value="جمعية">جمعية</option>         
                             <option value="قطاع خاص">قطاع خاص</option>      
