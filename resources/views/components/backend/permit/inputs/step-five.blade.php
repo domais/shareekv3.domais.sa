@@ -27,7 +27,8 @@
                             <td>{{$guest->age}}</td>
                             <td>{{$guest->getAge()}}
                             {{-- Pivot filed type --}}
-                            <td>{{$guest->pivot->type}}</td>
+                            {{-- 'going', 'interested', 'maybe', 'cancelled' --}}
+                            <td>{{$guest->pivot->type === 'going' ? 'حاضر' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}</td>
                         </tr>
                         @endforeach
                     </tbody>
