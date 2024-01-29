@@ -39,8 +39,6 @@
 						<option value="1">داخلية</option>
 						<option value="2">خارجية</option>
 						<option value="3">افتراضي</option>
-
-
 					</select>
 
 					<input type="text" x-show="location == 2" id="search-location" class="form-control rounded text-left mt-3" placeholder="بحث عن منطقة">

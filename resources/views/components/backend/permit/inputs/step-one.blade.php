@@ -174,6 +174,7 @@
         </div><!-- /col-5 -->
     </div>
 </div>
+</div>
 <style>
     input[type=file]#AdvImg_input::before {
         content: 'اضغط هنا لأختيار صورة الإعلان'
