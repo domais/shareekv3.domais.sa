@@ -33,7 +33,18 @@ x-data="{  errors: @entangle('validationErrors').live  }" x-init="
             <div class="card p-3 py-4">
                 
                 <div class="text-center">
-                    <img src="{{asset('img/default_avatar.png')}}" width="100" class="rounded-circle">
+                    @php
+                            if (auth()->user()->owner->fileable) {
+                                $userImage = auth()->user()->owner->fileable->path 
+                                ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . auth()->user()->owner->fileable->path) 
+                                : asset('img/default_avatar.png');
+                            }
+                            else {
+                                $userImage = asset('img/default_avatar.png');
+                            }
+
+                    @endphp
+                    <img src="{{ $userImage }}" width="100" class="rounded-circle">
                 </div>
                 
                 <div class="text-center mt-3">
