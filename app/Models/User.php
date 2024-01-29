@@ -104,4 +104,22 @@ class User extends Authenticatable implements LaratrustUser
     {
         return $this->morphMany(Survey::class, 'surveyable');
     }
+
+    public function getAge(): string
+    {
+        switch ($this->age) {
+            case 'less-11':
+                return 'أقل من 11 سنة';
+                break;
+            case '11-18':
+                return 'من 11 إلى 18 سنة';
+                break;
+            case 'more-18':
+                return 'أكبر من 18 سنة';
+                break;
+            default:
+                return 'غير محدد';
+                break;
+        }
+    }
 }

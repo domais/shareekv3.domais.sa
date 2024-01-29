@@ -19,12 +19,12 @@
                     <tbody>
                         @foreach($this->permit->event->guests as $guest)
                         <tr class="mx-2">
-                            <td>1</td>
-                            <td>Guest 1</td>
-                            <td>gm@g.com</td>
-                            <td>051245748</td>
-                            <td>12</td>
-                            <td>Male</td>
+                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{$guest->name}}</td>
+                            <td>{{$guest->email}}</td>
+                            <td>{{$guest->phone}}</td>
+                            <td>{{$guest->age}}</td>
+                            <td>{{$guest->getAge()}}
                         </tr>
                         @endforeach
                     </tbody>
