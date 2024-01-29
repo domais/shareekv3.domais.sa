@@ -40,9 +40,7 @@ use Illuminate\Validation\Rules\Password;
              'lng' => 'required',
             'image_adv' => ['required', function ($attribute, $value, $fail) {
                 if (is_string($value)) {
-                    if (!Storage::exists($value)) {
-                        $fail($attribute.' must be a valid file path.');
-                    }
+               
                 } else {
                     if (!$value->isValid() || !in_array($value->getMimeType(), ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/svg'])) {
                         $fail($attribute.' must be a valid image file.');

@@ -158,13 +158,15 @@
             <div class="col-1"></div>
             <div class="col-11">
 
+                <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3"
+                id="AdvImg_input">
+                
                 @if ($this->permit)
                     <div class="DropArea" style="height: 360px;background:none ">
                         <img id="AdvImg"
                         src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">               
                 @else
-                    <input type="file" x-bind:disabled="is_show_page" class="style image mx-auto mb-3"
-                        id="AdvImg_input">
+                
                     <div class="DropArea" style="height: 360px">
                         <img id="AdvImg" src="{{ asset('img/pexel.png') }}" alt="Picture">
                     </div>

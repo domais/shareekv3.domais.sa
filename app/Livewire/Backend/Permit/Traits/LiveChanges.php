@@ -213,14 +213,16 @@ trait LiveChanges
                     switch ($file->use) {
                         case 'adv':
                             if (!is_string($permitData['image_adv'])) {
-                                Storage::delete('public/'.$file->path);
-                                $file->path = $permitData['image_adv']->store('files/'.$permit->order_number.'/adv','public');
+                                Storage::disk('do')->delete('public/'.$file->path);
+                                $file->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/adv', $permitData['image_adv'], 'public');
+
                             }
                             break;
                         case 'approval_letter':
                             if ($permitData['event_location'] == 2 && !is_string($permitData['approval_file'])) {
-                                Storage::delete($file->path);
-                                $file->path = $permitData['approval_file']->store('files/'.$permit->order_number.'/approval_letter','public');
+                                Storage::disk('do')->delete('public/'.$file->path);
+                                $file->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/adv', $permitData['approval_file'], 'public');
+
                             }elseif ($permitData['event_location'] == 1) {
                                 Storage::delete($file->path);
                                 $file->delete();
@@ -228,8 +230,9 @@ trait LiveChanges
                             break;
                         case 'location_image':
                             if ($permitData['event_location'] == 2 && !is_string($permitData['location_image'])) {
-                                Storage::delete($file->path);
-                                $file->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image','public');
+                                Storage::disk('do')->delete('public/'.$file->path);
+                                $file->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/adv', $permitData['location_image'], 'public');
+
                             } elseif ($permitData['event_location'] == 1) {
                                 Storage::delete($file->path);
                                 $file->delete();
