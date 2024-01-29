@@ -45,7 +45,7 @@ class EventService implements EventServiceInterface
         // })
             $events = Event::when(!isset($data['date_range']), function ($query) {
                 // return $query->whereDate('start_date', '>=', Carbon::now());
-                return $query->whereIn('status', [5,6]);
+                return $query->whereIn('status_id', [5,6]);
             })
             ->when(isset($data['date_range']), function ($query) use ($data) {
                 return $this->filterDateRangeEvents($data['date_range'], $query);
