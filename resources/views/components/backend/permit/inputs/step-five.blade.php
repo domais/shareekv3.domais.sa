@@ -26,9 +26,10 @@
                             <td>{{$guest->phone}}</td>
                             <td>{{$guest->age}}</td>
                             <td>{{$guest->getAge()}}
-                            {{-- Pivot filed type --}}
-                            {{-- 'going', 'interested', 'maybe', 'cancelled' --}}
-                            <td>{{$guest->pivot->type === 'going' ? 'حاضر' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}</td>
+                            <td>
+                            <div class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">
+                                {{$guest->pivot->type === 'going' ? 'حاضر' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}
+                            </div>
                         </tr>
                         @endforeach
                     </tbody>
