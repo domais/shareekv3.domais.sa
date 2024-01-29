@@ -78,7 +78,6 @@
 			</div><!-- /DropArea -->
 		</div>
 		<div class="col-7">
-			<!-- Rahmani: لو حليت مشكلة الخرائد .. فعل السطر التالي -->
 			<div class="map" style="height: 562px"></div>
 		</div>
 	</div>

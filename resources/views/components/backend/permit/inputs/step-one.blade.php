@@ -10,7 +10,6 @@
             <div class="row my-3">
                 <div class="col-3 d-flex align-items-center">الشريك</div>
                 <div class="col-9">{{ $this->permit->user->owner->name }} / {{ $this->permit->user->name }}</div>
-                <!-- Rahmani: Fix this -->
             </div>
         @endif
 

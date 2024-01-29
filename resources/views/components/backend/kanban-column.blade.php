@@ -18,7 +18,6 @@
                     @if (auth()->user()->hasRole('SuperAdmin'))
                      <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
                     @endif
-                    {{-- Rahmani: if admin => show caffee name / else hide --}}
                 </div>
                 @if ($item->literary)
                 <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->name}}@endif</div>

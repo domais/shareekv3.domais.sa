@@ -138,6 +138,23 @@ class PartnerTable extends DataTableComponent
                     'class' => 'text-center',
                 ])->sortable(),
 
+                Column::make("دعم الشريك", "points")
+                    ->format(function ($value, $column, $row) {
+                        $points = 0;
+                        switch ($column->class) {
+                            case 'أ':
+                                $points = 20 - $value;
+                                break;
+                            case 'ب':
+                                $points = 12 - $value;
+                                break;
+                            case 'ج':
+                                $points = 8 - $value;
+                                break;
+                        }
+                        return $points;
+                    })->sortable(),
+
             Column::make(__(''), 'id')
                 ->view('Tableactions.index')
 
