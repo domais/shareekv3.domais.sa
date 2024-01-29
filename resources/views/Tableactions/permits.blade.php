@@ -2,7 +2,7 @@
 
     <div class="btn-group mx-2" role="group" aria-label="Third group">
       
-      @if (havePermission(auth()->user(),'event-delete'))
+      @if (havePermission(auth()->user(),'event-delete') || $row->user_id == auth()->id())
           <button type="button" class="btn btn-light" wire:click="$dispatch('delete-user', { id: {{$row->id}}})">
             <x-heroicon-o-trash style="width: 28px" />
         </button>

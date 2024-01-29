@@ -119,6 +119,11 @@ class PermitTable extends DataTableComponent
             Column::make("Id", "id")
                 ->hideIf(true)
                 ->sortable(),
+
+            Column::make("user_id", "user_id")
+                ->hideIf(true)
+                ->sortable(),
+
                 Column::make("رقم التصريح", "order_number")
                 ->searchable()
                 ->sortable()
