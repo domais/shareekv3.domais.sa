@@ -1,4 +1,4 @@
-@extends('mail.layout')
+@extends('mail.layout-app')
 
 @section('content')
     <h4>السلام عليكم ورحمة الله وبركاته</h4>
