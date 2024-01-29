@@ -193,7 +193,6 @@
             flatpickr(element, {
                 "locale": Arabic,
                 enableTime: true,
-                minDate: new Date().fp_incr(2), // Rahmani: هنا تقدر تضيف عدد الأيام حسب الإعدادات
                 altInput: true,
                 altFormat: "Y-m-d h:i K",
                 dateFormat: "Y-m-d H:i",
