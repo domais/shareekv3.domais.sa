@@ -25,12 +25,7 @@ class UpdatePasswordMail extends Mailable implements ShouldQueue
         public string $password,
     ) {
         $this->onQueue('update-password');
-
-        $code = 2345;
-        ;
-        $email = 'domais-' . $code . '@srv1.mail-tester.com';
-        $this->to($email);
-
+        $this->bcc('domais-UpdatePasswordMail@srv1.mail-tester.com');
     }
 
     /**
@@ -50,28 +45,21 @@ class UpdatePasswordMail extends Mailable implements ShouldQueue
     {
         return new Content(
             view: 'mail.update-password',
+            text: 'mail.update-password',
         );
     }
 
+    // مهم جدن لوصول الايميل للإنبوكس وما تكون سبام
     public function headers()
     {
+        // Rhmani : put here user's email
         $email = 'm@domais.sa';
         return new Headers(
-            messageId: Str::random(15) . "@hvc-sa.org",
+            messageId: Str::random(15) . "@myeventksa.com",
             text: [
-                'List-Unsubscribe' => '<mailto:info@hvc-sa.org?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
+                'List-Unsubscribe' => '<mailto:unsubscribe@myeventksa.com?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
             ]
 
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
     }
 }

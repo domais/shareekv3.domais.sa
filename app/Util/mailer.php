@@ -16,10 +16,10 @@ function ChangePermitStatus($permit)
     switch ($permit->status_id) {
         // تحت الدراسة
         case 2:
-            $admins = Role::where('name', 'SuperAdmin')->first()->users;
-
-            $recipients = $admins->pluck('email')->toArray(); // Get all admin emails
-            Mail::to($recipients)->send(new ChangeStatus($data));
+            // $admins = Role::where('name', 'SuperAdmin')->first()->users;
+            // تم ايقافها بواسطة دميس بطلب من م.أحمد 2024-01-30
+            // $recipients = $admins->pluck('email')->toArray(); // Get all admin emails
+            // Mail::to($recipients)->send(new ChangeStatus($data));
         break;
 
         //  موافقة مبدأية

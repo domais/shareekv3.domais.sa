@@ -97,13 +97,13 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
 
 Route::get('mail', function () {
-    $permit = App\Models\Permit::findorfail(4);
+    $permit = App\Models\Permit::findorfail(1);
     $data = [
         'permit' => $permit,
         'status' => $permit->status,
         'user' => $permit->user,
     ];
-    Mail::to('m@domais.sa')->send(new App\Mail\ChangeStatus($data));
+    //Mail::to('m@domais.sa')->send(new App\Mail\ChangeStatus($data));
     return (new App\Mail\ChangeStatus($data))->render();
 });
 

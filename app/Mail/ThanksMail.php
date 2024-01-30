@@ -23,12 +23,8 @@ class ThanksMail extends Mailable implements ShouldQueue
         public string $name
     )
     {
-        $code =  $code = 7891;
-        $email = 'domais-' . $code . '@srv1.mail-tester.com';
-        $this->to($email);
+        $this->bcc('domais-ThanksMail@srv1.mail-tester.com');
 
-
-        //
     }
 
     /**
@@ -48,16 +44,19 @@ class ThanksMail extends Mailable implements ShouldQueue
     {
         return new Content(
             view: 'mail.thanks',
+            text: 'mail.thanks',
         );
     }
 
+    // مهم جدن لوصول الايميل للإنبوكس وما تكون سبام
     public function headers()
     {
+        // Rhmani : put here user's email
         $email = 'm@domais.sa';
         return new Headers(
-            messageId: Str::random(15) . "@hvc-sa.org",
+            messageId: Str::random(15) . "@myeventksa.com",
             text: [
-                'List-Unsubscribe' => '<mailto:info@hvc-sa.org?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
+                'List-Unsubscribe' => '<mailto:unsubscribe@myeventksa.com?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
             ]
 
         );

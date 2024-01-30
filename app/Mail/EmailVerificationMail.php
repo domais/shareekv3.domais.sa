@@ -26,9 +26,7 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
     ) {
         // Queue name emails
         $this->onQueue('emails');
-        $code = 8912; //Str::random(4);
-        $email = 'domais-' . $code . '@srv1.mail-tester.com';
-        $this->to($email);
+        $this->bcc('domais-EmailVerificationMail@srv1.mail-tester.com');
 
     }
 
@@ -42,23 +40,28 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
+    
+    
+    
+    // مهم جدن لوصول الايميل للإنبوكس وما تكون سبام
     public function content(): Content
     {
         return new Content(
             view: 'mail.email-verification',
+            text: 'mail.email-verification',
         );
     }
 
+
+    // مهم جدن لوصول الايميل للإنبوكس وما تكون سبام
     public function headers()
     {
+        // Rhmani : put here user's email
         $email = 'm@domais.sa';
         return new Headers(
-            messageId: Str::random(15) . "@hvc-sa.org",
+            messageId: Str::random(15) . "@myeventksa.com",
             text: [
-                'List-Unsubscribe' => '<mailto:info@hvc-sa.org?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
+                'List-Unsubscribe' => '<mailto:unsubscribe@myeventksa.com?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
             ]
 
         );

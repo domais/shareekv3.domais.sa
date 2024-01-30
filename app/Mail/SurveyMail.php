@@ -25,11 +25,7 @@ class SurveyMail extends Mailable implements ShouldQueue
         public $user,
         public $type
     ) {
-        $code = 3456; //Str::random(4);
-        $email = 'domais-' . $code . '@srv1.mail-tester.com';
-        $this->to($email);
-
-        //
+        $this->bcc('domais-SurveyMail@srv1.mail-tester.com');
     }
 
     /**
@@ -52,6 +48,7 @@ class SurveyMail extends Mailable implements ShouldQueue
 
         return new Content(
             view: $view,
+            text: $view,
             with: [
                 'token' => $this->token,
                 'event' => $this->event,
@@ -62,13 +59,15 @@ class SurveyMail extends Mailable implements ShouldQueue
     }
 
 
+    // مهم جدن لوصول الايميل للإنبوكس وما تكون سبام
     public function headers()
     {
+        // Rhmani : put here user's email
         $email = 'm@domais.sa';
         return new Headers(
-            messageId: Str::random(15) . "@hvc-sa.org",
+            messageId: Str::random(15) . "@myeventksa.com",
             text: [
-                'List-Unsubscribe' => '<mailto:info@hvc-sa.org?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
+                'List-Unsubscribe' => '<mailto:unsubscribe@myeventksa.com?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
             ]
 
         );

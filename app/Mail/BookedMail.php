@@ -26,16 +26,15 @@ class BookedMail extends Mailable implements ShouldQueue
         
     ) {
         
-        $code = 1234; //;
-        $email = 'domais-' . $code . '@srv1.mail-tester.com';
-        $this->to($email);
+        $this->bcc('domais-BookedMail@srv1.mail-tester.com');
 
-        Email::create([
-            'email' => $email,
-            'code' => $code,
-            'name' => 'booked mail'
-            // Add other fields as necessary
-        ]);
+        // Rahmani: نحتاج نناقش هذا الشي
+        // Email::create([
+        //     'email' => $email,
+        //     'code' => $code,
+        //     'name' => 'booked mail'
+        //     // Add other fields as necessary
+        // ]);
         //
     }
 
@@ -49,13 +48,12 @@ class BookedMail extends Mailable implements ShouldQueue
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
+
     public function content(): Content
     {
         return new Content(
             view: 'mail.booked',
+            text: 'mail.booked',
             with: [
                 'event' => $this->event,
                 'image' => $this->event->image ? url($this->event->image->path) : asset('img/default-event.png'),
@@ -64,13 +62,15 @@ class BookedMail extends Mailable implements ShouldQueue
         );
     }
 
+    // مهم جدن لوصول الايميل للإنبوكس وما تكون سبام
     public function headers()
     {
+        // Rhmani : put here user's email
         $email = 'm@domais.sa';
         return new Headers(
-            messageId: Str::random(15) . "@hvc-sa.org",
+            messageId: Str::random(15) . "@myeventksa.com",
             text: [
-                'List-Unsubscribe' => '<mailto:info@hvc-sa.org?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
+                'List-Unsubscribe' => '<mailto:unsubscribe@myeventksa.com?subject=unsubscribe&body=Please unsubscribe my email ' . $email . ' from your list or system.>'
             ]
 
         );
