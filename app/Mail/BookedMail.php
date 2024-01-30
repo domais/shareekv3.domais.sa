@@ -6,6 +6,7 @@ use App\Models\Email;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Headers;
 use Illuminate\Queue\SerializesModels;
@@ -25,10 +26,10 @@ class BookedMail extends Mailable implements ShouldQueue
         public $event,
         public string $name,
         public string $email,
-        
+
     ) {
         $this->Uemail = $email;
-        
+
         $this->bcc('domais-BookedMail@srv1.mail-tester.com');
 
         // Rahmani: نحتاج نناقش هذا الشي
@@ -47,6 +48,7 @@ class BookedMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address(config('mail.from.address'), 'جسر الثقاقة'),
             subject: 'تأكيد تسجيلك في فعالية ' . mb_substr($this->event['name'], 0, 70) . '...',
         );
     }

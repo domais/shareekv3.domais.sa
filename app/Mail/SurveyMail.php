@@ -6,6 +6,7 @@ use App\Models\Email;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Headers;
 use Illuminate\Queue\SerializesModels;
@@ -36,6 +37,7 @@ class SurveyMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
+            from: new Address(config('mail.from.address'), 'جسر الثقاقة'),
             subject: 'لقد تمت دعوتك للمشاركة في الاستبيان',
         );
     }
