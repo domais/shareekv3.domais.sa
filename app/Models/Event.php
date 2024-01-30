@@ -30,7 +30,8 @@ class Event extends Model
         'need_support',
         'lat',
         'lng',
-        'source'
+        'source',
+        'is_survey_sent',
     ];
 
     public function user()
