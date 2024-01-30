@@ -6,8 +6,9 @@ use App\Models\Permit;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Support;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
-
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class SupportTable extends DataTableComponent
 {
@@ -26,6 +27,26 @@ class SupportTable extends DataTableComponent
         }
         return Permit::query()->whereHas('support');
     }
+    public function filters(): array
+    {
+        return [
+            
+    
+            SelectFilter::make(__('حالة التصريح'))
+            ->options([
+                '' => 'الكل',
+                '11' => 'طلب دعم جديد',
+                '12' => 'تحت الدراسة',
+                '13' => 'تمت الموافقة',
+                '14' => 'مؤرشف',
+            ])
+            ->filter(function(Builder $builder, string $value) {
+                $builder->whereHas('support', function (Builder $query) use ($value) {
+                    $query->where('status_id', $value);
+                });
+            }),
+        ];
+    }
     public function configure(): void
     {
         $this->setPrimaryKey('id');
@@ -39,8 +60,13 @@ class SupportTable extends DataTableComponent
                 ->sortable(),
             Column::make("رقم التصريح", "order_number")
                 ->sortable(),
-            Column::make("الحالة", "status.name")
+            Column::make("الحالة", "support.status.name")
                 ->sortable(),
+                
+            Column::make("تاريخ الطلب", "created_at")
+                ->format(function($value, $column, $row) {
+                    return Carbon::parse($value)->translatedFormat('l، d F Y');
+            })
         ];
     }
 }
