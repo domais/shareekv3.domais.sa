@@ -33,8 +33,7 @@ class SurveyCommand extends Command
         $hours = $this->argument('hours');
 
         // $events = Event::where('end_date', '<=', Carbon::now()->subHours($hours))
-        $events = Event::where('end_date', '<=', Carbon::now()->minutes(1))
-            ->where('source', '!=', 'firebase')
+        $events = Event::where('end_date', '<=', Carbon::now()->subMinutes(1))
             ->where('is_survey_sent', 0)
             ->get();
 
