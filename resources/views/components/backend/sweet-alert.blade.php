@@ -293,8 +293,7 @@
 	// مشاركة فعالية لجميع المستخدمين
 	function Act_ShareEvent(id, model) {
     console.log(id, model);
-    var url = window.location.origin + '/i/event/' + id;
-    handleAction(
+    var url = 'https://app.myeventksa.com/event/' + id;    handleAction(
         id,             // id,
         model,          // model,
         false,          // icon ,
