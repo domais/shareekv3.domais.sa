@@ -38,7 +38,7 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'لقد تم إنشاء كلمة مرور جديدة لحسابك في الشريك الأدبي',
+            subject: 'لقد تم إنشاء كلمة مرور جديدة لحسابك في  جسر الثقاقة',
         );
     }
 
