@@ -86,7 +86,7 @@ class Inputs extends Component
 
         try {
             $this->form->store($status);
-            if ($status == 2 && empty($this->speakers)) {
+            if ($status == 2 && empty($this->speakers) && $this->form->event_type_id == 1) {
                 $this->errors[] = "يجب إضافة متحدث واحد على الأقل" ;
                 return;
             }

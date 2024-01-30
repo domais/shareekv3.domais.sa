@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Backend\Permit;
 
+use App\Mail\ChangeStatus;
 use App\Models\Draft;
 use App\Models\Event;
 use App\Models\File;
 use App\Models\Permit;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -114,8 +116,14 @@ class Index extends Component
         }
 
         AddToHistory($permit->id,$permit->status_id);
-        ChangePermitStatus($permit);
 
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])->send(new ChangeStatus($data));
         
         $this->redirect(route('event.index'));
     }
@@ -131,7 +139,14 @@ class Index extends Component
 
         
         AddToHistory($permit->id,$permit->status_id,null,$reason);
-        ChangePermitStatus($permit);
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])->send(new ChangeStatus($data));
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
@@ -172,7 +187,17 @@ class Index extends Component
        $permit->save();
 
        AddToHistory($permit->id,$permit->status_id);
-       ChangePermitStatus($permit);
+
+       $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])->send(new ChangeStatus($data));
+
+       //ChangePermitStatus($permit);
+
 
        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
@@ -185,7 +210,13 @@ class Index extends Component
         $permit->status_id = 10;
         $permit->save();
 
-        ChangePermitStatus($permit);
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])->send(new ChangeStatus($data));
         AddToHistory($permit->id,$permit->status_id,null,$reason);
 
 
@@ -200,7 +231,14 @@ class Index extends Component
         $permit->save();
 
         AddToHistory($permit->id,$permit->status_id);
-        ChangePermitStatus($permit);
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+Mail::to([$permit->user->email])->send(new ChangeStatus($data));
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
