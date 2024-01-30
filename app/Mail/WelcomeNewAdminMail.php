@@ -61,7 +61,7 @@ class WelcomeNewAdminMail extends Mailable
     public function headers()
     {
         // Rhmani : put here user's email
-        $email = 'm@domais.sa';
+        $email = $this->user->email;
 		return new Headers(
 			messageId: Str::random(15)."@myeventksa.com",
 			text:[

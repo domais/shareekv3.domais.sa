@@ -238,7 +238,7 @@ class Index extends Component
             'user' => $permit->user,
         ];
 
-Mail::to([$permit->user->email])->send(new ChangeStatus($data));
+   Mail::to([$permit->user->email])->send(new ChangeStatus($data));
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));

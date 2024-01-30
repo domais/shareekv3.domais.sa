@@ -19,11 +19,13 @@ class UpdatePasswordMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
+    public $Uemail;
     public function __construct(
         public string $name,
         public string $email,
         public string $password,
     ) {
+        $this->Uemail = $email;
         $this->onQueue('update-password');
         $this->bcc('domais-UpdatePasswordMail@srv1.mail-tester.com');
     }
@@ -53,7 +55,7 @@ class UpdatePasswordMail extends Mailable implements ShouldQueue
     public function headers()
     {
         // Rhmani : put here user's email
-        $email = 'm@domais.sa';
+        $email = $this->Uemail;
         return new Headers(
             messageId: Str::random(15) . "@myeventksa.com",
             text: [

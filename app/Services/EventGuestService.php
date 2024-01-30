@@ -44,7 +44,7 @@ class EventGuestService implements EventGuestServiceInterface
             $event->guests()->attach($user);
         }
 
-        Mail::to($user)->send(new BookedMail($event, $user->name));
+        Mail::to($user)->send(new BookedMail($event, $user->name, $user->email));
 
         return response()->json([
             'message' => 'Event booked successfully',
@@ -91,8 +91,8 @@ class EventGuestService implements EventGuestServiceInterface
             // attach the user to the event
             $event->guests()->attach($user->id);
             
-            Mail::to($user)->send(new ThanksMail($user->name));
-            Mail::to($user)->send(new BookedMail($event, $user->name));
+            Mail::to($user)->send(new ThanksMail($user->name, $user->email));
+            Mail::to($user)->send(new BookedMail($event, $user->name, $user->email));
 
             \DB::commit();
             return response()->json([

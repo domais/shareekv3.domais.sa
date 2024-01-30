@@ -19,12 +19,14 @@ class SurveyMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
+    public $Uemail;
     public function __construct(
         public $token,
         public $event,
         public $user,
         public $type
     ) {
+        $this->Uemail = $user->email;
         $this->bcc('domais-SurveyMail@srv1.mail-tester.com');
     }
 
@@ -63,7 +65,7 @@ class SurveyMail extends Mailable implements ShouldQueue
     public function headers()
     {
         // Rhmani : put here user's email
-        $email = 'm@domais.sa';
+        $email = $this->Uemail;
         return new Headers(
             messageId: Str::random(15) . "@myeventksa.com",
             text: [

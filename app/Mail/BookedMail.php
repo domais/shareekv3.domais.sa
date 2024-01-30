@@ -20,11 +20,14 @@ class BookedMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
+    public $Uemail;
     public function __construct(
         public $event,
-        public string $name
+        public string $name,
+        public string $email,
         
     ) {
+        $this->Uemail = $email;
         
         $this->bcc('domais-BookedMail@srv1.mail-tester.com');
 
@@ -66,7 +69,7 @@ class BookedMail extends Mailable implements ShouldQueue
     public function headers()
     {
         // Rhmani : put here user's email
-        $email = 'm@domais.sa';
+        $email = $this->Uemail;
         return new Headers(
             messageId: Str::random(15) . "@myeventksa.com",
             text: [
