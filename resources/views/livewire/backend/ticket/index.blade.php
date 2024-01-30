@@ -114,7 +114,7 @@
 				</div>
 				<div class="row mb-2" x-show="open == 3">
 					<div class="col-3 d-flex align-items-center">
-						رقم التصريح
+						رقم الفعالية 
 						<span class="text-danger">*</span>
 					</div>
 					<div class="col-9">

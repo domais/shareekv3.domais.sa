@@ -96,7 +96,7 @@ x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
 			name="{{ auth()->user()->hasRole('User') ? 'موافق عليه مبدأيا' : 'بإنتظار تصريح الهيئة' }}"
 			count="{{ count($approved) }}"
 			:data="$approved"
-			:buttons="auth()->user()->hasRole('User') ? [] : KanbanButtons('PermitAdminAwatingApproval')  "
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('PermitUserEdit') : KanbanButtons('PermitAdminAwatingApproval')  "
 		/>
 
 	</div>

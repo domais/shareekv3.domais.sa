@@ -195,6 +195,13 @@ function ArToEn($input) {
 			break;
 
 
+			case 'PermitUserEdit':
+				return[
+					['type' => 'link' , 'title' => 'تعديل', 'href' => 'permit.edit','class' => 'btn btn-secondary'],
+				];
+			break;
+
+
 
 
 

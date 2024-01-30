@@ -56,13 +56,17 @@ class SurveyTable extends DataTableComponent
             //     ->searchable()
             //     ->sortable(),
 
+            Column::make("رقم الفعالية", "event.order_number")
+            ->searchable()
+            ->sortable(),
+
             Column::make("النوع", "type")
                 ->searchable()
                 ->sortable(),
 
             Column::make("الحدث", "event.title"),
 
-            Column::make("الحلية", "status")
+            Column::make("الحالة", "status")
                 ->searchable()
                 ->sortable(),
 
