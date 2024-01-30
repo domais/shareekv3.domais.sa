@@ -5,6 +5,7 @@ namespace App\Livewire\Backend\Partner;
 use App\Livewire\Forms\PartnerForm;
 use App\Livewire\Forms\UserForm;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -31,6 +32,14 @@ class Index extends Component
         $this->Pform->save($user);
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
+    }
+
+
+    
+    #[On('setCoordinates')] 
+    public function setCoordinates($lat, $lng)
+    {
+       $this->Pform->coordinates = $lat . ',' . $lng;
     }
 
 

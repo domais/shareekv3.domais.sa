@@ -73,7 +73,11 @@
                                         <input type="text" wire:model="Pform.city" class="form-control text-start" id="partnerCity" placeholder="المدينة">
                                     </div>
                                     <div class="mb-3">
-                                        <input type="text" wire:model="Pform.coordinates" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
+                                        <input type="text" id="partnerLat" class="form-control text-start" placeholder="ادخل احداثيات المكان .,.">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <input type="number" wire:model="Pform.points" dir="ltr" class="form-control text-start" id="partnerPoints" placeholder="أدخل الدعم المتبقي">
                                     </div>
 
                                     <div class="mb-3">
@@ -102,3 +106,59 @@
       </div>
 
 </div>
+
+<script>
+    function initAutocomplete() {
+        const input = document.getElementById('partnerLat');
+        const autocomplete = new google.maps.places.Autocomplete(input);
+
+        let service = new google.maps.places.AutocompleteService();
+        let pacContainerInitialized = false;
+
+        input.addEventListener('input', () => {
+            if (!pacContainerInitialized) {
+                setTimeout(() => {
+                    const pacContainer = document.querySelector('.pac-container');
+                    if (pacContainer) {
+                        pacContainer.style.zIndex = '9999';
+                        pacContainerInitialized = true;
+                    }
+                }, 0);
+            }
+
+            if (input.value) {
+                service.getPlacePredictions({ input: input.value }, (predictions, status) => {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        console.log(predictions);
+                    }
+                });
+            }
+        });
+
+        autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            if (place.geometry) {
+                const lat = place.geometry.location.lat();
+                const lng = place.geometry.location.lng();
+                console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+                Livewire.dispatch('setCoordinates', { lat, lng })
+            }
+        });
+    }
+
+    initAutocomplete();
+</script>
+
+@pushOnce('scripts')
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&language=ar&region=SA"></script>
+@endPushOnce
+
+@pushOnce('styles')
+    
+<style>
+    .pac-container {
+        z-index: 1051 !important;
+    }
+</style>
+
+@endPushOnce

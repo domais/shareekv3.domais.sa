@@ -17,7 +17,10 @@ class PartnerForm extends Form
     public $status = "";
     public $coordinates; // This will store both lat and lng
     public $class;
+    public $points;
     public $logo;
+    public $lat;
+    public $lng;
 
     public function rules()
     {
@@ -28,6 +31,7 @@ class PartnerForm extends Form
             'coordinates' => ['required', 'string', 'regex:/^-?\d{1,3}\.\d+,-?\d{1,3}\.\d+$/'],
             'class' => ['required', 'string', 'in:أ,ب,ج,د'],
             'logo' => ['required', 'image'],
+            'points' => ['required', 'numeric'],
         ];
     }
 
@@ -38,7 +42,11 @@ class PartnerForm extends Form
         $this->CR = $parnter->CR;
         $this->city = $parnter->city;
         $this->coordinates = $parnter->coordinates;
+        $this->lat = $parnter->lat;
+        $this->lng = $parnter->lng;
+
         $this->class = $parnter->class;
+        $this->points = $parnter->points;
 
         $this->logo = $parnter->image ? 'https://nextlevel.ams3.digitaloceanspaces.com/'.$parnter->image->path : null;
 
@@ -61,7 +69,7 @@ class PartnerForm extends Form
         $this->partner->lat = explode(',', $this->coordinates)[0];
         $this->partner->lng = explode(',', $this->coordinates)[1];
         $this->partner->class = $this->class;
-        $this->partner->points = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
+        $this->partner->points = $this->points; //$this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
         $this->partner->save();
 
         if (!is_string($this->logo)) {
@@ -96,7 +104,7 @@ class PartnerForm extends Form
         $partner->lat = explode(',', $this->coordinates)[0];
         $partner->lng = explode(',', $this->coordinates)[1];
         $partner->class = $this->class;
-        $partner->points = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
+        $partner->points = $this->points; //$this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
         $partner->CR = $this->CR;
         $partner->save();
 

@@ -6,6 +6,7 @@ use App\Livewire\Forms\PartnerForm;
 use App\Livewire\Forms\UserForm;
 use App\Models\Partner;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -49,12 +50,17 @@ class Show extends Component
             $this->ValidationErrors = $th->validator->errors()->all();
             return;
         }
-
-
-     
-
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
+
+    #[On('setCoordinates')] 
+    public function setCoordinates($lat, $lng)
+    {
+       $this->Pform->coordinates = $lat . ',' . $lng;
+    }
+
+
+
 
 
 

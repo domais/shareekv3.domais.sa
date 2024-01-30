@@ -35,8 +35,12 @@
                 <input type="text" wire:model="Pform.city" class="form-control text-start" id="partnerCity" placeholder="المدينة">
             </div>
             <div class="mb-3">
-                <input type="text" wire:model="Pform.coordinates" dir="ltr" class="form-control text-start" id="partnerLat" placeholder="ادخل احداثيات المكان 21.345,46.321">
-            </div>
+              <input type="text" id="partnerLat" class="form-control text-start" placeholder="ادخل احداثيات المكان .,.">
+             </div>
+
+            <div class="mb-3">
+              <input type="number" wire:model="Pform.points" dir="ltr" class="form-control text-start" id="partnerPoints" placeholder="أدخل الدعم المتبقي">
+          </div>
 
             <div class="mb-3">
                 <select class="form-select" id="partnerClass" wire:model.live="Pform.class">
@@ -101,6 +105,43 @@
           </div>
     </div>
   </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        function initAutocomplete() {
+            const defaultLocation = { lat: {{$this->Pform->lat}}, lng: {{$this->Pform->lng}} }; // Replace with your default location
+
+            const geocoder = new google.maps.Geocoder;
+            geocoder.geocode({ 'location': defaultLocation }, function(results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        document.getElementById('partnerLat').value = results[0].formatted_address;
+                    }
+                }
+            });
+
+            const autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('partnerLat')
+            );
+
+            autocomplete.addListener('place_changed', () => {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    const lat = place.geometry.location.lat();
+                    const lng = place.geometry.location.lng();
+                    console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+                    Livewire.dispatch('setCoordinates', { lat, lng })
+                }
+            });
+        }
+
+        google.maps.event.addDomListener(window, 'load', initAutocomplete);
+    });
+</script>
+
+  @pushOnce('scripts')
+  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&language=ar&region=SA"></script>
+  @endPushOnce
   @pushOnce('styles')
 
   <style>
