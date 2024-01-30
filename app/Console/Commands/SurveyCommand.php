@@ -35,8 +35,10 @@ class SurveyCommand extends Command
         // $events = Event::where('end_date', '<=', Carbon::now()->subHours($hours))
         $events = Event::where('end_date', '<=', Carbon::now()->minutes(1))
             ->where('source', '!=', 'firebase')
-            ->where('is_survey_sent', false)
+            ->where('is_survey_sent', 0)
             ->get();
+
+        \Log::info('Sending survey to ' . $events->count() . ' events');
 
         $events->each(function ($event) {
             $event->speakers->each(function ($speaker) use ($event) {
@@ -63,8 +65,8 @@ class SurveyCommand extends Command
                 ]);
                 Mail::to($guest->email)->send(new SurveyMail($token, $event, $guest, 'guest'));
             });
-
-            $event->update(['is_survey_sent' => true]);
+            \Log::info('Survey sent to event ' . $event->id);
+            $event->update(['is_survey_sent' => 1]);
         });
 
     }
