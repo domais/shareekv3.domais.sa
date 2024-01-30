@@ -20,7 +20,7 @@
                     @endif
                 </div>
                 @if ($item->literary)
-                <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->name}}@endif</div>
+                <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
 
                 {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
                 @else
