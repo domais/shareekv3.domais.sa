@@ -79,7 +79,18 @@ class SurveyTable extends DataTableComponent
 
             Column::make("الحالة", "status")
                 ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->format(function($value) {
+                    if ($value == 'draft') {
+                        return 'مرسلة';
+                    } elseif ($value == 'submitted') {
+                        return 'معبأة';
+                    } elseif ($value == 'completed') {
+                        return 'إنتهى تاريخه';
+                    } else {
+                        return $value;
+                    }
+                }),
 
             Column::make(__('مشاهدة'), 'id')
                 ->view('Tableactions.survey')
