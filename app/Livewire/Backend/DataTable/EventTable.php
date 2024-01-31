@@ -151,7 +151,7 @@ class EventTable extends DataTableComponent
                 ->searchable()
                 ->sortable()
                 ->format(
-                    fn($value, $row, Column $column) => $row->user->name.'<br>'.$row->user->name
+                    fn($value, $row, Column $column) => $row->user->owner->name.'<br>'.$row->user->name
                 )->html(),
 
             Column::make("العنوان", "title")
