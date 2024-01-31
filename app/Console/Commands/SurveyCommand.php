@@ -15,8 +15,7 @@ class SurveyCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:survey {hours=2}';
-
+    protected $signature = 'app:survey {minutes=2}';
     /**
      * The console command description.
      *
