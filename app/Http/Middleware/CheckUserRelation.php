@@ -17,7 +17,7 @@ class CheckUserRelation
      */
     public function handle(Request $request, Closure $next, $model)
     {
-        $id = $request->route('id');
+        $id = $request->route('permit');
         dd($model, $id);
         $user = $request->user();
 
