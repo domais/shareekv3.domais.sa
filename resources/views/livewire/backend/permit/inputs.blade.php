@@ -22,9 +22,12 @@
 				@else
 
 				<li class="breadcrumb-item active" aria-current="page">
-					{{$this->permit == 'permit.edit' ? ' تعديل تصريح' : 'إنشاء تصريح جديد'}}
-
-
+					@if ($this->permit)
+					تعديل معلومات التصريح رقم {{$this->permit->order_number}}
+						
+					@else
+					إنشاء تصريح جديد
+					@endif
 				</li>
 
 				@endif
