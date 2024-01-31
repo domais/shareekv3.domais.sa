@@ -59,6 +59,12 @@ class Show extends Component
        $this->Pform->coordinates = $lat . ',' . $lng;
     }
 
+    public function senddata()
+    {
+        // $this->owner
+        dd("مهندس محمد هنا ارسل بيانات المستخدم");
+    }
+
 
 
 

@@ -58,6 +58,9 @@
                 <button type="submit" class="btn btn-success text-white">
                     تأكيـد
                 </button>
+                <button type="button" class="btn btn-primary text-white" wire:click="senddata">
+                  ارسل بيانات الدخول
+              </button>
             </div>
 
           </form>
