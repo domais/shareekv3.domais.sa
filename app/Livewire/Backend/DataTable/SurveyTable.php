@@ -63,8 +63,17 @@ class SurveyTable extends DataTableComponent
             Column::make("اسم المبادرة", "event.title"),
 
             Column::make("قام بالتعبئة", "type")
-                ->searchable()
-                ->sortable(),
+            ->searchable()
+            ->sortable()
+            ->format(function($value) {
+                if ($value == 'guest') {
+                    return 'زائر';
+                } elseif ($value == 'speaker') {
+                    return 'متحدث';
+                } else {
+                    return $value;
+                }
+            }),
 
             
 
