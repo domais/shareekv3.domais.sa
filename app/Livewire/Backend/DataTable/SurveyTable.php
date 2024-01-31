@@ -71,7 +71,7 @@ class SurveyTable extends DataTableComponent
                 ->sortable(),
 
             Column::make(__(''), 'id')
-                ->view('Tableactions.Survey')
+                ->view('Tableactions.survey')
         ];
     }
 }
