@@ -15,8 +15,9 @@ class CheckUserRelation
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $model, $id)
+    public function handle(Request $request, Closure $next, $model)
     {
+        $id = $request->route('id');
         dd($model, $id);
         $user = $request->user();
 
