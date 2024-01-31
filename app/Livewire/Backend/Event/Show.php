@@ -54,7 +54,7 @@ class Show extends Component
         $this->is_show_page = true;
 
         if ($this->is_show_page && $this->permit) {
-            $this->histories = array_reverse($this->permit->history()->orderBy('created_at', 'asc')->get()->toArray());
+            $this->histories = collect(array_reverse($this->permit->history()->orderBy('created_at', 'asc')->get()->toArray()));
             dd($this->histories);
 
         }
