@@ -77,7 +77,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
     <div class="kanban" x-show="view === 'kanban'">
 
         <x-backend.kanban-column 
-            name="مجدولة"
+            name="مبادرات مجدولة"
             count="{{count($scheduled)}}" 
             :data="$scheduled"
             route="event"
@@ -86,7 +86,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
          />
 
          <x-backend.kanban-column 
-            name="قائمة"
+            name="مبادرات قائمة"
             count="{{count($active)}}" 
             :data="$active"
             route="event"
@@ -94,7 +94,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
           />
 
           <x-backend.kanban-column 
-            name="{{ !auth()->user()->hasRole('User') ? 'منتهية <small>بإنتظار توثيق الشريك</small>' : 'بإنتظارك لتوثيق الفعالية' }}"
+            name="{{ !auth()->user()->hasRole('User') ? 'مبادرات <small>بإنتظار توثيق الشريك</small>' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
             permission="event-update"
