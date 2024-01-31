@@ -16,10 +16,7 @@ class SurveyTable extends DataTableComponent
 {
     public function builder(): Builder
     {
-        return Survey::query()
-            ->whereHas('event', function (Builder $query) {
-                $query->groupBy('order_number');
-            });
+        return Survey::query()->groupBy('event_id');
     }
     public function configure(): void
     {
