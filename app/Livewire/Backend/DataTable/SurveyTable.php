@@ -14,8 +14,13 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class SurveyTable extends DataTableComponent
 {
-    protected $model = Survey::class;
-
+    public function builder(): Builder
+    {
+        return Survey::query()
+            ->whereHas('event', function (Builder $query) {
+                $query->groupBy('order_number');
+            });
+    }
     public function configure(): void
     {
         $this->setPrimaryKey('id');
