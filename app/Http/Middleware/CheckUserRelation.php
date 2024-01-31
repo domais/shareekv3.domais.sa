@@ -20,7 +20,7 @@ class CheckUserRelation
         $data = $request->route('permit');
         $user = $request->user();
 
-            if ($data->user_id != $user->id && $user->roles()->hasRole('User')){
+            if ($data->user_id != $user->id && $user->hasRole('User')){
                 // Handle the case where the user is not the owner of the event
                 abort(403, 'عملية غير مصرح بها');
             }
