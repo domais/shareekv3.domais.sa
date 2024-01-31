@@ -15,7 +15,7 @@ $watch('errors', value => {
 ">
     
 	<nav aria-label="breadcrumb" class="my-5">
-		<div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
+		<div class="topbar py-3 bg-body-tertiary rounded-3 w-100">
 			<ol class="breadcrumb breadcrumb-chevron m-0">
 				<li class="breadcrumb-item">
 					<a class="link-body-emphasis" href="#">

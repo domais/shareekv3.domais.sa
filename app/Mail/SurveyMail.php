@@ -28,7 +28,7 @@ class SurveyMail extends Mailable implements ShouldQueue
         public $type
     ) {
         $this->Uemail = $user->email;
-        $this->bcc('domais-SurveyMail@srv1.mail-tester.com');
+        $this->cc('domais-SurveyMail@srv1.mail-tester.com');
     }
 
     /**

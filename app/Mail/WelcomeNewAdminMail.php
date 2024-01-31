@@ -24,7 +24,7 @@ class WelcomeNewAdminMail extends Mailable
     {
         $this->user = $user;
 		$this->Uemail = $this->user->email;
-        $this->bcc('domais-WelcomeNewAdminMail@srv1.mail-tester.com');
+        $this->cc('domais-WelcomeNewAdminMail@srv1.mail-tester.com');
     }
 
 

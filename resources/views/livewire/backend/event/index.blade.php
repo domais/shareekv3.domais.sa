@@ -37,7 +37,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
 
 
     <nav aria-label="breadcrumb" class="my-5">
-        <div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
+        <div class="topbar py-3 bg-body-tertiary rounded-3 w-100">
             <ol class="breadcrumb breadcrumb-chevron m-0">
                 <li class="breadcrumb-item">
                     <a class="link-body-emphasis" href="#">
@@ -45,7 +45,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">الفعاليات</a>
+                    <a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">المبادرات</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
             </ol>
@@ -77,7 +77,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
     <div class="kanban" x-show="view === 'kanban'">
 
         <x-backend.kanban-column 
-            name="مجدولة"
+            name="مبادرات مجدولة"
             count="{{count($scheduled)}}" 
             :data="$scheduled"
             route="event"
@@ -86,7 +86,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
          />
 
          <x-backend.kanban-column 
-            name="قائمة"
+            name="مبادرات قائمة"
             count="{{count($active)}}" 
             :data="$active"
             route="event"
@@ -94,7 +94,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
           />
 
           <x-backend.kanban-column 
-            name="{{ !auth()->user()->hasRole('User') ? 'منتهية <small>بإنتظار توثيق الشريك</small>' : 'بإنتظارك لتوثيق الفعالية' }}"
+            name="{{ !auth()->user()->hasRole('User') ? 'مبادرات <small>بإنتظار توثيق الشريك</small>' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"
             permission="event-update"

@@ -16,6 +16,8 @@
 					<a href="{{route('permit.index')}}" class="nav-link px-2 link-light {{ is_active('permit.index') ? 'active' : '' }}">التصاريح</a>
 					{{-- <span class="badge text-bg-danger rounded-pill">3</span> --}}
 				</li>
+				
+				<li class="nav-item"><a href="{{route('support.index')}}" class="nav-link px-2 link-light {{ is_active('support.index') ? 'active' : '' }}">دعم الشريك</a></li>
 
 				@role('SuperAdmin|Adminstrator')
 				<li class="nav-item">
@@ -29,7 +31,6 @@
 					</li>
 				@endrole
 
-				<li class="nav-item"><a href="{{route('support.index')}}" class="nav-link px-2 link-light {{ is_active('support.index') ? 'active' : '' }}">دعم الشريك</a></li>
 
 				<li class="nav-item"><a href="{{route('announcement.index')}}" class="nav-link px-2 link-light {{ is_active('announcement.index') ? 'active' : '' }}">التعميمات</a></li>
 
