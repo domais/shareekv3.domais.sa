@@ -10,23 +10,24 @@
 					</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
+					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">دعم الشريك</a>
 				</li>
 				<li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
 			</ol>
 			<div class="links">
 				{{-- <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a> --}}
 
-				@if (auth()->user()->hasRole('User'))
-					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
-				@endif
-
 				<div class="btn-group" role="group" aria-label="View switcher">
-					<button type="button" class="btn btn-outline-secondary" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
+					<button type="button" class="btn btn-outline-secondary me-2" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
 						<span x-show="view === 'kanban'">عرض كجدول</span>
 						<span x-show="view === 'table'">عرض كقوائم</span>
 					</button>
 				</div>
+
+				
+				@if (auth()->user()->hasRole('User'))
+					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
+				@endif
 			</div>
 		</div>
 	</nav>
