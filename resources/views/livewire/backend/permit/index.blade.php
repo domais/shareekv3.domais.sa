@@ -33,18 +33,17 @@ x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
 			<div class="links">
 				{{-- <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a> --}}
 
-				@if ($role == 2)
-					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
-				@endif
 
 				<div class="btn-group" role="group" aria-label="View switcher">
-					<button type="button" class="btn btn-outline-secondary" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
+					<button type="button" class="btn btn-outline-secondary me-2" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
 						<span x-show="view === 'kanban'">عرض كجدول</span>
 						<span x-show="view === 'table'">عرض كقوائم</span>
 					</button>
 				</div>
 				
-
+				@if ($role == 2)
+					<a class="btn btn-brand" href="{{route('permit.create')}}">طلب تصريح</a>
+				@endif
 
 
 

@@ -53,7 +53,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
                 {{-- <a class="btn btn-secondary me-2" href="#" role="button">عرض كجدول</a> --}}
 
                 <div class="btn-group" role="group" aria-label="View switcher">
-					<button type="button" class="btn btn-outline-secondary" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
+					<button type="button" class="btn btn-outline-secondary me-2" @click="view = (view === 'kanban' ? 'table' : 'kanban')">
 						<span x-show="view === 'kanban'">عرض كجدول</span>
 						<span x-show="view === 'table'">عرض كقوائم</span>
 					</button>
