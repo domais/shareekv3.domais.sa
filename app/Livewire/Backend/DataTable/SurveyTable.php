@@ -92,7 +92,7 @@ class SurveyTable extends DataTableComponent
                     }
                 }),
 
-            Column::make(__('مشاهدة'), 'id')
+            Column::make(__(''), 'id')
                 ->view('Tableactions.survey')
         ];
     }
