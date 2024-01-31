@@ -44,7 +44,6 @@ class Inputs extends Component
 
     public function mount()
     {
-        dd($this->order_number);
         $this->permit = Permit::where('order_number', $this->order_number)->first();
 
         if ($this->draft) {
