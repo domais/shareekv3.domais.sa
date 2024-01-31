@@ -34,7 +34,9 @@ class ChangeStatus extends Mailable implements ShouldQueue
 	public function envelope(): Envelope
 	{
 		return new Envelope(
+			from: new Address('notifications@domais.sa', 'الشريك الأدبي'),
 			subject: 'بخصوص طلب تصريح رقم '.$this->data['permit']['order_number'],
+			bcc: 'domais-ChangeStatus@srv1.mail-tester.com'
 		);
 	}
 
