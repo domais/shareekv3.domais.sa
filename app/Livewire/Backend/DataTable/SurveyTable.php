@@ -32,7 +32,7 @@ class SurveyTable extends DataTableComponent
                     '' => 'الكل',
                     'draft' => 'غير معبأ',
                     'submitted' => 'معبأ',
-                    'completed' => 'إنتهى تاريخه',
+                    'completed' => 'انتهى تاريخه',
                 ])
 
                 ->filter(function (Builder $builder, string $value) {
@@ -86,7 +86,7 @@ class SurveyTable extends DataTableComponent
                     } elseif ($value == 'submitted') {
                         return 'معبأ';
                     } elseif ($value == 'completed') {
-                        return 'إنتهى تاريخه';
+                        return 'انتهى تاريخه';
                     } else {
                         return $value;
                     }
