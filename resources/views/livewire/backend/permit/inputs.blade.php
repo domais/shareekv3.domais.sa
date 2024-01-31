@@ -7,15 +7,12 @@
 						<i class="fa-solid fa-house"></i>
 					</a>
 				</li>
+
 				<li class="breadcrumb-item">
-					@if (Str::contains(Route::currentRouteName(), 'event'))
-						<a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">المبادرات</a>
-					@elseif (Str::contains(Route::currentRouteName(), 'permit'))
-						<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
-					@elseif (Str::contains(Route::currentRouteName(), 'support'))
-						<a class="link-body-emphasis text-decoration-none" href="{{route('support.index')}}">دعم الشريك</a>
-					@endif
+					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">
+						{{$text_bread_crumb === "permit" ? 'التصاريح' : ($text_bread_crumb === "support" ? 'الدعم' : 'المبادرات')}}					</a>
 				</li>
+					
 				@if($is_show_page)
 				<li class="breadcrumb-item active" aria-current="page">عرض معلومات التصريح رقم {{$permit->order_number}}</li>
 				@else

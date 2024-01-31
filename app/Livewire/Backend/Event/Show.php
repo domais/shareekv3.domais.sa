@@ -27,6 +27,8 @@ class Show extends Component
     public $is_show_page = false;
     public $histories =  [];
     public $selectedSpeakers = [];
+    public $text_bread_crumb = 'event';
+
 
     //files
 
