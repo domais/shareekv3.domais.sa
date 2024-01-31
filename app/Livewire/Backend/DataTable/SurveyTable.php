@@ -30,8 +30,8 @@ class SurveyTable extends DataTableComponent
             SelectFilter::make(__('الحالة'))
                 ->options([
                     '' => 'الكل',
-                    'draft' => 'مرسلة',
-                    'submitted' => 'معبأة',
+                    'draft' => 'غير معبأ',
+                    'submitted' => 'معبأ',
                     'completed' => 'إنتهى تاريخه',
                 ])
 
@@ -82,9 +82,9 @@ class SurveyTable extends DataTableComponent
                 ->sortable()
                 ->format(function($value) {
                     if ($value == 'draft') {
-                        return 'مرسلة';
+                        return 'غير معبأ';
                     } elseif ($value == 'submitted') {
-                        return 'معبأة';
+                        return 'معبأ';
                     } elseif ($value == 'completed') {
                         return 'إنتهى تاريخه';
                     } else {
