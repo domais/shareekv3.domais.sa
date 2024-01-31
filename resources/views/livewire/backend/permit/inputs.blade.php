@@ -127,6 +127,9 @@
 			<h1>مراحل الطلب</h1>
 			<ul class="list-group">
 				<!-- : م.جمال ، اعرض الهيستوري بشكل عكسي بحيث القديم يكون تحت والجديد يكون فوق -->
+				@if ($this->histories)
+					
+				
 				@foreach ($this->histories->reverse() as $item)
 					<li>
 						<div>
@@ -144,6 +147,7 @@
 						@endif
 					</li>
 				@endforeach
+				@endif
 
 			</ul>
 		</div>
