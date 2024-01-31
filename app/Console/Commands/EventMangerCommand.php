@@ -47,8 +47,8 @@ class EventMangerCommand extends Command
                 ];
                 
                 Log::info('Event data:', [$data]);
-                
-                Mail::to('m@domais.sa')->send(new ChangeStatus($data));
+
+                Mail::to($permit->user->email)->send(new ChangeStatus($data));
             } elseif ($event->status_id == 6 && $event->end_date <= now()) {
                 $event->status_id = 7;
                 $event->save();
@@ -62,7 +62,7 @@ class EventMangerCommand extends Command
                 
                 Log::info('Event data:', [$data]);
 
-                Mail::to('m@domais.sa')->send(new ChangeStatus($data));
+                Mail::to($permit->user->email)->send(new ChangeStatus($data));
             }
             Log::info('Event :  ' . $event->id);
        
