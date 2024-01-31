@@ -56,8 +56,9 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
         Route::get('/', Index::class)->name('index');
 
-        Route::get('/show/{permit}', Show::class)->name('show')->middleware('checkUserRelation:event,permit');;
-
+        Route::get('/show/{permit}', Show::class)
+        ->name('show')
+        ->middleware('checkUserRelation:permit,permit');
     });
 
     Route::namespace('Ticket')->prefix('ticket')->middleware('checkpassword')->as('ticket.')->group(function () {
