@@ -54,7 +54,9 @@ class Show extends Component
         $this->is_show_page = true;
 
         if ($this->is_show_page && $this->permit) {
-            $this->histories = $this->permit->history()->orderBy('created_at', 'asc')->get();
+            $this->histories = $this->permit->history()->orderBy('created_at', 'asc')->get()->toArray();
+            dd($this->histories);
+
         }
         if (is_null($this->permit)) {
             $this->form->lat = auth()->user()->owner->lat;
