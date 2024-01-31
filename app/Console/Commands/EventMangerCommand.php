@@ -48,7 +48,6 @@ class EventMangerCommand extends Command
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
             }
             Log::info('testing done ' . $event->id);
-
         }
     }
 }
