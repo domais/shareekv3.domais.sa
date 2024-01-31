@@ -30,9 +30,9 @@ class SurveyTable extends DataTableComponent
             SelectFilter::make(__('الحالة'))
                 ->options([
                     '' => 'الكل',
-                    'draft' => 'مسودة',
-                    'submitted' => 'تم الإرسال',
-                    'completed' => 'تم الإنتهاء',
+                    'draft' => 'مرسلة',
+                    'submitted' => 'معبأة',
+                    'completed' => 'إنتهى تاريخه',
                 ])
 
                 ->filter(function (Builder $builder, string $value) {
