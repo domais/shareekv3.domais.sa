@@ -30,7 +30,7 @@ class EventMangerCommand extends Command
     public function handle()
     {
         Log::info('testing done ');
-        /*
+        
         $events = Event::whereIn('status_id', [5, 6])->get();
     
         foreach ($events as $event) {
@@ -49,7 +49,10 @@ class EventMangerCommand extends Command
                 ];
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
             }
-        }*/
+            Log::info('Event :  ' . $event->id);
+
+        }
+        
 
     }
 }

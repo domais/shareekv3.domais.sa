@@ -86,18 +86,15 @@ function ArToEn($input) {
 				foreach($statusesEvent as $status) {
 					if($status == 5) {
 						$events[$status] = Event::where('admin_id', $user->id)
-						->where('start_date', '>', $now)
+						->where('status_id',5)
 						->get();
 					} elseif($status == 6) {
 						$events[$status] = Event::where('admin_id', $user->id)
-						->where('start_date', '<=', $now)
-						->where('end_date', '>=', $now)
+						->where('status_id',6)
 						->get();
 					}elseif($status == 7) {
 						$events[$status] = Event::where('admin_id', $user->id)
-						->where('status_id', '<>', 8)
-						->where('status_id', '<>', 9)
-						->where('end_date', '<', $now)
+						->where('status_id',7)
 						->get();
 					} elseif($status == 8) {
 						$events[$status] = Event::where('status_id', $status)
