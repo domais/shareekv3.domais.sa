@@ -17,10 +17,13 @@ class WelcomeNewAdminMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
+	public $Uemail;
+
 
     public function __construct($user)
     {
         $this->user = $user;
+		$this->Uemail = $this->user->email;
         $this->bcc('domais-WelcomeNewAdminMail@srv1.mail-tester.com');
     }
 
@@ -61,7 +64,7 @@ class WelcomeNewAdminMail extends Mailable
     public function headers()
     {
         // Rhmani : put here user's email
-        $email = $this->user->email;
+        $email = $this->Uemail;
 		return new Headers(
 			messageId: Str::random(15)."@myeventksa.com",
 			text:[
