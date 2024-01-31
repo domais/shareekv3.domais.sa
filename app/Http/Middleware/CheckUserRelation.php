@@ -17,7 +17,8 @@ class CheckUserRelation
      */
     public function handle(Request $request, Closure $next, $model)
     {
-        $data = $request->route('permit');
+        $data = $request->route('order_number');
+        $data = Permit::where('order_number', $data)->first();
         $user = $request->user();
             if ($data->user_id != $user->id && $user->hasRole('User')){
                 // Handle the case where the user is not the owner of the event

@@ -14,6 +14,7 @@ class Show extends Component
     use LiveChanges;
 
     public ?Permit $permit = null;
+    public $order_number;
 
     public PermitForm $form;
     public SpeakerForm  $speakerForm;
@@ -31,6 +32,7 @@ class Show extends Component
 
     public function mount()
     {   
+        $this->permit = Permit::where('order_number', $this->order_number)->first();
         if ($this->permit) {
             $this->form->setForm($this->permit);
             $this->updatedForm();

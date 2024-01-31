@@ -57,7 +57,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
         Route::get('/', Index::class)->name('index');
 
-        Route::get('/show/{permit}', Show::class)
+        Route::get('/show/{order_number}', Show::class)
         ->name('show')
         ->middleware('checkUserRelation:event');
     });
@@ -71,7 +71,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
         Route::get('/', Index::class)->name('index');
 
-        Route::get('/show/{permit}', Show::class)->name('show');
+        Route::get('/show/{order_number}', Show::class)->name('show');
     });
 
     Route::namespace('Announcement')->prefix('announcement')->middleware('checkpassword')->as('announcement.')->group(function () {
