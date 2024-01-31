@@ -105,7 +105,9 @@ Route::get('mail', function () {
         'status' => $permit->status,
         'user' => $permit->user,
     ];
-    Mail::to('m@domais.sa')->send(new App\Mail\ChangeStatus($data));
+    Mail::to('m@domais.sa','domais-ChangeStatus@srv1.mail-tester.com')
+    // ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+    ->send(new App\Mail\ChangeStatus($data));
     return (new App\Mail\ChangeStatus($data))->render();
 });
 
