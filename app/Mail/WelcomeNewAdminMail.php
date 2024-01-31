@@ -31,7 +31,7 @@ class WelcomeNewAdminMail extends Mailable
 	public function envelope(): Envelope
 	{
 		return new Envelope(
-			subject: 'حسابك في الشريك الأدبي',
+			subject: 'بيانات الدخول على حسابك',
 		);
 	}
 
