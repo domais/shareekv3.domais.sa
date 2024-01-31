@@ -29,7 +29,7 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
         $this->Uemail = $email;
         // Queue name emails
         $this->onQueue('emails');
-        $this->bcc('domais-EmailVerificationMail@srv1.mail-tester.com');
+        $this->cc('domais-EmailVerificationMail@srv1.mail-tester.com');
 
     }
 

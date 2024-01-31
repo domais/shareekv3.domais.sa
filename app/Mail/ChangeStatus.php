@@ -23,7 +23,7 @@ class ChangeStatus extends Mailable implements ShouldQueue
 	public function __construct($data)
 	{
 		$this->data = $data;		
-        $this->bcc('domais-ChangeStatus@srv1.mail-tester.com');
+        $this->cc('domais-ChangeStatus@srv1.mail-tester.com');
 	}
 
 
