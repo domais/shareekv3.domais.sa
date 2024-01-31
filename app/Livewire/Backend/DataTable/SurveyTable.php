@@ -7,6 +7,7 @@ use App\Models\Survey;
 use App\Exports\PartnerExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Columns\DateColumn;
@@ -16,7 +17,9 @@ class SurveyTable extends DataTableComponent
 {
     public function builder(): Builder
     {
-        return Survey::query()->groupBy('event_id');
+        return Survey::query()
+            ->select('event_id', DB::raw('MAX(id) as max_id'))
+            ->groupBy('event_id');
     }
     public function configure(): void
     {
