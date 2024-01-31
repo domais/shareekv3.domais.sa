@@ -72,7 +72,7 @@ class PartnerForm extends Form
         $this->partner->points = $this->points; //$this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
         $this->partner->save();
 
-        if (!is_string($this->logo) ||  null) {
+        if (!is_string($this->logo) && $this->logo) {
             // Delete the old logo if it exists
             if ($this->partner->image) {
                 Storage::disk('do')->delete($this->partner->fileable->path);
