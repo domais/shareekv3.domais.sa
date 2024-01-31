@@ -96,6 +96,7 @@ function ArToEn($input) {
 					}elseif($status == 7) {
 						$events[$status] = Event::where('admin_id', $user->id)
 						->where('status_id', '<>', 8)
+						->where('status_id', '<>', 9)
 						->where('end_date', '<', $now)
 						->get();
 					} elseif($status == 8) {
