@@ -1,7 +1,7 @@
 @props(['name' => '','count' => 0 , 'buttons' => [],'edit' => 0,'data' => [],'permission' => 'permit-update','route' => 'permit'])
 <div class="column">
     <div class="head">
-        <div class="fw-bold">{!! html_entity_decode($name) !!} @if($count > 0)<span>{{$count}}</span>@endif</div>
+        <div class="fw-bold">{!! html_entity_decode($name) !!} <span>{{$count}}</span></div>
         @if ($name == 'منتهية وبإنتظار توثيق الشريك')
         <button class="btn btn-danger" onclick="fireSwal()">
             <i class="fas fa-bell"></i>
@@ -12,20 +12,19 @@
     <div class="body">
         @foreach ($data as $item)
         <div class="item">
-            <a class="click" href="{{route($route . '.show', $item->id)}}">
-                <div >
-                    <div class="name">
-                        <div class="my-2">{{$item->title}}</div>
-                        @if (auth()->user()->hasRole('SuperAdmin'))
-                        <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
-                        @endif
-                    </div>
-                    @if ($item->literary)
-                    <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
+            <div class="click" onclick="window.location = '{{route($route . '.show', $item->id)}}'">
+                <div class="name">
+                    <div class="my-2">{{$item->title}}</div>
+                    @if (auth()->user()->hasRole('SuperAdmin'))
+                     <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
+                    @endif
+                </div>
+                @if ($item->literary)
+                <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
 
-                    {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
-                    @else
-                    <div class="type mb-3">مساهمة</div>
+                {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
+                @else
+                <div class="type mb-3">مساهمة</div>
 
                 @endif
                 
@@ -117,7 +116,7 @@
         Swal.fire({
             'icon': 'success',
             'title': 'تمت العملية بنجاح',
-            // 'text': 'تمت العملية بنجاح',
+            'text': 'تمت العملية بنجاح',
             'timerProgressBar': true,
             'showConfirmButton': false,
             'timer': 4000,
