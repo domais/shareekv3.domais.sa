@@ -84,7 +84,7 @@
 						<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
 					</li>
 
-					@if ($this->permit && $this->permit->event)
+					@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 6)
 
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="guest-tab" data-bs-toggle="tab" data-bs-target="#guest-tab-pane" type="button" role="tab" aria-controls="guest-tab-pane" aria-selected="false">قائمة الحضور</button>
@@ -112,7 +112,7 @@
 					<x-backend.permit.inputs.step-four />
 				</div><!-- نهاية محتوى التاب -->
 
-				@if ($this->permit && $this->permit->event)
+				@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 6)
 
 				<div class="tab-pane fade" id="guest-tab-pane" role="tabpanel" aria-labelledby="guest-tab" tabindex="0">
 					<x-backend.permit.inputs.step-five />
