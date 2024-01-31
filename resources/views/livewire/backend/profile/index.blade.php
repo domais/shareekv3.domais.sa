@@ -99,7 +99,7 @@ x-data="{  errors: @entangle('validationErrors').live  }" x-init="
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-5 d-flex align-items-center">رقم الهاتف</div>
+                    <div class="col-5 d-flex align-items-center">رقم الجوال</div>
                     <div class="col-7"><input type="email" wire:model="phone" class="form-control" id="email"></div>
                 </div>
             
