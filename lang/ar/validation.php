@@ -144,7 +144,7 @@ return [
     'attributes' => [
         'name' => 'الاسم',
         'email' => 'البريد الإلكتروني',
-        'phone' => 'رقم الهاتف',
+        'phone' => 'رقم الجوال',
         'role' => 'الدور',
         'permissions' => 'الصلاحيات',
         'password' => 'كلمة السر',
