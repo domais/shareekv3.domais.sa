@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Mail\ChangeStatus;
 use App\Models\Event;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class EventMangerCommand extends Command
@@ -46,6 +47,8 @@ class EventMangerCommand extends Command
                 ];
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
             }
+            Log::info('testing done ' . $event->id);
+
         }
     }
 }
