@@ -13,7 +13,7 @@
 					@elseif (Str::contains(Route::currentRouteName(), 'permit'))
 						<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
 					@elseif (Str::contains(Route::currentRouteName(), 'support'))
-						<a class="link-body-emphasis text-decoration-none" href="{{route('support.index')}}">الدعم الفني</a>
+						<a class="link-body-emphasis text-decoration-none" href="{{route('support.index')}}">دعم الشريك</a>
 					@endif
 				</li>
 				@if($is_show_page)
