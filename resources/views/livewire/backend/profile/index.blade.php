@@ -70,8 +70,8 @@ x-data="{  errors: @entangle('validationErrors').live  }" x-init="
                     </div>
                 
                     <div class="buttons">
-                        <button class="btn btn-outline-primary px-4"  data-bs-toggle="modal" data-bs-target="#openModalInformation">  تعديل المعلومات الشخصية</button>
-                        <button class="btn btn-outline-warning px-4"  data-bs-toggle="modal" data-bs-target="#openModalPassword">تعديل كلمة السر</button>
+                        <button class="btn btn-outline-secondary px-4"  data-bs-toggle="modal" data-bs-target="#openModalInformation">  تعديل المعلومات الشخصية</button>
+                        <button class="btn btn-outline-secondary px-4"  data-bs-toggle="modal" data-bs-target="#openModalPassword">تعديل كلمة السر</button>
 
                     </div>
                 </div>  
