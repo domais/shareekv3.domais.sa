@@ -15,7 +15,7 @@ class EventMangerCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:event';
+    protected $signature = 'app:event-manger';
 
     /**
      * The console command description.
