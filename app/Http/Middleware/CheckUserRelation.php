@@ -17,23 +17,13 @@ class CheckUserRelation
      */
     public function handle(Request $request, Closure $next, $model)
     {
-        $id = $request->route('permit');
-        dd($model, $id);
+        $data = $request->route('permit');
         $user = $request->user();
 
-        if ($model == 'event') {
-            $event = Event::findOrFail($id);
-            if ($event->user_id != $user->id) {
+            if ($data->user_id != $user->id && $user->roles()->hasRoles('User')){
                 // Handle the case where the user is not the owner of the event
-                abort(403, 'Unauthorized action.');
+                abort(403, 'عملية غير مصرح بها');
             }
-        } elseif ($model == 'permit') {
-            $permit = Permit::findOrFail($id);
-            if ($permit->user_id != $user->id) {
-                // Handle the case where the user is not the owner of the permit
-                abort(403, 'Unauthorized action.');
-            }
-        }
 
         return $next($request);
     }
