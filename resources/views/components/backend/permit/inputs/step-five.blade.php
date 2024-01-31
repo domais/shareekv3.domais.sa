@@ -12,9 +12,9 @@
                         <th scope="col">الاسم</th>
                         <th scope="col">البريد الالكتروني</th>
                         <th scope="col">الجوال</th>
+                        <th scope="col">الجنس</th>
                         <th scope="col">الفئة العمرية</th>
-                        <th scope="col">النوع</th>
-                        <th scope="col">الحلية</th>
+                        <th scope="col">الحالة</th>
                         </tr>
                     </thead>
                     <tbody>
