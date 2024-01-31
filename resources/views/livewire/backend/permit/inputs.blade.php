@@ -8,7 +8,13 @@
 					</a>
 				</li>
 				<li class="breadcrumb-item">
-					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
+					@if (Str::contains(Route::currentRouteName(), 'event'))
+						<a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">المبادرات</a>
+					@elseif (Str::contains(Route::currentRouteName(), 'permit'))
+						<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">التصاريح</a>
+					@elseif (Str::contains(Route::currentRouteName(), 'support'))
+						<a class="link-body-emphasis text-decoration-none" href="{{route('support.index')}}">الدعم الفني</a>
+					@endif
 				</li>
 				@if($is_show_page)
 				<li class="breadcrumb-item active" aria-current="page">عرض معلومات التصريح رقم {{$permit->order_number}}</li>
