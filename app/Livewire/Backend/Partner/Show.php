@@ -4,7 +4,9 @@ namespace App\Livewire\Backend\Partner;
 
 use App\Livewire\Forms\PartnerForm;
 use App\Livewire\Forms\UserForm;
+use App\Mail\WelcomeNewAdminMail;
 use App\Models\Partner;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -61,8 +63,11 @@ class Show extends Component
 
     public function senddata()
     {
-        // $this->owner
-        dd("مهندس محمد هنا ارسل بيانات المستخدم");
+        $user = $this->owner; // Assuming $this->owner contains the user data
+    
+        Mail::to($user->email)->send(new WelcomeNewAdminMail($user));
+    
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 
 
