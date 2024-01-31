@@ -14,7 +14,11 @@
 				</li>
 					
 				@if($is_show_page)
-				<li class="breadcrumb-item active" aria-current="page">عرض معلومات التصريح رقم {{$permit->order_number}}</li>
+				<li class="breadcrumb-item active" aria-current="page">عرض معلومات 
+					
+					{{$text_bread_crumb === "permit" ? 'التصريح' : ($text_bread_crumb === "support" ? 'الدعم' : 'المبادرة')}}					</a>
+
+					 رقم {{$permit->order_number}}</li>
 				@else
 				<li class="breadcrumb-item active" aria-current="page">إنشاء تصريح جديد</li>
 				@endif
