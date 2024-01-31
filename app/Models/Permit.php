@@ -69,7 +69,7 @@ class Permit extends Model
 
     public function history()
     {
-        return $this->hasMany(History::class);
+        return $this->hasMany(History::class)->orderBy('created_at', 'desc');
     }
 
 
