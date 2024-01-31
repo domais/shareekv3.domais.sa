@@ -38,24 +38,34 @@ class EventMangerCommand extends Command
             if ($event->status_id == 5 && $event->start_date <= now()) {
                 $event->status_id = 6;
                 $event->save();
+                $permit = Permit::where('order_number', $event->order_number)->first();
+                
                 $data = [
-                    'permit' => $event,
+                    'permit' => $permit,
                     'status' => $event->status,
-                    'user' => $event->user,
+                    'user' => $permit->user,
                 ];
+                
+                Log::info('Event data:', [$data]);
+                
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
             } elseif ($event->status_id == 6 && $event->end_date <= now()) {
                 $event->status_id = 7;
                 $event->save();
+                $permit = Permit::where('order_number', $event->order_number)->first();
+                
                 $data = [
-                    'permit' => $event,
+                    'permit' => $permit,
                     'status' => $event->status,
-                    'user' => $event->user,
+                    'user' => $permit->user,
                 ];
+                
+                Log::info('Event data:', [$data]);
+
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
             }
             Log::info('Event :  ' . $event->id);
-            Log::info('Event data:', $data);
+       
 
 
         }
