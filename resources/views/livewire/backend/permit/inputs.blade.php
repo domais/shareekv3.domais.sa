@@ -20,7 +20,13 @@
 
 					 رقم {{$permit->order_number}}</li>
 				@else
-				<li class="breadcrumb-item active" aria-current="page">إنشاء تصريح جديد</li>
+
+				<li class="breadcrumb-item active" aria-current="page">
+					{{Route::current()->getName() == 'permit.edit' ? ' تعديل تصريح' : 'إنشاء تصريح جديد'}}
+
+
+				</li>
+
 				@endif
 			</ol>
 			<div class="links">
