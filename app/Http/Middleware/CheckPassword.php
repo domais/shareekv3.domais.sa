@@ -17,7 +17,7 @@ class CheckPassword
     public function handle($request, Closure $next)
     {
         if (Hash::check('123456', $request->user()->password)) {
-            return redirect()->route('profile.index')->withErrors(['password' => 'كلمة المرور غير آمنة. يرجى تغييرها.']);
+            return redirect()->route('profile.index')->withErrors(['password' => 'كلمة المرور غير آمنة ، يجب تغييرها']);
         }
     
         return $next($request);
