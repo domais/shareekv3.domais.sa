@@ -22,7 +22,7 @@
 				@else
 
 				<li class="breadcrumb-item active" aria-current="page">
-					{{Route::current()->getName() == 'permit.edit' ? ' تعديل تصريح' : 'إنشاء تصريح جديد'}}
+					{{$this->permit == 'permit.edit' ? ' تعديل تصريح' : 'إنشاء تصريح جديد'}}
 
 
 				</li>
