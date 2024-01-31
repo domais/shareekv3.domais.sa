@@ -60,7 +60,7 @@ class PartnerForm extends Form
             'city' => 'required|string|in:الرياض,جدة,مكة,أبها',
             'coordinates' => 'required|string|regex:/^-?\d{1,3}\.\d+,-?\d{1,3}\.\d+$/',
             'class' => 'required|string|in:أ,ب,ج,د',
-            'logo' => 'nullable|image',
+            'logo' => 'nullable',
         ]);
 
         $this->partner->name = $this->partner_name;
