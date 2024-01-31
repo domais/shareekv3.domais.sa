@@ -24,6 +24,8 @@ class Inputs extends Component
 
     public ?Draft $draft = null;
     public ?Permit $permit = null;
+    public $order_number;
+
 
     public PermitForm $form;
     public SpeakerForm  $speakerForm;
@@ -41,6 +43,8 @@ class Inputs extends Component
 
     public function mount()
     {
+        $this->permit = Permit::where('order_number', $this->order_number)->first();
+
         if ($this->draft) {
             $this->form->setForm($this->draft);
             $this->updatedForm();

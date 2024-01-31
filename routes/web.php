@@ -42,7 +42,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
         Route::get('/edit/{permit}', Inputs::class)->name('edit');
 
-        Route::get('/show/{permit}', Inputs::class)->name('show')
+        Route::get('/show/{order_number}', Inputs::class)->name('show')
         ->middleware('checkUserRelation:permit');
     });
 
