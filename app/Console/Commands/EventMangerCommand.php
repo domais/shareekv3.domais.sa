@@ -38,6 +38,8 @@ class EventMangerCommand extends Command
                 $event->status_id = 6;
                 $event->save();
                 $data = [
+                    'permit' => $event,
+                    'status' => $event->status,
                     'user' => $event->user,
                 ];
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
@@ -45,6 +47,8 @@ class EventMangerCommand extends Command
                 $event->status_id = 7;
                 $event->save();
                 $data = [
+                    'permit' => $event,
+                    'status' => $event->status,
                     'user' => $event->user,
                 ];
                 Mail::to('m@domais.sa')->send(new ChangeStatus($data));
