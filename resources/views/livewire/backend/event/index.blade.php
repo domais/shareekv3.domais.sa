@@ -37,7 +37,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
 
 
     <nav aria-label="breadcrumb" class="my-5">
-        <div class="topbar p-3 bg-body-tertiary rounded-3 w-100">
+        <div class="topbar py-3 bg-body-tertiary rounded-3 w-100">
             <ol class="breadcrumb breadcrumb-chevron m-0">
                 <li class="breadcrumb-item">
                     <a class="link-body-emphasis" href="#">
@@ -45,7 +45,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
                     </a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">الفعاليات</a>
+                    <a class="link-body-emphasis text-decoration-none" href="{{route('event.index')}}">المبادرات</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">استعراض كقوائم</li>
             </ol>
