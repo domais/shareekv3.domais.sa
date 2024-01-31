@@ -54,7 +54,7 @@
 
                             @if($button['type'] == 'link')
                                 <a class="{{ $button['class'] }}" href="{{ isset($button['href']) ? route($button['href'],$item->order_number) : '#' }}">
-                                    {!! $button['title'] !!}
+                                    {!! $button['title'] !!} rd
                                 </a>
                             @endif
 
