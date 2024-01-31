@@ -121,6 +121,10 @@ class EventTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setColumnSelectStatus(false);
+        $this->setTableRowUrl(function($row) {
+            return route('event.show', $row->id);
+        });
+        
 
     }
 
@@ -141,12 +145,14 @@ class EventTable extends DataTableComponent
                 ->sortable()
                 ->format(
                     fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('event.show', $row->id).'">'.$row->order_number.'</a>'
-                    )
-                ->html(),
+                )->html(),
 
             Column::make("اسم الشريك", "user.name")
                 ->searchable()
-                ->sortable(),
+                ->sortable()
+                ->format(
+                    fn($value, $row, Column $column) => $row->user->owner->name.'<br>'.$row->user->name
+                )->html(),
 
             Column::make("العنوان", "title")
                  ->searchable()
