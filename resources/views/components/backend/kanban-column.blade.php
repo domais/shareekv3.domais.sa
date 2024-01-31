@@ -12,19 +12,20 @@
     <div class="body">
         @foreach ($data as $item)
         <div class="item">
-            <div class="click" onclick="window.location = '{{route($route . '.show', $item->id)}}'">
-                <div class="name">
-                    <div class="my-2">{{$item->title}}</div>
-                    @if (auth()->user()->hasRole('SuperAdmin'))
-                     <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
-                    @endif
-                </div>
-                @if ($item->literary)
-                <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
+            <a class="click" href="{{route($route . '.show', $item->id)}}">
+                <div >
+                    <div class="name">
+                        <div class="my-2">{{$item->title}}</div>
+                        @if (auth()->user()->hasRole('SuperAdmin'))
+                        <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
+                        @endif
+                    </div>
+                    @if ($item->literary)
+                    <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
 
-                {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
-                @else
-                <div class="type mb-3">مساهمة</div>
+                    {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
+                    @else
+                    <div class="type mb-3">مساهمة</div>
 
                 @endif
                 
@@ -37,7 +38,7 @@
                      {{$item->history->last()->descreption ?? 'لم يحدد السبب'}}    
                     </div>  
                 @endif
-            </div> 
+            </div>
             <div class="d-flex justify-content-between mt-3">
                 @if (auth()->user()->hasRole('SuperAdmin'))
 
