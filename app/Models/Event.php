@@ -86,6 +86,6 @@ class Event extends Model
 
     public function permit()
     {
-        return $this->hasOne(Event::class, 'order_number', 'order_number');
+        return $this->hasOne(Permit::class, 'order_number', 'order_number');
     }
 }
