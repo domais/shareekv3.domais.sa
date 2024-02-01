@@ -67,6 +67,11 @@ x-data="{  errors: @entangle('validationErrors').live  }" x-init="
                             تاريخ الانضمام: {{ \Carbon\Carbon::parse(auth()->user()->created_at)->diffForHumans() }}<br>
                             البريد الإلكتروني: {{ auth()->user()->email }}<br>
                             الهاتف المحمول: {{ auth()->user()->phone }}
+                            @if (auth()->user()->hasRole('User'))
+                                الفئة: {{  auth()->user()->owner->class }}
+                                الدعم المتبقي: {{  auth()->user()->owner->points }}
+                            @endif
+                            
                     </div>
                 
                     <div class="buttons">
