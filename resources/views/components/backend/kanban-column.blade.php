@@ -64,7 +64,7 @@
 
                             @if($button['type'] == 'switch')
                                 <div class="form-check form-switch d-flex align-items-center">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="register_{{$item->id}}" checked>
+                                    <input class="form-check-input" onchange="handleSwitchChange({{$item->order_number}})" type="checkbox" role="switch" id="register_{{$item->id}}" @if($item->allow_booking == 1) checked @endif>
                                     <label class="form-check-label ms-2" for="register_{{$item->id}}">التسجيل</label>
                                 </div>
                             @endif
@@ -96,7 +96,7 @@
 
                         @if($button['type'] == 'switch')
                             <div class="form-check form-switch d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" role="switch" id="register_{{$item->id}}" value="{{$item->allow_booking}}" onchange="handleChange({{$item->id}}, {{$item->allow_booking}})">
+                                <input class="form-check-input" onchange="handleSwitchChange({{$item->order_number}})" type="checkbox" role="switch" id="register_{{$item->id}}" @if($item->allow_booking == 1) checked @endif>
                                 <label class="form-check-label ms-2" for="register_{{$item->id}}">التسجيل</label>
                             </div>
                         @endif
@@ -123,9 +123,8 @@
         });
     }
 </script>
-
 <script>
-    function handleChange(id, checked) {
-        console.log('ID: ' + id + ', Checked: ' + checked);
+    function handleSwitchChange(id) {
+        Livewire.dispatch('switchChange', {'id':id});
     }
 </script>

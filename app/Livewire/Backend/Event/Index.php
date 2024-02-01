@@ -180,6 +180,20 @@ class Index extends Component
         $this->Waiting_for_approval = $events['8'];
      
     }
+
+    #[On('switchChange')] 
+    public function switchChange($id)
+    {
+        $event = Event::where('order_number',$id)->first();
+
+        $event->allow_booking = !$event->allow_booking;
+
+        $event->save();
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
+
+
+    }
     public function render()
     {
         return view('livewire.backend.event.index');
