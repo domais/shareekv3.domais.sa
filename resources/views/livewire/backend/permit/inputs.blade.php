@@ -63,17 +63,14 @@
 					</button>
 				   @endif
 				   @if ($this->permit->status_id == 4)
-				   <button class="btn btn-warning" wire:click="change_permit(5)"
-						wire:loading.attr="disabled">
-						 تشغيل بدون تصريح
-					</button>
+
 					<a class="btn btn-warning" 
 						 data-bs-toggle="modal"
 						  data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
 
 					<button class="btn btn-secondary" wire:click="change_permit(5,true)"
 					wire:loading.attr="disabled">
-						 تشغيل  
+						  تشغيل بدون تصريح  
 					</button>
 
 				   @endif
