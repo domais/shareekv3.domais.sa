@@ -69,14 +69,11 @@ trait LiveChanges
             
             if ($partner) {
                 $newPoints = $partner->points - count($this->speakers);
-                if ($this->speakers[$index]['reward'] == true && $this->speakers[$index]['reservations'] && $newPoints < 1){
+                if ($newPoints < 1 && ($this->speakers[$index]['reward'] == true || $this->speakers[$index]['reservations'])){
                     $validator = Validator::make([], []); // empty data and rules
-                    $validator->errors()->add('','لايوجد لديك رصيد كافي للدعم اللوجستي<br>رصيدك الحالي ('.$partner->points.') نقطة');
+                    $validator->errors()->add('','عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                     throw new ValidationException($validator);
                 }
-        
-                $partner->points = $newPoints;
-                $partner->save();
             }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
