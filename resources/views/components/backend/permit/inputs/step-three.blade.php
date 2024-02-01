@@ -124,6 +124,7 @@ x-data="{
                                 <span x-text="speaker.type"></span>
                                 <span class="d-inline-block px-3">/</span>
                                 <span x-text="speaker.phone"></span>
+                                <a href="https://wa.me/966<!-- Rahmani:put mobile here after cuttent the firest digit (0) -->" target="_tab"><img class="ms-2" src="{{ asset('img/whatsapp.png') }}" height="20"></a>
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="px-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 me-3" x-show="speaker.reward">
