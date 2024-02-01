@@ -74,7 +74,6 @@ class Event extends Model
         return $this->morphOne(File::class, 'fileable');
     }
 
-
     public function guests()
     {
         return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->withPivot('type');
@@ -83,5 +82,10 @@ class Event extends Model
     public function guestsGoing()
     {
         return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->wherePivot('type', 'going');
+    }
+
+    public function permit()
+    {
+        return $this->hasOne(Permit::class, 'order_number', 'order_number');
     }
 }

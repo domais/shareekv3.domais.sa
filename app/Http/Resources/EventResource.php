@@ -15,7 +15,7 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $image = $this->image->path ?? '';
+        $image = $this->permit->fileable->path ?? '';
         if ($image) {
             $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
         } else {
@@ -48,6 +48,7 @@ class EventResource extends JsonResource
             'lng' => $this->lng,
             'goings' => $this->guestsGoing->pluck('id'),
             'guest_count' => $this->guestsGoing->count(),
+            'allow_booking' => $this->allow_booking ?? true,
             'guests' => $this->guestsGoing
                 ->map(function ($guest) {
                     return [
