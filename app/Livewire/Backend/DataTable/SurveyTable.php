@@ -21,6 +21,7 @@ class SurveyTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        
         $this->setColumnSelectStatus(false);
     }
 
