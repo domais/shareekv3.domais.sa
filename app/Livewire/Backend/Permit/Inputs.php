@@ -46,6 +46,11 @@ class Inputs extends Component
     {
         $this->permit = Permit::where('order_number', $this->order_number)->first();
 
+        if ($this->permit == null) {
+            # code...
+            abort(404); 
+        }
+
         if ($this->draft) {
             $this->form->setForm($this->draft);
             $this->updatedForm();
@@ -114,7 +119,7 @@ class Inputs extends Component
                     $validator->errors()->add('points', 'ليس لديك رصيد كافي للدعم اللوجستي');
                     throw new ValidationException($validator);
                 }*/
-                
+
             }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
