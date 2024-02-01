@@ -11,7 +11,7 @@ x-data="{
     }
 }"
 >
-        <div class="col-5">
+        <div class="{{ $this->is_show_page ? 'd-none':'col-5'}}">
             {{-- <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">إختر متحدث موجود من قبل</div>
                 <div class="col-8">
@@ -25,7 +25,7 @@ x-data="{
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">الاسم الثلاثي</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.name" class="form-control rounded"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.name" class="form-control rounded" autocomplete="name" id="name"></div>
             </div>
 
 
@@ -37,13 +37,13 @@ x-data="{
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">البريد الإلكتروني</div>
-                <div class="col-8"><input type="email" x-bind:disabled="is_show_page" wire:model="speakerForm.email" dir="ltr" class="form-control rounded" autocomplete="email"></div>
+                <div class="col-8"><input type="email" x-bind:disabled="is_show_page" wire:model="speakerForm.email" dir="ltr" class="form-control rounded" autocomplete="email" id="email"></div>
             </div>
 
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">الجنسية</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.nationality" class="form-control rounded" autocomplete="nationality"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.nationality" class="form-control rounded" autocomplete="nationality" id="nationality"></div>
             </div>
 
 
@@ -62,19 +62,19 @@ x-data="{
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">رابط تويتر</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.twitter" dir="ltr" class="form-control rounded" autocomplete="twitter"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.twitter" dir="ltr" class="form-control rounded" autocomplete="twitter" id="twitter"></div>
             </div>
 
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">رابط انستغرام</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.instagram" dir="ltr" class="form-control rounded" autocomplete="insta"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.instagram" dir="ltr" class="form-control rounded" autocomplete="insta" id="insta"></div>
             </div>
 
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">رابط لنكدإن</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.linkedin" dir="ltr" class="form-control rounded" autocomplete="lnkedin"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.linkedin" dir="ltr" class="form-control rounded" autocomplete="lnkedin" id="lnkedin"></div>
             </div>
 
 
@@ -88,12 +88,14 @@ x-data="{
             </div>
         </div>
 
-        <div class="col-6 pe-4">
+        <div class="col-1"></div>
+        <div class="{{ $this->is_show_page ? 'col-10':'col-6'}} pe-4">
             <div class=" row my-2 mx-0">
+                @if(!$this->is_show_page)
                 <template x-for="(speaker,index) in speakers">
                     <div class="card p-2 mx-1 mb-2">
                         <div class="card-body d-flex justify-space-between align-items-center p-0">
-                            <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" onmouseover="this.style.color='blue';" onmouseout="this.style.color='black';" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
+                            <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none me-3" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
                             <div class="float-end d-flex align-items-center">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
@@ -112,8 +114,34 @@ x-data="{
                         </div>
                     </div>
                 </template>
+                @else
+                <template x-for="(speaker,index) in speakers">
+                    <div class="card p-2 mx-2 mb-2">
+                        <div class="card-body d-flex justify-content-between align-items-center p-0">
+                            <div>
+                                <a style="width:200px" class="d-inline-block overflow-hidden card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
+                                <span style="width:130px" class="d-inline-block text-center" x-text="speaker.type"></span>
+                                <span style="width:100px" class="d-inline-block text-center" x-text="speaker.phone"></span>
+                                <a href="https://wa.me/966<!-- Rahmani:put mobile here after cuttent the firest digit (0) -->" target="_tab"><img class="ms-2" src="{{ asset('img/whatsapp.png') }}" height="20"></a>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reward ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
+                                    <x-heroicon-o-banknotes style="width: 21px" class="opacity-50" />
+                                    مكافأة
+                                </div>
+                                <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reservations ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
+                                    <x-heroicon-o-check-circle style="width: 21px" class="opacity-50" />
+                                    حجوزات
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </template>
+                @endif
             </div>
         </div>
+        <div class="{{ $this->is_show_page ? 'd-none':'col-1'}}"></div>
 
         <!-- Modal -->
         <div class="modal fade" id="speakerdetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

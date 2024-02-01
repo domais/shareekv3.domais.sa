@@ -21,33 +21,51 @@ class Index extends Component
     public $selected_id = 0;
     public $file;
 
+    private function getPermitsByRoleAndStatus($role, $status)
+    {
+        $query = Permit::where('need_support', 1)
+            ->whereHas('support', function ($query) use ($status) {
+                $query->where('status_id', $status);
+            });
+
+        if ($role === 'SuperAdmin') {
+            return $query->get();
+        } elseif ($role === 'Adminstrator') {
+            return $query->where('admin_id', auth()->user()->id)->get();
+        } else {
+            return $query->where('user_id', auth()->user()->id)->get();
+        }
+    }
+
 
     public function mount()  {
-        $this->requests = Permit::where('need_support', 1)
-        ->whereHas('support', function ($query) {
-            $query->where('status_id', 11);
-            
-        })->get();      
-        
-        
-        $this->initial_approve = Permit::where('need_support', 1)
-        ->whereHas('support', function ($query) {
-            $query->where('status_id', 12);
-            
-        })->get(); 
-
-        $this->rejectd = Permit::where('need_support', 1)
-            ->whereHas('support', function ($query) {
-                $query->where('status_id', 15);
-            })->get();
 
 
-        $this->approved = Permit::where('need_support', 1)
-        ->whereHas('support', function ($query) {
-            $query->where('status_id', 13);
-            
-        })->get();;
-        
+        if (auth()->user()->hasRole('SuperAdmin')) {
+   
+            $this->requests  = $this->getPermitsByRoleAndStatus('SuperAdmin', 11);
+            $this->initial_approve = $this->getPermitsByRoleAndStatus('SuperAdmin', 12);
+            $this->rejectd = $this->getPermitsByRoleAndStatus('SuperAdmin', 15);
+            $this->approved = $this->getPermitsByRoleAndStatus('SuperAdmin', 13);
+
+
+
+        } elseif (auth()->user()->hasRole('Adminstrator')) {
+            $this->requests  = $this->getPermitsByRoleAndStatus('Adminstrator', 11);
+            $this->initial_approve = $this->getPermitsByRoleAndStatus('Adminstrator', 12);
+            $this->rejectd = $this->getPermitsByRoleAndStatus('Adminstrator', 15);
+            $this->approved = $this->getPermitsByRoleAndStatus('Adminstrator', 13);
+
+
+
+        }else {
+            # code...
+            $this->requests  = $this->getPermitsByRoleAndStatus('User', 11);
+            $this->initial_approve = $this->getPermitsByRoleAndStatus('User', 12);
+            $this->rejectd = $this->getPermitsByRoleAndStatus('User', 15);
+            $this->approved = $this->getPermitsByRoleAndStatus('User', 13);
+        }
+
     }
 
     public function selected($id)

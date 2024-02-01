@@ -41,7 +41,44 @@
 
 				@endif
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
-					<button class="btn btn-brand" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
+					<button class="btn btn-secondary" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
+				@endif
+				@if ($this->is_show_page && $this->permit && $this->permit->status_id < 5)
+				   @if ($this->permit->status_id == 2)
+				      @if (!auth()->user()->hasRole('User'))
+					  <button class="btn btn-secondary" wire:click="change_permit(3)"
+					  	 wire:loading.attr="disabled">إبدأ الدراسة
+					  </button>
+					  @endif
+				   @endif
+				   @if ($this->permit->status_id == 3)
+				   <button class="btn btn-secondary" wire:click="change_permit(4)"
+						wire:loading.attr="disabled">
+						موافقة أولية
+					</button>
+
+					<button class="btn btn-brand" wire:click="change_permit(10)"
+					wire:loading.attr="disabled">
+						رفض	
+					</button>
+				   @endif
+				   @if ($this->permit->status_id == 4)
+
+					<a class="btn btn-warning" 
+						 data-bs-toggle="modal"
+						  data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
+
+					<button class="btn btn-secondary" wire:click="change_permit(5)"
+					wire:loading.attr="disabled">
+						  تشغيل بدون تصريح  
+					</button>
+
+				   @endif
+
+
+
+
+					
 				@endif
 			</div>
 		</div>
@@ -175,6 +212,30 @@
 				@endif
 
 			</ul>
+		</div>
+
+		    <!-- مودال اعتماد تشغيل فعالية -->
+			<div wire:ignore class="modal fade" id="Permit-Admin-Final-Approval-Modal" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5">تشغيل</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="row mt-2">
+								<div class="col-3 d-flex align-items-center">رقم التصريح</div>
+								<div class="col-8"><input type="text" wire:model="permitNumber" class="form-control" id="PermitNumber"></div>
+							</div>
+							<div class="row mt-4">
+								<div class="col-3 d-flex align-items-center">ملف التصريح</div>
+								<div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF" accept="image/png, image/jpeg, image/jpg"></div>                </div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
+							<button type="button" class="btn btn-success" wire:click="approvePermit" wire:loading.attr="disabled">اعتماد</button>                </div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div><!-- /row -->
