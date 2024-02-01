@@ -138,6 +138,4 @@ x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
             </div>
         </div>
     </div>
-
-
 </div>

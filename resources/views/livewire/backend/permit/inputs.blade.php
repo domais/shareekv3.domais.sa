@@ -67,6 +67,10 @@
 						wire:loading.attr="disabled">
 						 تشغيل بدون تصريح
 					</button>
+					<a class="btn btn-warning" 
+						 data-bs-toggle="modal"
+						  data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
+
 					<button class="btn btn-secondary" wire:click="change_permit(5,true)"
 					wire:loading.attr="disabled">
 						 تشغيل  
@@ -211,6 +215,30 @@
 				@endif
 
 			</ul>
+		</div>
+
+		    <!-- مودال اعتماد تشغيل فعالية -->
+			<div wire:ignore class="modal fade" id="Permit-Admin-Final-Approval-Modal" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5">تشغيل</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="row mt-2">
+								<div class="col-3 d-flex align-items-center">رقم التصريح</div>
+								<div class="col-8"><input type="text" wire:model="permitNumber" class="form-control" id="PermitNumber"></div>
+							</div>
+							<div class="row mt-4">
+								<div class="col-3 d-flex align-items-center">ملف التصريح</div>
+								<div class="col-8"><input type="file" wire:model="permitFile" class="form-control" id="PermitPDF" accept="image/png, image/jpeg, image/jpg"></div>                </div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
+							<button type="button" class="btn btn-success" wire:click="approvePermit" wire:loading.attr="disabled">اعتماد</button>                </div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</div><!-- /row -->
