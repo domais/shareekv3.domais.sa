@@ -272,7 +272,7 @@ trait LiveChanges
                    // dd($partner->points,$counter_speakers,$speakers);
                     $newPoints = $partner->points - $counter_speakers;
                     if ($newPoints < 1) {
-                        throw new \Exception('نقاط غير كافية.');
+                        throw new \Exception("لايوجد لديك رصيد كافي للدعم اللوجستي<br>طلبت رصيد $counter_speakers وانت لديك فقط $partner->points");
                     }
             
                     $partner->points = $newPoints;
