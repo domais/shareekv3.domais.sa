@@ -269,7 +269,7 @@ trait LiveChanges
                 $partner = Partner::where('owner_id', $user->id)->first();
                 
                 if ($partner) {
-                   dd($partner->points,$counter_speakers,$speakers);
+                 //  dd($partner->points,$counter_speakers,$speakers);
                     $newPoints = $partner->points - $counter_speakers;
                     if ($newPoints < 0) {
                         throw new \Exception("لايوجد لديك رصيد كافي للدعم اللوجستي<br>طلبت رصيد $counter_speakers وانت لديك فقط $partner->points");
