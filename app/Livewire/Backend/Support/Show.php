@@ -37,9 +37,9 @@ class Show extends Component
         $this->permit = Permit::where('order_number', $this->order_number)->first();
 
         if ($this->order_number && $this->permit == null) {
-            abort(404); 
+            abort(403,'التصريح غير موجود'); 
         }
-        
+
         if ($this->permit) {
             $this->form->setForm($this->permit);
             $this->updatedForm();

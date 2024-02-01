@@ -96,10 +96,17 @@
 							<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
 						</li>
 					@endif
-
-					<li class="nav-item" role="presentation">
-						<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
-					</li>
+					@if ($is_show_page)
+						@if (count($this->partnerships) != 0)
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
+							</li>
+							@endif	
+					@else
+						<li class="nav-item" role="presentation">
+							<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
+						</li>
+					@endif
 
 					@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 6)
 
