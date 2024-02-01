@@ -46,13 +46,13 @@
 				@if ($this->is_show_page && $this->permit && $this->permit->status_id < 5)
 				   @if ($this->permit->status_id == 2)
 				      @if (!auth()->user()->hasRole('User'))
-					  <button class="btn btn-brand" wire:click="change_permit(3)"
+					  <button class="btn btn-secondary" wire:click="change_permit(3)"
 					  	 wire:loading.attr="disabled">إبدأ الدراسة
 					  </button>
 					  @endif
 				   @endif
 				   @if ($this->permit->status_id == 3)
-				   <button class="btn btn-brand" wire:click="change_permit(4)"
+				   <button class="btn btn-secondary" wire:click="change_permit(4)"
 						wire:loading.attr="disabled">
 						موافقة أولية
 					</button>
@@ -67,7 +67,7 @@
 						wire:loading.attr="disabled">
 						 تشغيل بدون تصريح
 					</button>
-					<button class="btn btn-warning" wire:click="change_permit(5,true)"
+					<button class="btn btn-secondary" wire:click="change_permit(5,true)"
 					wire:loading.attr="disabled">
 						 تشغيل  
 					</button>
