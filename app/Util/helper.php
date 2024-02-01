@@ -84,22 +84,13 @@ function ArToEn($input) {
 				//dd($now->format('Y-m-d H:i'));
 
 				foreach($statusesEvent as $status) {
-					if($status == 5) {
-						$events[$status] = Event::where('admin_id', $user->id)
-						->where('status_id',5)
-						->get();
-					} elseif($status == 6) {
-						$events[$status] = Event::where('admin_id', $user->id)
-						->where('status_id',6)
-						->get();
-					}elseif($status == 7) {
-						$events[$status] = Event::where('admin_id', $user->id)
-						->where('status_id',7)
-						->get();
-					} elseif($status == 8) {
-						$events[$status] = Event::where('status_id', $status)
-						->where('admin_id', $user->id)->get();
+					$query = Event::query();
+				
+					if (!$user->hasRole('SuperAdmin')) {
+						$query->where('admin_id', $user->id);
 					}
+				
+					$events[$status] = $query->where('status_id', $status)->get();
 				}
 			} else {
 				foreach($statuses as $status) {

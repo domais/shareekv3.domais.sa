@@ -132,7 +132,7 @@ class PermitTable extends DataTableComponent
                 ->searchable()
                 ->sortable()
                 ->format(
-                    fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('permit.show', $row->id).'">'.$row->order_number.'</a>'
+                    fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('permit.show', $row->order_number).'">'.$row->order_number.'</a>'
                     )
                 ->html(),
                 Column::make("اسم الشريك", "user.owner.name")
