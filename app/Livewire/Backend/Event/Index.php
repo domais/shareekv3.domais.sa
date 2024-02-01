@@ -178,6 +178,8 @@ class Index extends Component
         $this->active = $events['6'];
         $this->completed = $events['7'];
         $this->Waiting_for_approval = $events['8'];
+
+        dd($this->scheduled);
      
     }
     public function render()
