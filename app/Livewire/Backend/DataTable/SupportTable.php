@@ -63,7 +63,7 @@ class SupportTable extends DataTableComponent
                 ->sortable(),
             Column::make("رقم التصريح", "order_number")
                 ->sortable(),
-            Column::make("رقم التصريح", "permit.user.owner.name")
+            Column::make("رقم التصريح", "support.permit.user.owner.name")
                 ->searchable()
                 ->sortable(),
             Column::make("الحالة", "support.status.name")
