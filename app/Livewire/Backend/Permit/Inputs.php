@@ -46,6 +46,7 @@ class Inputs extends Component
     {
         if ($without_number == false) {
             $this->permit->status_id = $status_id;
+            $this->permit->admin_id = auth()->user()->id;
             $this->permit->save();
         }
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
