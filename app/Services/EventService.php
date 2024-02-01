@@ -44,7 +44,7 @@ class EventService implements EventServiceInterface
         //         ->orderBy('distance');
         // })
             $events = Event::when(!isset($data['date_range']), function ($query) {
-                return $query->whereDate('end_date', '>=', Carbon::now());
+                return $query->where('end_date', '>', Carbon::now());
             })
             ->when(isset($data['date_range']), function ($query) use ($data) {
                 return $this->filterDateRangeEvents($data['date_range'], $query);
