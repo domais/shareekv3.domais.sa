@@ -68,6 +68,7 @@ trait LiveChanges
             $partner = Partner::where('owner_id', $user->id)->first();
             
             if ($partner) {
+                dd($partner->points,count($this->speakers));
                 $newPoints = $partner->points - count($this->speakers);
                 if ($newPoints > 0 && ($this->speakers[$index]['reward'] == true || $this->speakers[$index]['reservations'])){
                     $validator = Validator::make([], []); // empty data and rules
