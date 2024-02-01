@@ -126,11 +126,11 @@ x-data="{
                             </div>
                             <div class="d-flex align-items-center">
                                 <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reward ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
-                                    <x-heroicon-o-banknotes style="width: 21px" />
+                                    <x-heroicon-o-banknotes style="width: 21px" class="opacity-75" />
                                     مكافأة
                                 </div>
                                 <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reservations ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
-                                    <x-heroicon-o-check-circle style="width: 21px" />
+                                    <x-heroicon-o-check-circle style="width: 21px" class="opacity-75" />
                                     حجوزات
                                 </div>
                                 
