@@ -35,6 +35,11 @@ class Show extends Component
     public function mount()
     {   
         $this->permit = Permit::where('order_number', $this->order_number)->first();
+
+        if ($this->order_number && $this->permit == null) {
+            abort(404); 
+        }
+        
         if ($this->permit) {
             $this->form->setForm($this->permit);
             $this->updatedForm();
