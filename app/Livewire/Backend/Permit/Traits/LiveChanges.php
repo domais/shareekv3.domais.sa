@@ -71,7 +71,7 @@ trait LiveChanges
                 $newPoints = $partner->points - count($this->speakers);
                 if ($this->speakers[$index]['reward'] == true && $this->speakers[$index]['reservations'] && $newPoints < 1){
                     $validator = Validator::make([], []); // empty data and rules
-                    $validator->errors()->add('','رصيدك الحالي ('.$newPoints.') لايسمح');
+                    $validator->errors()->add('','لايوجد لديك رصيد كافي للدعم اللوجستي<br>رصيدك الحالي ('.$partner->points.') نقطة');
                     throw new ValidationException($validator);
                 }
         
