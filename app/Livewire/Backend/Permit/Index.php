@@ -188,6 +188,7 @@ class Index extends Component
        $permit = Permit::findorfail($id);
        $permit->status_id = 3;
        $permit->admin_id = auth()->id();
+       dd($permit->support);
        $permit->save();
 
        AddToHistory($permit->id,$permit->status_id);
