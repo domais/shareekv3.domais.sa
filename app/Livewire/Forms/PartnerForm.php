@@ -63,8 +63,8 @@ class PartnerForm extends Form
             'logo' => 'nullable',
         ]);
 
-        $pints = 0;
-        $pints = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
+        // Added by Domais
+        $pints = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 0));
 
         $this->partner->name = $this->partner_name;
         $this->partner->city = $this->city;
