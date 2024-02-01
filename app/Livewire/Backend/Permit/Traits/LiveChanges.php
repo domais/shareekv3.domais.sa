@@ -62,6 +62,22 @@ trait LiveChanges
                 $validator->errors()->add('start_date', 'لا يمكنك  طلب المكافأة إلا إذا كان تاريخ بداية المبادرة بعد يومين  على الأقل');
                 throw new ValidationException($validator);
             }
+
+            // Added by Domais
+            $user = auth()->user();
+            $partner = Partner::where('owner_id', $user->id)->first();
+            
+            if ($partner) {
+                $newPoints = $partner->points - count($this->speakers);
+                if ($this->speakers[$index]['reward'] == true && $this->speakers[$index]['reservations'] && $newPoints < 1){
+                    $validator = Validator::make([], []); // empty data and rules
+                    $validator->errors()->add('','رصيدك الحالي ('.$newPoints.') لايسمح');
+                    throw new ValidationException($validator);
+                }
+        
+                $partner->points = $newPoints;
+                $partner->save();
+            }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
             return;
