@@ -117,7 +117,7 @@ class PartnerTable extends DataTableComponent
             Column::make("المسؤول", "owner.name")
                 ->format(function ($value, $column, $row) {
 
-                    return $column->owner->name . '<br><a href="tel:'.$column->owner->phone.'" class="text-decoration-none">0' . $column->owner->phone . '</a><a href="https://wa.me/966'.$column->owner->phone.'" target="_tab"><img class="ms-2" src="'.asset('img/whatsapp.png').'" height="20"></a>';
+                    return $column->owner->name . '<br><a href="tel:'.$column->owner->phone.'" class="text-decoration-none">' . $column->owner->phone . '</a><a href="https://wa.me/966'.substr($column->owner->phone,1).'" target="_tab"><img class="ms-2" src="'.asset('img/whatsapp.png').'" height="20"></a>';
                 })->html()->sortable(),
 
             Column::make("التصاريح", "owner_id")
