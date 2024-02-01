@@ -86,7 +86,7 @@
                                         : asset('img/default_avatar.png')))
                                 : asset('img/default_avatar.png');
                         @endphp
-                        <img src="{{ $logoUrl }}" alt="wrapkit" class="img-fluid rounded-circle h-75 w-50" />  
+                        <img src="{{ $logoUrl }}" alt="wrapkit" class="img-fluid rounded-circle h-75 w-75" />  
                     </div>              
                     <div class="col-md-12 text-center">
                         <div class="pt-2">
