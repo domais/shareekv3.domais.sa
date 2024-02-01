@@ -126,11 +126,11 @@ x-data="{
                                 <span x-text="speaker.phone"></span>
                             </div>
                             <div class="d-flex align-items-center">
-                                <div class="px-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2" x-show="speaker.reward">
+                                <div class="px-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 me-3" x-show="speaker.reward">
                                     <x-heroicon-o-banknotes style="width: 21px" />
                                     مكافأة
                                 </div>
-                                <div class="px-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 mx-3" x-show="speaker.reservations">
+                                <div class="px-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-2 me-3" x-show="speaker.reservations">
                                     <x-heroicon-o-check-circle style="width: 21px" />
                                     حجوزات
                                 </div>
