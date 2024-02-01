@@ -48,6 +48,7 @@ class EventResource extends JsonResource
             'lng' => $this->lng,
             'goings' => $this->guestsGoing->pluck('id'),
             'guest_count' => $this->guestsGoing->count(),
+            'allow_booking' => $this->allow_booking ?? true,
             'guests' => $this->guestsGoing
                 ->map(function ($guest) {
                     return [
