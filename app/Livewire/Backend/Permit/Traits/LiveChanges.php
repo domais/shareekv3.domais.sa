@@ -259,7 +259,7 @@ trait LiveChanges
                 if ($partner) {
                    // dd($partner->points,$counter_speakers,$speakers);
                     $newPoints = $partner->points - $counter_speakers;
-                    if ($newPoints < 0) {
+                    if ($newPoints < 1) {
                         throw new \Exception('نقاط غير كافية.');
                     }
             
