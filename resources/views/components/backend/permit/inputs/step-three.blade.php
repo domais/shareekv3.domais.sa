@@ -37,13 +37,13 @@ x-data="{
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">البريد الإلكتروني</div>
-                <div class="col-8"><input type="email" x-bind:disabled="is_show_page" wire:model="speakerForm.email" dir="ltr" class="form-control rounded"></div>
+                <div class="col-8"><input type="email" x-bind:disabled="is_show_page" wire:model="speakerForm.email" dir="ltr" class="form-control rounded" autocomplete="email"></div>
             </div>
 
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">الجنسية</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.nationality" class="form-control rounded"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.nationality" class="form-control rounded" autocomplete="nationality"></div>
             </div>
 
 
@@ -62,19 +62,19 @@ x-data="{
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">رابط تويتر</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.twitter" dir="ltr" class="form-control rounded"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.twitter" dir="ltr" class="form-control rounded" autocomplete="twitter"></div>
             </div>
 
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">رابط انستغرام</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.instagram" dir="ltr" class="form-control rounded"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.instagram" dir="ltr" class="form-control rounded" autocomplete="insta"></div>
             </div>
 
 
             <div class="row my-2">
                 <div class="col-4 d-flex align-items-center">رابط لنكدإن</div>
-                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.linkedin" dir="ltr" class="form-control rounded"></div>
+                <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.linkedin" dir="ltr" class="form-control rounded" autocomplete="lnkedin"></div>
             </div>
 
 
