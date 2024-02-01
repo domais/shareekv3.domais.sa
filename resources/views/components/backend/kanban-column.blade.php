@@ -95,14 +95,10 @@
                         @endif
 
                         @if($button['type'] == 'switch')
-                        <div class="form-check form-switch d-flex align-items-center" 
-                        x-data="{ checked: {{$item->allow_booking ? 'true' : 'false'}}, orderNumber: '{{$item->order_number}}' }" 
-                        x-init="() => {
-                            $watch('checked', value => console.log('Order Number: ' + orderNumber + ', Checked: ' + value))
-                        }">
-                       <input class="form-check-input" type="checkbox" role="switch" id="register_{{$item->id}}" x-model="checked">
-                       <label class="form-check-label ms-2" for="register_{{$item->id}}">التسجيل</label>
-                   </div>
+                            <div class="form-check form-switch d-flex align-items-center">
+                                <input class="form-check-input" type="checkbox" role="switch" id="register_{{$item->id}}" value="{{$item->allow_booking}}" onchange="handleChange({{$item->id}}, {{$item->allow_booking}})">
+                                <label class="form-check-label ms-2" for="register_{{$item->id}}">التسجيل</label>
+                            </div>
                         @endif
 
                     @endforeach
@@ -125,5 +121,11 @@
             'showConfirmButton': false,
             'timer': 4000,
         });
+    }
+</script>
+
+<script>
+    function handleChange(id, checked) {
+        console.log('ID: ' + id + ', Checked: ' + checked);
     }
 </script>
