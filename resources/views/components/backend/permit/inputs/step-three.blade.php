@@ -119,11 +119,9 @@ x-data="{
                     <div class="card p-2 mx-1 mb-2">
                         <div class="card-body d-flex justify-content-between align-items-center p-0">
                             <div>
-                                <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
-                                <span class="d-inline-block px-3">/</span>
-                                <span x-text="speaker.type"></span>
-                                <span class="d-inline-block px-3">/</span>
-                                <span x-text="speaker.phone"></span>
+                                <a style="width:200px" class="d-inline-block overflow-hidden card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
+                                <span style="width:130px" class="d-inline-block text-center" x-text="speaker.type"></span>
+                                <span style="width:100px" class="d-inline-block text-center" x-text="speaker.phone"></span>
                                 <a href="https://wa.me/966<!-- Rahmani:put mobile here after cuttent the firest digit (0) -->" target="_tab"><img class="ms-2" src="{{ asset('img/whatsapp.png') }}" height="20"></a>
                             </div>
                             <div class="d-flex align-items-center">
