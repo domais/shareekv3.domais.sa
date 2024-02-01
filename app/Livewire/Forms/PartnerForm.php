@@ -63,13 +63,16 @@ class PartnerForm extends Form
             'logo' => 'nullable',
         ]);
 
+        $pints = 0;
+        $pints = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
+
         $this->partner->name = $this->partner_name;
         $this->partner->city = $this->city;
         $this->partner->coordinates = $this->coordinates;
         $this->partner->lat = explode(',', $this->coordinates)[0];
         $this->partner->lng = explode(',', $this->coordinates)[1];
         $this->partner->class = $this->class;
-        $this->partner->points = $this->points; //$this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 5));
+        $this->partner->points = (is_null($this->points) ?  $pints : $this->points); // Modefied by Domais
         $this->partner->save();
 
         if (!is_string($this->logo) && $this->logo) {
