@@ -66,6 +66,8 @@ class PartnerForm extends Form
         // Added by Domais
         $pints = $this->class == 'أ' ? 20 : ($this->class == 'ب' ? 14 : ($this->class == 'ج' ? 8 : 0));
 
+        dd($pints,$this->points);
+
         $this->partner->name = $this->partner_name;
         $this->partner->city = $this->city;
         $this->partner->coordinates = $this->coordinates;
