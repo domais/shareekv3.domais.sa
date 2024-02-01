@@ -57,7 +57,8 @@ class Show extends Component
             $this->histories = $this->permit->history()->orderBy('created_at', 'asc')->get();
             
         }
-        if (is_null($this->permit)) {
+        // Rahmani: remove isset() && fix this
+        if (is_null($this->permit) && isset(auth()->user()->owner)) {
             $this->form->lat = auth()->user()->owner->lat;
             $this->form->lng = auth()->user()->owner->lng;
         }

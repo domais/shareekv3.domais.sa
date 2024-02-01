@@ -75,8 +75,8 @@ class Inputs extends Component
         if ($this->is_show_page && $this->permit) {
             $this->histories = $this->permit->history()->orderBy('created_at', 'asc')->get();
         }
-        if (is_null($this->permit)) {
-            $this->form->lat = auth()->user()->owner->lat;
+        // Rahmani: remove isset() && fix this
+        if (is_null($this->permit) && isset(auth()->user()->owner)) {
             $this->form->lng = auth()->user()->owner->lng;
 
           //  dd($this->form->lat,$this->form->lng);
