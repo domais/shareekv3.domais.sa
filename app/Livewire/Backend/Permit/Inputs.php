@@ -42,6 +42,15 @@ class Inputs extends Component
 
     //files
 
+    public function change_permit($status_id,$without_number = false)
+    {
+        if ($without_number == false) {
+            $this->permit->status_id = $status_id;
+        }
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
+    }
+
     public function mount()
     {
         $this->permit = Permit::where('order_number', $this->order_number)->first();
