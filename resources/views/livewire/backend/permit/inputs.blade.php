@@ -85,9 +85,21 @@
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location-tab-pane" type="button" role="tab" aria-controls="location-tab-pane" aria-selected="false">المكان</button>
 					</li>
+					@if ($is_show_page)
+						@if ( count($this->speakers) != 0)
+							<li class="nav-item" role="presentation">
+								<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
+							</li>
+						@endif	
+					@else
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
 					</li>
+						
+					@endif
+
+
+					@endif
 
 					<li class="nav-item" role="presentation">
 						<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
@@ -117,9 +129,17 @@
 					<x-backend.permit.inputs.step-three />
 				</div><!-- نهاية محتوى التاب -->
 
-				<div class="tab-pane fade" id="partnership-tab-pane" role="tabpanel" aria-labelledby="partnership-tab" tabindex="0">
-					<x-backend.permit.inputs.step-four />
-				</div><!-- نهاية محتوى التاب -->
+				@if ($is_show_page)
+					@if ( count($this->speakers) != 0)
+						<div class="tab-pane fade" id="partnership-tab-pane" role="tabpanel" aria-labelledby="partnership-tab" tabindex="0">
+							<x-backend.permit.inputs.step-four />
+						</div><!-- نهاية محتوى التاب -->
+					@endif
+				@else
+					<div class="tab-pane fade" id="partnership-tab-pane" role="tabpanel" aria-labelledby="partnership-tab" tabindex="0">
+						<x-backend.permit.inputs.step-four />
+					</div><!-- نهاية محتوى التاب -->
+				@endif
 
 				@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 6)
 
