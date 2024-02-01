@@ -68,7 +68,7 @@ trait LiveChanges
             $partner = Partner::where('owner_id', $user->id)->first();
             
             if ($partner) {
-                if ($partner->points < count($this->speakers) && ($this->speakers[$index]['reward'] == true || $this->speakers[$index]['reservations'])){
+                if (count($this->speakers) > $partner->points && ($this->speakers[$index]['reward'] == true || $this->speakers[$index]['reservations'])){
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('','عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                     throw new ValidationException($validator);
