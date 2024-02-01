@@ -8,6 +8,8 @@ use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
 use App\Mail\ChangeStatus;
 use App\Models\Draft;
+use App\Models\Event;
+use App\Models\File;
 use App\Models\Permit;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -39,6 +41,8 @@ class Inputs extends Component
     public $histories =  [];
     public $selectedSpeakers = [];
     public $text_bread_crumb = 'permit';
+    public $permitNumber;
+    public $permitFile;
 
     //files
 
@@ -50,7 +54,77 @@ class Inputs extends Component
             $this->permit->save();
         }
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+    }
 
+    public function approvePermit()
+    {
+        try {
+            // Validate the input
+            $validator = Validator::make([
+                'permitNumber' => $this->permitNumber,
+                'permitFile' => $this->permitFile,
+            ], [
+                'permitNumber' => 'required|unique:permits,permit_number',
+                'permitFile' => 'required|file|image|mimes:jpeg,png,jpg',
+            ]);
+            if ($validator->fails()) {
+                // Handle validation failure
+                throw new \Exception($validator->errors()->first());
+            }
+    
+            // Find the permit
+            $permit = $this->permit;
+    
+            // Update the permit number
+            $permit->permit_number = $this->permitNumber;
+            $permit->status_id = 5;
+            $permit->save();
+    
+            // Store the file
+            $path = $this->permitFile->store('files/'.$permit->order_number.'/permit_file','public');
+            // Create a new file record
+            $approval_file = new File();
+            $approval_file->name = $permit->order_number;
+            $approval_file->use = 'permit_file';
+            $approval_file->type = 'pdf';
+            $approval_file->path = $path;
+
+            $permit->fileable()->save($approval_file);
+        } catch (\Exception $e) {
+            // Handle the exception
+            $this->errors[] = $e->getMessage();
+            return;
+        }
+
+
+        $event = Event::create($permit->toArray());
+
+        $speakers = $permit->speakers;
+        $partnerships = $permit->partnerships;
+
+        foreach ($speakers as $speaker) {
+            $speaker->event_id = $event->id;
+            $speaker->save();
+        }
+
+        foreach ($partnerships as $partnership) {
+            $partnership->event_id = $event->id;
+            $partnership->save();
+        }
+
+        AddToHistory($permit->id,$permit->status_id);
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])
+            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->send(new ChangeStatus($data));
+        
+        $this->redirect(route('event.index'));
     }
 
     public function mount()

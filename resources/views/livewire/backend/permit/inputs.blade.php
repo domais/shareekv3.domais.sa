@@ -68,7 +68,7 @@
 						 data-bs-toggle="modal"
 						  data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
 
-					<button class="btn btn-secondary" wire:click="change_permit(5,true)"
+					<button class="btn btn-secondary" wire:click="change_permit(5)"
 					wire:loading.attr="disabled">
 						  تشغيل بدون تصريح  
 					</button>
