@@ -257,7 +257,7 @@ trait LiveChanges
                 $partner = Partner::where('owner_id', $user->id)->first();
                 
                 if ($partner) {
-                   dd($partner->points,$counter_speakers,$speakers);
+                   // dd($partner->points,$counter_speakers,$speakers);
                     $newPoints = $partner->points - $counter_speakers;
                     if ($newPoints < 1) {
                         throw new \Exception('نقاط غير كافية.');

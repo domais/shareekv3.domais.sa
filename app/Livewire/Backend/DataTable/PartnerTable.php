@@ -138,7 +138,7 @@ class PartnerTable extends DataTableComponent
                     'class' => 'text-center',
                 ])->sortable(),
 
-                Column::make("دعم الشريك", "points")
+                Column::make("الدعم المتبقي", "points")
                     ->format(function ($value, $column, $row) {
                         $points = 0;
                         switch ($column->class) {
@@ -152,7 +152,8 @@ class PartnerTable extends DataTableComponent
                                 $points = 8 - $value;
                                 break;
                         }
-                        return $points;
+                        // return $points;
+                        return $value; // Modefied by Domais
                     })->sortable(),
 
             Column::make(__(''), 'id')
