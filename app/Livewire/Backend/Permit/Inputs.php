@@ -110,8 +110,8 @@ class Inputs extends Component
                /* if (auth()->user()->hasRole('User') && auth()->user()->owner->points == 0) {
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('points', 'ليس لديك رصيد كافي للدعم اللوجستي');
-                    throw new ValidationException($validator);*/
-                }
+                    throw new ValidationException($validator);
+                }*/
             }
         } catch (ValidationException $th) {
             $this->errors = $th->validator->errors()->all();
