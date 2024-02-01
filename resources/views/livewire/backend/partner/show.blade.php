@@ -39,7 +39,7 @@
              </div>
 
             <div class="mb-3">
-              <input type="number" wire:model="Pform.points" dir="ltr" class="form-control text-start" id="partnerPoints" placeholder="كم تبقى من رصيد الدعم؟  اتركها فارغة إذا لم يسبق له أن استهلك شي">
+              <input type="number" wire:model="Pform.points" dir="ltr" class="form-control text-start" id="partnerPoints" placeholder="كم تبقى من رصيد الدعم؟">
           </div>
 
             <div class="mb-3">
@@ -86,7 +86,7 @@
                                         : asset('img/default_avatar.png')))
                                 : asset('img/default_avatar.png');
                         @endphp
-                        <img src="{{ $logoUrl }}" alt="wrapkit" class="img-fluid rounded-circle h-75 w-75" />  
+                        <img src="{{ $logoUrl }}" alt="wrapkit" class="img-fluid rounded-circle w-50" />  
                     </div>              
                     <div class="col-md-12 text-center">
                         <div class="pt-2">
