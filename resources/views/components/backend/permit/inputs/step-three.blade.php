@@ -116,7 +116,7 @@ x-data="{
                 </template>
                 @else
                 <template x-for="(speaker,index) in speakers">
-                    <div class="card p-2 mx-1 mb-2">
+                    <div class="card p-2 mx-2 mb-2">
                         <div class="card-body d-flex justify-content-between align-items-center p-0">
                             <div>
                                 <a style="width:200px" class="d-inline-block overflow-hidden card-title float-start mb-0 me-auto cursor-pointer text-decoration-none" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
