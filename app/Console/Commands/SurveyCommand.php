@@ -15,7 +15,7 @@ class SurveyCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:survey {minutes=2}';
+    protected $signature = 'app:survey {hours=2}';
     /**
      * The console command description.
      *
@@ -31,8 +31,8 @@ class SurveyCommand extends Command
     {
         $hours = $this->argument('hours');
 
-        $events = Event::where('end_date', '<=', Carbon::now()->subHours($hours))
-        // $events = Event::where('end_date', '<=', Carbon::now()->subMinutes(1))
+        // $events = Event::where('end_date', '<=', Carbon::now()->subHours($hours))
+        $events = Event::where('end_date', '<=', Carbon::now()->subMinutes(1))
             ->where('is_survey_sent', 0)
             ->get();
 
