@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'exists:users,email'],
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'phone' => ['required', 'string', 'min:10', 'max:255'],
-            'age' => ['required', 'integer', 'min:18', 'max:100'],
+            'age' => ['required'],
             'gender' => ['required', 'string'],
         ];
     }
