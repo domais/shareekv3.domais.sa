@@ -87,4 +87,9 @@ class Permit extends Model
     {
         return $this->hasOne(Event::class, 'order_number', 'order_number');
     }
+
+    public function image()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

@@ -18,7 +18,7 @@ class EventCollection extends ResourceCollection
 
             // full path for image
             $isDefault = false;
-            $image = $event->permit->fileable->path ?? '';
+            $image = $event->permit->image->path ?? '';
             if ($image) {
                 $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
             } else {
