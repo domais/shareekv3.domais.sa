@@ -6,8 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\VerfiyRequest;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\UpdateUserRequest;
 
 class AuthController extends Controller
 {
@@ -64,5 +65,15 @@ class AuthController extends Controller
     public function resendEmailVerification(LoginRequest $request): \Illuminate\Http\JsonResponse
     {
         return $this->authService->resendEmailVerification($request->email);
+    }
+
+    /**
+     * Update user profile
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateProfile(UpdateUserRequest $request): \Illuminate\Http\JsonResponse
+    {
+        return $this->authService->updateProfile($request->validated());
     }
 }

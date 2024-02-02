@@ -180,4 +180,21 @@ class AuthService implements AuthServiceInterface
     {
         return $this->login($email);
     }
+
+    /**
+     * Update user profile
+     */
+    public function updateProfile(array $data): \Illuminate\Http\JsonResponse
+    {
+        $user = request()->user();
+
+        $user->update($data);
+
+        return response()->json([
+            'message' => 'Profile updated successfully',
+            'data' => [
+                'user' => new UserResource($user),
+            ],
+        ], 200);
+    }
 }

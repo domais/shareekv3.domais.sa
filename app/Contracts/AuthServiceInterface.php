@@ -39,4 +39,9 @@ interface AuthServiceInterface
      * Resend email verification
      */
     public function resendEmailVerification(string $email): \Illuminate\Http\JsonResponse;
+
+    /**
+     * Update profile
+     */
+    public function updateProfile(array $data): \Illuminate\Http\JsonResponse;
 }
