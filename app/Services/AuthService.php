@@ -188,7 +188,12 @@ class AuthService implements AuthServiceInterface
     {
         $user = request()->user();
 
-        $user->update($data);
+        $user->phone = $data['phone'];
+        $user->age = $data['age'];
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->gender = $data['gender'];
+        $user->save();
 
         return response()->json([
             'message' => 'Profile updated successfully',
