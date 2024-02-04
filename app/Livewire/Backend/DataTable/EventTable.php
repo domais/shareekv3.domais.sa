@@ -44,7 +44,7 @@ class EventTable extends DataTableComponent
                 '5' => 'مجدولة',
                 '6' => 'قائمة',
                 '7' => 'بانتظار التوثيق',
-                '8' => 'للمراجعة',
+                '8' => 'مراجعة المشرف',
                 '9' => 'مؤرشف',
             ])
             ->filter(function(Builder $builder, string $value) {
@@ -128,6 +128,10 @@ class EventTable extends DataTableComponent
             Column::make("العنوان", "title")
                  ->searchable()
                 ->sortable(),
+
+            Column::make("الحالة", "status.name")
+                ->searchable()
+               ->sortable(),
 
             Column::make("تاريخ البداية", "start_date")
                     ->format(function($value, $column, $row) {
