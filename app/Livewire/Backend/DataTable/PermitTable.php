@@ -78,23 +78,23 @@ class PermitTable extends DataTableComponent
     public function builder(): Builder
     {
         if (auth()->user()->hasRole('SuperAdmin')){
-            return Permit::withTrashed()->where('status_id', '<', 5);
+            return Permit::withTrashed()->where('status_id', '!=', 5);
         }
         if (auth()->user()->hasRole('Administrator')) {
             return Permit::withTrashed()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');
-            })->where('status_id', '<', 5)
+            })->where('status_id', '!=', 5)
             ->where('status_id', '!=', 7)
             ->where('status_id', '!=', 5);
         } elseif (auth()->user()->hasRole('User')) {
             return Permit::withTrashed()->where('user_id', auth()->id())
-            ->where('status_id', '<', 5)
+            ->where('status_id', '!=', 5)
             ->where('status_id', '!=', 7)
             ->where('status_id', '!=', 5);
         }
     
-        return Permit::withTrashed()->where('status_id', '<', 5)
+        return Permit::withTrashed()->where('status_id', '!=', 5)
         ->where('status_id', '!=', 7)
         ->where('status_id', '!=', 5);
     }
