@@ -108,7 +108,13 @@ class Index extends Component
     #[On('Definitely_Decline_Support')] 
     public function Definitely_Decline_Support($id,$model,$reason)
     {
-        dd($id,$model,$reason);
+        $permit = Permit::findorfail($id);
+        $permit->support->update(['status_id' => 15]);
+
+        AddToHistory($permit->id,$permit->status_id,null,$reason);
+
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 
 
@@ -117,7 +123,7 @@ class Index extends Component
     public function RejectPermit_Dispatch($id,$model,$reason)
     {
         $permit = Permit::findorfail($id);
-        $permit->support->update(['status_id' => 15]);
+        $permit->support->update(['status_id' => 14]);
 
         AddToHistory($permit->id,$permit->status_id,null,$reason);
 
