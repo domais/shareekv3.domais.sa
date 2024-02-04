@@ -213,7 +213,7 @@
 	function Act_AdminRejectSupport(id, model) {
 		Swal.fire({
 			title: 'رفض الدعم',
-  			text: "لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف"
+  			text: "لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف",
 			icon: 'question',
 			input: 'textarea',
 			inputPlaceholder: 'أدخل سبب الرفض هنا',
