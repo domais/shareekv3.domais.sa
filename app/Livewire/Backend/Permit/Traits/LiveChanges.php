@@ -216,6 +216,9 @@ trait LiveChanges
                 $permit->speakers()->delete();
                 $permit->partnerships()->delete();
 
+                $permit->user->owner->points -= $permit->points;
+                $permit->user->owner->save();
+
 
                 AddToHistory($permit->id,$permitData['status_id'],true,'معاد من قبل الشريك');
                 ChangePermitStatus($permit);
