@@ -39,7 +39,7 @@
              </div>
 
             <div class="mb-3">
-              <input type="number" wire:model="Pform.points" dir="ltr" class="form-control text-start" id="partnerPoints" placeholder="كم تبقى من رصيد الدعم؟  اتركها فارغة إذا لم يسبق له أن استهلك شي">
+              <input type="number" wire:model="Pform.points" dir="ltr" class="form-control text-start" id="partnerPoints" placeholder="كم تبقى من رصيد الدعم؟  يمكنك تركها فارعة ...">
           </div>
 
             <div class="mb-3">
