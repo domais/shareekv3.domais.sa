@@ -106,6 +106,14 @@ class StatusesTableSeeder extends Seeder
                 'name'         => 'معاد لتعديل',
                 'description'  => 'تم إرسالها للشريك للتعديل'
             ],
+
+            // global status 
+
+            [
+                'id'           => 16,
+                'name'         => 'محذوف',
+                'description'  => 'تم حذف الطلب'
+            ],
             
         ];
 

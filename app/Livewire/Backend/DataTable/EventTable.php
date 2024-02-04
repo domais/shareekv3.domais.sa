@@ -82,6 +82,9 @@ class EventTable extends DataTableComponent
 
         $permit = Event::findorfail($id);
 
+        $permit->status_id = 16;
+
+
         $permit->delete();
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));

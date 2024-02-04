@@ -28,6 +28,7 @@ class PermitTable extends DataTableComponent
                 '3' => 'تحت الدراسة',
                 '4' => 'بإنتظار التصريح',
                 '8' => 'مؤرشف',
+                '16' => 'محذوف',
             ])
             ->filter(function(Builder $builder, string $value) {
 
@@ -39,6 +40,9 @@ class PermitTable extends DataTableComponent
                 }
                 if ($value === '4') {
                     $builder->where('status_id', 4);
+                }
+                if ($value === '16') {
+                    $builder->where('status_id', 16);
                 }
                 if ($value === '8') {
                     $builder->whereIn('status_id', [5,8]);
@@ -74,25 +78,22 @@ class PermitTable extends DataTableComponent
     public function builder(): Builder
     {
         if (auth()->user()->hasRole('SuperAdmin')){
-            return Permit::query();
-
+            return Permit::withTrashed()->query();
+    
         }
         if (auth()->user()->hasRole('Administrator')) {
-            return Permit::query()->where(function ($query) {
+            return Permit::withTrashed()->query()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');
-            })->where('status_id', '!=', 8)
-            ->where('status_id', '!=', 7)
+            })->where('status_id', '!=', 7)
             ->where('status_id', '!=', 5);
         } elseif (auth()->user()->hasRole('User')) {
-            return Permit::query()->where('user_id', auth()->id())
-            ->where('status_id', '!=', 8)
+            return Permit::withTrashed()->query()->where('user_id', auth()->id())
             ->where('status_id', '!=', 7)
             ->where('status_id', '!=', 5);
         }
     
-        return Permit::query()->where('status_id', '!=', 8)
-        ->where('status_id', '!=', 7)
+        return Permit::withTrashed()->query()->where('status_id', '!=', 7)
         ->where('status_id', '!=', 5);
     }
 
@@ -101,6 +102,8 @@ class PermitTable extends DataTableComponent
     {
 
         $permit = Permit::findorfail($id);
+
+        $permit->status_id = 16;
 
         $permit->delete();
 
@@ -113,6 +116,7 @@ class PermitTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+
 
         $this->setColumnSelectStatus(false);
 
