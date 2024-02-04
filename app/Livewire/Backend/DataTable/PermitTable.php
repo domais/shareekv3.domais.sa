@@ -147,6 +147,10 @@ class PermitTable extends DataTableComponent
                     ->searchable()
                 ->sortable(),
 
+            Column::make("الحالة", "status.name")
+                ->searchable()
+                ->sortable(),
+
             Column::make("تاريخ البداية", "start_date")
                     ->format(function($value, $column, $row) {
                         return Carbon::parse($value)->translatedFormat('l، d F Y');
