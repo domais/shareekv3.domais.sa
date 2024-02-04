@@ -45,7 +45,7 @@
 				<a class="btn btn-warning" 
 							data-bs-toggle="modal"
 							data-bs-target="#assign-Admin-Modal">
-							تعديل الادمين
+							إسناد لموظف آخر
 						</a>
 
 				@endif
@@ -261,10 +261,10 @@
 										</div>
 										<div class="modal-body">
 											<div class="row mt-2">
-												<div class="col-3 d-flex align-items-center">إختيار أدمين</div>
+												<div class="col-3 d-flex align-items-center">إختيار موظف</div>
 												<div class="col-8">
 													<select class="form-select" id="partnerClass" wire:model.live="newAdmin">
-														<option selected disabled value="">إختر الفئة ...</option>
+														<option selected disabled value="">إختر ...</option>
 														@foreach (settings('admins') as $admin)
 															<option value="{{$admin->id}}">{{$admin->name}}</option>
 														@endforeach
@@ -273,7 +273,7 @@
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
-												<button type="button" class="btn btn-success" wire:click="changeAdmin" wire:loading.attr="disabled">اعتماد</button>
+												<button type="button" class="btn btn-success" wire:click="changeAdmin" wire:loading.attr="disabled">موافق</button>
 											</div>
 										</div>
 								</div>
