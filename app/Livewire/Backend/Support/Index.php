@@ -112,8 +112,11 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
 
-        $permit->support->update(['reasons' => DB::raw('json_array_append(reasons, "$", "'.$reason.'")')]);
-       // AddToHistory($permit->id,$permit->status_id,null,$reason);
+        $reasons = json_decode($permit->support->reasons, true);
+        $reasons[] = $reason;
+        $permit->support->reasons = json_encode($reasons);
+        $permit->support->save();
+               // AddToHistory($permit->id,$permit->status_id,null,$reason);
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
@@ -128,8 +131,11 @@ class Index extends Component
         $permit->support->update(['status_id' => 15]);
 
        // AddToHistory($permit->id,$permit->status_id,null,$reason);
-       $permit->support->update(['reasons' => DB::raw('json_array_append(reasons, "$", "'.$reason.'")')]);
 
+        $reasons = json_decode($permit->support->reasons, true);
+        $reasons[] = $reason;
+        $permit->support->reasons = json_encode($reasons);
+        $permit->support->save();
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
