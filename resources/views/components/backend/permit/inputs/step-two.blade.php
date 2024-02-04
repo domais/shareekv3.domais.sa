@@ -54,8 +54,10 @@ $watch('location',
             <div class="row my-3" x-show="location == 2">
                 <div class="col-4 d-flex align-items-center">خطاب الموافقة</div>
                 @if ($this->permit && $this->permit->event_location == 2 && $this->is_show_page)
-                    <div class="col-8"><a
-                            href="{{ asset('storage/' . $this->permit->fileable->where('use', 'approval_letter')->first()->path) }}"
+                    @php
+                        $approvalLetter = $this->permit->fileable->where('use', 'approval_letter')->first();
+                    @endphp
+                    <div class="col-8"><a href="{{ $approvalLetter ? asset('storage/' . $approvalLetter->path) : '#' }}"
                             target="_blank" class="btn btn-primary">عرض الملف</a>
 					</div>
                 @else
