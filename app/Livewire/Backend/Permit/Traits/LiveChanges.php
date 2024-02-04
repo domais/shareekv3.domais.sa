@@ -288,25 +288,25 @@ trait LiveChanges
 
                 $permit->fileable()->save($image);
 
-                if ($permitData['event_location'] == 2) {
+                if ($permitData['approval_file']) {
                     $approval_file = new File();
                     $approval_file->name = $permit->order_number;
                     $approval_file->use = 'approval_letter';
                     $approval_file->type = 'pdf';
                     $approval_file->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/approval_letter', $permitData['approval_file'], 'public');
-
                     $permit->fileable()->save($approval_file);
-
+                }
+                if ($permitData['location_image']) {
                     $location_image = new File();
                     $location_image->name = $permit->order_number;
                     $location_image->use = 'location_image';
                     $location_image->type = 'image';
                    // $location_image->path = $permitData['location_image']->store('files/'.$permit->order_number.'/location_image','public');
                     $location_image->path = Storage::disk('do')->putFile('files/'.$permit->order_number.'/location_image', $permitData['location_image'], 'public');
-
                     $permit->fileable()->save($location_image);
-
                 }
+
+               
 
                 AddToHistory($permit->id,$permitData['status_id']);
                 ChangePermitStatus($permit);

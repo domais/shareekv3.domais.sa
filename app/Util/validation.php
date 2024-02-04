@@ -47,8 +47,7 @@ use Illuminate\Validation\Rules\Password;
                     }
                 }
             }],
-            'approval_file' => ['nullable'],
-            'location_image' => ['nullable'],
+  
         ];
     }
 
