@@ -57,7 +57,7 @@ class EventMangerCommand extends Command
 
                 $history = new History();
                 $history->permit_id = $permit->id;
-                $history->status_id = $event->status_id;
+                $history->status_id = 6;
                 $history->user_id = $permit->admin_id;
                 $history->descreption = null;
                 $history->notes = null;
@@ -74,8 +74,6 @@ class EventMangerCommand extends Command
                 Log::info('Event data:', [$data]);
 
                 Mail::to($permit->user->email)->send(new ChangeStatus($data));
-
-                AddToHistory($permit->id,$permit->status_id);
 
 
             }
