@@ -187,6 +187,9 @@
 							<span>
 								<small>{{$item->status->name}}</small><br>
 								 {{$item->user->name}}
+								 @if (auth()->user()->hasRole('User'))
+									 / {{$item->user->owner->name}}
+								 @endif
 							</span>
 							<span class="d-block date">
 								{{ $item->created_at->format('Y-m-d') }}<br>
