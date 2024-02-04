@@ -99,14 +99,17 @@ x-data="{  errors: @entangle('validationErrors').live  }" x-init="
                 </div>
 
                 <div class="row mt-2">
-                    <div class="col-5 d-flex align-items-center">البريد الإلكتروني</div>
-                    <div class="col-7"><input type="email" wire:model="email" class="form-control" id="email"></div>
-                </div>
-
-                <div class="row mt-2">
                     <div class="col-5 d-flex align-items-center">رقم الجوال</div>
                     <div class="col-7"><input type="email" wire:model="phone" class="form-control" id="email"></div>
                 </div>
+
+                @if (auth()->user()->hasRole('User'))
+                    <div class="row mt-2">
+                        <div class="col-5 d-flex align-items-center">الصورة</div>
+                        <div class="col-7"><input type="file" wire:model="logo" class="form-control" id="logo"></div>
+                    </div>    
+                @endif
+
             
             </div>
             <div class="modal-footer">

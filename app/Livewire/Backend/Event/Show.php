@@ -28,9 +28,18 @@ class Show extends Component
     public $histories =  [];
     public $selectedSpeakers = [];
     public $text_bread_crumb = 'event';
+    public $newAdmin = "";
+
 
 
     //files
+
+    public function changeAdmin()
+    {
+        $this->permit->admin_id = $this->newAdmin;
+        $this->permit->save();
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
+    }
 
     public function mount()
     {   

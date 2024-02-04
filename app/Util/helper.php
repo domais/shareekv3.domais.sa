@@ -6,6 +6,7 @@ use App\Models\EventType;
 use App\Models\History;
 use App\Models\Literary;
 use App\Models\Permit;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -271,6 +272,17 @@ function ArToEn($input) {
 				} else {
 					return Cache::rememberForever('Literary_parent', function () {
 						return Literary::whereNull('parent_id')->get();
+					});
+				}    
+			break;
+
+			case 'admins':
+				if ($updateCache) {
+					// Remove it from cache
+					Cache::forget('admins');
+				} else {
+					return Cache::rememberForever('admins', function () {
+						return Role::where('name', 'Adminstrator')->first()->users;
 					});
 				}    
 			break;

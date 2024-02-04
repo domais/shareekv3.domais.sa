@@ -2,16 +2,22 @@
 
 namespace App\Livewire\Backend\Profile;
 
+use App\Models\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
+    use WithFileUploads;
+    
     public $user;
     public $name;
     public $email;
     public $phone;
+    public $logo;
 
     public $current_password = '';
     public $password = '';
@@ -40,7 +46,6 @@ class Index extends Component
 
             $this->validate([
                 'name' => 'required|min:3',
-                'email' => 'required|email|unique:users,email,' . $this->user->id,
                 'phone' => 'required|min:10|unique:users,phone,' . $this->user->id,
             ]);
 
@@ -49,12 +54,29 @@ class Index extends Component
             return;
         }
 
+        if ($this->logo) {
+                // Delete the old logo if it exists
+                $partner = auth()->user()->owner;
+                if ($partner->image) {
+                    Storage::disk('do')->delete($this->partner->fileable->path);
+                    $partner->fileable()->delete();
+                }
+            
+                // Save the new logo
+                $path = Storage::disk('do')->putFile('files/logos/'.$partner->id, $this->logo, 'public');
+            
+                $document = new File();
+                $document->name = $partner->name;
+                $document->use = 'logo';
+                $document->type = 'image';
+                $document->path = $path;
+                $partner->fileable()->save($document);
+        }
+
         $this->user->update([
             'name' => $this->name,
-            'email' => $this->email,
             'phone' => $this->phone, 
         ]);
-
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 

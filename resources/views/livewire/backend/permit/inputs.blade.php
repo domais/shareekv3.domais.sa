@@ -40,6 +40,16 @@
 				</button>
 
 				@endif
+				@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
+
+				<a class="btn btn-warning" 
+							data-bs-toggle="modal"
+							data-bs-target="#assign-Admin-Modal">
+							تعديل الادمين
+						</a>
+
+				@endif
+
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
 					<button class="btn btn-secondary" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
@@ -229,6 +239,40 @@
 				</div>
 			</div>
 		</div>
+
+		@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin'))
+
+						    <!-- مودال   تعديل الادمين -->
+							<div wire:ignore class="modal fade" id="assign-Admin-Modal" tabindex="-1">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5">تعديل الأدمين</h1>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<div class="row mt-2">
+												<div class="col-3 d-flex align-items-center">إختيار أدمين</div>
+												<div class="col-8">
+													<select class="form-select" id="partnerClass" wire:model.live="newAdmin">
+														<option selected disabled value="">إختر الفئة ...</option>
+														@foreach (settings('admins') as $admin)
+															<option value="{{$admin->id}}">{{$admin->name}}</option>
+														@endforeach
+													</select>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-light" data-bs-dismiss="modal">إلغاء</button>
+												<button type="button" class="btn btn-success" wire:click="changeAdmin" wire:loading.attr="disabled">اعتماد</button>
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+			
+		@endif
+
 
 	</div><!-- /row -->
 </div>

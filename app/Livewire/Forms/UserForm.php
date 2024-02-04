@@ -39,6 +39,7 @@ class UserForm extends Form
         }
         else {
             $user->addRole(4);
+            settings('admins',true);
         }
 
         return $user;

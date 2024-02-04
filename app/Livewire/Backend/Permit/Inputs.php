@@ -43,6 +43,18 @@ class Inputs extends Component
     public $text_bread_crumb = 'permit';
     public $permitNumber;
     public $permitFile;
+    public $newAdmin = "";
+
+    public function changeAdmin()
+    {
+        if ($this->permit->status_id == 2) {
+            # code...
+            $this->permit->status_id = 3;
+        }
+        $this->permit->admin_id = $this->newAdmin;
+        $this->permit->save();
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
+    }
 
     //files
 
