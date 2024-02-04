@@ -217,7 +217,7 @@ trait LiveChanges
                 $permit->partnerships()->delete();
 
 
-                AddToHistory($permit->id,$permitData['status_id'],true);
+                AddToHistory($permit->id,$permitData['status_id'],true,'معاد من قبل الشريك');
                 ChangePermitStatus($permit);
 
                     // Handle files
