@@ -187,7 +187,7 @@
 							<span>
 								<small>{{$item->status->name}}</small><br>
 								 {{$item->user->name}}
-								 @if (auth()->user()->hasRole('User'))
+								 @if ($item->user->hasRole('User'))
 									 / {{$item->user->owner->name}}
 								 @endif
 							</span>
