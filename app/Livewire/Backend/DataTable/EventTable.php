@@ -84,6 +84,7 @@ class EventTable extends DataTableComponent
 
         $permit->status_id = 16;
 
+        $permit->save();
 
         $permit->delete();
 

@@ -104,6 +104,8 @@ class PermitTable extends DataTableComponent
 
         $permit->status_id = 16;
 
+        $permit->save();
+
         $permit->delete();
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
