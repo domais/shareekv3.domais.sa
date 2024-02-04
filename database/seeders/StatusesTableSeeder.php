@@ -114,6 +114,7 @@ class StatusesTableSeeder extends Seeder
                 'name'         => 'محذوف',
                 'description'  => 'تم حذف الطلب'
             ],
+
             
         ];
 

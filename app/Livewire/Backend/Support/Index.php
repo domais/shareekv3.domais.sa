@@ -2,11 +2,14 @@
 
 namespace App\Livewire\Backend\Support;
 
+use App\Mail\ChangeStatus;
 use App\Models\File;
 use App\Models\History;
 use App\Models\Permit;
+use App\Models\Status;
 use App\Models\Support;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -104,6 +107,15 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
 
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+        
+
+        Mail::to($permit->user->email)->send(new ChangeStatus($data));
+
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 
@@ -123,6 +135,17 @@ class Index extends Component
 		$history->descreption = $reason;
         $history->support_id = $permit->support->id;
 		$history->save();
+
+        // مهندس محمد هنا ارسل ايميل انه تم رفض نهائي للدعم
+
+        $data = [
+            'permit' => $permit,
+            'status' => Status::findorfail(16),
+            'user' => $permit->user,
+        ];
+
+        Mail::to($permit->user->email)->send(new ChangeStatus($data));
+
 
 
                 

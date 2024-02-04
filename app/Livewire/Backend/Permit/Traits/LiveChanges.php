@@ -222,7 +222,6 @@ trait LiveChanges
 
                 AddToHistory($permit->id,$permitData['status_id'],true,'معاد من قبل الشريك');
                 ChangePermitStatus($permit);
-
                     // Handle files
                 foreach ($permit->fileable as $file) {
                     switch ($file->use) {
