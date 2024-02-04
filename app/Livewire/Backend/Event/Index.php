@@ -4,6 +4,8 @@ namespace App\Livewire\Backend\Event;
 
 use App\Models\Event;
 use App\Models\File;
+use App\Models\History;
+use App\Models\Permit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -146,7 +148,10 @@ class Index extends Component
         $event->attendance = $this->attendance ? $this->attendance : 0;
         $event->save();
 
-      
+        $permit = Permit::where('order_number', $event->order_number)->first();
+
+        AddToHistory($permit->id,7);
+
         foreach ($this->photos as $photo) {
 
             $path = $photo->store('files/'.$event->order_number.'/documenting','public');
