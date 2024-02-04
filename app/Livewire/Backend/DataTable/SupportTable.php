@@ -19,11 +19,11 @@ class SupportTable extends DataTableComponent
         }
         if (auth()->user()->hasRole('Administrator')) {
             return  Permit::query()->where(function ($query) {
-                $query->where('admin_id', auth()->id())
-                      ->orWhereNull('admin_id');
+                $query->where('permits.admin_id', auth()->id())
+                      ->orWhereNull('permits.admin_id');
             })->whereHas('support');
         } elseif (auth()->user()->hasRole('User')) {
-            return Permit::query()->where('user_id', auth()->id())->whereHas('support');
+            return Permit::query()->where('permits.user_id', auth()->id())->whereHas('support');
         }
         return Permit::query()->whereHas('support');
     }
