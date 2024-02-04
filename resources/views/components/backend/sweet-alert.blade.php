@@ -221,15 +221,22 @@
 			confirmButtonText: 'رفض الطلب',
 			cancelButtonText: 'إلغاء',
 			confirmButtonColor: '#FF0000',
+			showDenyButton: true, // Add this line
+			denyButtonText: 'رفض نهائي', // Add this line
+			denyButtonColor: '#FF0000', // Add this line
 		}).then((result) => {
 			if (result.isConfirmed && result.value) {
-				// Perform the action when the user clicks the confirm button
-				// You can replace 'RejectPermit_Dispatch' with the actual function you want to call
-				//RejectPermit_Dispatch(id, model, result.value);
 				Livewire.dispatch('RejectPermit_Dispatch', {
 					id: id,
 					model: model,
 					reason: result.value
+				})
+			} else if (result.isDenied) { // Add this condition
+				// Perform the action when the user clicks the deny button
+				// You can replace 'DefinitelyDeclineSupport' with the actual function you want to call
+				Livewire.dispatch('DefinitelyDeclineSupport', {
+					id: id,
+					model: model
 				})
 			}
 		});
