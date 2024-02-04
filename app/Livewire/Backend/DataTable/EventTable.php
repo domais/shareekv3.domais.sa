@@ -48,31 +48,7 @@ class EventTable extends DataTableComponent
                 '9' => 'مؤرشف',
             ])
             ->filter(function(Builder $builder, string $value) {
-
-                if ($value === '5') {
-                    $builder->where(function ($query) {
-                        $query->whereDate('start_date', '>=', now())
-                              ->whereDate('end_date', '>=', now());
-                    });
-                }
-                if ($value === '6') {
-                    $builder->where(function ($query) {
-                        $query->whereDate('start_date', '<=', now())
-                              ->whereDate('end_date', '>=', now());
-                    });
-                }
-                if ($value === '7') {
-                    $builder->whereDate('start_date', '<', now())
-                            ->whereDate('end_date', '<', now())
-                            ->where('status_id','!=',8);
-
-                }
-                if ($value === '8') {
-                    $builder->where('status_id',8);
-                }
-                if ($value === '9') {
-                    $builder->where('status_id',9);
-                }
+                $builder->where('status_id',$value);
             }),
 
             DateTimeFilter::make('تاريخ البداية')
