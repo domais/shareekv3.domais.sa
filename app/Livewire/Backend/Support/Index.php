@@ -109,7 +109,7 @@ class Index extends Component
     public function Definitely_Decline_Support($id,$model,$reason)
     {
         $permit = Permit::findorfail($id);
-        $permit->support->update(['status_id' => 15]);
+        $permit->support->update(['status_id' => 14]);
 
         AddToHistory($permit->id,$permit->status_id,null,$reason);
 
@@ -123,7 +123,7 @@ class Index extends Component
     public function RejectPermit_Dispatch($id,$model,$reason)
     {
         $permit = Permit::findorfail($id);
-        $permit->support->update(['status_id' => 14]);
+        $permit->support->update(['status_id' => 15]);
 
         AddToHistory($permit->id,$permit->status_id,null,$reason);
 
