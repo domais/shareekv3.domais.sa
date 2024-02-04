@@ -113,9 +113,6 @@ class PermitTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setTableRowUrl(function($row) {
-            return route('permit.show', $row->order_number);
-        });
 
         $this->setColumnSelectStatus(false);
 

@@ -121,9 +121,7 @@ class EventTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setColumnSelectStatus(false);
-        $this->setTableRowUrl(function($row) {
-            return route('event.show', $row->order_number);
-        });
+
         
 
     }

@@ -50,9 +50,7 @@ class SupportTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setTableRowUrl(function($row) {
-            return route('support.show', $row->order_number);
-        });
+
     }
 
     public function columns(): array
