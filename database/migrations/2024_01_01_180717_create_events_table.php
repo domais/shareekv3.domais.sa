@@ -26,8 +26,7 @@ return new class extends Migration
             $table->string('meeting_link')->nullable();
             $table->integer('attendance')->default(0);
             $table->boolean('from_old_db')->default(true);
-
-
+            $table->integer('points')->default(0);
 
             $table->tinyInteger('event_location')->comment('1 => inside, 2 => outside , 3 => online');
             $table->unsignedBigInteger('literary_id')->nullable();

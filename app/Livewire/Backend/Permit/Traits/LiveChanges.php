@@ -271,9 +271,11 @@ trait LiveChanges
                     if ($newPoints < 0) {
                         throw new \Exception("لايوجد لديك رصيد كافي للدعم اللوجستي<br>طلبت رصيد $counter_speakers وانت لديك فقط $partner->points");
                     }
+                    $permit->points = $counter_speakers;
             
                     $partner->points = $newPoints;
                     $partner->save();
+                    $permit->save();
                 }
 
                 // start files upload

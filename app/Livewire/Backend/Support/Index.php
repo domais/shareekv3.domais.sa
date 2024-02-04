@@ -113,6 +113,9 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
 
+        $permit->user->owner->points += $permit->points;
+        $permit->user->owner->save(); 
+
         $history = new History();
 		$history->permit_id = $id;
 		$history->status_id = 14;
@@ -134,7 +137,11 @@ class Index extends Component
     public function RejectPermit_Dispatch($id,$model,$reason)
     {
         $permit = Permit::findorfail($id);
+
         $permit->support->update(['status_id' => 15]);
+
+        $permit->user->owner->points += $permit->points;
+        $permit->user->owner->save(); 
 
        // AddToHistory($permit->id,$permit->status_id,null,$reason);
 
