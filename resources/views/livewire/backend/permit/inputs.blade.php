@@ -43,42 +43,31 @@
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
 					<button class="btn btn-secondary" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
-				@if ($this->is_show_page && $this->permit && $this->permit->status_id < 5)
+				@if ($this->is_show_page && $this->permit && $this->permit->status_id < 5 && !auth()->user()->hasRole('User'))
 				   @if ($this->permit->status_id == 2)
-				      @if (!auth()->user()->hasRole('User'))
-					  <button class="btn btn-secondary" wire:click="change_permit(3)"
-					  	 wire:loading.attr="disabled">إبدأ الدراسة
-					  </button>
-					  @endif
+						<button class="btn btn-secondary" wire:click="change_permit(3)"
+							wire:loading.attr="disabled">إبدأ الدراسة
+						</button>
 				   @endif
 				   @if ($this->permit->status_id == 3)
-				   <button class="btn btn-secondary" wire:click="change_permit(4)"
-						wire:loading.attr="disabled">
-						موافقة أولية
-					</button>
-
-					<button class="btn btn-brand" wire:click="change_permit(10)"
-					wire:loading.attr="disabled">
-						رفض	
-					</button>
+						<button class="btn btn-secondary" wire:click="change_permit(4)"
+							wire:loading.attr="disabled">
+							موافقة أولية
+						</button>
+						<button class="btn btn-brand" wire:click="change_permit(10)"
+							wire:loading.attr="disabled">
+							رفض	
+						</button>
 				   @endif
 				   @if ($this->permit->status_id == 4)
-
-					<a class="btn btn-warning" 
-						 data-bs-toggle="modal"
-						  data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
-
-					<button class="btn btn-secondary" wire:click="change_permit(5)"
-					wire:loading.attr="disabled">
-						  تشغيل بدون تصريح  
-					</button>
-
+						<a class="btn btn-warning" 
+							data-bs-toggle="modal"
+							data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
+						<button class="btn btn-secondary" wire:click="change_permit(5)"
+						wire:loading.attr="disabled">
+							تشغيل بدون تصريح  
+						</button>
 				   @endif
-
-
-
-
-					
 				@endif
 			</div>
 		</div>
