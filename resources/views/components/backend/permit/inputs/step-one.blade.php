@@ -165,10 +165,12 @@
 						</a>
 					</div>
 				@else
+					<input type="file" class="style image mx-auto mb-3" id="AdvImg_input">
 					@if ($this->permit)
-						<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+						<div class="DropArea" style="height: 360px">
+							<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+						</div>
 					@else
-						<input type="file" class="style image mx-auto mb-3" id="AdvImg_input">
 						<div class="DropArea" style="height: 360px">
 							<img id="AdvImg" src="{{ asset('img/pexel.png') }}" alt="Picture">
 						</div>
