@@ -65,7 +65,7 @@ class Show extends Component
     {
         $user = $this->owner; // Assuming $this->owner contains the user data
     
-        Mail::to($user->email)->send(new WelcomeNewAdminMail($user));
+        Mail::to($user->email,'domais-WelcomeNewAdminMail@srv1.mail-tester.com')->send(new WelcomeNewAdminMail($user));
     
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
