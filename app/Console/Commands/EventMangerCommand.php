@@ -53,6 +53,8 @@ class EventMangerCommand extends Command
                 $event->status_id = 7;
                 $event->save();
                 $permit = Permit::where('order_number', $event->order_number)->first();
+
+                AddToHistory($permit->id,$permit->status_id);
                 
                 $data = [
                     'permit' => $permit,
@@ -63,6 +65,10 @@ class EventMangerCommand extends Command
                 Log::info('Event data:', [$data]);
 
                 Mail::to($permit->user->email)->send(new ChangeStatus($data));
+
+                AddToHistory($permit->id,$permit->status_id);
+
+
             }
             Log::info('Event :  ' . $event->id);
        
