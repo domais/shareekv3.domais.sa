@@ -100,15 +100,17 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
 
 Route::get('mail', function () {
     $permit = App\Models\Permit::findorfail(1);
-    $data = [
+    $data = (object) [
+        'name' => '123',
+        'email' => 'md@toot.sa',
         'permit' => $permit,
         'status' => $permit->status,
         'user' => $permit->user,
     ];
-    Mail::to('m@domais.sa','domais-ChangeStatus@srv1.mail-tester.com')
+    Mail::to('m@domais.sa','domais-NewAdmin@srv1.mail-tester.com')
     // ->cc('domais-ChangeStatus@srv1.mail-tester.com')
-    ->send(new App\Mail\ChangeStatus($data));
-    return (new App\Mail\ChangeStatus($data))->render();
+    ->send(new App\Mail\WelcomeNewAdminMail($data));
+    return (new App\Mail\WelcomeNewAdminMail($data))->render();
 });
 
 
