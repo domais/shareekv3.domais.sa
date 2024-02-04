@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Mail\ChangeStatus;
 use App\Models\Event;
+use App\Models\History;
 use App\Models\Permit;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -54,7 +55,15 @@ class EventMangerCommand extends Command
                 $event->save();
                 $permit = Permit::where('order_number', $event->order_number)->first();
 
-                AddToHistory($permit->id,$permit->status_id);
+                $history = new History();
+                $history->permit_id = $permit->id;
+                $history->status_id = $event->status_id;
+                $history->user_id = $permit->admin_id;
+                $history->descreption = null;
+                $history->notes = null;
+                $history->edited = null;
+                $history->save();
+
                 
                 $data = [
                     'permit' => $permit,
