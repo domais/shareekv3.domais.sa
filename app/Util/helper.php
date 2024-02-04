@@ -53,24 +53,9 @@ function ArToEn($input) {
 			if($is_event) {
 				$now = now();
 				foreach($statusesEvent as $status) {
-					if($status == 5) {
-						$events[$status] = Event::where('user_id', $user->id)
-						->where('start_date', '>', $now)
-						->get();
-					} elseif($status == 6) {
-						$events[$status] = Event::where('user_id', $user->id)
-						->where('start_date', '<=', $now)
-						->where('end_date', '>=', $now)
-						->get();
-					} elseif($status == 7) {
-						$events[$status] = Event::where('user_id', $user->id)
-						->where('status_id', '<>', 8)
-						->where('end_date', '<', $now)
-						->get();
-					} elseif($status == 8) {
-						$events[$status] = Event::where('status_id', $status)
-						->where('user_id', $user->id)->get();
-					}
+					$events[$status] = Event::where('user_id', $user->id)
+					->where('status_id', $status)
+					->get();
 				}
 			} else {
 				foreach($statuses as $status) {
