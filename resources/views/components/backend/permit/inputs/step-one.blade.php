@@ -159,16 +159,20 @@
 			<div class="col-11">
 
 				@if ($this->is_show_page)
-				<div class="DropArea" style="height: 360px;background:none ">
-					<a target="_tab" href="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
-						<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
-					</a>
-				</div>
+					<div class="DropArea" style="height: 360px;background:none ">
+						<a target="_tab" href="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+							<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+						</a>
+					</div>
 				@else
-				<input type="file" class="style image mx-auto mb-3" id="AdvImg_input">
-				<div class="DropArea" style="height: 360px">
-					<img id="AdvImg" src="{{ asset('img/pexel.png') }}" alt="Picture">
-				</div>
+					@if ($this->permit)
+						<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+					@else
+						<input type="file" class="style image mx-auto mb-3" id="AdvImg_input">
+						<div class="DropArea" style="height: 360px">
+							<img id="AdvImg" src="{{ asset('img/pexel.png') }}" alt="Picture">
+						</div>
+					@endif
 				@endif
 
 			</div>

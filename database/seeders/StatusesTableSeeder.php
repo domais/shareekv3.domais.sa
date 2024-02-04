@@ -70,7 +70,7 @@ class StatusesTableSeeder extends Seeder
 
             [
                 'id'           => 10,
-                'name'         => 'معاد لتعديل',
+                'name'         => 'معاد للتعديل',
                 'description'  => 'تم إرسالها للشريك للتعديل'
             ],
 
@@ -103,7 +103,7 @@ class StatusesTableSeeder extends Seeder
 
             [
                 'id'           => 15,
-                'name'         => 'معاد لتعديل',
+                'name'         => 'معاد للتعديل',
                 'description'  => 'تم إرسالها للشريك للتعديل'
             ],
 
