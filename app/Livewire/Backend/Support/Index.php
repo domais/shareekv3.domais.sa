@@ -5,6 +5,7 @@ namespace App\Livewire\Backend\Support;
 use App\Models\File;
 use App\Models\Permit;
 use App\Models\Support;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -111,7 +112,8 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
 
-        AddToHistory($permit->id,$permit->status_id,null,$reason);
+        $permit->support->update(['reasons' => DB::raw('json_array_append(reasons, "$", "'.$reason.'")')]);
+       // AddToHistory($permit->id,$permit->status_id,null,$reason);
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
@@ -125,7 +127,9 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 15]);
 
-        AddToHistory($permit->id,$permit->status_id,null,$reason);
+       // AddToHistory($permit->id,$permit->status_id,null,$reason);
+       $permit->support->update(['reasons' => DB::raw('json_array_append(reasons, "$", "'.$reason.'")')]);
+
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));

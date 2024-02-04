@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('permit_id');
             $table->unsignedBigInteger('status_id');
             $table->string('order_number')->unique();
+            $table->json('reasons')->nullable();
 
 
             $table->foreign('permit_id')->references('id')->on('permits')->onDelete('cascade');
