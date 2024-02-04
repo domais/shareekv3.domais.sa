@@ -218,7 +218,7 @@
 			input: 'textarea',
 			inputPlaceholder: 'أدخل سبب الرفض هنا',
 			showCancelButton: true,
-			confirmButtonText: 'رفض الطلب',
+			confirmButtonText: 'إعادة للتعديل',
 			cancelButtonText: 'إلغاء',
 			confirmButtonColor: '#FF0000',
 			showDenyButton: true, // Add this line
