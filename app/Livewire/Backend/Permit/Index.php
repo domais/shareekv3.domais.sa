@@ -209,11 +209,7 @@ class Index extends Component
        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
     
-    #[On('Definitely_Decline_Support')] 
-    public function Definitely_Decline_Support($id,$model,$reason)
-    {
-        dd($id,$model,$reason);
-    }
+
 
     #[On('RejectPermit_Dispatch')] 
     public function RejectPermit($id,$model,$reason)
