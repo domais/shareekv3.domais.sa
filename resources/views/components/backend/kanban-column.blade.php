@@ -79,9 +79,16 @@
                     @foreach($buttons as $button)
 
                         @if($button['type'] == 'sweetalert')
-                            <a class="{{ $button['class'] }}" onclick="{{ $button['onclick'] }}({{ $item->id }}, '{{ get_class($item) }}')">
-                                {!! $button['title'] !!}
-                            </a>
+                            @if (auth()->user()->hasRole('Adminstrator') && havePermission(auth()->user(),'permit-update'))
+                                <a class="{{ $button['class'] }}" onclick="{{ $button['onclick'] }}({{ $item->id }}, '{{ get_class($item) }}')">
+                                    {!! $button['title'] !!}
+                                </a>
+                            @endif
+                            @if (auth()->user()->hasRole(['SuperAdmin']))
+                                <a class="{{ $button['class'] }}" onclick="{{ $button['onclick'] }}({{ $item->id }}, '{{ get_class($item) }}')">
+                                    {!! $button['title'] !!}
+                                </a>
+                            @endif
                         @endif
 
                         @if($button['type'] == 'link')
