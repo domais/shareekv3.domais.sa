@@ -140,7 +140,7 @@ class Index extends Component
 
         $history = new History();
         $history->permit_id = $id;
-        $history->status_id = 14;
+        $history->status_id = 15;
         $history->user_id = auth()->id();
         $history->descreption = $reason;
         $history->support_id = $permit->support->id;
