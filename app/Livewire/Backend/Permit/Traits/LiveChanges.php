@@ -253,9 +253,6 @@ trait LiveChanges
                     }
                     $file->save();
                 }
-
-
-
             }
             else{
                 // create permit
