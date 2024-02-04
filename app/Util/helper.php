@@ -83,8 +83,12 @@ function ArToEn($input) {
 						$events[$status] = Permit::where('status_id', $status)
 						->whereNull('admin_id')->get();
 					} else {
-						$events[$status] = Permit::where('status_id', $status)
-						->where('admin_id',$user->id)->get();
+						if ($user->hasRole('SuperAdmin')) {
+							$events[$status] = Permit::where('status_id', $status)->get();
+						} else {
+							$events[$status] = Permit::where('status_id', $status)
+							->where('admin_id', $user->id)->get();
+						}
 					}
 				}
 			}
