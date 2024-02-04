@@ -77,7 +77,7 @@ class Inputs extends Component
 
         $this->is_show_page = Route::currentRouteName() == 'permit.show';
         if ($this->is_show_page && $this->permit) {
-            $this->histories = $this->permit->history()->orderBy('created_at', 'asc')->get();
+            $this->histories = $this->permit->history()->whereNull('support_id')->orderBy('created_at', 'asc')->get();            
         }
         // Rahmani: remove isset() && fix this
         if (is_null($this->permit) && isset(auth()->user()->owner)) {

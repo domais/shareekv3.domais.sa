@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Support;
 
 use App\Models\File;
+use App\Models\History;
 use App\Models\Permit;
 use App\Models\Support;
 use Illuminate\Support\Facades\DB;
@@ -112,11 +113,16 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
 
-        $reasons = json_decode($permit->support->reasons, true);
-        $reasons[] = $reason;
-        $permit->support->reasons = json_encode($reasons);
-        $permit->support->save();
-               // AddToHistory($permit->id,$permit->status_id,null,$reason);
+        $history = new History();
+		$history->permit_id = $id;
+		$history->status_id = 14;
+		$history->user_id = auth()->id();
+		$history->descreption = $reason;
+        $history->support_id = $permit->support->id;
+		$history->save();
+
+
+                
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
@@ -132,10 +138,13 @@ class Index extends Component
 
        // AddToHistory($permit->id,$permit->status_id,null,$reason);
 
-        $reasons = json_decode($permit->support->reasons, true);
-        $reasons[] = $reason;
-        $permit->support->reasons = json_encode($reasons);
-        $permit->support->save();
+        $history = new History();
+        $history->permit_id = $id;
+        $history->status_id = 14;
+        $history->user_id = auth()->id();
+        $history->descreption = $reason;
+        $history->support_id = $permit->support->id;
+        $history->save();
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
