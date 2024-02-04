@@ -93,6 +93,11 @@
 	@endif
 
 
+	@if (!$this->is_show_page && $this->permit && $this->permit->status_id == 10)
+		<div class="alert alert-warning" role="alert">
+			{{$this->permit->history->last()->descreption}}				
+		</div>
+	@endif
 
 
 
