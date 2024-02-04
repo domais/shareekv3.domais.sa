@@ -12,21 +12,22 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class SupportTable extends DataTableComponent
 {
-    public function builder(): Builder
-    {
-        if (auth()->user()->hasRole('SuperAdmin')){
-            return Permit::query()->whereHas('support');
-        }
-        if (auth()->user()->hasRole('Administrator')) {
-            return  Permit::query()->where(function ($query) {
-                $query->where('permits.admin_id', auth()->id())
-                      ->orWhereNull('permits.admin_id');
-            })->whereHas('support');
-        } elseif (auth()->user()->hasRole('User')) {
-            return Permit::query()->where('permits.user_id', auth()->id())->whereHas('support');
-        }
-        return Permit::query()->whereHas('support');
+
+public function builder(): Builder
+{
+    if (auth()->user()->hasRole('SuperAdmin')){
+        return Permit::withTrashed()->whereHas('support');
     }
+    if (auth()->user()->hasRole('Administrator')) {
+        return  Permit::withTrashed()->where(function ($query) {
+            $query->where('permits.admin_id', auth()->id())
+                  ->orWhereNull('permits.admin_id');
+        })->whereHas('support');
+    } elseif (auth()->user()->hasRole('User')) {
+        return Permit::withTrashed()->where('permits.user_id', auth()->id())->whereHas('support');
+    }
+    return Permit::withTrashed()->whereHas('support');
+}
     public function filters(): array
     {
         return [
@@ -39,6 +40,7 @@ class SupportTable extends DataTableComponent
                 '12' => 'تحت الدراسة',
                 '13' => 'تمت الموافقة',
                 '14' => 'مؤرشف',
+                '16' => 'محذوف',
             ])
             ->filter(function(Builder $builder, string $value) {
                 $builder->whereHas('support', function (Builder $query) use ($value) {

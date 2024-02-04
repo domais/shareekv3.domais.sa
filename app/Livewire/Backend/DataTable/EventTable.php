@@ -16,20 +16,20 @@ class EventTable extends DataTableComponent
     public function builder(): Builder
     {
         if (auth()->user()->hasRole('SuperAdmin')){
-            return Event::query();
-
+            return Event::withTrashed();
+    
         }
-
+    
         if (auth()->user()->hasRole('Administrator')) {
-            return Event::query()->where(function ($query) {
+            return Event::withTrashed()->where(function ($query) {
                 $query->where('admin_id', auth()->id())
                       ->orWhereNull('admin_id');
             });
         } elseif (auth()->user()->hasRole('User')) {
-            return Event::query()->where('user_id', auth()->id());
+            return Event::withTrashed()->where('user_id', auth()->id());
         }
     
-        return Event::query();
+        return Event::withTrashed();
     }
 
 
@@ -46,6 +46,7 @@ class EventTable extends DataTableComponent
                 '7' => 'بانتظار التوثيق',
                 '8' => 'مراجعة المشرف',
                 '9' => 'مؤرشف',
+                '16' => 'محذوف',
             ])
             ->filter(function(Builder $builder, string $value) {
                 $builder->where('status_id',$value);
