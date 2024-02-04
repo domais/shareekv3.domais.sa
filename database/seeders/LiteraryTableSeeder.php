@@ -132,11 +132,6 @@ class LiteraryTableSeeder extends Seeder
                 'id'     => 25,
                 'name'   => 'مانهوا',
                 'parent_id' => 6
-            ],
-            [
-                'id'     => 26,
-                'name'   => 'NA',
-                'status' => 0,
             ]
         ];
 
