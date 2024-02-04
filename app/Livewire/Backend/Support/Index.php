@@ -9,6 +9,7 @@ use App\Models\Permit;
 use App\Models\Status;
 use App\Models\Support;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
@@ -123,32 +124,29 @@ class Index extends Component
     public function Definitely_Decline_Support($id,$model,$reason)
     {
         $permit = Permit::findorfail($id);
-        $permit->support->update(['status_id' => 14]);
+        $permit->support->update(['status_id' => 16]);
 
         $permit->user->owner->points += $permit->points;
         $permit->user->owner->save(); 
 
         $history = new History();
 		$history->permit_id = $id;
-		$history->status_id = 14;
+		$history->status_id = 16;
 		$history->user_id = auth()->id();
 		$history->descreption = $reason;
         $history->support_id = $permit->support->id;
 		$history->save();
 
-        // مهندس محمد هنا ارسل ايميل انه تم رفض نهائي للدعم
+        //  مهندس محمد هنا ارسل ايميل انه تم رفض نهائي للدعم
+        // و سبب الحذف لي موجود في $reason
+        //$data فيها كل البيانات لي تحتاجها في الايميل
 
         $data = [
             'permit' => $permit,
-            'status' => Status::findorfail(16),
+            'status' => $permit->status,
             'user' => $permit->user,
         ];
 
-        Mail::to($permit->user->email)->send(new ChangeStatus($data));
-
-
-
-                
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
