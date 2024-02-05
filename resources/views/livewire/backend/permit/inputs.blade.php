@@ -12,10 +12,10 @@
 					<a class="link-body-emphasis text-decoration-none" href="{{route('permit.index')}}">
 						{{$text_bread_crumb === "permit" ? 'التصاريح' : ($text_bread_crumb === "support" ? 'الدعم' : 'المبادرات')}}					</a>
 				</li>
-					
+
 				@if($is_show_page)
-				<li class="breadcrumb-item active" aria-current="page">عرض معلومات 
-					
+				<li class="breadcrumb-item active" aria-current="page">عرض معلومات
+
 					{{$text_bread_crumb === "permit" ? 'التصريح' : ($text_bread_crumb === "support" ? 'الدعم' : 'المبادرة')}}					</a>
 
 					 رقم {{$permit->order_number}}</li>
@@ -24,7 +24,7 @@
 				<li class="breadcrumb-item active" aria-current="page">
 					@if ($this->permit)
 					تعديل معلومات التصريح رقم {{$this->permit->order_number}}
-						
+
 					@else
 					إنشاء تصريح جديد
 					@endif
@@ -42,7 +42,7 @@
 				@endif
 				@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
 
-				<a class="btn btn-warning" 
+				<a class="btn btn-warning"
 							data-bs-toggle="modal"
 							data-bs-target="#assign-Admin-Modal">
 							إسناد لموظف آخر
@@ -66,16 +66,16 @@
 						</button>
 						<button class="btn btn-brand" wire:click="change_permit(10)"
 							wire:loading.attr="disabled">
-							رفض	
+							رفض
 						</button>
 				   @endif
 				   @if ($this->permit->status_id == 4)
-						<a class="btn btn-warning" 
+						<a class="btn btn-warning"
 							data-bs-toggle="modal"
 							data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
 						<button class="btn btn-secondary" wire:click="change_permit(5)"
 						wire:loading.attr="disabled">
-							تشغيل بدون تصريح  
+							تشغيل بدون تصريح
 						</button>
 				   @endif
 				@endif
@@ -97,9 +97,9 @@
 		<div class="alert alert-warning" role="alert">
 			<strong>
 				 الملاحظات الإدارية
-			</strong> 
+			</strong>
 			<br>
-			{{$this->permit->history->last()->descreption}}				
+			{{$this->permit->history->last()->descreption}}
 		</div>
 	@endif
 
@@ -135,7 +135,7 @@
 							<li class="nav-item" role="presentation">
 								<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
 							</li>
-						@endif	
+						@endif
 					@else
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="speakers-tab" data-bs-toggle="tab" data-bs-target="#speakers-tab-pane" type="button" role="tab" aria-controls="speakers-tab-pane" aria-selected="false">المتحدثون</button>
@@ -146,7 +146,7 @@
 							<li class="nav-item" role="presentation">
 								<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
 							</li>
-							@endif	
+							@endif
 					@else
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="partnership-tab" data-bs-toggle="tab" data-bs-target="#partnership-tab-pane" type="button" role="tab" aria-controls="partnership-tab-pane" aria-selected="false">الشراكات</button>
@@ -177,17 +177,17 @@
 					<x-backend.permit.inputs.step-three />
 				</div><!-- نهاية محتوى التاب -->
 
-				
+
 				<div class="tab-pane fade" id="partnership-tab-pane" role="tabpanel" aria-labelledby="partnership-tab" tabindex="0">
 					<x-backend.permit.inputs.step-four />
 				</div><!-- نهاية محتوى التاب -->
 
-				@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 6)
+				@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 5)
 
 				<div class="tab-pane fade" id="guest-tab-pane" role="tabpanel" aria-labelledby="guest-tab" tabindex="0">
 					<x-backend.permit.inputs.step-five />
 				</div><!-- نهاية محتوى التاب -->
-					
+
 				@endif
 
 			</div>
@@ -198,8 +198,8 @@
 			<ul class="list-group">
 				<!-- : م.جمال ، اعرض الهيستوري بشكل عكسي بحيث القديم يكون تحت والجديد يكون فوق -->
 				@if ($this->histories)
-					
-				
+
+
 				@foreach ($this->histories->reverse() as $item)
 					<li>
 						<div>
@@ -279,7 +279,7 @@
 								</div>
 							</div>
 						</div>
-			
+
 		@endif
 
 
