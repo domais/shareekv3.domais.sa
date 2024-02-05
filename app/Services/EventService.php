@@ -55,7 +55,7 @@ class EventService implements EventServiceInterface
             ->when(isset($data['type']), function ($query) use ($data) {
                 return $query->where('literary_id', $data['type']);
             })
-            ->orderBy('start_date', 'desc')
+            ->orderBy('start_date', 'asc')
             ->paginate($data['per_page'] ?? 10, ['*'], 'page', $data['page'] ?? 1);
 
         $events = new EventCollection($events);

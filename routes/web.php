@@ -19,7 +19,7 @@ use App\Models\Survey;
 */
 
 Route::get('/', function () {
-    return redirect('/i');
+    return redirect('https://app.myeventksa.com');
 });
 
 // Survey Guest, Speaker /survey/guest/{token} /survey/speaker/{token}
