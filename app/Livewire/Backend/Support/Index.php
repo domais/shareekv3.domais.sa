@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Support;
 
 use App\Mail\ChangeStatus;
+use App\Mail\PermitSupportRejected;
 use App\Models\File;
 use App\Models\History;
 use App\Models\Permit;
@@ -145,7 +146,10 @@ class Index extends Component
             'permit' => $permit,
             'status' => $permit->status,
             'user' => $permit->user,
+            'reject_reason' => $reason
         ];
+
+        Mail::to($permit->user->email)->send(new PermitSupportRejected($data));
 
 
 
