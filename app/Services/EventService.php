@@ -36,14 +36,14 @@ class EventService implements EventServiceInterface
         // Literary_id
         $data['type'] = $data['type'] ?? null;
 
-        // $events = Event::when(isset($lat) && isset($lng), function ($query) use ($lat, $lng, $radius) {
-        //     return $query->selectRaw('*, ( 6371 * acos( cos( radians(?) ) *
-        //     cos( radians( lat ) ) * cos( radians( lng ) - radians(?) ) + sin( radians(?) ) *
-        //     sin( radians( lat ) ) ) ) AS distance', [$lat, $lng, $lat])
-        //         ->having('distance', '<', $radius)
-        //         ->orderBy('distance');
-        // })
-            $events = Event::when(!isset($data['date_range']), function ($query) {
+        $events = Event::when(isset($lat) && isset($lng), function ($query) use ($lat, $lng, $radius) {
+            return $query->selectRaw('*, ( 6371 * acos( cos( radians(?) ) *
+            cos( radians( lat ) ) * cos( radians( lng ) - radians(?) ) + sin( radians(?) ) *
+            sin( radians( lat ) ) ) ) AS distance', [$lat, $lng, $lat])
+                ->having('distance', '<', $radius)
+                ->orderBy('distance');
+        })
+            ->when(!isset($data['date_range']), function ($query) {
                 return $query->where('end_date', '>', Carbon::now());
             })
             ->when(isset($data['date_range']), function ($query) use ($data) {
