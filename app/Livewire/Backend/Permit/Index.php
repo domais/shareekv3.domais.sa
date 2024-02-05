@@ -36,15 +36,15 @@ class Index extends Component
 
         $permits = getEvents();
 
-        $this->drafts = $permits[1] ?? [];  
+        $this->drafts = $permits[1] ?? [];
 
         $this->new_orders = $permits[2];
         $this->rejected = $permits[10];
         $this->pending = $permits[3];
-        $this->approved = $permits[4]; 
+        $this->approved = $permits[4];
 
         $user = auth()->user();
-        
+
         if ($user->hasRole('User')) {
             $this->pending = $this->new_orders->concat($this->pending);
             $this->role = 2;
@@ -55,7 +55,7 @@ class Index extends Component
     {
         $this->selected_id = $id;
     }
-    
+
 
     public function approvePermit()
     {
@@ -74,17 +74,17 @@ class Index extends Component
                 // Handle validation failure
                 throw new \Exception($validator->errors()->first());
             }
-    
+
             // Find the permit
             $permit = Permit::find($this->selected_id);
-    
+
             // Update the permit number
             $permit->permit_number = $this->permitNumber;
             $permit->status_id = 5;
             $permit->save();
-    
+
             // Store the file
-            $path = $this->permitFile->store('files/'.$permit->order_number.'/permit_file','public');
+            $path = $this->permitFile->store('files/' . $permit->order_number . '/permit_file', 'public');
             // Create a new file record
             $approval_file = new File();
             $approval_file->name = $permit->order_number;
@@ -115,7 +115,7 @@ class Index extends Component
             $partnership->save();
         }
 
-        AddToHistory($permit->id,$permit->status_id);
+        AddToHistory($permit->id, $permit->status_id);
 
         $data = [
             'permit' => $permit,
@@ -126,21 +126,34 @@ class Index extends Component
         Mail::to([$permit->user->email])
             ->cc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
-        
+
         $this->redirect(route('event.index'));
     }
 
-    #[On('Act_ApproveWithoutPirmet')] 
+    #[On('Act_ApproveWithoutPirmet')]
     public function Act_ApproveWithoutPirmet($id, $model, $reason)
     {
         $permit = Permit::find($id);
         $permit->status_id = 5;
         $permit->save();
 
-        Event::create($permit->toArray());
+        $event = Event::create($permit->toArray());
 
-        
-        AddToHistory($permit->id,$permit->status_id,null,$reason);
+        $speakers = $permit->speakers;
+        $partnerships = $permit->partnerships;
+
+        foreach ($speakers as $speaker) {
+            $speaker->event_id = $event->id;
+            $speaker->save();
+        }
+
+        foreach ($partnerships as $partnership) {
+            $partnership->event_id = $event->id;
+            $partnership->save();
+        }
+
+
+        AddToHistory($permit->id, $permit->status_id, null, $reason);
 
         $data = [
             'permit' => $permit,
@@ -155,14 +168,13 @@ class Index extends Component
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
 
-    #[On('DeletePermit_Dispatch')] 
-    public function deletePermit($place, $id,$model)
+    #[On('DeletePermit_Dispatch')]
+    public function deletePermit($place, $id, $model)
     {
         if ($model == 'AppModelsPermit') {
-            $permit = Permit::findOrfail($id);        
-        }
-        else {
-            $permit = Draft::findOrfail($id);        
+            $permit = Permit::findOrfail($id);
+        } else {
+            $permit = Draft::findOrfail($id);
         }
         $statusId = $permit->status_id;
         $permit->delete();
@@ -171,29 +183,27 @@ class Index extends Component
             $this->drafts = collect($this->drafts)->filter(function ($value, $key) use ($id) {
                 return $value->id != $id;
             });
-        }  
-        else {
+        } else {
             $this->rejected = collect($this->rejected)->filter(function ($value, $key) use ($id) {
                 return $value->id != $id;
-            });   
-            AddToHistory($permit->id,$statusId);
-    
-         }
-         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+            });
+            AddToHistory($permit->id, $statusId);
+        }
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
 
-    #[On('AssignPermit_Dispatch')] 
-    public function AssignPermit($place,$redirect ,$id,$model)
+    #[On('AssignPermit_Dispatch')]
+    public function AssignPermit($place, $redirect, $id, $model)
     {
-       $permit = Permit::findorfail($id);
-       $permit->status_id = 3;
-       $permit->admin_id = auth()->id();
-    //    dd($permit->support);
-       $permit->save();
+        $permit = Permit::findorfail($id);
+        $permit->status_id = 3;
+        $permit->admin_id = auth()->id();
+        //    dd($permit->support);
+        $permit->save();
 
-       AddToHistory($permit->id,$permit->status_id);
+        AddToHistory($permit->id, $permit->status_id);
 
-       $data = [
+        $data = [
             'permit' => $permit,
             'status' => $permit->status,
             'user' => $permit->user,
@@ -203,18 +213,18 @@ class Index extends Component
             ->cc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
 
-       //ChangePermitStatus($permit);
+        //ChangePermitStatus($permit);
 
 
-       $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
-    
 
 
-    #[On('RejectPermit_Dispatch')] 
-    public function RejectPermit($id,$model,$reason)
+
+    #[On('RejectPermit_Dispatch')]
+    public function RejectPermit($id, $model, $reason)
     {
-        
+
         $permit = Permit::findorfail($id);
         $permit->status_id = 10;
         $permit->save();
@@ -228,20 +238,20 @@ class Index extends Component
         Mail::to([$permit->user->email])
             ->cc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
-        AddToHistory($permit->id,$permit->status_id,null,$reason);
+        AddToHistory($permit->id, $permit->status_id, null, $reason);
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
-    
-    #[On('IntialApproved_Dispatch')] 
-    public function IntialApproved($id,$model)
+
+    #[On('IntialApproved_Dispatch')]
+    public function IntialApproved($id, $model)
     {
         $permit = Permit::findorfail($id);
         $permit->status_id = 4;
         $permit->save();
 
-        AddToHistory($permit->id,$permit->status_id);
+        AddToHistory($permit->id, $permit->status_id);
 
         $data = [
             'permit' => $permit,
@@ -249,14 +259,14 @@ class Index extends Component
             'user' => $permit->user,
         ];
 
-   Mail::to([$permit->user->email])
-    ->cc('domais-ChangeStatus@srv1.mail-tester.com')
-    ->send(new ChangeStatus($data));
+        Mail::to([$permit->user->email])
+            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->send(new ChangeStatus($data));
 
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
-    
+
 
     public function render()
     {
