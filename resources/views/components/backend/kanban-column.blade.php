@@ -79,11 +79,9 @@
                     @foreach($buttons as $button)
 
                         @if($button['type'] == 'sweetalert')
-                            @if (auth()->user()->hasRole(['SuperAdmin']) || (havePermission(auth()->user(),'permit-update')))
                                 <a class="{{ $button['class'] }}" onclick="{{ $button['onclick'] }}({{ $item->id }}, '{{ get_class($item) }}')">
                                     {!! $button['title'] !!}
                                 </a>
-                            @endif
                         @endif
 
                         @if($button['type'] == 'link')
