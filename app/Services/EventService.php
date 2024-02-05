@@ -27,11 +27,11 @@ class EventService implements EventServiceInterface
         $radius = $data['radius'] ?? 100; // km
 
         // check if lat and lng are in Saudi Arabia
-        if ($lat < 15 || $lat > 35 || $lng < 34 || $lng > 56) {
-            // Riyadh
-            $lat = 24.7136;
-            $lng = 46.6753;
-        }
+        // if ($lat < 15 || $lat > 35 || $lng < 34 || $lng > 56) {
+        //     // Riyadh
+        //     $lat = 24.7136;
+        //     $lng = 46.6753;
+        // }
 
         // Literary_id
         $data['type'] = $data['type'] ?? null;
