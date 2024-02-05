@@ -182,7 +182,7 @@
 					<x-backend.permit.inputs.step-four />
 				</div><!-- نهاية محتوى التاب -->
 
-				@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 5)
+				@if ($this->permit && $this->permit->event)
 
 				<div class="tab-pane fade" id="guest-tab-pane" role="tabpanel" aria-labelledby="guest-tab" tabindex="0">
 					<x-backend.permit.inputs.step-five />
