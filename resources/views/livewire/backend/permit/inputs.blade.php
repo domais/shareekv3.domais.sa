@@ -153,7 +153,7 @@
 						</li>
 					@endif
 
-					@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 6)
+					@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 5)
 
 						<li class="nav-item" role="presentation">
 							<button class="nav-link" id="guest-tab" data-bs-toggle="tab" data-bs-target="#guest-tab-pane" type="button" role="tab" aria-controls="guest-tab-pane" aria-selected="false">قائمة الحضور</button>
@@ -182,11 +182,13 @@
 					<x-backend.permit.inputs.step-four />
 				</div><!-- نهاية محتوى التاب -->
 
-				{{-- @if ($this->permit && $this->permit->event) --}}
+				@if ($this->permit && $this->permit->event && $this->permit->event->status_id >= 5)
+
 				<div class="tab-pane fade" id="guest-tab-pane" role="tabpanel" aria-labelledby="guest-tab" tabindex="0">
 					<x-backend.permit.inputs.step-five />
 				</div><!-- نهاية محتوى التاب -->
-				{{-- @endif --}}
+
+				@endif
 
 			</div>
 		</div>
