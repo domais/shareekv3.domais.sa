@@ -12,6 +12,7 @@ class Show extends Component
     public function mount()
     {
         $this->survey =  $this->survey->load('surveyable');
+
     }
 
 
