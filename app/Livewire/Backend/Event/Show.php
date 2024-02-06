@@ -29,6 +29,8 @@ class Show extends Component
     public $selectedSpeakers = [];
     public $text_bread_crumb = 'event';
     public $newAdmin = "";
+    public $edit_support = false;
+
 
 
 

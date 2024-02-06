@@ -50,7 +50,7 @@
 			edit="1"
 			:data="$rejectd"
 			route="support"
-			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('PermitUserReturned') : []  "
+			:buttons="auth()->user()->hasRole('User') ? KanbanButtons('SupportUserReturned') : []  "
 			type="rejected"
 		/>
 

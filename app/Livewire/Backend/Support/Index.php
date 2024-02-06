@@ -138,9 +138,6 @@ class Index extends Component
         $history->support_id = $permit->support->id;
 		$history->save();
 
-        //  مهندس محمد هنا ارسل ايميل انه تم رفض نهائي للدعم
-        // و سبب الحذف لي موجود في $reason
-        //$data فيها كل البيانات لي تحتاجها في الايميل
 
         $data = [
             'permit' => $permit,

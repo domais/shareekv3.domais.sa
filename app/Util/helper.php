@@ -180,6 +180,13 @@ function ArToEn($input) {
 				];
 			break;
 
+			case 'SupportUserReturned':
+				return[
+					['type' => 'link' , 'title' => 'تعديل', 'href' => 'support.edit','class' => 'btn btn-secondary'],
+					['type' => 'sweetalert' , 'title' => 'حذف', 'onclick' => 'Act_UserDeletePermit', 'class' => 'btn btn-outline-danger']
+				];
+			break;
+
 
 
 

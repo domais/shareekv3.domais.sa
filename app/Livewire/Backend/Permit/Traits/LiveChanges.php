@@ -204,20 +204,28 @@ trait LiveChanges
 
                 $check_event_exist = Event::where('order_number', $permit->order_number)->exists();
 
-             
+                //dd("hello",$permitData);
                 // update permit
                 $order_number = $permit->order_number;
                 $permitData['order_number'] = $order_number;
                 if (!$check_event_exist) {
-                    $permitData['status_id'] = 3;
+
+                    $permitData['status_id'] = $permit->status_id == 10 ? 3 : $permit->status_id;
+
                     $permit->update($permitData);
                 }
+                
+
 
                 $permit->speakers()->delete();
                 $permit->partnerships()->delete();
 
+                $permit->points = $counter_speakers;
+                $permit->save();
+
                 $permit->user->owner->points -= $permit->points;
                 $permit->user->owner->save();
+
 
 
                 AddToHistory($permit->id,$permitData['status_id'],true,'معاد من قبل الشريك');

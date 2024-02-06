@@ -7,9 +7,10 @@ use App\Livewire\Forms\PartnershipForm;
 use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
 use App\Models\Permit;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
-class Show extends Component
+class Inputs extends Component
 {
     use LiveChanges;
 
@@ -28,20 +29,17 @@ class Show extends Component
     public $histories =  [];
     public $selectedSpeakers = [];
     public $text_bread_crumb = 'support';
-    public $edit_support = false;
+    public $edit_support = true;
 
-
-
-    //files
 
     public function mount()
-    {   
+    {
         $this->permit = Permit::where('order_number', $this->order_number)->first();
 
         if ($this->order_number && $this->permit == null) {
             abort(403,'التصريح غير موجود'); 
-        }
-
+        } 
+        
         if ($this->permit) {
             $this->form->setForm($this->permit);
             $this->updatedForm();
@@ -58,19 +56,37 @@ class Show extends Component
             }
         }   
 
-        $this->is_show_page = true;
-
+        $this->is_show_page = Route::currentRouteName() == 'support.show';
         if ($this->is_show_page && $this->permit) {
-            $this->histories = $this->permit->history()->whereNotNull('support_id')->orderBy('created_at', 'asc')->get();            
+            $this->histories = $this->permit->history()->whereNull('support_id')->orderBy('created_at', 'asc')->get();            
         }
-        if (is_null($this->permit)) {
-            $this->form->lat = auth()->user()->owner->lat;
+        // Rahmani: remove isset() && fix this
+        if (is_null($this->permit) && isset(auth()->user()->owner)) {
             $this->form->lng = auth()->user()->owner->lng;
+
+          //  dd($this->form->lat,$this->form->lng);
         }
     }   
+
+    public function store()
+    {
+
+        $permitData = $this->form->toArray();
+        try {
+            unset($permitData['status_id']);
+            $permitData['user_id'] = auth()->id();
+            $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit);
+        } catch (\Exception $e) {
+            $this->errors = [$e->getMessage()];
+            return;
+        }    
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
+    }
     
     public function render()
     {
-        return view('livewire.backend.permit.inputs');
+        return view('livewire.backend.support.inputs');
     }
 }

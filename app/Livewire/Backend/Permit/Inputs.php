@@ -44,6 +44,8 @@ class Inputs extends Component
     public $permitNumber;
     public $permitFile;
     public $newAdmin = "";
+    public $edit_support = false;
+
 
     public function changeAdmin()
     {

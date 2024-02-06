@@ -3,7 +3,9 @@
 	type: @entangle('form.category_id').live,
 	literary_id: @entangle('form.literary_id').live,
 	Litrary_childes: @entangle('Litrary_childes').live,
-}">
+}"
+
+>
 
 	<div class="col-7">
 		@if (auth()->user()->hasRole('SuperAdmin'))

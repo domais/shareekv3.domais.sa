@@ -72,6 +72,8 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/', Index::class)->name('index');
 
         Route::get('/show/{order_number}', Show::class)->name('show');
+
+        Route::get('/edit/{order_number}', Inputs::class)->name('edit');
     });
 
     Route::namespace('Announcement')->prefix('announcement')->middleware('checkpassword')->as('announcement.')->group(function () {

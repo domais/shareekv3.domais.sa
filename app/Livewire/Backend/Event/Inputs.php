@@ -39,6 +39,8 @@ class Inputs extends Component
     public $histories =  [];
     public $selectedSpeakers = [];
     public $text_bread_crumb = 'permit';
+    public $edit_support = false;
+
 
     //files
 
