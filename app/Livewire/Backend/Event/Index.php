@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Event;
 
+use App\Jobs\SendReminderEmail;
 use App\Models\Event;
 use App\Models\File;
 use App\Models\History;
@@ -87,20 +88,25 @@ class Index extends Component
     public function sendNotfictaion($id)
     {
         $user = Auth::user();
-        $event = Event::where('status_id', 7);
+        $events = Event::where('status_id', 7);
     
         if ($user->hasRole('Adminstrator')) {
-            $event = $event->where('admin_id', $user->id);
+            $events = $events->where('admin_id', $user->id);
         }
     
-        $event = $event->get();
+        $events = $events->get();
     
-        $userIds = $event->pluck('user_id')->toArray();
-        $emails = User::whereIn('id', $userIds)->pluck('email')->toArray();
+        $data = [];
+        foreach ($events as $event) {
+            $userIds = $event->pluck('user_id')->toArray();
+            $emails = User::whereIn('id', $userIds)->pluck('email')->toArray();
+    
+            $data[$event->id] = $emails;
+        }
 
-        dd($emails);
+        dd($data);
     
-        // Now you have the emails of the users
+       // dispatch(new SendReminderEmail($data));
     }
 
     #[On('downloadImages')] 
