@@ -103,10 +103,8 @@ class Index extends Component
     
             $data[$event->order_number] = $emails;
         }
-
-        dd($data);
     
-       // dispatch(new SendReminderEmail($data));
+       dispatch(new SendReminderEmail($data));
     }
 
     #[On('downloadImages')] 

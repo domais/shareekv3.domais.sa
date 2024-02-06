@@ -16,12 +16,16 @@ class ReminderToCloseEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+
+    public $order_number;
+    public $Uemail;
+    public function __construct($email,$order_number)
     {
+        $this->Uemail = $email;
+        $this->order_number = $order_number;
         $this->cc('domais-ChangeStatus@sr32.mail-tester.com');
+        $this->cc('rahmanidja8@gmail.com');
+
     }
 
     /**
@@ -32,7 +36,7 @@ class ReminderToCloseEmail extends Mailable
 	{
 		return new Envelope(
 			from: new Address('notifications@domais.sa', 'الشريك الأدبي'),
-			subject: 'بخصوص   توثيق مبادرة منتهية ',
+			subject: 'بخصوص طلب تصريح رقم '.$this->order_number,
 			to: 'domais-ChangeStatus@srv1.mail-tester.com'
 		);
 	}
@@ -42,19 +46,23 @@ class ReminderToCloseEmail extends Mailable
      * Get the message content definition.
      */
     public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
+	{
+		return new Content(
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
+			view: 'mail.reminder-event',
+			text: 'mail.reminder-event',
+		);
+	}
+
+	public function headers()
+	{
+		$email = $this->Uemail;
+		return new Headers(
+			messageId: Str::random(15)."@myeventksa.com",
+			text:[
+				'List-Unsubscribe' => '<mailto:unsubscribe@myeventksa.com?subject=unsubscribe&body=Please unsubscribe my email '.$email.' from your list or system.>'
+			]
+
+		);
+	}
 }

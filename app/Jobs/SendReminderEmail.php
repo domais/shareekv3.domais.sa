@@ -15,11 +15,11 @@ class SendReminderEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $emails;
+    protected $data;
 
-    public function __construct(array $emails)
+    public function __construct(array $data)
     {
-        $this->emails = $emails;
+        $this->data = $data;
     }
 
     /**
@@ -27,9 +27,9 @@ class SendReminderEmail implements ShouldQueue
      */
     public function handle(): void
     {
-        foreach ($this->emails as $email) {
+        foreach ($this->data as $event_id => $email) {
             // Replace with your own logic to send an email
-            Mail::to($email)->send(new ReminderToCloseEmail());
+            Mail::to($email)->send(new ReminderToCloseEmail($email,$event_id));
         }
     }
 }
