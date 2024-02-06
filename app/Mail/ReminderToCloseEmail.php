@@ -23,9 +23,7 @@ class ReminderToCloseEmail extends Mailable
     {
         $this->Uemail = $email;
         $this->order_number = $order_number;
-        $this->cc('domais-ChangeStatus@srv1.mail-tester.com');
-        $this->cc('rahmanidja8@gmail.com');
-
+        $this->cc('domais-SurveyMail@srv1.mail-tester.com');
     }
 
     /**
