@@ -211,10 +211,6 @@ class Index extends Component
         Mail::to([$permit->user->email])
             ->cc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
-
-        //ChangePermitStatus($permit);
-
-
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
 

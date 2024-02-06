@@ -55,16 +55,16 @@
 				@endif
 				@if ($this->is_show_page && $this->permit && $this->permit->status_id < 5 && (auth()->user()->hasRole(['SuperAdmin']) || (havePermission(auth()->user(),'permit-update'))))
 				   @if ($this->permit->status_id == 2)
-						<button class="btn btn-secondary" wire:click="change_permit(3)"
+						<button class="btn btn-secondary" onclick="Act_AdminStartStudy({{$this->permit->id}},'Permit')"
 							wire:loading.attr="disabled">إبدأ الدراسة
 						</button>
 				   @endif
 				   @if ($this->permit->status_id == 3)
-						<button class="btn btn-secondary" onclick="IntialApproved($this->permit,'Permit')"
+						<button class="btn btn-secondary" onclick="IntialApproved({{$this->permit->id}},'Permit')"
 							wire:loading.attr="disabled">
 							موافقة أولية
 						</button>
-						<button class="btn btn-brand" wire:click="change_permit(10)"
+						<button class="btn btn-brand" onclick="Act_AdminRejectPermit({{$this->permit->id}},'Permit')"
 							wire:loading.attr="disabled">
 							رفض
 						</button>
@@ -73,7 +73,7 @@
 						<a class="btn btn-warning"
 							data-bs-toggle="modal"
 							data-bs-target="#Permit-Admin-Final-Approval-Modal">تشغيل</a>
-						<button class="btn btn-secondary" wire:click="change_permit(5)"
+						<button class="btn btn-secondary" onclick="Act_ApproveWithoutPirmet({{$this->permit->id}},'Permit')"
 						wire:loading.attr="disabled">
 							تشغيل بدون تصريح
 						</button>

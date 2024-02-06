@@ -250,6 +250,112 @@ class Inputs extends Component
 
     }
 
+    #[On('IntialApproved_Dispatch')]
+    public function IntialApproved($id, $model)
+    {
+        $permit = Permit::findorfail($id);
+        $permit->status_id = 4;
+        $permit->save();
+
+        AddToHistory($permit->id, $permit->status_id);
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])
+            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->send(new ChangeStatus($data));
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+    }
+
+    #[On('AssignPermit_Dispatch')]
+    public function AssignPermit($place = 'inside', $redirect, $id, $model)
+    {
+        $permit = Permit::findorfail($id);
+        $permit->status_id = 3;
+        $permit->admin_id = auth()->id();
+        $permit->save();
+
+        AddToHistory($permit->id, $permit->status_id, null, 'تم تحويل التصريح للموظف');
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])
+            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->send(new ChangeStatus($data));
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
+    }
+
+    #[On('RejectPermit_Dispatch')]
+    public function RejectPermit($id, $model, $reason)
+    {
+
+        $permit = Permit::findorfail($id);
+        $permit->status_id = 10;
+        $permit->save();
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])
+            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->send(new ChangeStatus($data));
+        AddToHistory($permit->id, $permit->status_id, null, $reason);
+
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
+    }
+
+    #[On('Act_ApproveWithoutPirmet')]
+    public function Act_ApproveWithoutPirmet($id, $model, $reason)
+    {
+        $permit = Permit::find($id);
+        $permit->status_id = 5;
+        $permit->save();
+
+        $event = Event::create($permit->toArray());
+
+        $speakers = $permit->speakers;
+        $partnerships = $permit->partnerships;
+
+        foreach ($speakers as $speaker) {
+            $speaker->event_id = $event->id;
+            $speaker->save();
+        }
+
+        foreach ($partnerships as $partnership) {
+            $partnership->event_id = $event->id;
+            $partnership->save();
+        }
+
+
+        AddToHistory($permit->id, $permit->status_id, null, $reason);
+
+        $data = [
+            'permit' => $permit,
+            'status' => $permit->status,
+            'user' => $permit->user,
+        ];
+
+        Mail::to([$permit->user->email])
+            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->send(new ChangeStatus($data));
+
+            return redirect(route('event.index'));
+
+    }
+
 
     public function render()
     {
