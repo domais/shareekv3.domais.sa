@@ -9,7 +9,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use PgSql\Lob;
 
 class SendReminderEmail implements ShouldQueue
 {
@@ -30,6 +32,8 @@ class SendReminderEmail implements ShouldQueue
         foreach ($this->data as $event_id => $email) {
             // Replace with your own logic to send an email
             Mail::to($email)->send(new ReminderToCloseEmail($email,$event_id));
+
+            Log::info('Sent reminder to: '.$email);
         }
     }
 }
