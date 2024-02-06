@@ -302,6 +302,8 @@ x-data="{errors: @entangle('ValidationErrors').live,
 
         var attendance = document.getElementById('Number_of_attendees').value;
 
+        console.log('Attendance:', attendance);
+
         @this.set('attendance', attendance);
 
     }
