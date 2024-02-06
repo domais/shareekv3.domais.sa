@@ -102,7 +102,7 @@ class Index extends Component
             $data[$event->order_number] = $userEmail;
         }
 
-        dd($data);
+       // dd($data);
     
        dispatch(new SendReminderEmail($data));
     }
