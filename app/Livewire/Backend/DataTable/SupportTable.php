@@ -63,10 +63,17 @@ public function builder(): Builder
                 ->sortable(),
             Column::make("رقم التصريح", "order_number")
                 ->sortable(),
-            Column::make("رقم التصريح", "support.permit.user.owner.name")
+            Column::make("اسم الشريك", "support.permit.user.owner.name")
                 ->searchable()
                 ->sortable(),
+
             Column::make("الحالة", "support.status.name")
+            ->format(function($value, $column, $row) {
+                if ($value === 'محذوف') {
+                    $value = 'مرفوض';
+                }
+                return $value;
+        })
                 ->sortable(),
                 
             Column::make("تاريخ الطلب", "created_at")
