@@ -152,6 +152,19 @@ x-data="{errors: @entangle('ValidationErrors').live,
                             </div>                        
                         </div>
                     </div>
+                    <div x-show="selected_event && selected_event.event_location != 3" x-data="{ checked: false }" >
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" @click="checked = !checked">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                هل كان هناك بث مباشر للفعالية؟ 
+                            </label>
+                        </div>
+                    
+                        <div x-show="checked">
+                            <label for="inputField" class="form-label">عدد الحضور</label>
+                            <input type="text" class="form-control" id="inputField">
+                        </div>
+                    </div>
         
 
                 
