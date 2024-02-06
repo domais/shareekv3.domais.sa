@@ -101,7 +101,7 @@ class Index extends Component
             $userIds = $event->pluck('user_id')->toArray();
             $emails = User::whereIn('id', $userIds)->pluck('email')->toArray();
     
-            $data[$event->id] = $emails;
+            $data[$event->order_number] = $emails;
         }
 
         dd($data);
