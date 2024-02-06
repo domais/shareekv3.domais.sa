@@ -72,7 +72,7 @@ class SurveyTable extends DataTableComponent
             Column::make("رقم المبادرة", "event.order_number")
             ->searchable()
             ->format(
-                fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('survey.show', $value).'">'.$value.'</a>'
+                fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('survey.show', $row->id).'">'.$value.'</a>'
                 )
             ->html()
             ->sortable(),
