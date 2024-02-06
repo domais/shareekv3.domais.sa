@@ -7,6 +7,7 @@ use App\Models\Survey;
 use App\Exports\PartnerExcel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Columns\DateColumn;
@@ -14,9 +15,18 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class SurveyTable extends DataTableComponent
 {
+
     public function builder(): Builder
     {
-        return Survey::query()->select('event_id')->distinct();
+        $query = Survey::query()->select('event_id')->distinct();
+    
+        if (auth()->user()->hasRole('User')) {
+            $query->whereHas('event', function ($q) {
+                $q->where('user_id', Auth::id());
+            });
+        }
+    
+        return $query;
     }
     public function configure(): void
     {
@@ -61,6 +71,10 @@ class SurveyTable extends DataTableComponent
 
             Column::make("رقم المبادرة", "event.order_number")
             ->searchable()
+            ->format(
+                fn($value, $row, Column $column) => '<a class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="'.route('survey.show', $value).'">'.$value.'</a>'
+                )
+            ->html()
             ->sortable(),
             
             Column::make("اسم المبادرة", "event.title"),
