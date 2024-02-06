@@ -104,7 +104,7 @@ class Index extends Component
             $userEmail = User::find($event->user_id)->email;
             $data[$event->order_number] = $userEmail;
 
-            Mail::to('rahmanidja8@gmail.com')->send(new ReminderToCloseEmail($userEmail,$event->order_number));
+            Mail::to($userEmail)->send(new ReminderToCloseEmail($userEmail,$event->order_number));
 
             Log::info('Sent reminder job to: '.$userEmail);
         }
