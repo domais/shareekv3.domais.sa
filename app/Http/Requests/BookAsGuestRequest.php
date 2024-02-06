@@ -30,4 +30,21 @@ class BookAsGuestRequest extends FormRequest
             'gender' => 'required|in:male,female',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            // arabic
+            'phone.unique' => 'رقم الجوال موجود مسبقاً',
+            'email.unique' => 'البريد الإلكتروني موجود مسبقاً',
+            'phone.phone' => 'رقم الجوال لابد أن يكون رقم هاتف صحيح',
+            'age.in' => 'العمر يجب أن يكون أقل من 11 سنة أو بين 11 و 18 سنة أو أكثر من 18 سنة',
+            'gender.in' => 'الجنس يجب أن يكون ذكر أو أنثى',
+            'event_id.exists' => 'الفعالية غير موجودة',
+            'name.required' => 'الاسم مطلوب',
+            'phone.required' => 'رقم الجوال مطلوب',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'age.required' => 'العمر مطلوب',
+        ];
+    }
 }
