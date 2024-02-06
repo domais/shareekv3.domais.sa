@@ -2,7 +2,7 @@
 <div class="column">
     <div class="head">
         <div class="fw-bold">{!! html_entity_decode($name) !!} @if($count > 0)<span>{{$count}}</span>@endif</div>
-        @if ($name == 'بإنتظارك لتوثيق الفعالية')
+        @if ($name == 'مبادرات <small>بإنتظار توثيق الشريك</small>')
         <button class="btn btn-danger" onclick="fireSwal({{auth()->id()}})">
             <i class="fas fa-bell"></i>
         </button>
