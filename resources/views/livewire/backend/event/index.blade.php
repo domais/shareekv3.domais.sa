@@ -162,7 +162,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
 
                         <div class="mt-3 row mx-0" x-show="checked">
                             <div class="col-3 px-0 d-flex align-items-center"> عدد الحضور : </div>
-                            <div class="col-8"><input type="text" class="form-control" id="inputField"></div>
+                            <div class="col-8"><input type="text" class="form-control" id="Number_of_attendees"></div>
                         </div>
                     </div>
         
