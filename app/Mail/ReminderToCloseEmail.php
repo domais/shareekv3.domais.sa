@@ -12,7 +12,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Headers;
 use Illuminate\Support\Str;
 
-class ReminderToCloseEmail extends Mailable
+class ReminderToCloseEmail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 

@@ -3,12 +3,15 @@
 namespace App\Livewire\Backend\Event;
 
 use App\Jobs\SendReminderEmail;
+use App\Mail\ReminderToCloseEmail;
 use App\Models\Event;
 use App\Models\File;
 use App\Models\History;
 use App\Models\Permit;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -100,11 +103,11 @@ class Index extends Component
         foreach ($events as $event) {
             $userEmail = User::find($event->user_id)->email;
             $data[$event->order_number] = $userEmail;
-        }
 
-       // dd($data);
-    
-       dispatch(new SendReminderEmail($data));
+            Mail::to('rahmanidja8@gmail.com')->send(new ReminderToCloseEmail($userEmail,$event->order_number));
+
+            Log::info('Sent reminder job to: '.$userEmail);
+        }
     }
 
     #[On('downloadImages')] 
