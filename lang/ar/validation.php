@@ -2,7 +2,7 @@
   //lang/ar/validation.php
 return [
     'phone' => 'The :attribute field must be a valid number.',
-
+    'required_if' => 'حقل :attribute مطلوب عندما :other يكون :value.',
     'accepted' => 'يجب قبول حقل :attribute.',
     'accepted_if' => 'يجب قبول حقل :attribute عندما :other يكون :value.',
     'active_url' => 'حقل :attribute يجب أن يكون عنوان URL صالحًا.',
@@ -169,7 +169,13 @@ return [
         'reply' => 'الرد',
         'permitNumber' => 'رقم التصريح',
         'permitFile' => 'ملف التصريح',
-        'links.*' => 'الروابط'
+        'links.*' => 'الروابط',
+        'meeting_link' => 'رابط الاجتماع',
+    ],
+    'values' => [
+        'event_location' => [
+            '3' => 'افتراضي',
+        ],
     ],
     'custom' => [
         'approval_file' => [

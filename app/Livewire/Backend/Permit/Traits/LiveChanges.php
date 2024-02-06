@@ -28,7 +28,7 @@ trait LiveChanges
            $this->Litrary_childes =  getChildes($this->form->literary_id);
         }
         if ($this->form->event_location) {
-            if ($this->form->event_location == 1) {
+            if ($this->form->event_location == 1 || $this->form->event_location == 3) {
                 if (auth()->user()->hasRole('User')) {
                     # code...
                     $coordinates = explode(',', auth()->user()->owner->coordinates);
