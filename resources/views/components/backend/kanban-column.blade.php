@@ -2,8 +2,8 @@
 <div class="column">
     <div class="head">
         <div class="fw-bold">{!! html_entity_decode($name) !!} @if($count > 0)<span>{{$count}}</span>@endif</div>
-        @if ($name == 'منتهية وبإنتظار توثيق الشريك')
-        <button class="btn btn-danger" onclick="fireSwal()">
+        @if ($name == 'بإنتظارك لتوثيق الفعالية')
+        <button class="btn btn-danger" onclick="fireSwal({{auth()->id()}})">
             <i class="fas fa-bell"></i>
         </button>
             
@@ -112,7 +112,8 @@
     </div><!-- /body -->
 </div><!-- /column -->
 <script>
-    function fireSwal() {
+    function fireSwal(id) {
+        console.log(id);
         Swal.fire({
             'icon': 'success',
             'title': 'تمت العملية بنجاح',

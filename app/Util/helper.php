@@ -241,7 +241,7 @@ function ArToEn($input) {
 			
 			case 'archiveSupport':
 				return [
-					['type' => 'sweetalert' , 'title' => 'أرشفة', 'onclick' => 'Act_AdminStartStudySupportarchive','class' => 'btn btn-success'],
+				//	['type' => 'sweetalert' , 'title' => 'أرشفة', 'onclick' => 'Act_AdminStartStudySupportarchive','class' => 'btn btn-success'],
 				];
 
 

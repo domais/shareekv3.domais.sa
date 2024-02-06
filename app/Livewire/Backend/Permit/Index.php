@@ -115,8 +115,7 @@ class Index extends Component
             $partnership->save();
         }
 
-        AddToHistory($permit->id, $permit->status_id);
-
+        AddToHistory($permit->id, $permit->status_id, null, 'تم الموافقة على التصريح ' . $permit->permit_number);
         $data = [
             'permit' => $permit,
             'status' => $permit->status,
@@ -201,7 +200,7 @@ class Index extends Component
         //    dd($permit->support);
         $permit->save();
 
-        AddToHistory($permit->id, $permit->status_id);
+        AddToHistory($permit->id, $permit->status_id, null, 'تم تحويل التصريح للموظف');
 
         $data = [
             'permit' => $permit,

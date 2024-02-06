@@ -64,7 +64,7 @@
 		/>
 
 		<x-backend.kanban-column 
-			name="الحالة النهائية"
+			name="الدعم مقبول"
 			count="{{ count($approved) }}"
 			:data="$approved"
 			route="support"

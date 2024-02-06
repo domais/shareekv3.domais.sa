@@ -100,6 +100,14 @@ class Index extends Component
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 12]);
 
+        $history = new History();
+        $history->permit_id = $id;
+        $history->status_id = 15;
+        $history->user_id = auth()->id();
+        $history->descreption =  'تم بدء دراسة الدعم';
+        $history->support_id = $permit->support->id;
+        $history->save();
+
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }
 
@@ -108,6 +116,14 @@ class Index extends Component
     {
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 14]);
+
+        $history = new History();
+        $history->permit_id = $id;
+        $history->status_id = 15;
+        $history->user_id = auth()->id();
+        $history->descreption =  'تم قبول الدعم';
+        $history->support_id = $permit->support->id;
+        $history->save();
 
         $data = [
             'permit' => $permit,

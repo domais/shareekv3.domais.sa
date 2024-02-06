@@ -88,7 +88,7 @@
 					</div>
 					<div class="col-9">
 						<select class="form-select ps-2 rounded" x-model="open" aria-label="type" wire:model.live="form.request_type">
-							<option selected disabled value="">اخر ...</option>
+							<option selected disabled value="">اختر ...</option>
 							<option value="1">سؤال</option>
 							<option value="2">اقتراح</option>
 							<option value="3">طلب دعم إضافي</option>
@@ -113,9 +113,12 @@
 					</div>
 				</div>
 				<div class="row mb-2" x-show="open == 3">
-					<div class="col-3 d-flex align-items-center">
+					<div class="col-3 d-flex align-items-center position-relative" x-data="{ show: false }" @mouseover="show = true" @mouseout="show = false">
 						رقم الفعالية 
 						<span class="text-danger">*</span>
+						<div x-show="show" class="position-absolute top-100 start-0 bg-dark text-white px-2 py-1 rounded shadow">
+							رقم الفعالية هو عبارة عن رقم التصريح أو المبادرة المرفوعة من طرف الشريك. 
+						</div>
 					</div>
 					<div class="col-9">
 						<input type="text" inputmode="numeric" class="form-control rounded" wire:model="form.permit_number">
