@@ -95,14 +95,14 @@ class Index extends Component
         }
     
         $events = $events->get();
-    
+
         $data = [];
         foreach ($events as $event) {
-            $userIds = $event->pluck('user_id')->toArray();
-            $emails = User::whereIn('id', $userIds)->pluck('email')->toArray();
-    
-            $data[$event->order_number] = $emails;
+            $userEmail = User::find($event->user_id)->email;
+            $data[$event->order_number] = $userEmail;
         }
+
+        dd($data);
     
        dispatch(new SendReminderEmail($data));
     }
