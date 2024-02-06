@@ -55,6 +55,7 @@ class EventService implements EventServiceInterface
             ->when(isset($data['type']), function ($query) use ($data) {
                 return $query->where('literary_id', $data['type']);
             })
+            ->where('event_type_id', 1)
             ->orderBy('start_date', 'asc')
             ->paginate($data['per_page'] ?? 10, ['*'], 'page', $data['page'] ?? 1);
 
@@ -88,6 +89,7 @@ class EventService implements EventServiceInterface
             ->when(isset($data['targeted_audience']), function ($query) use ($data) {
                 return $query->where('targeted_audience', $data['targeted_audience']);
             })
+            ->where('event_type_id', 1)
             ->paginate($data['per_page'] ?? 10, ['*'], 'page', $data['page'] ?? 1);
 
         $events =  new EventCollection($events);
@@ -125,10 +127,12 @@ class EventService implements EventServiceInterface
     public function userEvents(User $user, array $data): \Illuminate\Http\JsonResponse
     {
         $upcomingEvents = $user->guestEventsGoing()
+            ->where('event_type_id', 1)
             ->whereDate('start_date', '>=', Carbon::now())
             ->paginate(10, ['*'], 'page', $data['page'] ?? 1);
 
         $pastEvents = $user->guestEvents()
+            ->where('event_type_id', 1)
             ->whereDate('end_date', '<', Carbon::now())
             ->paginate(10, ['*'], 'page', $data['page'] ?? 1);
 
@@ -155,17 +159,17 @@ class EventService implements EventServiceInterface
             $literaries = \App\Models\Literary::where('status', 1)->withCount([
                 'events' => function ($query) use ($status) {
                     if ($status === 'upcoming') {
-                        $query->where('start_date', '>=', Carbon::now());
+                        $query->where('start_date', '>=', Carbon::now())->where('event_type_id', 1);
                     } elseif ($status === 'past') {
-                        $query->where('end_date', '<', Carbon::now());
+                        $query->where('end_date', '<', Carbon::now())->where('event_type_id', 1);
                     }
                 },
             ])
             ->whereHas('events', function ($query) use ($status) {
                 if ($status === 'upcoming') {
-                    $query->where('start_date', '>=', Carbon::now());
+                    $query->where('start_date', '>=', Carbon::now())->where('event_type_id', 1);
                 } elseif ($status === 'past') {
-                    $query->where('end_date', '<', Carbon::now());
+                    $query->where('end_date', '<', Carbon::now())->where('event_type_id', 1);
                 }
             })
             ->orderBy('events_count', 'desc')
@@ -238,6 +242,7 @@ class EventService implements EventServiceInterface
             ->when(!isset($data['date_range']), function ($query) {
                 return $query->whereDate('start_date', '>=', Carbon::now());
             })
+            ->where('event_type_id', 1)
             ->get();
 
         $events = $events->groupBy('user_id');
