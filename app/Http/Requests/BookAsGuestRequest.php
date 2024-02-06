@@ -24,7 +24,7 @@ class BookAsGuestRequest extends FormRequest
         return [
             'event_id' => 'required|exists:events,id',
             'name' => 'required|string|max:255',
-            'phone' => 'required|phone|unique:users,phone', // phone ex: 0555555555
+            'phone' => 'required|phone:mobile|unique:users,phone', // phone ex: 0555555555
             'email' => 'required|string|email|max:255|unique:users',
             'age' => 'required|in:less-11,11-18,more-18',
             'gender' => 'required|in:male,female',
