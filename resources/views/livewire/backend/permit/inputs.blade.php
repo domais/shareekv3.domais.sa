@@ -60,7 +60,7 @@
 						</button>
 				   @endif
 				   @if ($this->permit->status_id == 3)
-						<button class="btn btn-secondary" wire:click="change_permit(4)"
+						<button class="btn btn-secondary" onclick="IntialApproved($this->permit,'Permit')"
 							wire:loading.attr="disabled">
 							موافقة أولية
 						</button>
