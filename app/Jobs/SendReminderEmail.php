@@ -33,7 +33,7 @@ class SendReminderEmail implements ShouldQueue
             // Replace with your own logic to send an email
             Mail::to($email)->send(new ReminderToCloseEmail($email,$event_id));
 
-            Log::info('Sent reminder to: '.$email);
+            Log::info('Sent reminder job to: '.$email);
         }
     }
 }
