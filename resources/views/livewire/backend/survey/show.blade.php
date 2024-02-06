@@ -11,7 +11,6 @@
             <p class="card-text">تاريخ التقديم: <b>{{$survey->created_at->diffForHumans()}}</b></p>
         </div>
     </div>
-
     {{-- Display Data question and answer --}}
     <div class="row">
         @foreach ($survey->data as $key => $item)

@@ -7,6 +7,13 @@
 			<ul class="nav nav-pills col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 				{{-- <li class="nav-item"><a href="#" class="nav-link px-2 link-light">الرئيسية</a></li> --}}
 
+				@role('SuperAdmin|Adminstrator')
+				<li class="nav-item">
+					<a href="{{route('dashboard.index')}}" class="nav-link px-2 link-light {{ is_active('dashboard.index') ? 'active' : '' }}">الرئيسية</a>
+					{{-- <span class="badge text-bg-danger rounded-pill">1</span> --}}
+				</li>
+				@endrole
+
 				<li class="nav-item">
 					<a href="{{route('event.index')}}" class="nav-link px-2 link-light {{ is_active('event.index') ? 'active' : '' }}">المبادرات</a>
 					{{-- <span class="badge text-bg-danger rounded-pill">1</span> --}}
