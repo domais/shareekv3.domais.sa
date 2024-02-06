@@ -113,7 +113,9 @@
 </div><!-- /column -->
 <script>
     function fireSwal(id) {
-        console.log(id);
+        
+        Livewire.dispatch('sendNotfictaion', {'id':id});
+
         Swal.fire({
             'icon': 'success',
             'title': 'تمت العملية بنجاح',

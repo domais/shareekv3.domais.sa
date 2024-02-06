@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\File;
 use App\Models\History;
 use App\Models\Permit;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -79,6 +80,27 @@ class Index extends Component
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
 
+    }
+    
+
+    #[On('sendNotfictaion')] 
+    public function sendNotfictaion($id)
+    {
+        $user = Auth::user();
+        $event = Event::where('status_id', 7);
+    
+        if ($user->hasRole('Adminstrator')) {
+            $event = $event->where('admin_id', $user->id);
+        }
+    
+        $event = $event->get();
+    
+        $userIds = $event->pluck('user_id')->toArray();
+        $emails = User::whereIn('id', $userIds)->pluck('email')->toArray();
+
+        dd($emails);
+    
+        // Now you have the emails of the users
     }
 
     #[On('downloadImages')] 
