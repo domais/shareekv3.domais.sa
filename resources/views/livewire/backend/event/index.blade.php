@@ -94,6 +94,7 @@ x-data="{errors: @entangle('ValidationErrors').live,
           />
 
           <x-backend.kanban-column 
+            showAlert="true"
             name="{{ !auth()->user()->hasRole('User') ? 'مبادرات <small>بإنتظار توثيق الشريك</small>' : 'بإنتظارك لتوثيق الفعالية' }}"
             count="{{count($completed)}}" 
             :data="$completed"

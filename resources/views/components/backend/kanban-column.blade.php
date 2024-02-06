@@ -1,8 +1,8 @@
-@props(['name' => '','count' => 0 , 'buttons' => [],'edit' => 0,'data' => [],'permission' => 'permit-update','route' => 'permit'])
+@props(['name' => '','count' => 0 ,'showAlert' => false, 'buttons' => [],'edit' => 0,'data' => [],'permission' => 'permit-update','route' => 'permit'])
 <div class="column">
     <div class="head">
         <div class="fw-bold">{!! html_entity_decode($name) !!} @if($count > 0)<span>{{$count}}</span>@endif</div>
-        @if ($name == 'مبادرات <small>بإنتظار توثيق الشريك</small>')
+        @if ($showAlert && !auth()->user()->hasRole('User'))
         <button class="btn btn-danger" onclick="fireSwal({{auth()->id()}})">
             <i class="fas fa-bell"></i>
         </button>
