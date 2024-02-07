@@ -219,13 +219,6 @@ trait LiveChanges
                 }
                 
 
-
-                
-
-        
-
-
-
                 $permit->user->owner->points = $permit->user->owner->points + ($permit->points - $counter_speakers);
 
                 if ($permit->user->owner->points < 0) {
@@ -237,6 +230,12 @@ trait LiveChanges
                 $permit->save();
                 $permit->speakers()->delete();
                 $permit->partnerships()->delete();
+
+                if ($counter_speakers == 0) {
+                    if ($permit->support) {
+                        $permit->support->delete();
+                    }
+                }
 
 
 
