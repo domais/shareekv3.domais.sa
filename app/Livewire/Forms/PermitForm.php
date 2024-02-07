@@ -59,6 +59,7 @@ class PermitForm extends Form
         }
 
 
+        $this->meeting_link = $data->meeting_link ?? "";
         $this->event_type_id = $data->event_type_id ?? "";
         $this->category_id = $data->category_id ?? "";
         $this->other = $data->other ?? "";
