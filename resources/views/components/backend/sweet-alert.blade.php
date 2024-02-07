@@ -394,6 +394,7 @@
 				icon: 'info',
 				title: 'سبب الرفض',
 				text: reason,
+				showConfirmButton: false
 			})
 		})
 
