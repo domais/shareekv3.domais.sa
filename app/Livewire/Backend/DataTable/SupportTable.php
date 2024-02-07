@@ -81,6 +81,7 @@ public function builder(): Builder
             
                     return $value;
                 })
+                ->html()
                 ->sortable(),
                 
             Column::make("تاريخ الطلب", "created_at")
