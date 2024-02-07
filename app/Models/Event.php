@@ -32,6 +32,8 @@ class Event extends Model
         'lng',
         'source',
         'is_survey_sent',
+        'meeting_link',
+
     ];
 
     public function user()

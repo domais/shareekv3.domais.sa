@@ -29,7 +29,8 @@ class Permit extends Model
         'need_support',
         'lat',
         'lng',
-        'source'
+        'source',
+        'meeting_link',
     ];
 
     public function user()
