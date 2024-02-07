@@ -236,6 +236,14 @@ trait LiveChanges
                         $permit->support->delete();
                     }
                 }
+                else {
+                    if ($permit->support == null)  {
+                        $support = $permit->support()->create([
+                            'status_id' => 11,
+                            'order_number' => $permit->order_number,
+                        ]);
+                    }
+                }
 
 
 
