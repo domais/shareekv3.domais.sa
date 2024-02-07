@@ -60,7 +60,7 @@ public function builder(): Builder
         $permit = Permit::where('order_number', $order_number)->first();
         $history = $permit->history()->whereNotNull('support_id')->whereNotNull('descreption')->latest()->first();
 
-        $this->dispatch('reject-reason', $history->descreption);
+        $this->dispatch('reject-reason', [$history->descreption]);
     }
 
     public function columns(): array
