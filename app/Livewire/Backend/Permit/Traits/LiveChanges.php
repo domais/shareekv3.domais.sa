@@ -66,9 +66,12 @@ trait LiveChanges
             // Added by Domais
             $user = auth()->user();
             $partner = Partner::where('owner_id', $user->id)->first();
+            $speakersWithRewardOrReservation = array_filter($this->speakers, function ($speaker) {
+                return $speaker['reward'] == true || $speaker['reservations'] == true;
+            });
             
             if ($partner) {
-                if (count($this->speakers) > $partner->points && ($this->speakers[$index]['reward'] == true || $this->speakers[$index]['reservations'])){
+                if (count($speakersWithRewardOrReservation) > $partner->points && ($this->speakers[$index]['reward'] == true || $this->speakers[$index]['reservations'])){
                     $validator = Validator::make([], []); // empty data and rules
                     $validator->errors()->add('','عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                     throw new ValidationException($validator);
