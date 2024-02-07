@@ -111,7 +111,7 @@ class UsersTableSeeder extends Seeder
 
         $partner3  = User::create([
             'name'      => 'أحمد الغامدي',
-            'email'     => 'eng.ahmed.alghamdi2020@gamil.com',
+            'email'     => 'eng.ahmed.alghamdi2020@gmail.com',
             'phone'     => '0555555557',
             'password'  => Hash::make(123456),
         ]);
