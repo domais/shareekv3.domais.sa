@@ -211,37 +211,37 @@
 	}
 
 	function Act_AdminRejectSupport(id, model) {
-		Swal.fire({
-			title: 'رفض الدعم',
-  			text: "لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف",
-			icon: 'question',
-			input: 'textarea',
-			inputPlaceholder: 'أدخل سبب الرفض هنا',
-			showCancelButton: true,
-			confirmButtonText: 'إعادة للتعديل',
-			cancelButtonText: 'إلغاء',
-			confirmButtonColor: '#FF0000',
-			showDenyButton: true, // Add this line
-			denyButtonText: 'رفض نهائي', // Add this line
-			denyButtonColor: '#FF0000', // Add this line
-		}).then((result) => {
-			if (result.isConfirmed && result.value) {
-				Livewire.dispatch('RejectPermit_Dispatch', {
-					id: id,
-					model: model,
-					reason: result.value
-				})
-			}  else if (result.isDenied) { 
-				console.log('DefinitelyDeclineSupport');
-				console.log(result);
-				Livewire.dispatch('Definitely_Decline_Support', {
-					id: id,
-					model: model,
-					reason: result.value
-				})
-			}
-		});
-	}
+    Swal.fire({
+        title: 'رفض الدعم',
+        text: "لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف",
+        icon: 'question',
+        input: 'textarea',
+        inputPlaceholder: 'أدخل سبب الرفض هنا',
+        showCancelButton: true,
+        confirmButtonText: 'إعادة للتعديل',
+        cancelButtonText: 'إلغاء',
+        confirmButtonColor: '#FF0000',
+        showDenyButton: true,
+        denyButtonText: 'رفض نهائي',
+        denyButtonColor: '#FF0000',
+    }).then((result) => {
+        if (result.isConfirmed && result.inputValue) {
+            Livewire.dispatch('RejectPermit_Dispatch', {
+                id: id,
+                model: model,
+                reason: result.inputValue
+            })
+        } else if (result.isDenied) { 
+            console.log('DefinitelyDeclineSupport');
+            console.log(result.inputValue);
+            Livewire.dispatch('Definitely_Decline_Support', {
+                id: id,
+                model: model,
+                reason: result.inputValue
+            })
+        }
+    });
+}
 
 
 	// تشغيل الفعالية للآدمن
