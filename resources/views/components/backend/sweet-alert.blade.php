@@ -389,7 +389,7 @@
 		///////////
 
 		Livewire.on('reject-reason', (reason) => {
-			log(reason);
+			console.log(reason);
 			Swal.fire({
 				icon: 'info',
 				title: 'سبب الرفض',

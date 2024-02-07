@@ -40,7 +40,7 @@ public function builder(): Builder
                 '12' => 'تحت الدراسة',
                 '13' => 'تمت الموافقة',
                 '14' => 'مؤرشف',
-                '16' => 'محذوف',
+                '16' => 'مرفوض',
             ])
             ->filter(function(Builder $builder, string $value) {
                 $builder->whereHas('support', function (Builder $query) use ($value) {
