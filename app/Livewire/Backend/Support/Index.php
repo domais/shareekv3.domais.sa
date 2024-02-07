@@ -154,6 +154,8 @@ class Index extends Component
         $history->support_id = $permit->support->id;
 		$history->save();
 
+        dd($reason,$history);
+
 
         $data = [
             'permit' => $permit,
