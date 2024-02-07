@@ -385,6 +385,21 @@
 			})
 		})
 
+
+		///////////
+
+		Livewire.on('reject-reason', (reason) => {
+			log(reason);
+			Swal.fire({
+				icon: 'info',
+				title: 'سبب الرفض',
+				text: reason,
+			})
+		})
+
+
+		///////
+
 		Livewire.on('show-announcement-details', (announcement) => {
             console.log(announcement);
 			Swal.fire({
