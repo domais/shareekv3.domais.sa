@@ -225,6 +225,7 @@
         denyButtonText: 'رفض نهائي',
         denyButtonColor: '#FF0000',
     }).then((result) => {
+		console.log(result);
         if (result.isConfirmed && result.inputValue) {
             Livewire.dispatch('RejectPermit_Dispatch', {
                 id: id,
