@@ -233,11 +233,11 @@
 				})
 			}  else if (result.isDenied) { 
 				console.log('DefinitelyDeclineSupport');
-				console.log(result.inputValue);
+				console.log(result);
 				Livewire.dispatch('Definitely_Decline_Support', {
 					id: id,
 					model: model,
-					reason: result.inputValue
+					reason: result.value
 				})
 			}
 		});
