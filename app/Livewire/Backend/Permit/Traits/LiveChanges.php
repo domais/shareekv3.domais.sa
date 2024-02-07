@@ -226,7 +226,14 @@ trait LiveChanges
                 $permit->points = $counter_speakers;
                 $permit->save();
 
+
+
                 $permit->user->owner->points -= $permit->points;
+
+                if ($permit->user->owner->points <= 0) {
+                    throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
+                }
+
                 $permit->user->owner->save();
 
 
