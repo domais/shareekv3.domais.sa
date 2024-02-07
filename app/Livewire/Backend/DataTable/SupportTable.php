@@ -57,7 +57,9 @@ public function builder(): Builder
 
     public function testing($order_number)
     {
-        dd($order_number);
+        $permit = Permit::where('order_number', $order_number)->first();
+        $history = $permit->history()->whereNotNull('support_id')->whereNotNull('description')->latest()->first();
+        dd($history);
     }
 
     public function columns(): array
@@ -76,7 +78,7 @@ public function builder(): Builder
                 ->format(function($value, $column, $row) {
                     if ($value === 'محذوف') {
                         $value = 'مرفوض';
-                        return '<a href="#" wire:click="testing(' . $column->order_number . ')" class="btn btn-primary" role="button">' . $value . '</a>';
+                        return '<a href="#" wire:click="testing(' . $column->order_number . ')" class="btn btn-warning" role="button">' . $value . '</a>';
                     }
             
                     return $value;
