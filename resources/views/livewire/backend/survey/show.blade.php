@@ -2,7 +2,8 @@
     {{-- Survey Details --}}
     <div class="card mb-4">
         <div class="card-body">
-          <p class="card-text">رقم الفعالية: <b>{{ optional($survey->event)->order_number ?? '' }}</b></p>            <p class="card-text">عنوان الفعالية: <b>{{$survey->event->title}}</b></p>
+            <p class="card-text">رقم الفعالية: <b>{{ optional($survey->event)->order_number ?? '' }}</b></p>
+            <p class="card-text">عنوان الفعالية: <b>{{ optional($survey->event)->title ?? '' }}</b></p>
             <p class="card-text">الاسم: <b>{{$survey->surveyable->name}}</b></p>
             <p class="card-text">الهاتف: <b>{{$survey->surveyable->phone}}</b></p>
             <p class="card-text">النوع: <b>{{$survey->type == 'guest' ? 'زائر' : 'متحدث'}}</b></p>
