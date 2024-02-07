@@ -55,6 +55,11 @@ public function builder(): Builder
 
     }
 
+    public function testing($order_number)
+    {
+        dd($order_number);
+    }
+
     public function columns(): array
     {
         return [
@@ -67,13 +72,15 @@ public function builder(): Builder
                 ->searchable()
                 ->sortable(),
 
-            Column::make("الحالة", "support.status.name")
-            ->format(function($value, $column, $row) {
-                if ($value === 'محذوف') {
-                    $value = 'مرفوض';
-                }
-                return $value;
-        })
+                Column::make("الحالة", "support.status.name")
+                ->format(function($value, $column, $row) {
+                    if ($value === 'محذوف') {
+                        $value = 'مرفوض';
+                        return '<a href="#" wire:click="testing(' . $column->order_number . ')" class="btn btn-primary" role="button">' . $value . '</a>';
+                    }
+            
+                    return $value;
+                })
                 ->sortable(),
                 
             Column::make("تاريخ الطلب", "created_at")
