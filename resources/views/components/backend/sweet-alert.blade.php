@@ -233,6 +233,7 @@
 				})
 			} else if (result.isDenied) { 
 				console.log('DefinitelyDeclineSupport');
+				console.log(result.value);
 				// Add this condition
 				// Perform the action when the user clicks the deny button
 				// You can replace 'DefinitelyDeclineSupport' with the actual function you want to call

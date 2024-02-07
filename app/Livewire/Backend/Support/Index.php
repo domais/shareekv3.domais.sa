@@ -164,7 +164,7 @@ class Index extends Component
             'reject_reason' => $reason
         ];
 
-        Mail::to($permit->user->email)->send(new PermitSupportRejected($data));
+        Mail::to('rahmanidja8@gmail.com')->send(new PermitSupportRejected($data));
 
 
 
