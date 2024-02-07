@@ -213,8 +213,9 @@
 	function Act_AdminRejectSupport(id, model) {
 		Swal.fire({
 			title: 'رفض الدعم',
+			text: "لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف",
 			icon: 'question',
-			html: '<p style="font-size: 1.1em;">لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف</p><i class="fas fa-question-circle" style="font-size: 1.5em; margin-bottom: 10px;"></i><textarea id="swal-input" class="swal2-textarea" style="width: 100%;"></textarea>',
+			html: '<textarea id="swal-input" class="swal2-textarea"></textarea>',
 			showCancelButton: true,
 			confirmButtonText: 'إعادة للتعديل',
 			cancelButtonText: 'إلغاء',
@@ -224,6 +225,7 @@
 			denyButtonColor: '#FF0000',
 		}).then((result) => {
 			var inputValue = $('#swal-input').val();
+			console.log(inputValue);
 			if (result.isConfirmed) {
 				Livewire.dispatch('RejectPermit_Dispatch', {
 					id: id,
