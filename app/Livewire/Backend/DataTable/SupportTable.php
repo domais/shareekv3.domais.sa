@@ -58,7 +58,7 @@ public function builder(): Builder
     public function testing($order_number)
     {
         $permit = Permit::where('order_number', $order_number)->first();
-        $history = $permit->history()->whereNotNull('support_id')->whereNotNull('description')->latest()->first();
+        $history = $permit->history()->whereNotNull('support_id')->whereNotNull('descreption')->latest()->first();
         dd($history);
     }
 
