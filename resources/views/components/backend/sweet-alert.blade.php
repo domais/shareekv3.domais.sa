@@ -211,37 +211,36 @@
 	}
 
 	function Act_AdminRejectSupport(id, model) {
-    Swal.fire({
-        title: 'رفض الدعم',
-        text: "لديك خيارين: إعادة الطلب للشريك للتعديل عليه. أو رفض الطلب نهائياً وتحويله للمؤرشف",
-        icon: 'question',
-        input: 'textarea',
-        inputPlaceholder: 'أدخل سبب الرفض هنا',
-        showCancelButton: true,
-        confirmButtonText: 'إعادة للتعديل',
-        cancelButtonText: 'إلغاء',
-        confirmButtonColor: '#FF0000',
-        showDenyButton: true,
-        denyButtonText: 'رفض نهائي',
-        denyButtonColor: '#FF0000',
-    }).then((result) => {
-		console.log(result);
-        if (result.isConfirmed && result.inputValue) {
-            Livewire.dispatch('RejectPermit_Dispatch', {
-                id: id,
-                model: model,
-                reason: result.inputValue
-            })
-        } else if (result.isDenied) { 
-            console.log('DefinitelyDeclineSupport');
-            console.log(result.inputValue);
-            Livewire.dispatch('Definitely_Decline_Support', {
-                id: id,
-                model: model,
-                reason: result.inputValue
-            })
-        }
-    });
+		Swal.fire({
+			title: 'رفض الدعم',
+			html: '<textarea id="swal-input" class="swal2-textarea"></textarea>',
+			showCancelButton: true,
+			confirmButtonText: 'إعادة للتعديل',
+			cancelButtonText: 'إلغاء',
+			confirmButtonColor: '#3085d6',
+			showDenyButton: true,
+			denyButtonText: 'رفض نهائي',
+			denyButtonColor: '#FF0000',
+		}).then((result) => {
+			var inputValue = $('#swal-input').val();
+			console.log(inputValue);
+			if (result.isConfirmed) {
+				Livewire.dispatch('RejectPermit_Dispatch', {
+					id: id,
+					model: model,
+					reason: inputValue
+				})
+			} else if (result.isDenied) { 
+				console.log('DefinitelyDeclineSupport');
+				console.log(inputValue);
+				Livewire.dispatch('Definitely_Decline_Support', {
+					id: id,
+					model: model,
+					reason: inputValue
+				})
+			}
+		});
+   
 }
 
 
