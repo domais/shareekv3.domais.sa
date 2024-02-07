@@ -220,21 +220,23 @@ trait LiveChanges
                 
 
 
-                $permit->speakers()->delete();
-                $permit->partnerships()->delete();
+                
 
-                $permit->points = $counter_speakers;
-                $permit->save();
+        
 
 
 
-                $permit->user->owner->points -= $permit->points;
+                $permit->user->owner->points = $permit->user->owner->points + ($permit->points - $counter_speakers);
 
-                if ($permit->user->owner->points <= 0) {
+                if ($permit->user->owner->points < 0) {
                     throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                 }
 
                 $permit->user->owner->save();
+                $permit->points = $counter_speakers;
+                $permit->save();
+                $permit->speakers()->delete();
+                $permit->partnerships()->delete();
 
 
 
