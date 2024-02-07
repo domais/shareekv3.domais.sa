@@ -237,7 +237,7 @@ trait LiveChanges
                     }
                 }
                 else {
-                    if ($permit->support == null)  {
+                    if (is_null($permit->support))  {
                         $support = $permit->support()->create([
                             'status_id' => 11,
                             'order_number' => $permit->order_number,
