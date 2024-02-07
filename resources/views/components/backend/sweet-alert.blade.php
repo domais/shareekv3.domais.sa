@@ -231,16 +231,13 @@
 					model: model,
 					reason: result.value
 				})
-			} else if (result.isDenied) { 
+			}  else if (result.isDenied) { 
 				console.log('DefinitelyDeclineSupport');
-				console.log(result.value);
-				// Add this condition
-				// Perform the action when the user clicks the deny button
-				// You can replace 'DefinitelyDeclineSupport' with the actual function you want to call
+				console.log(result.inputValue);
 				Livewire.dispatch('Definitely_Decline_Support', {
 					id: id,
 					model: model,
-					reason: result.value
+					reason: result.inputValue
 				})
 			}
 		});
