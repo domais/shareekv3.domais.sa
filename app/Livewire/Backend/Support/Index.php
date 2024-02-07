@@ -140,6 +140,8 @@ class Index extends Component
     #[On('Definitely_Decline_Support')] 
     public function Definitely_Decline_Support($id,$model,$reason)
     {
+        dd($reason);
+
         $permit = Permit::findorfail($id);
         $permit->support->update(['status_id' => 16]);
 
@@ -153,7 +155,7 @@ class Index extends Component
 		$history->descreption = $reason;
         $history->support_id = $permit->support->id;
 		$history->save();
-
+        
 
 
         $data = [
@@ -163,9 +165,7 @@ class Index extends Component
             'reject_reason' => $reason
         ];
 
-        Mail::to('rahmanidja8@gmail.com')->send(new PermitSupportRejected($data));
-
-        dd($reason,$history);
+        Mail::to($permit->user->email)->send(new PermitSupportRejected($data));
 
 
 
