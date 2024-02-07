@@ -154,7 +154,6 @@ class Index extends Component
         $history->support_id = $permit->support->id;
 		$history->save();
 
-        dd($reason,$history);
 
 
         $data = [
@@ -165,6 +164,8 @@ class Index extends Component
         ];
 
         Mail::to('rahmanidja8@gmail.com')->send(new PermitSupportRejected($data));
+
+        dd($reason,$history);
 
 
 
