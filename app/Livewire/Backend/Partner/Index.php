@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Backend\Partner;
 
+use App\Exports\PartnerExcel;
 use App\Livewire\Forms\PartnerForm;
 use App\Livewire\Forms\UserForm;
+use App\Models\Partner;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -16,6 +18,11 @@ class Index extends Component
     public UserForm $Uform;
     public PartnerForm $Pform;
     public $ValidationErrors = [];
+
+    public function excelExport()
+    {
+        return (new PartnerExcel())->download('partners.xlsx');
+    }
 
     public function save()
     {

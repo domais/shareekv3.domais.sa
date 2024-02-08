@@ -8,29 +8,38 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class PartnerExcel implements FromCollection, WithHeadings
 {
-    public $partners;
 
-    public function __construct($partners) {
-        $this->partners = $partners;
+    public function __construct() {
+        
     }
 
     public function collection()
     {
-        return Partner::whereIn('id', $this->partners)
-        ->select('status', 'name', 'city', 'lat', 'lng', 'class', 'CR')
-        ->get();
+        return Partner::with(['owner', 'owner.permits'])
+            ->get()
+            ->map(function ($partner) {
+                return [
+                    'name' => $partner->name,
+                    'city' => $partner->city,
+                    'class' => $partner->class,
+                    'points' => $partner->points,
+                    'owner_name' => $partner->owner->name,
+                    'permits_count' => $partner->owner->permits->count(),
+                    'events_count' => $partner->owner->events->count(),
+                ];
+            });
     }
     
     public function headings(): array
     {
         return [
-            'status',
-            'name',
-            'city',
-            'lat',
-            'lng',
-            'class',
-            'CR'
+            'اسم الشريك',
+            'المدينة',
+            'الفئة',
+            'الدعم المتبقي',
+            'اسم المالك',
+            'عدد التصاريح',
+            'عدد الفعاليات',
         ];
     }
 }

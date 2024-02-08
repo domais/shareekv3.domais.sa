@@ -33,6 +33,10 @@
                 <button type="button" class="btn btn-brand float-end" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     أضف شريك جديد
                 </button>
+
+                <button type="button" wire:click="excelExport" class="btn btn-secondry float-end">
+                      تنزيل إكسل
+                </button>
 			</div>
             @endif
 		</div>
