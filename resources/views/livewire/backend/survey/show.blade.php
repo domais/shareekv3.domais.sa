@@ -13,27 +13,39 @@
     </div>
     {{-- Display Data question and answer --}}
     <div class="row">
-        @foreach ($survey->data as $key => $item)
-        <div class="col-6 mb-3">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">{{$key}}</h5>
-                    @if(is_numeric($item))
-                    <input
-                    class="rating"
-                    name="guest-rate-10"
-                    max="5"
-                    step="0"
-                    style="--stars:5;--value:{{$item}}"
-                    type="range"
-                    value="{{$item}}" />
-                    @else
-                    <p class="card-text">{{$item}}</p>
-                    @endif
-                </div>
-            </div>
+      @if ($survey->data)
+          @foreach ($survey->data as $key => $item)
+              <div class="col-6 mb-3">
+                  <div class="card">
+                      <div class="card-body">
+                          <h5 class="card-title">{{$key}}</h5>
+                          @if(is_numeric($item))
+                          <input
+                          class="rating"
+                          name="guest-rate-10"
+                          max="5"
+                          step="0"
+                          style="--stars:5;--value:{{$item}}"
+                          type="range"
+                          value="{{$item}}" />
+                          @else
+                          <p class="card-text">{{$item}}</p>
+                          @endif
+                      </div>
+                  </div>
+              </div>
+          @endforeach
+      @else
+
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">بيان غير معبأ</h5>
+            <p class="card-text">لم يتم تعبئة الإستبيان</p>
+            @endif
         </div>
-    @endforeach
+    </div>
+            
+      @endif
     </div>
 </div>
 
