@@ -23,6 +23,7 @@ class Index extends Component
 
     public function save()
     {
+        dd($this->form->toArray());
 
         $this->form->validate();
 
