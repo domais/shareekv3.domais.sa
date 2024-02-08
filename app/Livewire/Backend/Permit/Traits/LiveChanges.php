@@ -218,8 +218,9 @@ trait LiveChanges
 
                     $permit->update($permitData);
                 }
-                
-                $permit->user->owner->points = $permit->user->owner->points - $counter_speakers;
+                if(!Route::currentRouteNamed('permit.edit')) {
+                    $permit->user->owner->points = $permit->user->owner->points - $counter_speakers;
+                }
 
                 if ($permit->user->owner->points < 0) {
                     throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
