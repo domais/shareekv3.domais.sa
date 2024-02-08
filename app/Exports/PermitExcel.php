@@ -15,19 +15,20 @@ class PermitExcel implements FromCollection, WithHeadings
         $user = Auth::user();
     
         if ($user->hasRole('User')) {
-            $permits = Permit::where('user_id', $user->id);
+            $permits = Permit::where('user_id', $user->id)->where('status_id','<', 5);
         } elseif ($user->hasRole('Adminstrator')) {
-            $permits = Permit::where('admin_id', $user->id);
+            $permits = Permit::where('admin_id', $user->id)->where('status_id','<', 5);
         } elseif ($user->hasRole('SuperAdmin')) {
-            $permits = Permit::query();
+            $permits = Permit::query()->where('status_id','<', 5);
         } else {
-            return collect();
+            $permits = collect();
         }
     
-        return $permits->with(['user','eventType','literary'])
+        return $permits->with(['user','eventType','literary','status'])
             ->get()
             ->map(function ($permit) {
                 $targetedAudience = '';
+                $plcae = '';
                 switch ($permit->targeted_audience) {
                     case 1:
                         $targetedAudience = 'الأطفال (0-11)';
@@ -41,6 +42,20 @@ class PermitExcel implements FromCollection, WithHeadings
                     default:
                         $targetedAudience = 'Unknown';
                 }
+
+                switch ($permit->event_location) {
+                    case 1:
+                        $place = 'داخلية';
+                        break;
+                    case 2:
+                        $place = 'خارجية';
+                        break;
+                    case 3:
+                        $place = 'افتراضي';
+                        break;
+                    default:
+                        $place = 'Not defined';
+                }
     
                 return [
                     'title' => $permit->title,
@@ -50,6 +65,9 @@ class PermitExcel implements FromCollection, WithHeadings
                     'eventType' => $permit->eventType->name,
                     'targeted_audience' => $targetedAudience,
                     'literary' => $permit->literary ? $permit->literary->name : 'غير محدد',
+                    'available_seats' => $permit->available_seats,
+                    'place' => $place,
+                    'status' => $permit->status->name ?? 'غير محدد',
                 ];
             });
     }
@@ -63,7 +81,10 @@ class PermitExcel implements FromCollection, WithHeadings
             'الشريك',
             'نوع الفعالية',
             'الفئة المستهدفة',
-            'نوع الأدبي'
+            'نوع الأدبي',
+            'المقاعد المتاحة',
+            'مقر الاقامة',
+            'الحالة'
         ];
     }
 }
