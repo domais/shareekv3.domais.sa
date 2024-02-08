@@ -88,7 +88,6 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>
                                 <button type="button" wire:click="save"
-                                onclick="@this.form.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone"
                                 class="btn btn-success">حفظ</button>
                             </div>
                         </div>
