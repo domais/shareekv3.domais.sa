@@ -124,17 +124,18 @@ x-data="{
                                 <span style="width:100px" class="d-inline-block text-center" x-text="speaker.phone"></span>
                                 <a href="https://wa.me/966<!-- Rahmani:put mobile here after cuttent the firest digit (0) -->" target="_tab"><img class="ms-2" src="{{ asset('img/whatsapp.png') }}" height="20"></a>
                             </div>
-                            <div class="d-flex align-items-center">
-                                <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reward ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
-                                    <x-heroicon-o-banknotes style="width: 21px" class="opacity-50" />
-                                    مكافأة
+                            @if(!Route::currentRouteNamed('permit.edit') && !$this->permit->need_support == 1)
+                                <div class="d-flex align-items-center">
+                                    <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reward ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
+                                        <x-heroicon-o-banknotes style="width: 21px" class="opacity-50" />
+                                        مكافأة
+                                    </div>
+                                    <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reservations ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
+                                        <x-heroicon-o-check-circle style="width: 21px" class="opacity-50" />
+                                        حجوزات
+                                    </div>
                                 </div>
-                                <div class="px-2 border rounded-2 me-3 opacity-50 " :class="speaker.reservations ? 'text-success-emphasis bg-success-subtle border-success opacity-100' : 'text-muted bg-light border-muted'">
-                                    <x-heroicon-o-check-circle style="width: 21px" class="opacity-50" />
-                                    حجوزات
-                                </div>
-                                
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </template>
