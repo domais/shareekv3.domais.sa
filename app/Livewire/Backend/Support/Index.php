@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Support;
 
+use App\Livewire\Backend\Permit\Traits\LiveChanges;
 use App\Mail\ChangeStatus;
 use App\Mail\PermitSupportRejected;
 use App\Models\File;
@@ -19,7 +20,7 @@ use Livewire\WithFileUploads;
 
 class Index extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads,LiveChanges;
 
     public $requests = [];
     public $initial_approve = [];

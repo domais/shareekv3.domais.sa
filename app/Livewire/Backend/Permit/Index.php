@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Permit;
 
 use App\Exports\PermitExcel;
+use App\Livewire\Backend\Permit\Traits\LiveChanges;
 use App\Mail\ChangeStatus;
 use App\Models\Draft;
 use App\Models\Event;
@@ -19,7 +20,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads,LiveChanges;
 
     public $drafts = [];
     public $new_orders = [];

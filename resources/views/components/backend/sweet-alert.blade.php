@@ -48,6 +48,7 @@
 			cancelButtonText: 'إلغاء',
 		}).then((result) => {
 			if (result.isConfirmed) {
+					console.log(id,model);
 				// Perform the action associated with the 'Confirm' button here.
 				Livewire.dispatch('Act_UserDeletePermit', {
 					id: id,
