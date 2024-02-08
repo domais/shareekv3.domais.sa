@@ -41,7 +41,6 @@
         <div class="card-body">
             <h5 class="card-title">بيان غير معبأ</h5>
             <p class="card-text">لم يتم تعبئة الإستبيان</p>
-            @endif
         </div>
     </div>
             
