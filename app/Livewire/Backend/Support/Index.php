@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Support;
 
+use App\Exports\SupportExcel;
 use App\Livewire\Backend\Permit\Traits\LiveChanges;
 use App\Mail\ChangeStatus;
 use App\Mail\PermitSupportRejected;
@@ -17,6 +18,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -28,6 +30,11 @@ class Index extends Component
     public $approved = [];
     public $selected_id = 0;
     public $file;
+
+    public function excelExport()
+    {
+        return Excel::download(new SupportExcel(), 'supports.xlsx');
+    }
 
     private function getPermitsByRoleAndStatus($role, $status)
     {
