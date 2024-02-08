@@ -95,9 +95,9 @@ public function builder(): Builder
                 Column::make("محذوف", "deleted_at")
                 ->format(function($value, $column, $row) {
                     if ($value) {
-                        return Carbon::parse($value)->translatedFormat('l، d F Y');
+                        return 'نعم';
                     }
-                    return '';
+                    return 'لا';
                 })
                 ->sortable(),
                 
