@@ -96,20 +96,22 @@ x-data="{
                     <div class="card p-2 mx-1 mb-2">
                         <div class="card-body d-flex justify-space-between align-items-center p-0">
                             <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none me-3" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
-                            <div class="float-end d-flex align-items-center">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
-                                    <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_1'">
-                                        مكافأة
-                                    </label>
+                            @if ( Route::currentRouteName() != 'permit.edit') 
+                                <div class="float-end d-flex align-items-center">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
+                                        <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_1'">
+                                            مكافأة
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-switch mx-3">
+                                        <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_2'" x-model="speaker.reservations" x-on:change="changeStatus(index, 'reservations')">
+                                        <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_2'">
+                                            حجوزات
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="form-check form-switch mx-3">
-                                    <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_2'" x-model="speaker.reservations" x-on:change="changeStatus(index, 'reservations')">
-                                    <label class="form-check-label" :for="'flexSwitchCheckDefault' + index + '_2'">
-                                        حجوزات
-                                    </label>
-                                </div>
-                            </div>
+                            @endif
                             <button class="btn btn-danger float-end" x-bind:disabled="is_show_page" x-on:click="removeSpeaker(index)">×</button>
                         </div>
                     </div>
