@@ -72,6 +72,7 @@ class Inputs extends Component
     {
 
         $permitData = $this->form->toArray();
+        dd($permitData);
         try {
             unset($permitData['status_id']);
             $permitData['user_id'] = auth()->id();
