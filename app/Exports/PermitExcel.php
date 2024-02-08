@@ -68,6 +68,7 @@ class PermitExcel implements FromCollection, WithHeadings
                     'available_seats' => $permit->available_seats,
                     'place' => $place,
                     'status' => $permit->status->name ?? 'غير محدد',
+                    'deleted_at' => $permit->deleted_at ? 'نعم' :   'لا',
                 ];
             });
     }
@@ -85,6 +86,7 @@ class PermitExcel implements FromCollection, WithHeadings
             'المقاعد المتاحة',
             'مقر الاقامة',
             'الحالة'
+            'محذوف'
         ];
     }
 }

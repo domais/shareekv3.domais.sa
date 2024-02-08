@@ -74,6 +74,8 @@ class SupportExcel implements FromCollection, WithHeadings
                     'available_seats' => $permit->available_seats,
                     'place' => $place,
                     'status' => $permit->support->status->name ?? 'غير محدد',
+                    'deleted_at' => $permit->deleted_at ? 'نعم' :   'لا',
+
                 ];
             });
     }
@@ -90,7 +92,8 @@ class SupportExcel implements FromCollection, WithHeadings
             'نوع الأدبي',
             'المقاعد المتاحة',
             'مقر الاقامة',
-            'الحالة'
+            'الحالة',
+            'محذوف',
         ];
     }
 }
