@@ -10,6 +10,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -21,7 +22,7 @@ class Index extends Component
 
     public function excelExport()
     {
-        return (new PartnerExcel())->download('partners.xlsx');
+        return Excel::download(new PartnerExcel(), 'partners.xlsx');
     }
 
     public function save()

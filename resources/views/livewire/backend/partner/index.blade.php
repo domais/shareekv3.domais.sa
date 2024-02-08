@@ -34,7 +34,7 @@
                     أضف شريك جديد
                 </button>
 
-                <button type="button" wire:click="excelExport" class="btn btn-secondry float-end">
+                <button type="button" wire:click="excelExport" class="btn btn-outline-secondary">
                       تنزيل إكسل
                 </button>
 			</div>
