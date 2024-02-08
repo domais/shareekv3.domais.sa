@@ -91,6 +91,15 @@ public function builder(): Builder
                 })
                 ->html()
                 ->sortable(),
+
+                Column::make("محذوف", "deleted_at")
+                ->format(function($value, $column, $row) {
+                    if ($value) {
+                        return Carbon::parse($value)->translatedFormat('l، d F Y');
+                    }
+                    return '';
+                })
+                ->sortable(),
                 
             Column::make("تاريخ الطلب", "created_at")
                 ->format(function($value, $column, $row) {
