@@ -139,7 +139,13 @@ trait LiveChanges
     #[On('Act_UserDeletePermit')] 
     public function Act_UserDeletePermit($id,$model)
     {
-        dd($id,$model);
+        $permit = Permit::findorfail($id);
+        $permit->user->owner->points += $permit->points;
+        $permit->user->owner->save();
+
+        
+
+        $permit->delete();
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
 
