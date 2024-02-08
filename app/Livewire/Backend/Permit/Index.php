@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Index extends Component
 {
@@ -262,6 +263,10 @@ class Index extends Component
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
 
+    public function excelExport()
+    {
+        return Excel::download(new PartnerExcel(), 'permits.xlsx');
+    }
 
     public function render()
     {
