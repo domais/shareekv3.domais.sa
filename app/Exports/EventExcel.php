@@ -58,6 +58,7 @@ class EventExcel implements FromCollection, WithHeadings
                 }
     
                 return [
+                    'order_number' => $permit->order_number,
                     'title' => $permit->title,
                     'start_date' => $permit->start_date,
                     'end_date' => $permit->class,
@@ -75,6 +76,7 @@ class EventExcel implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'رقم الفعالية',
             'العنوان',
             'تاريخ البداية',
             'تاريخ النهاية',

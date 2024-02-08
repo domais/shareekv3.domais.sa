@@ -58,6 +58,8 @@ class PermitExcel implements FromCollection, WithHeadings
                 }
     
                 return [
+                    'order_number' => $permit->order_number,
+
                     'title' => $permit->title,
                     'start_date' => $permit->start_date,
                     'end_date' => $permit->class,
@@ -76,6 +78,7 @@ class PermitExcel implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'رقم الطلب',
             'العنوان',
             'تاريخ البداية',
             'تاريخ النهاية',
@@ -85,7 +88,7 @@ class PermitExcel implements FromCollection, WithHeadings
             'نوع الأدبي',
             'المقاعد المتاحة',
             'مقر الاقامة',
-            'الحالة'
+            'الحالة',
             'محذوف'
         ];
     }

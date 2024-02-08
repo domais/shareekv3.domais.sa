@@ -16,15 +16,12 @@ class SupportExcel implements FromCollection, WithHeadings
     
         if ($user->hasRole('User')) {
             $permits = Permit::where('user_id', $user->id)
-                             ->where('status_id','<', 5)
                              ->whereHas('support');
         } elseif ($user->hasRole('Adminstrator')) {
             $permits = Permit::where('admin_id', $user->id)
-                             ->where('status_id','<', 5)
                              ->whereHas('support');
         } elseif ($user->hasRole('SuperAdmin')) {
             $permits = Permit::query()
-                             ->where('status_id','<', 5)
                              ->whereHas('support');
         } else {
             $permits = collect();
@@ -64,6 +61,7 @@ class SupportExcel implements FromCollection, WithHeadings
                 }
     
                 return [
+                    'order_number' => $permit->order_number,
                     'title' => $permit->title,
                     'start_date' => $permit->start_date,
                     'end_date' => $permit->class,
@@ -83,6 +81,7 @@ class SupportExcel implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'رقم التصريح',
             'العنوان',
             'تاريخ البداية',
             'تاريخ النهاية',
