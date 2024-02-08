@@ -220,15 +220,10 @@ trait LiveChanges
                 }
                 if(!Route::currentRouteNamed('permit.edit')) {
                     $permit->user->owner->points = $permit->user->owner->points - $counter_speakers;
-                }
-
-                if ($permit->user->owner->points < 0) {
-                    throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
-                }
-
-                if(!Route::currentRouteNamed('permit.edit')) {
-                    $permit->user->owner->save();
-                }                
+                    if ($permit->user->owner->points < 0) {
+                        throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
+                    }
+                }              
                 $permit->points = $counter_speakers;
                 $permit->save();
                 $permit->speakers()->delete();
