@@ -58,6 +58,11 @@ public function builder(): Builder
     public function testing($order_number)
     {
         $permit = Permit::where('order_number', $order_number)->first();
+        if ($permit == null) {
+            $this->dispatch('reject-reason', ['التصريح غير موجود']);
+            return;
+            # code...
+        }
         $history = $permit->history()->whereNotNull('support_id')->whereNotNull('descreption')->latest()->first();
 
         $this->dispatch('reject-reason', [$history->descreption]);
