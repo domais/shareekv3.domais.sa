@@ -167,6 +167,15 @@ class PermitTable extends DataTableComponent
                 })
                 ->sortable(),
 
+            Column::make("محذوف", "deleted_at")
+                ->format(function($value, $column, $row) {
+                    if ($value) {
+                        return Carbon::parse($value)->translatedFormat('l، d F Y');
+                    }
+                    return '';
+                })
+                ->sortable(),
+
             Column::make(__(''), 'id')
                 ->view('Tableactions.permits')
         ];
