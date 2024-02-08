@@ -226,6 +226,7 @@ $watch('location',
     }
 
     function updateMarkerPosition(lat, lng) {
+        console.log(lat, lng);
         var newPosition = new google.maps.LatLng(lat, lng);
         marker.setPosition(newPosition);
         map.setCenter(newPosition);
