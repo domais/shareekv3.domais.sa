@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -224,7 +225,10 @@ trait LiveChanges
                     throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                 }
 
-                $permit->user->owner->save();
+                if ( Route::currentRouteName() != 'permit.edit') 
+                    $permit->user->owner->save();
+
+                }
                 $permit->points = $counter_speakers;
                 $permit->save();
                 $permit->speakers()->delete();
