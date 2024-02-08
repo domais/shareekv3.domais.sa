@@ -225,10 +225,9 @@ trait LiveChanges
                     throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                 }
 
-                if ( Route::currentRouteName() != 'permit.edit') 
+                if(!Route::currentRouteNamed('permit.edit')) {
                     $permit->user->owner->save();
-
-                }
+                }                
                 $permit->points = $counter_speakers;
                 $permit->save();
                 $permit->speakers()->delete();
