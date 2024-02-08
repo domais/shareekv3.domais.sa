@@ -176,7 +176,7 @@ trait LiveChanges
     }
 
 
-    public function savePermit($permitData,$speakers,$partnerships,$permit = null,$image = null)
+    public function savePermit($permitData,$speakers,$partnerships,$permit = null,$image = null,$from_support = false)
     {
         $permitData = array_map(function($value) {
             return $value === "" ? null : $value;
@@ -185,7 +185,7 @@ trait LiveChanges
         $permitData['literary_id'] =  $permitData['litrary_children_id'];
         $permitData['status_id'] =  2;
         
-        DB::transaction(function () use ($permitData,$speakers,$permit,$partnerships) {
+        DB::transaction(function () use ($permitData,$speakers,$permit,$partnerships,$from_support) {
             $needSupport = collect($speakers)->contains(function ($speaker) use (&$counter_speakers) {
                 if ($speaker['reservations'] || $speaker['reward']) {
                     return true;
@@ -220,13 +220,11 @@ trait LiveChanges
                     $permit->update($permitData);
                 }
 
-                dd(Request::url());
+                
 
 
-                if(!Route::currentRouteName() == 'permit.edit') {
-                    dd("hello");
+                if($from_support) {
                     $permit->user->owner->points = $permit->user->owner->points - $counter_speakers;
-
                     if ($permit->user->owner->points < 0) {
                         throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
                     }

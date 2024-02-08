@@ -75,7 +75,7 @@ class Inputs extends Component
         try {
             unset($permitData['status_id']);
             $permitData['user_id'] = auth()->id();
-            $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit);
+            $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit,null,true);
         } catch (\Exception $e) {
             $this->errors = [$e->getMessage()];
             return;
