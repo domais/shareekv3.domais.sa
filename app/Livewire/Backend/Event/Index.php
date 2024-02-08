@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Event;
 
+use App\Exports\EventExcel;
 use App\Exports\PermitExcel;
 use App\Jobs\SendReminderEmail;
 use App\Mail\ReminderToCloseEmail;
@@ -230,7 +231,7 @@ class Index extends Component
     }
     public function excelExport()
     {
-        return Excel::download(new PermitExcel(), 'permits.xlsx');
+        return Excel::download(new EventExcel(), 'events.xlsx');
     }
     
     public function render()

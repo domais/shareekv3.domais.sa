@@ -57,6 +57,10 @@ x-data="{errors: @entangle('ValidationErrors').live,
 						<span x-show="view === 'kanban'">عرض كجدول</span>
 						<span x-show="view === 'table'">عرض كقوائم</span>
 					</button>
+
+                    <button type="button" wire:click="excelExport" class="btn btn-outline-secondary mx-2">
+                        تنزيل إكسل
+                    </button>
 				</div>
                 {{-- : make this work as $role == 2 --}}
                 @if (auth()->user()->hasRole('User'))
