@@ -57,7 +57,7 @@ class PartnerForm extends Form
         $validatedData = $this->validate([
             'partner_name' => 'required|string|max:255',
             'CR' => 'nullable|numeric',
-            'city' => 'required|string|in:الرياض,جدة,مكة,أبها',
+            'city' => 'required|string',
             'coordinates' => 'required|string|regex:/^-?\d{1,3}\.\d+,-?\d{1,3}\.\d+$/',
             'class' => 'required|string|in:أ,ب,ج,د',
             'logo' => 'nullable',
