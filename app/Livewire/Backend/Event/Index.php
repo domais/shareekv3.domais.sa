@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Event;
 
+use App\Exports\PermitExcel;
 use App\Jobs\SendReminderEmail;
 use App\Mail\ReminderToCloseEmail;
 use App\Models\Event;
@@ -18,6 +19,7 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 use ZipArchive;
 
 class Index extends Component
@@ -225,9 +227,12 @@ class Index extends Component
         $event->save();
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
-
-
     }
+    public function excelExport()
+    {
+        return Excel::download(new PermitExcel(), 'permits.xlsx');
+    }
+    
     public function render()
     {
         return view('livewire.backend.event.index');

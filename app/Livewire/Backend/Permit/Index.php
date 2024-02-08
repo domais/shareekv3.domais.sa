@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Backend\Permit;
 
+use App\Exports\PermitExcel;
 use App\Mail\ChangeStatus;
 use App\Models\Draft;
 use App\Models\Event;
@@ -265,7 +266,7 @@ class Index extends Component
 
     public function excelExport()
     {
-        return Excel::download(new PartnerExcel(), 'permits.xlsx');
+        return Excel::download(new PermitExcel(), 'permits.xlsx');
     }
 
     public function render()
