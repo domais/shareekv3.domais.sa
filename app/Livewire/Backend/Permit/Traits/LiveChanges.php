@@ -218,6 +218,10 @@ trait LiveChanges
 
                     $permit->update($permitData);
                 }
+
+                dd(Route::currentRouteName());
+
+                
                 if(!Route::currentRouteName() == 'permit.edit') {
                     dd("hello");
                     $permit->user->owner->points = $permit->user->owner->points - $counter_speakers;
