@@ -10,7 +10,7 @@ use Illuminate\Validation\Rules\Password;
 
 			'partner_name' => ['required', 'string', 'max:255'],
 			'CR' => ['required', 'numeric'],
-			'city' => ['required', 'string', 'in:الرياض,جدة,مكة,أبها'],
+			'city' => ['required', 'string'],
 
 
             'name' => ['required', 'string', 'max:255'],
