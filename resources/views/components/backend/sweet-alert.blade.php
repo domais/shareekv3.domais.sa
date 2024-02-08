@@ -38,27 +38,23 @@
 
 	// حذف التصريح لليوزر
 	function Act_UserDeletePermit(id, model) {
-		handleAction(
-			id, 			// id,
-			model, 			// model,
-			'question', 	// icon ,
-			false, 	        // img located => public/img/alert/
-			'حذف التصريح؟',
-			'سيتم حذف التصريح ولايمكنك التراجع ، هل أنت متأكد؟',
-			true, 			// show Confirm Button
-			true, 			// show Cancel Button
-			'red', 			// confirm Button Color 	default = #456496
-			'نعم احذف',     // confirm Button Text 		default = موافق
-			false,          // cancel Button Text  		default = إلغاء
-			false, 			// timer before auto disaplear
-			false, 			// bar
-			false, 			// actio
-			false, 			// place inside?
-			true, 			// actionable
-			false, 			// redirect
-			false, 			// textarea
-		);
-
+		Swal.fire({
+			title: 'حذف التصريح؟',
+			text: 'سيتم حذف التصريح ولايمكنك التراجع ، هل أنت متأكد؟',
+			icon: 'question',
+			showCancelButton: true,
+			confirmButtonColor: 'red',
+			confirmButtonText: 'نعم احذف',
+			cancelButtonText: 'إلغاء',
+		}).then((result) => {
+			if (result.isConfirmed) {
+				// Perform the action associated with the 'Confirm' button here.
+				Livewire.dispatch('Act_UserDeletePermit', {
+					id: id,
+					model: model,
+				})
+			}
+		});
 	}
 
 	function Act_AdminApprove(id,model)
@@ -80,7 +76,6 @@
 				})
 			}
 		});
-
 	}
 
 

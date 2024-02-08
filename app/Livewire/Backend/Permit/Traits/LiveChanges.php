@@ -136,6 +136,16 @@ trait LiveChanges
     }
 
     
+    #[On('Act_UserDeletePermit')] 
+    public function Act_UserDeletePermit($id,$model)
+    {
+        dd($id,$model);
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
+
+    }
+
+    
     #[On('editorUpdated')] 
     public function editorUpdated($data)
     {
