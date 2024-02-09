@@ -40,10 +40,12 @@ class Index extends Component
         ->where('end_at', '>=', Carbon::now())
         ->get();
 
+        /*
+        i was testing the time 
         if (auth()->user()->hasRole('User')) {
             dd($this->announcements, Carbon::now()->format('Y-m-d H:i'));
 
-        }
+        }*/
     }
 
 
