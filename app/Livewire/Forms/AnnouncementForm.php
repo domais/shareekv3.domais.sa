@@ -38,8 +38,8 @@ class AnnouncementForm extends Form
         $announcement->description = $this->description;
 
         // convert client timezone to UTC
-        $announcement->start_at = $this->start_at;
-        $announcement->end_at = $this->end_at;
+        $announcement->start_at = Carbon::parse($this->start_at, $this->timezone)->setTimezone('UTC');
+        $announcement->end_at = Carbon::parse($this->end_at, $this->timezone)->setTimezone('UTC');
         $announcement->is_active = $this->is_active;
         $announcement->save();
     }
