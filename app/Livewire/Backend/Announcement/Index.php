@@ -10,6 +10,7 @@ use Livewire\Attributes\On;
 use App\Models\Announcement;
 use Livewire\WithFileUploads;
 use App\Livewire\Forms\AnnouncementForm;
+use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 
 class Index extends Component
@@ -34,10 +35,13 @@ class Index extends Component
 
     public function mount()
     {
-        $this->announcements = Announcement::all();
+        $this->announcements = Announcement::whereIsActive(true)
+        ->where('start_at', '<=', Carbon::now())
+        ->where('end_at', '>=', Carbon::now())
+        ->get();
 
         if (auth()->user()->hasRole('User')) {
-          //  dd($this->announcements,now());
+            dd($this->announcements, Carbon::now()->format('Y-m-d H:i'));
 
         }
     }
