@@ -37,7 +37,7 @@ class Index extends Component
         $this->announcements = Announcement::all();
 
         if (auth()->user()->hasRole('User')) {
-            dd($this->announcements,now());
+          //  dd($this->announcements,now());
 
         }
     }
