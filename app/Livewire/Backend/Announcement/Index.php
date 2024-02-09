@@ -34,10 +34,7 @@ class Index extends Component
 
     public function mount()
     {
-        $this->announcements = Announcement::whereIsActive(true)
-        ->where('start_at', '<=', now()->setTimezone('Asia/Riyadh'))
-        ->where('end_at', '>=', now()->setTimezone('Asia/Riyadh'))
-        ->get();
+        $this->announcements = Announcement::all();
 
         if (auth()->user()->hasRole('User')) {
             dd($this->announcements,now());
