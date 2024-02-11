@@ -20,8 +20,6 @@ class Index extends Component
         ->whereHas('owner.permits')
         ->take(10)
         ->get();
-        
-        dd($this->partners);
     }
     public function render()
     {
