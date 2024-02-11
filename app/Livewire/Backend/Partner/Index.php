@@ -5,7 +5,9 @@ namespace App\Livewire\Backend\Partner;
 use App\Exports\PartnerExcel;
 use App\Livewire\Forms\PartnerForm;
 use App\Livewire\Forms\UserForm;
+use App\Mail\WelcomeNewAdminMail;
 use App\Models\Partner;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -38,6 +40,11 @@ class Index extends Component
         $user = $this->Uform->save();
 
         $this->Pform->save($user);
+
+        $user = $this->owner; // Assuming $this->owner contains the user data
+    
+        Mail::to($user->email,'domais-WelcomeNewAdminMail@srv1.mail-tester.com')->send(new WelcomeNewAdminMail($user));
+    
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));
     }

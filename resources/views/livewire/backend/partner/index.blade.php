@@ -99,7 +99,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إغلاق</button>
-                                <button type="button" wire:click="save" wire:loading.attr="disabled" class="btn btn-success">حفظ</button>                            </div>
+                                <button type="button" wire:click="save" wire:loading.attr="disabled" class="btn btn-success">حفظ و إرسال</button>                            </div>
                         </div>
                         </div>
                     </div>
