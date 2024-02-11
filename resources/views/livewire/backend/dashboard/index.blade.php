@@ -256,7 +256,7 @@
             </div>
             <div class="ca0rd-body d-flex flex-column justify-content-start">
               <div class="col-12">
-                @foreach ($collection as $item)
+                @foreach ($urgent_permits as $item)
 
                 <div class="order row">
                   <div class="col-3 partner">
