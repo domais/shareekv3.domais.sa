@@ -257,25 +257,34 @@
             <div class="ca0rd-body d-flex flex-column justify-content-start">
               <div class="col-12">
                 @foreach ($urgent_permits as $item)
-
                 <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/05.png" />
-                    {{$item->user->owner->name}}
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    {{$item->order_number}}
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                       {{$item->title}}
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span class="badge text-secondary {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) <= 2 ? 'bg-danger' : 'bg-warning' }} rounded-pill fw-normal">
-                        {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) }} أيام
-                    </span>
-                  </div>
+                    <div class="col-3 partner">
+                        @php
+                            if ($item->user->owner->fileable) {
+                                $ownerImage = $item->user->owner->fileable->path 
+                                ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . $item->user->owner->fileable->path) 
+                                : asset('img/default_avatar.png');
+                            }
+                            else {
+                                $ownerImage = asset('img/default_avatar.png');
+                            }  
+                        @endphp
+                        <img alt="" src="{{ $ownerImage }}" />
+                        {{$item->user->owner->name}}
+                    </div>
+                    <div class="col-2 number d-flex align-items-center">
+                        {{$item->order_number}}
+                    </div>
+                    <div class="col-5 title d-flex align-items-center">
+                        {{$item->title}}
+                    </div>
+                    <div class="col-2 badge d-flex align-items-center">
+                        <span class="badge text-secondary {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) <= 2 ? 'bg-danger' : 'bg-warning' }} rounded-pill fw-normal">
+                            {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) }} أيام
+                        </span>
+                    </div>
                 </div>
-                @endforeach
+            @endforeach
               </div>
             </div>
           </div>
