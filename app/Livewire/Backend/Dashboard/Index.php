@@ -15,6 +15,7 @@ class Index extends Component
     public $partners = [];
     public $partners_counter;
     public $urgent_permits = [];
+    public $guests_counter;
 
     public function mount()
     {
@@ -26,6 +27,8 @@ class Index extends Component
         ->get();
 
         $this->partners_counter = Partner::count();
+
+        $this->guests_counter = Event::withCount('guests')->get()->sum('guests_count');
 
         $this->urgent_permits = Permit::where('status_id', '<=', 5)
         ->where('start_date', '<=', Carbon::now()->addDays(5))

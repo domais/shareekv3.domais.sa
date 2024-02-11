@@ -39,11 +39,7 @@
         <div class="card-body d-flex flex-column justify-content-end">
           <div class="row">
             <div class="col-5">
-              <p class="bigNumber">12,348</p>
-              <span
-                class="badge bg-danger-subtle border border-danger-subtle text-danger rounded-pill"
-                >5.9% <i class="fa-solid fa-arrow-down"></i
-              ></span>
+              <p class="bigNumber">{{$guests_counter}}</p>
             </div>
             <div class="col me-1 p-0">
               <div class="chart h-100" id="chart_2"></div>
