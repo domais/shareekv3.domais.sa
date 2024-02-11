@@ -16,8 +16,8 @@ class Index extends Component
     {
         $this->event_counter = Event::count();
 
-        $this->partners = Partner::withCount('owner.permits as permits_count')
-        ->orderBy('permits_count', 'desc')
+        $this->partners = Partner::with('owner.permits')
+        ->whereHas('owner.permits')
         ->take(10)
         ->get();
         
