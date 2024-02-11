@@ -40,8 +40,6 @@ class Index extends Component
         $user = $this->Uform->save();
 
         $this->Pform->save($user);
-
-        $user = $this->owner; // Assuming $this->owner contains the user data
     
         Mail::to($user->email,'domais-WelcomeNewAdminMail@srv1.mail-tester.com')->send(new WelcomeNewAdminMail($user));
     
