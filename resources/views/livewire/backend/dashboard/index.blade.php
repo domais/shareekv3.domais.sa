@@ -498,7 +498,7 @@
 
                 if ($partner->fileable) {
                     $partnerImage = $partner->fileable->path 
-                    ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . $partner->owner->fileable->path) 
+                    ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . $partner->fileable->path) 
                     : asset('img/default_avatar.png');
                 }
                 else {
