@@ -4,6 +4,8 @@ namespace App\Livewire\Backend\Dashboard;
 
 use App\Models\Event;
 use App\Models\Partner;
+use App\Models\Permit;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class Index extends Component
@@ -12,6 +14,7 @@ class Index extends Component
     public $chart_one = [];
     public $partners = [];
     public $partners_counter;
+    public $urgent_permits = [];
 
     public function mount()
     {
@@ -23,6 +26,11 @@ class Index extends Component
         ->get();
 
         $this->partners_counter = Partner::count();
+
+        $this->urgent_permits = Permit::where('status_id', '<=', 5)
+        ->where('start_date', '<=', Carbon::now()->addDays(5))
+        ->where('start_date', '>=', Carbon::now())
+        ->get();
     }
     public function render()
     {

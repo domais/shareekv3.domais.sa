@@ -256,171 +256,26 @@
             </div>
             <div class="ca0rd-body d-flex flex-column justify-content-start">
               <div class="col-12">
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/02.png" />
-                    مد - مقهى ومحمصة
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    هنا اسم الفعالية
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span class="badge text-bg-danger rounded-pill fw-normal"
-                      >متأخر يومين</span
-                    >
-                  </div>
-                </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/01.png" />
-                    مقهى المعرفة
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    <i
-                      title="طلب دعم"
-                      class="fa-solid fa-sack-dollar text-success fs-5 me-2"
-                    ></i>
-                    مراجعة كتاب محاط بالحمقى
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span class="badge text-bg-danger rounded-pill fw-normal"
-                      >متأخر يوم</span
-                    >
-                  </div>
-                </div>
+                @foreach ($collection as $item)
+
                 <div class="order row">
                   <div class="col-3 partner">
                     <img alt="" src="../../img/logos/05.png" />
-                    صحارى كافيه
+                    {{$item->user->owner->name}}
                   </div>
                   <div class="col-2 number d-flex align-items-center">
-                    230045869
+                    {{$item->order_number}}
                   </div>
                   <div class="col-5 title d-flex align-items-center">
-                    قراءة رواية الأميرة والوحش
+                       {{$item->title}}
                   </div>
                   <div class="col-2 badge d-flex align-items-center">
-                    <span class="badge text-bg-danger rounded-pill fw-normal"
-                      >انتهى الوقت</span
-                    >
+                    <span class="badge text-secondary {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) <= 2 ? 'bg-danger' : 'bg-warning' }} rounded-pill fw-normal">
+                        {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) }} أيام
+                    </span>
                   </div>
                 </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/06.png" />
-                    بن مايسترو
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    <i
-                      title="طلب دعم"
-                      class="fa-solid fa-sack-dollar text-success fs-5 me-2"
-                    ></i
-                    >مشاهدة فيلم ديزني فروزن
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span class="badge text-bg-warning rounded-pill fw-normal"
-                      >2 يوم وتنتهي</span
-                    >
-                  </div>
-                </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/03.png" />
-                    طعم السعادة
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    قراءة كتاب الأميرات السبع والأقزام
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span class="badge text-bg-warning rounded-pill fw-normal"
-                      >5 يوم وتنتهي</span
-                    >
-                  </div>
-                </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/04.png" />
-                    النسور للقهوة
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    رسم على الوجوه
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span
-                      class="badge text-secondary bg-secondary-subtle rounded-pill fw-normal"
-                      >على وشك</span
-                    >
-                  </div>
-                </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/02.png" />
-                    مد - مقهى ومحمصة
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    هنا اسم الفعالية
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span
-                      class="badge text-secondary bg-secondary-subtle rounded-pill fw-normal"
-                      >على وشك</span
-                    >
-                  </div>
-                </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/01.png" />
-                    مقهى المعرفة
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    مراجعة كتاب محاط بالحمقى
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span
-                      class="badge text-secondary bg-secondary-subtle rounded-pill fw-normal"
-                      >على وشك</span
-                    >
-                  </div>
-                </div>
-                <div class="order row">
-                  <div class="col-3 partner">
-                    <img alt="" src="../../img/logos/05.png" />
-                    صحارى كافيه
-                  </div>
-                  <div class="col-2 number d-flex align-items-center">
-                    230045869
-                  </div>
-                  <div class="col-5 title d-flex align-items-center">
-                    قراءة رواية الأميرة والوحش
-                  </div>
-                  <div class="col-2 badge d-flex align-items-center">
-                    <span
-                      class="badge text-secondary bg-secondary-subtle rounded-pill fw-normal"
-                      >على وشك</span
-                    >
-                  </div>
-                </div>
+                @endforeach
               </div>
             </div>
           </div>
@@ -474,7 +329,7 @@
           class="car0d-header pb-0 d-flex align-items-center justify-content-between"
         >
           <h6 class="mb-3 pb-0 pe-0 mb-0 d-flex align-items-center">
-                أنشط {{ $partners_counter}} شركاء من أصل {{ $partners->count() }}
+            أنشط {{ $partners->count() }} شركاء من أصل {{ $partners_counter }}
           </h6>
           <select
             class="mt-3 me-3 px-2 py-1 rounded border-secondary-subtle d-none"
