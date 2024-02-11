@@ -54,7 +54,7 @@ use Illuminate\Validation\Rules\Password;
     {
         return [
             'name' => 'required|string|max:255',
-            'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9}$/',
+            'phone' => 'required|regex:/^\+\d{1,4}\s?\d{1,14}$/',
             'email' => 'required|email|max:255',
             'nationality' => 'required|string|max:255',
             'type' => 'required|in:كاتب,ناشط ثقافي',
