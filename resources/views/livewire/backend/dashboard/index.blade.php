@@ -474,7 +474,7 @@
           class="car0d-header pb-0 d-flex align-items-center justify-content-between"
         >
           <h6 class="mb-3 pb-0 pe-0 mb-0 d-flex align-items-center">
-            أنشط 10 شركاء من أصل 237
+                أنشط {{ $partners_counter}} شركاء من أصل {{ $partners->count() }}
           </h6>
           <select
             class="mt-3 me-3 px-2 py-1 rounded border-secondary-subtle d-none"
@@ -491,96 +491,33 @@
         <div class="card-body d-flex flex-column justify-content-start">
           <div class="activePartners">
             <div class="scroller">
-              <div class="partner">
-                <div class="head">مقهى المعرفي</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/01.png')"
-                  ></div>
-                </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
 
-              <div class="partner">
-                <div class="head">مُد مقهى ومحمصة</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/02.png')"
-                  ></div>
-                </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
+              @foreach($partners as $partner)
 
-              <div class="partner">
-                <div class="head">طعم السعادة</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/03.png')"
-                  ></div>
-                </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
+              @php
 
-              <div class="partner">
-                <div class="head">النسور للقهوة</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/04.png')"
-                  ></div>
-                </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
+                if ($partner->fileable) {
+                    $partnerImage = $partner->fileable->path 
+                    ? asset('https://nextlevel.ams3.digitaloceanspaces.com/' . $partner->owner->fileable->path) 
+                    : asset('img/default_avatar.png');
+                }
+                else {
+                    $partnerImage = asset('img/default_avatar.png');
+                }  
+              @endphp
 
-              <div class="partner">
-                <div class="head">صحارى كافيه</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/05.png')"
-                  ></div>
+                <div class="partner">
+                  <div class="head">{{$partner->name}}</div>
+                  <div class="body">
+                    <div style="background-image: url('{{ $partnerImage }}')"></div>
+                  </div>
+                  <div class="foot">
+                    <span><small>الفعاليات</small>46</span>
+                    <span><small>الحاضرين</small>2,397</span>
+                  </div>
                 </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
+              @endforeach
 
-              <div class="partner">
-                <div class="head">بن مايسترو</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/06.png')"
-                  ></div>
-                </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
-
-              <div class="partner">
-                <div class="head">مقهى المعرفي</div>
-                <div class="body">
-                  <div
-                    style="background-image: url('../../img/logos/01.png')"
-                  ></div>
-                </div>
-                <div class="foot">
-                  <span><small>الفعاليات</small>46</span>
-                  <span><small>الحاضرين</small>2,397</span>
-                </div>
-              </div>
             </div>
           </div>
         </div>

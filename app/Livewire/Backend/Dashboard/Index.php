@@ -11,6 +11,7 @@ class Index extends Component
     public $event_counter;
     public $chart_one = [];
     public $partners = [];
+    public $partners_counter;
 
     public function mount()
     {
@@ -20,6 +21,8 @@ class Index extends Component
         ->whereHas('owner.permits')
         ->take(10)
         ->get();
+
+        $this->partners_counter = Partner::count();
     }
     public function render()
     {
