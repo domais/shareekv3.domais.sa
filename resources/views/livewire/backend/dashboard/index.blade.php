@@ -678,7 +678,7 @@
             });
   
             var customText = (chart.myCustomText = chart.renderer
-              .text("234" + "<br>ألف", chart.plotWidth / 2, chart.plotHeight / 2)
+              .text("{{$support_counter}}" + "<br>", chart.plotWidth / 2, chart.plotHeight / 2)
               .css({
                 fontSize: "16px",
                 "text-align": "center",
