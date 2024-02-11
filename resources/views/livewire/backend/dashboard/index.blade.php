@@ -376,8 +376,8 @@
                     <div style="background-image: url('{{ $partnerImage }}')"></div>
                   </div>
                   <div class="foot">
-                    <span><small>الفعاليات</small>{{$partner->events->count()}}</span>
-                    <span><small>الحاضرين</small>{{$partner->events->sum(function ($event) { return $event->guests->count(); })}}</span>
+                    <span><small>الفعاليات</small>{{$partner->owner->events->count()}}</span>
+                    <span><small>الحاضرين</small>{{$partner->owner->events->sum(function ($event) { return $event->guests->count(); })}}</span>
                   </div>
                 </div>
               @endforeach
