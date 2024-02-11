@@ -37,7 +37,7 @@ class PartnerExcel implements FromCollection, WithHeadings
             'المدينة',
             'الفئة',
             'الدعم المتبقي',
-            'اسم المالك',
+            'اسم المسؤول',
             'عدد التصاريح',
             'عدد الفعاليات',
         ];
