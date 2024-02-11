@@ -185,14 +185,14 @@
               style="background-image: url('../../img/corner-1.png')"
             ></div>
             <div class="card-body position-relative d-flex align-items-center">
-              <a class="text-dark fs-5 text-decoration-none" href="?p=map"
+              <a class="text-dark fs-5 text-decoration-none" href="#"
                 ><img
                   alt=""
                   src="../../img/3DMarker.png"
                   height="150"
                   class="me-5 ms-3"
               /></a>
-              <a class="text-dark fs-5 text-decoration-none" href="?p=map"
+              <a class="text-dark fs-5 text-decoration-none" href="#"
                 >شاهد توزيع الفعاليات على الخريطة</a
               >
             </div>
