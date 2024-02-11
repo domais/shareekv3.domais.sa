@@ -223,7 +223,7 @@
           class="card-header pb-0 d-flex align-items-center justify-content-between"
         >
           <h6 class="p-3 pb-0 pe-0 mb-0 d-flex align-items-center">
-            عدد الفعاليات الشهرية حسب الجنس
+            عدد الفعاليات الشهرية حسب المناطق
           </h6>
           <select class="mt-3 me-3 px-2 py-1 rounded border-secondary-subtle">
             <option selected>اختر الفترة ...</option>
@@ -376,8 +376,8 @@
                     <div style="background-image: url('{{ $partnerImage }}')"></div>
                   </div>
                   <div class="foot">
-                    <span><small>الفعاليات</small>46</span>
-                    <span><small>الحاضرين</small>2,397</span>
+                    <span><small>الفعاليات</small>{{$partner->events->count()}}</span>
+                    <span><small>الحاضرين</small>{{$partner->events->sum(function ($event) { return $event->guests->count(); })}}</span>
                   </div>
                 </div>
               @endforeach
