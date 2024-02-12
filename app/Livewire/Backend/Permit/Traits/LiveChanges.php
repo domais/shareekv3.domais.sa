@@ -242,6 +242,8 @@ trait LiveChanges
                         $permitData['user_id'] = $permit->user_id;                        
                     }
                     $permit->update($permitData);
+                    
+                    dd("test");
                 }
 
                 
