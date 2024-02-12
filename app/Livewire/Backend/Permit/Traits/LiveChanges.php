@@ -402,6 +402,8 @@ trait LiveChanges
 
 
 
+            $user = auth()->user();
+
 
 
             foreach ($speakers as $key => $item) {
@@ -415,7 +417,11 @@ trait LiveChanges
                 $speaker->instagram = $item['instagram'];
                 $speaker->twitter = $item['twitter'];
                 $speaker->linkedin = $item['linkedin'];
-                $speaker->partner_id = auth()->user()->owner->id;
+                if ($user->hasRole('SuperAdmin')) {
+                    $speaker->partner_id = $permit->user->owner->id;
+                } else {
+                    $speaker->partner_id = $user->owner->id;
+                }
                 $speaker->reservations = $item['reservations'];
                 $speaker->reward = $item['reward'];
                 $speaker->save();
@@ -424,7 +430,12 @@ trait LiveChanges
             foreach ($partnerships as $key => $item) {
                 $parntership = new Partnership();
                 $parntership->permit_id = $permit->id;
-                $parntership->partner_id = auth()->user()->owner->id;
+                
+                if ($user->hasRole('SuperAdmin')) {
+                    $parntership->partner_id = $permit->user->owner->id;
+                } else {
+                    $parntership->partner_id = $user->owner->id;
+                }
 
                 $parntership->name = $item['name'];
                 $parntership->type = $item['type'];
