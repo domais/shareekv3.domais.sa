@@ -248,6 +248,11 @@ trait LiveChanges
 
 
                 if($from_support) {
+
+                    if (auth()->user()->hasRole('SuperAdmin')) {
+                        $permit->user->owner->points = $permit->user->owner->points + $permit->points;
+                    }
+                    
                     $permit->user->owner->points = $permit->user->owner->points - $counter_speakers;
                     if ($permit->user->owner->points < 0) {
                         throw new \Exception('عفواً .. لقد استهلكت كامل رصيدك للدعم اللوجستي');
