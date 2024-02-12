@@ -8,11 +8,10 @@
 >
 
 	<div class="col-7">
-		@if (auth()->user()->hasRole('SuperAdmin'))
+		@if (auth()->user()->hasRole('SuperAdmin') && Route::currentRouteName() != 'permit.edit')
 			<div class="row my-3">
 				<div class="col-3 d-flex align-items-center">الشريك</div>
-				<div class="col-9">{{ optional($this->permit->user->owner)->name }} / {{ $this->permit->user->name }}</div>
-								<!-- Rahmani: Fix this -->
+				<div class="col-9">{{ optional(optional($this->permit->user)->owner)->name }} / {{ optional($this->permit->user)->name }}</div>								<!-- Rahmani: Fix this -->
 			</div>
 		@endif
 
