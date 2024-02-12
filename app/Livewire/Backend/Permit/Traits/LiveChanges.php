@@ -68,7 +68,7 @@ trait LiveChanges
             // Added by Domais
             $user = auth()->user();
 
-            if ($user->hasRole('superAdmin')) {
+            if ($user->hasRole('SuperAdmin')) {
                 $user = $this->permit->user;
             }
             $partner = Partner::where('owner_id', $user->id)->first();
@@ -237,11 +237,9 @@ trait LiveChanges
 
                     $permitData['status_id'] = $permit->status_id == 10 ? 3 : $permit->status_id;
 
-                    if (auth()->user()->hasRole('superAdmin')) {
+                    if (auth()->user()->hasRole('SuperAdmin')) {
                         # code...
-                        $permitData['user_id'] = $permit->user_id;
-                        dd($permitData,$permit);
-                        
+                        $permitData['user_id'] = $permit->user_id;                        
                     }
                     $permit->update($permitData);
                 }
