@@ -146,7 +146,7 @@ class Inputs extends Component
         $permitData = $this->form->toArray();
             
             try {
-                $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit);
+                $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit,null,true);
             } catch (\Exception $e) {
                 $this->errors = [$e->getMessage()];
                 return;

@@ -255,6 +255,7 @@ trait LiveChanges
                 }
                 $permit->user->owner->save();
                 $permit->points = $counter_speakers;
+                
                 $permit->save();
                 $permit->speakers()->delete();
                 $permit->partnerships()->delete();
