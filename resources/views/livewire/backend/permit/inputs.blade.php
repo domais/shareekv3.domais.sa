@@ -53,6 +53,13 @@
 				@if (!$this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
 					<button class="btn btn-secondary" wire:click="updatePermit" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
+				@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin') && $this->permit->status_id < 5)
+				<a class="link-body-emphasis text-decoration-none" href="{{route('permit.edit',['order_number' => $this->permit->order_number])}}">
+					التعديل الشامل
+				</a>
+
+				@endif
+
 
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
 					<button class="btn btn-secondary" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
