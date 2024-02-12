@@ -143,6 +143,7 @@ class Inputs extends Component
 
     public function updatePermit()
     {
+        dd('test');
         $permitData = $this->form->toArray();
             
             try {
@@ -152,7 +153,6 @@ class Inputs extends Component
                 return;
             } 
 
-            dd("hello worl");
 
     }
 

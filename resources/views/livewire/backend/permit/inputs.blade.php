@@ -51,7 +51,7 @@
 				@endif
 
 				@if (!$this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
-					<button class="btn btn-secondary" wire:click="updatePermit()" wire:loading.attr="disabled">إرسال الطلب</button>
+					<button class="btn btn-secondary" wire:click="updatePermit" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
 
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
