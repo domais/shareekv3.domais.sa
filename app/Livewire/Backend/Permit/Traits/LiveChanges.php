@@ -240,6 +240,7 @@ trait LiveChanges
                     if (auth()->user()->hasRole('superAdmin')) {
                         # code...
                         $permitData['user_id'] = $permit->user_id;
+                        dd($permitData,$permit);
                         
                     }
                     $permit->update($permitData);
