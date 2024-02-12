@@ -237,7 +237,11 @@ trait LiveChanges
 
                     $permitData['status_id'] = $permit->status_id == 10 ? 3 : $permit->status_id;
 
-                    dd($permitData,$permit);
+                    if (auth()->user()->hasRole('superAdmin')) {
+                        # code...
+                        $permitData['user_id'] = $this->permit->user_id;
+                        
+                    }
                     $permit->update($permitData);
                 }
 
