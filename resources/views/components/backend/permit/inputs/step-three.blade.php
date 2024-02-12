@@ -96,7 +96,7 @@ x-data="{
                     <div class="card p-2 mx-1 mb-2">
                         <div class="card-body d-flex justify-space-between align-items-center p-0">
                             <a role="button" class="card-title float-start mb-0 me-auto cursor-pointer text-decoration-none me-3" x-text="speaker.name" @click="openModal(index)" style="color: black; transition: color 0.3s ease; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#speakerdetails"></a>
-                            @if ( Route::currentRouteName() != 'permit.edit') 
+                            @if ( Route::currentRouteName() != 'permit.edit' || auth()->user()->hasRole('SuperAdmin'))
                                 <div class="float-end d-flex align-items-center">
                                     <div class="form-check form-switch">
                                         <input class="form-check-input " type="checkbox" role="switch" :id="'flexSwitchCheckDefault' + index + '_1'" x-model="speaker.reward" x-on:change="changeStatus(index, 'reward')">
