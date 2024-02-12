@@ -242,8 +242,6 @@ trait LiveChanges
                         $permitData['user_id'] = $permit->user_id;                        
                     }
                     $permit->update($permitData);
-                    
-                    dd("test");
                 }
 
                 
@@ -430,7 +428,7 @@ trait LiveChanges
             foreach ($partnerships as $key => $item) {
                 $parntership = new Partnership();
                 $parntership->permit_id = $permit->id;
-                
+
                 if ($user->hasRole('SuperAdmin')) {
                     $parntership->partner_id = $permit->user->owner->id;
                 } else {
