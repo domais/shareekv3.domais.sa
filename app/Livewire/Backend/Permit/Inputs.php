@@ -152,6 +152,8 @@ class Inputs extends Component
                 return;
             } 
 
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
 
     }
 
