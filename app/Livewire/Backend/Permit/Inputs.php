@@ -151,7 +151,8 @@ class Inputs extends Component
                 $this->errors = [$e->getMessage()];
                 return;
             } 
-            $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
+            dd("hello worl");
 
     }
 
