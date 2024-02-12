@@ -141,6 +141,20 @@ class Inputs extends Component
         $this->redirect(route('event.index'));
     }
 
+    public function updatePermit()
+    {
+        $permitData = $this->form->toArray();
+            
+            try {
+                $this->savePermit($permitData, $this->speakers, $this->partnerships, $this->permit);
+            } catch (\Exception $e) {
+                $this->errors = [$e->getMessage()];
+                return;
+            } 
+            $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
+
+    }
+
     public function mount()
     {
         $this->permit = Permit::where('order_number', $this->order_number)->first();
