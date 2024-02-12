@@ -51,14 +51,14 @@ trait LiveChanges
             $startDate = Carbon::parse($this->form->start_date);
             $now = Carbon::now();
     
-            if ($status == 'reservations' && $now->diffInDays($startDate) < 10) {
+            if ($status == 'reservations' && $now->diffInDays($startDate) < 10 && auth()->user()->hasRole('User')) {
                 $this->speakers[$index]['reservations'] = false;
                 $validator = Validator::make([], []); // empty data and rules
                 $validator->errors()->add('start_date', 'لا يمكنك طلب الدعم اللوجيستي إلا إذا كان تاريخ بداية المبادرة بعد 10 أيام على الأقل');
                 throw new ValidationException($validator);
             }
     
-            if ($status == 'reward' && $now->diffInDays($startDate) < 2) {
+            if ($status == 'reward' && $now->diffInDays($startDate) < 2 && auth()->user()->hasRole('User')) {
                 $this->speakers[$index]['reward'] = false;
                 $validator = Validator::make([], []); // empty data and rules
                 $validator->errors()->add('start_date', 'لا يمكنك  طلب المكافأة إلا إذا كان تاريخ بداية المبادرة بعد يومين  على الأقل');
@@ -67,6 +67,10 @@ trait LiveChanges
 
             // Added by Domais
             $user = auth()->user();
+
+            if ($user->hasRole('superAdmin')) {
+                $user = $this->permit->user;
+            }
             $partner = Partner::where('owner_id', $user->id)->first();
             $speakersWithRewardOrReservation = array_filter($this->speakers, function ($speaker) {
                 return $speaker['reward'] == true || $speaker['reservations'] == true;
