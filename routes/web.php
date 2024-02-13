@@ -128,7 +128,7 @@ require __DIR__ . '/auth.php';
 
 Route::get('/test', function () {
 
-    $token = md5(uniqid(rand(), true));
+   /* $token = md5(uniqid(rand(), true));
     $event = Event::findorfail(1);
     $speaker = $event->speakers->first();
 
