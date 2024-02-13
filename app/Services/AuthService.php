@@ -90,7 +90,7 @@ class AuthService implements AuthServiceInterface
             'expires_at' => now()->addMinutes(5),
             'token' => Str::random(32),
             'is_verified' => false,
-            'code' => rand(1000, 9999),
+            'code' => rand(10000, 99999),
         ]);
     }
 
