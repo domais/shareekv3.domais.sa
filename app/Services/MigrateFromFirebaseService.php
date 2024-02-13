@@ -79,7 +79,7 @@ class MigrateFromFirebaseService
         }
 
         if (isset($email) && $email && $user->wasRecentlyCreated) {
-            Mail::to($user)->send(new UpdatePasswordMail(@$user->name,  $user->email, $randomPassword));
+            Mail::to($user->email)->send(new UpdatePasswordMail(@$user->name,  $user->email, $randomPassword));
         }
 
         \Log::info('User: #' . $user->id . ' ' . $user->email);

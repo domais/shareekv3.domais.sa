@@ -28,7 +28,7 @@ function ChangePermitStatus($permit)
         case 3:
             $user = $permit->user->email;
             Mail::to($user)
-                ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+                ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
                 ->send(new ChangeStatus($data));
             break;
 
@@ -37,7 +37,7 @@ function ChangePermitStatus($permit)
             $user = $permit->user->email;
 
             Mail::to($user)
-                ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+                ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
                 ->send(new ChangeStatus($data));
         break;
     }

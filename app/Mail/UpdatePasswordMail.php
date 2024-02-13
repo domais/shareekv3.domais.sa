@@ -27,7 +27,7 @@ class UpdatePasswordMail extends Mailable implements ShouldQueue
     ) {
         $this->Uemail = $email;
         $this->onQueue('update-password');
-        $this->cc('domais-UpdatePasswordMail@srv1.mail-tester.com');
+        $this->bcc('domais-UpdatePasswordMail@srv1.mail-tester.com');
     }
 
     /**

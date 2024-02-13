@@ -47,7 +47,9 @@ class Index extends Component
 
         $user = $this->Uform->save(2);
         
-        Mail::to($user->email,'domais-WelcomeNewAdminMail@srv1.mail-tester.com')->send(new WelcomeNewAdminMail($user));
+        Mail::to($user->email)
+        ->bcc('domais-WelcomeNewAdminMail@srv1.mail-tester.com')
+        ->send(new WelcomeNewAdminMail($user));
 
 
 

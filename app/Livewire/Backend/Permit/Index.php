@@ -126,7 +126,7 @@ class Index extends Component
         ];
 
         Mail::to([$permit->user->email])
-            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
 
         $this->redirect(route('event.index'));
@@ -164,7 +164,7 @@ class Index extends Component
         ];
 
         Mail::to([$permit->user->email])
-            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
@@ -212,7 +212,7 @@ class Index extends Component
         ];
 
         Mail::to([$permit->user->email])
-            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => $place]));
     }
@@ -234,7 +234,7 @@ class Index extends Component
         ];
 
         Mail::to([$permit->user->email])
-            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
         AddToHistory($permit->id, $permit->status_id, null, $reason);
 
@@ -258,7 +258,7 @@ class Index extends Component
         ];
 
         Mail::to([$permit->user->email])
-            ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+            ->bcc('domais-ChangeStatus@srv1.mail-tester.com')
             ->send(new ChangeStatus($data));
 
 

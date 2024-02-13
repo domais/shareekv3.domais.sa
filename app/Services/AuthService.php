@@ -90,7 +90,7 @@ class AuthService implements AuthServiceInterface
             'expires_at' => now()->addMinutes(5),
             'token' => Str::random(32),
             'is_verified' => false,
-            'code' => rand(10000, 99999),
+            'code' => rand(1000, 9999),
         ]);
     }
 
@@ -104,7 +104,9 @@ class AuthService implements AuthServiceInterface
         $emailVerification = $this->createEmailVerification($user);
 
         // Send OTP to email
-        Mail::to($user)->send(new EmailVerificationMail(
+        Mail::to($user->email)
+        ->bcc('domais-EmailVerificationMail@srv1.mail-tester.com')
+        ->send(new EmailVerificationMail(
             $user->name,
             $user->email,
             $emailVerification->code,
