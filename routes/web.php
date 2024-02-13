@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\SurveyController;
+use App\Mail\SurveyMail;
+use App\Models\Event;
 use App\Models\Survey;
 
 /*
@@ -125,6 +127,15 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('/test', function () {
+
+    $token = md5(uniqid(rand(), true));
+    $event = Event::findorfail(1);
+    $speaker = $event->speakers->first();
+
+
+    Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'speaker'));
+
+    dd('done');
 
     // delete any job name migrate-guests
     // $job = \DB::table('jobs')->where('queue', 'migrate-guests')->delete();
