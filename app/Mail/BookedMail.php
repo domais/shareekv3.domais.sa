@@ -30,7 +30,7 @@ class BookedMail extends Mailable implements ShouldQueue
     ) {
         $this->Uemail = $email;
 
-        $this->cc('domais-BookedMail@srv1.mail-tester.com');
+        // $this->cc('domais-BookedMail@srv1.mail-tester.com');
 
         // Rahmani: نحتاج نناقش هذا الشي
         // Email::create([

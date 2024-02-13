@@ -28,7 +28,7 @@ class ThanksMail extends Mailable implements ShouldQueue
     )
     {
         $this->Uemail = $email;
-        $this->cc('domais-ThanksMail@srv1.mail-tester.com');
+        // $this->cc('domais-ThanksMail@srv1.mail-tester.com');
 
     }
 
