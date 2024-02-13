@@ -19,7 +19,7 @@ use App\Models\Survey;
 */
 
 Route::get('/', function () {
-    return redirect('https://app.myeventksa.com');
+    return redirect()->route('permit.index');
 });
 
 // Survey Guest, Speaker /survey/guest/{token} /survey/speaker/{token}
