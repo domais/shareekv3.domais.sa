@@ -95,7 +95,7 @@ $watch('location',
     }
 </style>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=start&key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&language=ar&region=SA">
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=start&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA">
 </script>
 <script>
     let map;
