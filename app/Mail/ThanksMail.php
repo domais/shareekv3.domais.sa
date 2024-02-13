@@ -38,7 +38,7 @@ class ThanksMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'جسر الثقاقة'),
+            from: new Address(config('mail.from.address'), 'جسر الثقافة'),
             subject: 'تأكيد التسجيل',
         );
     }

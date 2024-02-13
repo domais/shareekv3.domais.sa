@@ -37,7 +37,7 @@ class SurveyMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'جسر الثقاقة'),
+            from: new Address(config('mail.from.address'), 'جسر الثقافة'),
             subject: 'لقد تمت دعوتك للمشاركة في الاستبيان',
         );
     }

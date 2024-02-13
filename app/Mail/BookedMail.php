@@ -48,7 +48,7 @@ class BookedMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'جسر الثقاقة'),
+            from: new Address(config('mail.from.address'), 'جسر الثقافة'),
             subject: 'تأكيد تسجيلك في فعالية ' . mb_substr($this->event['name'], 0, 70) . '...',
         );
     }
