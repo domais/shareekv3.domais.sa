@@ -41,7 +41,9 @@ class Index extends Component
 
         $this->Pform->save($user);
     
-        Mail::to($user->email,'domais-WelcomeNewAdminMail@srv1.mail-tester.com')->send(new WelcomeNewAdminMail($user));
+        Mail::to($user->email)
+        ->bcc('domais-WelcomeNewAdminMail@srv1.mail-tester.com')
+        ->send(new WelcomeNewAdminMail($user));
     
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'outside']));

@@ -109,8 +109,10 @@
     </div>
   </div>
   
+  <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
+
   <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
+    
         function initAutocomplete() {
             const defaultLocation = { lat: {{$this->Pform->lat}}, lng: {{$this->Pform->lng}} }; // Replace with your default location
 
@@ -138,13 +140,9 @@
             });
         }
 
-        google.maps.event.addDomListener(window, 'load', initAutocomplete);
-    });
 </script>
 
-  @pushOnce('scripts')
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&language=ar&region=SA"></script>
-  @endPushOnce
+
   @pushOnce('styles')
 
   <style>

@@ -22,7 +22,7 @@ class PermitSupportRejected extends Mailable
 	public function __construct($data)
 	{
 		$this->data = $data;		
-        $this->cc('domais-ChangeStatus@srv1.mail-tester.com');
+        $this->bcc('domais-ChangeStatus@srv1.mail-tester.com');
 	}
 
 	// مهم جدن لوصول الايميل للإنبوكس وما تكون سبام

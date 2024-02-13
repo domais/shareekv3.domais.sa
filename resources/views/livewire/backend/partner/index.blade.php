@@ -111,6 +111,8 @@
 
 </div>
 
+<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
+
 <script>
     function initAutocomplete() {
         const input = document.getElementById('partnerLat');
@@ -150,12 +152,7 @@
         });
     }
 
-    initAutocomplete();
 </script>
-
-@pushOnce('scripts')
-<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyA1Nkm7JLvCWyiVaU4lTFbg8wCBFrgtQTo&language=ar&region=SA"></script>
-@endPushOnce
 
 @pushOnce('styles')
     

@@ -23,7 +23,7 @@ class ReminderToCloseEmail extends Mailable implements ShouldQueue
     {
         $this->Uemail = $email;
         $this->order_number = $order_number;
-        $this->cc('domais-SurveyMail@srv1.mail-tester.com');
+        $this->bcc('domais-SurveyMail@srv1.mail-tester.com');
     }
 
     /**

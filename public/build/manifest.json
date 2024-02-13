@@ -3,13 +3,18 @@
     "css": [
       "assets/app-QIo8MdOz.css"
     ],
-    "file": "assets/app-2rceEVpm.js",
+    "file": "assets/app-703uH7yM.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
   "resources/scss/app.scss": {
-    "file": "assets/app-Nr7hGgL2.css",
+    "file": "assets/app-2xuV7CQ9.css",
     "isEntry": true,
     "src": "resources/scss/app.scss"
+  },
+  "resources/scss/tailwind.scss": {
+    "file": "assets/tailwind-bzF13CsA.css",
+    "isEntry": true,
+    "src": "resources/scss/tailwind.scss"
   }
 }

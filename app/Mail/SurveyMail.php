@@ -28,7 +28,7 @@ class SurveyMail extends Mailable implements ShouldQueue
         public $type
     ) {
         $this->Uemail = $user->email;
-        $this->cc('domais-SurveyMail@srv1.mail-tester.com');
+        // $this->cc('domais-SurveyMail@srv1.mail-tester.com');
     }
 
     /**
@@ -37,7 +37,7 @@ class SurveyMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(config('mail.from.address'), 'جسر الثقاقة'),
+            from: new Address(config('mail.from.address'), 'جسر الثقافة'),
             subject: 'لقد تمت دعوتك للمشاركة في الاستبيان',
         );
     }
