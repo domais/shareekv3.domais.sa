@@ -127,7 +127,7 @@ require __DIR__ . '/auth.php';
 
 
 Route::get('/test', function () {
-
+/*
     $token = md5(uniqid(rand(), true));
     $event = Event::findorfail(1);
     $speaker = $event->guestsGoing->first();
@@ -138,7 +138,7 @@ Route::get('/test', function () {
 
 
     dd('done');
-
+*/
     // delete any job name migrate-guests
     // $job = \DB::table('jobs')->where('queue', 'migrate-guests')->delete();
     // $jobFail = \DB::table('failed_jobs')->delete();
