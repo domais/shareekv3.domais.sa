@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
+  <script async src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', (event) => {
