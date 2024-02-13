@@ -128,16 +128,16 @@ require __DIR__ . '/auth.php';
 
 Route::get('/test', function () {
 
-   /* $token = md5(uniqid(rand(), true));
+    $token = md5(uniqid(rand(), true));
     $event = Event::findorfail(1);
-    $speaker = $event->speakers->first();
+    $speaker = $event->guestsGoing->first();
 
 
-    Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'speaker'));
-    Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'speaker'));
+  //  Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'speaker'));
+    Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'guest'));
 
 
-    dd('done');*/
+    dd('done');
 
     // delete any job name migrate-guests
     // $job = \DB::table('jobs')->where('queue', 'migrate-guests')->delete();
