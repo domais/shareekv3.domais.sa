@@ -17,9 +17,9 @@ class EventResource extends JsonResource
     {
         $image = $this->permit->fileable->where('use', 'adv')->last()->path ?? '';
         if ($image) {
-            $image = url('img/default-event.png');
-        } else {
             $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
+        } else {
+            $image = url('img/default-event.png');
         }
 
         $partnerLogo = $this->user->owner->image->path ?? '';

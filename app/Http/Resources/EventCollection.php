@@ -20,10 +20,10 @@ class EventCollection extends ResourceCollection
             $isDefault = false;
             $image = $event->permit->fileable->where('use', 'adv')->last()->path ?? '';
             if ($image) {
-                $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
-            } else {
                 $isDefault = true;
                 $image = url('img/default-event.png');
+            } else {
+                $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
             }
 
             $partnerLogo = $event->user->owner->image->path ?? '';
