@@ -162,14 +162,14 @@
 				@if ($this->is_show_page)
 					<div class="DropArea" style="height: 360px;background:none ">
 						<a target="_tab" href="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
-							<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+							<img id="AdvImg" class="w-100" src="{{ $data->fileable()->where('use','adv')->get()->last()  ? env('DO_CDN_ENDPOINT') . '/' . $data->fileable()->where('use','adv')->get()->last()->path  : '' }}">
 						</a>
 					</div>
 				@else
 					<input type="file" class="style image mx-auto mb-3" id="AdvImg_input">
 					@if ($this->permit)
 						<div class="DropArea" style="height: 360px">
-							<img id="AdvImg" class="w-100" src="{{ $this->permit->fileable->where('use', 'adv')->first() ? env('DO_CDN_ENDPOINT') . '/' . $this->permit->fileable->where('use', 'adv')->first()->path : '' }}">
+							<img id="AdvImg" class="w-100" src="{{ $data->fileable()->where('use','adv')->get()->last()  ? env('DO_CDN_ENDPOINT') . '/' . $data->fileable()->where('use','adv')->get()->last()->path : '' }}">
 						</div>
 					@else
 						<div class="DropArea" style="height: 360px">
