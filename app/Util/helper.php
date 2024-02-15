@@ -289,7 +289,7 @@ function ArToEn($input) {
 					Cache::forget('admins');
 				} else {
 					return Cache::rememberForever('admins', function () {
-					 $users =  Role::where('name', 'Adminstrator')->first()->users;
+						return Role::where('name', 'Adminstrator')->first()->users;
 					});
 				}    
 			break;
