@@ -52,6 +52,7 @@ class EventCollection extends ResourceCollection
                 'available_seats' => $event->available_seats,
                 'guest_count' => $event->guestsGoing->count(),
                 'goings' => $event->guestsGoing->pluck('id'),
+                'guest_approved' => $event->guestsGoing->where('id', auth()->id())->first()?->pivot->status === 'approved',
                 'partner' => [
                     'logo' => $partnerLogo,
                     'name' => $event->user->owner->name ?? '',
