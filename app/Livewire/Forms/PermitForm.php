@@ -73,7 +73,7 @@ class PermitForm extends Form
         $this->lat = $data->lat;
         $this->lng = $data->lng;
 
-        dd($data->fileable()->where('use','adv')->get(),$data);
+        dd($data->fileable()->where('use','adv')->get()->last(),$data);
 
         $this->image_adv = $data->fileable()->where('use','adv')->latest()->first() ? 'public/'.$data->fileable()->where('use','adv')->latest()->first()->path : "";
         if ($data->event_location == 2) {
