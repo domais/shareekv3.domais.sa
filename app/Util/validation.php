@@ -29,7 +29,7 @@ use Illuminate\Validation\Rules\Password;
             'event_type_id' => 'required|exists:event_types,id',
             'event_location' => 'required|in:1,2,3',
             'meeting_link' => 'nullable|required_if:event_location,3|url|max:255',
-            'literary_id' => 'nullable|exists:literaries,id',
+            'literary_id' => 'nullable|required_if:event_type_id,1|exists:literaries,id',
             'status_id' => 'required|exists:statuses,id',
             'description' => 'required',
             'start_date' => 'required|date',
