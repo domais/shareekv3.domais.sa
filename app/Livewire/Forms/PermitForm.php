@@ -73,12 +73,12 @@ class PermitForm extends Form
         $this->lat = $data->lat;
         $this->lng = $data->lng;
 
-        $this->image_adv = $data->fileable->where('use','adv')->first() ? 'public/'.$data->fileable->where('use','adv')->first()->path : "";
+        $this->image_adv = $data->fileable->where('use','adv')->first() ? 'public/'.$data->fileable->where('use','adv')->latest()->first()->path : "";
         if ($data->event_location == 2) {
             # code...
-            $this->location_image = $data->fileable->where('use','location_image')->latest() ? 'public/'.$data->fileable->where('use','location_image')->first()->path : "";
+            $this->location_image = $data->fileable->where('use','location_image')->latest()->first() ? 'public/'.$data->fileable->where('use','location_image')->latest()->first()->path : "";
 
-            $this->approval_file = $data->fileable->where('use','approval_letter')->latest() ? 'public/'.$data->fileable->where('use','approval_letter')->first()->path : "";
+            $this->approval_file = $data->fileable->where('use','approval_letter')->latest()->first() ? 'public/'.$data->fileable->where('use','approval_letter')->latest()->first()->path : "";
         }
 
 
