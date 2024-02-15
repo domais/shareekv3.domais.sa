@@ -14,6 +14,7 @@
                         <th scope="col">الجوال</th>
                         <th scope="col">الجنس</th>
                         <th scope="col">الفئة العمرية</th>
+                        <th scope="col">النوع</th>
                         <th scope="col">الحالة</th>
                         </tr>
                     </thead>
@@ -28,7 +29,10 @@
                             <td>{{$guest->getAge()}}
                             <td>
                             <div class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">
-                                {{$guest->pivot->type === 'going' ? 'حاضر' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}
+                                {{$guest->pivot->type === 'going' ? 'ذاهب' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}
+                            </div>
+                            <div class="badge {{$guest->pivot->status === 'approved' ? 'bg-success' : 'bg-danger'}}">
+                                {{$guest->pivot->status === 'approved' ? 'حاضر' : 'لم يحضر بعد'}}
                             </div>
                         </tr>
                         @endforeach
