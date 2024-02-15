@@ -76,7 +76,7 @@
                     
                 @else
                   <!-- shareek -->
-                @if (havePermission(auth()->user(),$permission))
+                {{-- @if (havePermission(auth()->user(),$permission)) --}}
 
                     @foreach($buttons as $button)
 
@@ -105,7 +105,7 @@
 
                     @endforeach
 
-                @endif
+                {{-- @endif --}}
                     
                 @endif
 
