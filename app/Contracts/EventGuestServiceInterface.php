@@ -26,5 +26,5 @@ interface EventGuestServiceInterface
     /**
      * Attend the event for the user
      */
-    public function attendEvent(\App\Models\User $user, array $data): \Illuminate\Http\JsonResponse;
+    public function attendEvent(\App\Models\User $user, \App\Models\Event $event): \Illuminate\Http\JsonResponse;
 }

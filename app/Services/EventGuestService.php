@@ -123,10 +123,8 @@ class EventGuestService implements EventGuestServiceInterface
     /**
      * Attend the event for the user
      */
-    public function attendEvent(User $user, array $data): \Illuminate\Http\JsonResponse
+    public function attendEvent(User $user, \App\Models\Event $event): \Illuminate\Http\JsonResponse
     {
-        $event = \App\Models\Event::find($data['event_id']);
-
         // if exists, update type to going
         if (!$event->guests()->where('user_id', $user->id)->exists()) {
             return throw new ValidationException('You are not registered for this event');
