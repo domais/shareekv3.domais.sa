@@ -55,8 +55,11 @@ class EventResource extends JsonResource
                         'id' => $guest->id,
                         'name' => $guest->name,
                         'email' => $guest->email,
+                        'status' => $guest->pivot->status,
+                        'type' => $guest->pivot->type,
                     ];
                 }),
+            'guest_approved' => $this->guestsGoing->where('id', auth()->id())->first()?->pivot->status === 'approved',
             'speakers' => $this->speakers->map(function ($speaker) {
                 return [
                     'id' => $speaker->id,
