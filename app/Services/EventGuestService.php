@@ -4,10 +4,11 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Mail\BookedMail;
+use App\Mail\ThanksMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Resources\EventResource;
 use App\Contracts\EventGuestServiceInterface;
-use App\Mail\ThanksMail;
+use Illuminate\Validation\ValidationException;
 
 class EventGuestService implements EventGuestServiceInterface
 {
@@ -41,12 +42,12 @@ class EventGuestService implements EventGuestServiceInterface
             $event->guests()->updateExistingPivot($user->id, ['type' => 'going']);
         } else {
             // else, attach the user to the event
-            $event->guests()->attach($user);
+            $event->guests()->attach($user, ['status' => 'pending']);
         }
 
         Mail::to($user->email)
-        ->bcc('domais-BookedMail@srv1.mail-tester.com')
-        ->send(new BookedMail($event, $user->name, $user->email));
+            ->bcc('domais-BookedMail@srv1.mail-tester.com')
+            ->send(new BookedMail($event, $user->name, $user->email));
 
         return response()->json([
             'message' => 'Event booked successfully',
@@ -91,15 +92,15 @@ class EventGuestService implements EventGuestServiceInterface
             $user = $register->getData()->data->user;
 
             // attach the user to the event
-            $event->guests()->attach($user->id);
-            
-            Mail::to($user->email)
-            ->bcc('domais-ThankyouMail@srv1.mail-tester.com')
-            ->send(new ThanksMail($user->name, $user->email));
+            $event->guests()->attach($user->id, ['status' => 'pending']);
 
             Mail::to($user->email)
-            ->bcc('domais-BookedMail@srv1.mail-tester.com')
-            ->send(new BookedMail($event, $user->name, $user->email));
+                ->bcc('domais-ThankyouMail@srv1.mail-tester.com')
+                ->send(new ThanksMail($user->name, $user->email));
+
+            Mail::to($user->email)
+                ->bcc('domais-BookedMail@srv1.mail-tester.com')
+                ->send(new BookedMail($event, $user->name, $user->email));
 
             \DB::commit();
             return response()->json([
@@ -117,5 +118,25 @@ class EventGuestService implements EventGuestServiceInterface
                 'error' => $th->getMessage(),
             ], 500);
         }
+    }
+
+    /**
+     * Attend the event for the user
+     */
+    public function attendEvent(User $user, array $data): \Illuminate\Http\JsonResponse
+    {
+        $event = \App\Models\Event::find($data['event_id']);
+
+        // if exists, update type to going
+        if (!$event->guests()->where('user_id', $user->id)->exists()) {
+            return throw new ValidationException('You are not registered for this event');
+        }
+
+        $event->guests()->updateExistingPivot($user->id, ['status' => 'approved', 'type' => 'going']);
+
+        return response()->json([
+            'message' => 'Event attended successfully',
+            'data' => new EventResource($event),
+        ], 200);
     }
 }

@@ -65,6 +65,9 @@ Route::prefix('event-guests')
         // middleware guest
         Route::post('/book-as-guest', [\App\Http\Controllers\Api\EventGuestController::class, 'bookAsGuest'])
             ->name('bookAsGuest')->middleware('guest');
+        Route::post('/{event}/attend', [\App\Http\Controllers\Api\EventGuestController::class, 'attend'])
+            ->middleware('auth:sanctum')
+            ->name('attend');
 
 
         // Route::get('test', function () {

@@ -47,4 +47,15 @@ class EventGuestController extends Controller
     {
         return $this->eventGuestService->bookAsGuest($request->all());
     }
+
+    /**
+     * Attend the event for the user
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function attend(Request $request)
+    {
+        $user = $request->user();
+        return $this->eventGuestService->attendEvent($user, $request->all());
+    }
 }

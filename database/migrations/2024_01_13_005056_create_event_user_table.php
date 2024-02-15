@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
 
             $table->enum('type', ['going', 'interested', 'maybe', 'cancelled'])->default('going');
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('approved');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 
             $table->unique(['event_id', 'user_id']);
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');

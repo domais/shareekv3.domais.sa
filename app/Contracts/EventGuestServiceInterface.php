@@ -22,4 +22,9 @@ interface EventGuestServiceInterface
      * @param data array
      */
     public function bookAsGuest(array $data);
+
+    /**
+     * Attend the event for the user
+     */
+    public function attendEvent(\App\Models\User $user, array $data): \Illuminate\Http\JsonResponse;
 }
