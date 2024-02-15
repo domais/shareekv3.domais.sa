@@ -40,6 +40,8 @@ class EventCollection extends ResourceCollection
                 'description' => $event->description,
                 'image' => $image,
                 'default_image' => $isDefault,
+                'lat' => $event->user->owner->lat,
+                'lng' => $event->user->owner->lng,
                 'start_date' => $event->start_date,
                 'end_date' => $event->end_date,
                 'event_type' => $event->eventType->name,
