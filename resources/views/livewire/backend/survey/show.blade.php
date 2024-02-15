@@ -2,13 +2,13 @@
     {{-- Survey Details --}}
     <div class="card mb-4">
         <div class="card-body">
-          <p class="card-text">رقم الفعالية: <b>{{ optional(optional($survey->event)->order_number) ?? '' }}</b></p>
-          <p class="card-text">عنوان الفعالية: <b>{{ optional(optional($survey->event)->title) ?? '' }}</b></p>
-          <p class="card-text">الاسم: <b>{{ optional($survey->surveyable->name) }}</b></p>
-          <p class="card-text">الهاتف: <b>{{ optional($survey->surveyable->phone) }}</b></p>
-          <p class="card-text">النوع: <b>{{ $survey->type == 'guest' ? 'زائر' : 'متحدث' }}</b></p>
-          <p class="card-text">تاريخ الانشاء: <b>{{ optional($survey->created_at)->format('Y-m-d') }}</b></p>
-          <p class="card-text">تاريخ التقديم: <b>{{ optional($survey->created_at)->diffForHumans() }}</b></p>
+            <p class="card-text">رقم الفعالية: <b>{{ optional($survey->event)->order_number ?? '' }}</b></p>
+            <p class="card-text">عنوان الفعالية: <b>{{ optional($survey->event)->title ?? '' }}</b></p>
+            <p class="card-text">الاسم: <b>{{$survey->surveyable->name}}</b></p>
+            <p class="card-text">الهاتف: <b>{{$survey->surveyable->phone}}</b></p>
+            <p class="card-text">النوع: <b>{{$survey->type == 'guest' ? 'زائر' : 'متحدث'}}</b></p>
+            <p class="card-text">تاريخ الانشاء: <b>{{$survey->created_at->format('Y-m-d')}}</b></p>
+            <p class="card-text">تاريخ التقديم: <b>{{$survey->created_at->diffForHumans()}}</b></p>
         </div>
     </div>
     {{-- Display Data question and answer --}}
