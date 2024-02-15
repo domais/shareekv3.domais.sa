@@ -18,7 +18,7 @@ class SurveyTable extends DataTableComponent
 
     public function builder(): Builder
     {
-        $query = Survey::query()->select('event_id')->distinct()->groupBy('event_id');
+        $query = Survey::query()->select('event_id')->distinct();
     
         if (auth()->user()->hasRole('User')) {
             $query->whereHas('event', function ($q) {
@@ -28,8 +28,6 @@ class SurveyTable extends DataTableComponent
     
         return $query;
     }
-
-    
     public function configure(): void
     {
         $this->setPrimaryKey('id');
