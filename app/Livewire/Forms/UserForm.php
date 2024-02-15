@@ -60,8 +60,14 @@ class UserForm extends Form
             'phone' => 'required|unique:users,phone,' . $this->user->id,
             'email' => 'required|email|unique:users,email,' . $this->user->id,
         ]);
+
+        settings('admins',true);
+
     
         // Update the user with the validated data
         $this->user->update($validatedData);
+
+        
+
     }
 }
