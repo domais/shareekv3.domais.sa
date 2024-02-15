@@ -15,7 +15,7 @@ class EventResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $image = $this->permit->image->path ?? '';
+        $image = $this->permit->image->where('use', 'adv')->last()->path ?? '';
         if ($image) {
             $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
         } else {
