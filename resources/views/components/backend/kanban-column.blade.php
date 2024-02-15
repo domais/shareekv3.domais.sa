@@ -76,6 +76,8 @@
                     
                 @else
                   <!-- shareek -->
+                @if (havePermission(auth()->user(),$permission))
+
                     @foreach($buttons as $button)
 
                         @if($button['type'] == 'sweetalert')
@@ -102,6 +104,8 @@
                         @endif
 
                     @endforeach
+
+                @endif
                     
                 @endif
 
