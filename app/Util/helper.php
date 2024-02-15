@@ -289,7 +289,12 @@ function ArToEn($input) {
 					Cache::forget('admins');
 				} else {
 					return Cache::rememberForever('admins', function () {
-						return Role::where('name', 'Adminstrator')->first()->users;
+						return Role::where('name', 'Adminstrator')
+							->whereHas('permissions', function ($query) {
+								$query->where('name', 'permit-update');
+							})
+							->first()
+							->users;
 					});
 				}    
 			break;
