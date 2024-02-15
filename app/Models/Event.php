@@ -78,12 +78,13 @@ class Event extends Model
 
     public function guests()
     {
-        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->withPivot('type');
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->withPivot('type', 'status');
     }
 
     public function guestsGoing()
     {
-        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')->wherePivot('type', 'going');
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id')
+            ->wherePivot('type', 'going')->withPivot('type', 'status');
     }
 
     public function permit()
