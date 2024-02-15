@@ -50,6 +50,8 @@ class EventCollection extends ResourceCollection
                 'available_seats' => $event->available_seats,
                 'guest_count' => $event->guestsGoing->count(),
                 'goings' => $event->guestsGoing->pluck('id'),
+                'latitude' => $event->latitude,
+                'longitude' => $event->longitude,
                 'partner' => [
                     'logo' => $partnerLogo,
                     'name' => $event->user->owner->name ?? '',
