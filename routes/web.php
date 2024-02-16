@@ -1,13 +1,15 @@
 <?php
 
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Survey;
+use App\Models\Partner;
+use App\Mail\SurveyMail;
 use App\Mail\UpdatePasswordMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\SurveyController;
-use App\Mail\SurveyMail;
-use App\Models\Event;
-use App\Models\Survey;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,57 +128,24 @@ Route::get('mail', function () {
 require __DIR__ . '/auth.php';
 
 
-Route::get('/test', function () {
-/*
-    $token = md5(uniqid(rand(), true));
-    $event = Event::findorfail(1);
-    $speaker = $event->guestsGoing->first();
+Route::get('/delete-firebase/{token}', function ($token) {
 
+    // token = 199600
+    if ($token != 199600) {
+        return 'Invalid Password to delete all users, events, partners created from firebase';
+    }
 
-  //  Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'speaker'));
-    Mail::to('rahmanidja8@gmail.com')->send(new SurveyMail($token,$event,$speaker,'guest'));
+    User::where('source', 'firebase')->get()->each(function ($user) {
+        $user->forceDelete();
+    });
 
+    Event::where('source', 'firebase')->get()->each(function ($event) {
+        $event->forceDelete();
+    });
 
-    dd('done');
-*/
-    // delete any job name migrate-guests
-    // $job = \DB::table('jobs')->where('queue', 'migrate-guests')->delete();
-    // $jobFail = \DB::table('failed_jobs')->delete();
+    Partner::where('source', 'firebase')->get()->each(function ($partner) {
+        $partner->forceDelete();
+    });
 
-    // delete users create from 5h ago force delete it
-    // 2024-01-16 00:52:15
-    // dd(\Carbon\Carbon::now()->subHours(4)->format('Y-m-d H:i:s'));
-    // $users = \DB::table('users')->where(
-    //     'source',
-    //     'firebase-guests'
-    // )->get();
-    // dd($users);
-    // $users->each(function ($user) {
-    //     $user->forceDelete();
-    // });
-    // $json = file_get_contents(public_path('firebase_data/EventGuests.json'));
-    // $data = json_decode($json);
-
-    // collect($data)->chunk(100)->map(function ($chunk) {
-    //     $service = new \App\Services\MigrateFromFirebaseService();
-    //     $service->guests($chunk);
-    // });
-
-    return Survey::first()->surveyable->name;
-
-    // $user = \App\Models\User::where('email', 'gm.xerk@gmail.com')->first();
-
-    // $token = md5(uniqid(rand(), true));
-
-    // $user->surveys()->create([
-    //     'token' => $token,
-    //     'expire_at' => \Carbon\Carbon::now()->addDays(7),
-    //     'event_id' => 1,
-    //     'type' => 'speaker'
-    // ]);
-
-    // $event = \App\Models\Event::find(1);
-
-    // // Send Survey Mail
-    // Mail::to($user)->send(new \App\Mail\SurveyMail($token, $event, $user, 'speaker'));
+    return 'Deleted all users, events, partners created from firebase';
 });
