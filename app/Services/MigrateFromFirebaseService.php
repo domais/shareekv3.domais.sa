@@ -223,7 +223,7 @@ class MigrateFromFirebaseService
             'lat' => $item->user->Cafi_map->latitude ?? 0.0,
             'lng' => $item->user->Cafi_map->longitude ?? 0.0,
             'status_id' => $status,
-            'literary_id' => $literary->id ?? 26,
+            'literary_id' => $literary->id ?? 1,
             'category_id' => $item->type_event,
             'other' => $item->type_event === 'أخرى' ? $item->Event_0ther : null,
             'created_at' => Carbon::createFromTimestamp($item->time_Post->seconds),
