@@ -62,8 +62,8 @@ class MigrateFromFirebaseService
 
         // Create User
         $user = User::updateOrCreate(
-            ['phone' => $phone, 'email' => $email],
-            ['name' => $name, 'password' => Hash::make($randomPassword), 'source' => $source]
+            ['email' => $email],
+            ['phone' => $phone, 'name' => $name, 'password' => Hash::make($randomPassword), 'source' => $source]
         );
 
         // assign role based 2
@@ -231,7 +231,7 @@ class MigrateFromFirebaseService
             'source' => 'firebase'
         ]);
 
-        
+
 
         // event is updated
         if ($event->wasRecentlyCreated && isset($item->Evint_img) &&  $item->Evint_img) {
@@ -247,7 +247,8 @@ class MigrateFromFirebaseService
         return $event;
     }
 
-    private function permit($item, $event) {
+    private function permit($item, $event)
+    {
         $permit = Permit::updateOrCreate(['order_number' => $item->id], [
             'order_number' => $item->id,
             'user_id' => $event->user_id,
@@ -270,14 +271,12 @@ class MigrateFromFirebaseService
             'source' => $event->source
         ]);
 
-         if ($event->image) {
+        if ($event->image) {
             $newImage = $event->image->replicate();
             $newImage->fileable_type = 'App\Models\Permit'; // Replace 'NewType' with the actual type
             $newImage->fileable_id = $permit->id; // Replace 'NewId' with the actual ID
-            $newImage->save();     
-         }
-    
-
+            $newImage->save();
+        }
     }
 
     function convert($string): int
