@@ -47,7 +47,7 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/edit/{order_number}', Inputs::class)->name('edit');
 
         Route::get('/show/{order_number}', Inputs::class)->name('show')
-        ->middleware('checkUserRelation:permit');
+            ->middleware('checkUserRelation:permit');
     });
 
     Route::namespace('Partner')->prefix('partner')->middleware('role:SuperAdmin')->middleware('checkpassword')->as('partner.')->group(function () {
@@ -62,8 +62,8 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
         Route::get('/', Index::class)->name('index');
 
         Route::get('/show/{order_number}', Show::class)
-        ->name('show')
-        ->middleware('checkUserRelation:event');
+            ->name('show')
+            ->middleware('checkUserRelation:event');
     });
 
     Route::namespace('Ticket')->prefix('ticket')->middleware('checkpassword')->as('ticket.')->group(function () {
@@ -118,9 +118,9 @@ Route::get('mail', function () {
         'status' => $permit->status,
         'user' => $permit->user,
     ];
-    Mail::to('m@domais.sa','domais-e5T6@srv1.mail-tester.com')
-    // ->cc('domais-ChangeStatus@srv1.mail-tester.com')
-    ->send(new App\Mail\WelcomeNewAdminMail($data));
+    Mail::to('m@domais.sa', 'domais-e5T6@srv1.mail-tester.com')
+        // ->cc('domais-ChangeStatus@srv1.mail-tester.com')
+        ->send(new App\Mail\WelcomeNewAdminMail($data));
     return (new App\Mail\WelcomeNewAdminMail($data))->render();
 });
 
@@ -135,17 +135,25 @@ Route::get('/delete-firebase/{token}', function ($token) {
         return 'Invalid Password to delete all users, events, partners created from firebase';
     }
 
-    User::where('source', 'firebase')->get()->each(function ($user) {
-        $user->forceDelete();
-    });
 
-    Event::where('source', 'firebase')->get()->each(function ($event) {
-        $event->forceDelete();
-    });
+    // 16-feb-2024
+    User::where('source', 'firebase')
+        ->where('created_at', '>', '2024-02-16')
+        ->get()->each(function ($user) {
+            $user->forceDelete();
+        });
 
-    Partner::where('source', 'firebase')->get()->each(function ($partner) {
-        $partner->forceDelete();
-    });
+    Event::where('source', 'firebase')
+        ->where('created_at', '>', '2024-02-16')
+        ->get()->each(function ($event) {
+            $event->forceDelete();
+        });
+
+    Partner::where('source', 'firebase')
+        ->where('created_at', '>', '2024-02-16')
+        ->get()->each(function ($partner) {
+            $partner->forceDelete();
+        });
 
     return 'Deleted all users, events, partners created from firebase';
 });

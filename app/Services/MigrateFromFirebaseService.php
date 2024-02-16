@@ -62,8 +62,8 @@ class MigrateFromFirebaseService
 
         // Create User
         $user = User::updateOrCreate(
-            ['email' => $email, 'source' => $source],
-            ['phone' => $phone, 'name' => $name, 'password' => Hash::make($randomPassword)]
+            ['email' => $email],
+            ['name' => $name, 'phone' => $phone, 'password' => Hash::make($randomPassword), 'source' => $source]
         );
 
         // assign role based 2
