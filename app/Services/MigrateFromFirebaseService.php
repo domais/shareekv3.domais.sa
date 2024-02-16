@@ -52,7 +52,7 @@ class MigrateFromFirebaseService
 
         $valition = validator([
             'email' => $email,
-            'phone' => $phone,
+            'name' => $name,
         ], [
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|unique:users',
@@ -62,8 +62,8 @@ class MigrateFromFirebaseService
 
         // Create User
         $user = User::updateOrCreate(
-            ['email' => $email],
-            ['phone' => $phone, 'name' => $name, 'password' => Hash::make($randomPassword), 'source' => $source]
+            ['email' => $email, 'source' => $source],
+            ['phone' => $phone, 'name' => $name, 'password' => Hash::make($randomPassword)]
         );
 
         // assign role based 2
