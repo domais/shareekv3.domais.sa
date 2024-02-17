@@ -20,7 +20,7 @@
                     @endif
                 </div>
                 @if ($item->literary)
-                @if(isset($item->literary->name))
+                @if(isset($item->literary->parent->name))
                 <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
                 @else
                 يوجد مشكلة في إدخال رقم {{ $item->id }}
