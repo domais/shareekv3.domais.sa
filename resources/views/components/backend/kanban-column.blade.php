@@ -16,11 +16,11 @@
                 <div class="name">
                     <div class="my-2">{{$item->title}}</div>
                     @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Adminstrator'))
-                     {{-- <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small> --}}
+                     <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
                     @endif
                 </div>
                 @if ($item->literary)
-                <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div>
+                {{-- <div class="type mb-3">فعالية @if($item->literary->name != 'NA') <span class="d-inline-block mx-2">في</span> {{$item->literary->parent->name}}@endif</div> --}}
 
                 {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
                 @else
