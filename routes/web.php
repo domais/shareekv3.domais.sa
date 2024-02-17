@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Permit;
 use App\Models\Survey;
 use App\Models\Partner;
 use App\Mail\SurveyMail;
@@ -148,6 +149,14 @@ Route::get('/delete-firebase/{token}', function ($token) {
         ->get()->each(function ($event) {
             $event->forceDelete();
         });
+
+
+    Permit::where('source', 'firebase')
+        ->where('created_at', '>', '2024-02-16')
+        ->get()->each(function ($event) {
+            $event->forceDelete();
+        });
+
 
     Partner::where('source', 'firebase')
         ->where('created_at', '>', '2024-02-16')
