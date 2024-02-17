@@ -16,7 +16,7 @@
                 <div class="name">
                     <div class="my-2">{{$item->title}}</div>
                     @if (auth()->user()->hasRole('SuperAdmin') || auth()->user()->hasRole('Adminstrator'))
-                     <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small>
+                     {{-- <small class="mt-2">{{$item->user ? $item->user->owner->name : ''}} / {{$item->user->name}}</small> --}}
                     @endif
                 </div>
                 @if ($item->literary)
