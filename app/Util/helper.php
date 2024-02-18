@@ -349,10 +349,9 @@ function ArToEn($input) {
 		return false;
 	}
 
-	function sendOtp($email)
+	function sendOtp($user)
     {
         $otp = rand(100000, 999999);
-        $user = User::where('email', $email)->first();
 
         $code = new Code();
         $code->code = $otp;

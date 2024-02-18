@@ -37,7 +37,7 @@ new #[Layout('layouts.auth')] class extends Component
 
             if ($otpCount < 3) {
                 // If less than 3 OTP codes have been generated today, generate a new one
-                sendOtp();
+                sendOtp($user);
             } else {
                 // Otherwise, return an error message
                 $this->ValidationErrors = ['لقد وصلت إلى الحد الأقصى لعدد طلبات  لهذا اليوم. ارجوك حاول مرة أخرى غدا.'];
