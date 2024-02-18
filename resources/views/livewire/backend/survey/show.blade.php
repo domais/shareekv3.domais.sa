@@ -25,15 +25,15 @@
                           name="guest-rate-10"
                           max="5"
                           step="0"
-                          style="--stars:5;--value:{{$item}}"
+                          style="--stars:5;--value:{{$item['value']}}"
                           type="range"
-                          value="{{$item}}" />
+                          value="{{$item['value']}}" />
                           @elseif($item['type'] == 'text')
-                          <p class="card-text">{{$item}}</p>
+                          <p class="card-text">{{$item['value']}}</p>
                         @elseif($item['type'] == 'boolean')
                             <p class="card-text">
-                                <span class="badge {{$item ? 'bg-success' : 'bg-danger'}}">
-                                    {{$item ? 'نعم' : 'لا'}}
+                                <span class="badge {{$item['value'] ? 'bg-success' : 'bg-danger'}}">
+                                    {{$item['value'] ? 'نعم' : 'لا'}}
                                 </span>
                             </p>
                           @endif
