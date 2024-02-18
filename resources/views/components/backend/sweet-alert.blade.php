@@ -445,8 +445,8 @@
 				if (data[0]['images'].length > 0) {
 					data[0]['images'].forEach((image, index) => {
 						imagesList += `
-							<a href="${window.location.origin}/storage/${image}" target="_blank">
-								<img src="${window.location.origin}/storage/${image}" alt="Image ${index + 1}" style="width: 100px; height: 100px; object-fit: cover;">
+							<a href="https://nextlevel.ams3.cdn.digitaloceanspaces.com/${image}" target="_blank">
+								<img src="https://nextlevel.ams3.cdn.digitaloceanspaces.com/${image}" alt="Image ${index + 1}" style="width: 100px; height: 100px; object-fit: cover;">
 							</a>
 							<br>
 						`;
