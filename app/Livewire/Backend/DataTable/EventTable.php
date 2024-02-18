@@ -114,6 +114,10 @@ class EventTable extends DataTableComponent
                 ->hideIf(true)
                 ->sortable(),
 
+            Column::make("status", "status_id")
+                ->hideIf(true)
+                ->sortable(),
+
             Column::make("user_id", "user_id")
                 ->hideIf(true)
                 ->sortable(),
