@@ -26,7 +26,7 @@ new #[Layout('layouts.auth')] class extends Component
             // If validation passes, continue with the password reset process
             // ...
 
-            $user = Auth::user();
+            $user = User::where('email', $this->email)->first();
 
             // Count the OTP codes generated for the user today
             $otpCount = Code::where('user_id', $user->id)
