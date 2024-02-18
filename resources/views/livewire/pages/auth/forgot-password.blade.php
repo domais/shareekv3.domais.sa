@@ -11,7 +11,7 @@ new #[Layout('layouts.auth')] class extends Component
     public $errors = [];
     public $email = '';
 
-    public function reseting(): void
+    public function login()
     {
         try {
             // Validate the email field
