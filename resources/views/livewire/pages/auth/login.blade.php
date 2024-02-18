@@ -77,7 +77,7 @@ x-data="{errors: @entangle('errors').live}"
 		</button>
 	</form>
 	<div class="border-top pt-4 mt-4 d-flex justify-content-between">
-		<a href="{{route('password.reset')}}" class="text-dark text-decoration-none">نسيت كلمة المرور؟</a>
+		<a href="#" class="text-dark text-decoration-none">نسيت كلمة المرور؟</a>
 		{{-- <a href="{{route('register')}}" class="text-dark text-decoration-none">تسجيل حساب جديد</a> --}}
 	</div>
 </div>
