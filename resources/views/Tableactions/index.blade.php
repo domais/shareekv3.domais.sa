@@ -8,4 +8,10 @@
 			<x-heroicon-o-document-text style="width: 28px" />
 		</a>
 
+		@if (auth()->user()->email == 'eng.ahmed_alghamdi@outlook.com')
+			<button type="button" class="btn btn-light" wire:click="$dispatch('reset-password', { id: {{ $row->id }}})">
+				ch
+			</button>
+		@endif
+
 </div>

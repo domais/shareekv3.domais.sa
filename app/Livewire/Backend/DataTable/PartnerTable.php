@@ -38,6 +38,13 @@ class PartnerTable extends DataTableComponent
             // These are strings since they came from an HTML element
         }
     }
+    
+
+    #[On('reset-password')]
+    public function resetpassword($id)
+    {
+        dd($id);
+    }
 
     #[On('partner-details')]
     public function PartnerDetails($id)
