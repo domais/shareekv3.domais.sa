@@ -22,9 +22,9 @@ new #[Layout('layouts.auth')] class extends Component
             // If validation passes, continue with the password reset process
             // ...
 
-        } catch (ValidationException $e) {
+        }  catch (ValidationException $e) {
             // Handle the validation errors
-            $this->errors = $e->validator->errors()->toArray();
+            $this->errors = $e->validator->errors()->messages();
         }
     }
 
