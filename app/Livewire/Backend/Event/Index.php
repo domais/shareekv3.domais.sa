@@ -146,20 +146,11 @@ class Index extends Component
                 }
             }
             $zip->close();
+
+                // Download the zip file from the temporary local directory
+            return response()->download($tempPath . '/' . $zipName);
         }
     
-        // Store the zip file back to the DigitalOcean Spaces
-        $zipContents = file_get_contents($tempPath . '/' . $zipName);
-        Storage::disk('do')->put($folderPath . '/' . $zipName, $zipContents, 'public');
-    
-        // Delete the temporary local directory
-        array_map('unlink', glob($tempPath . '/*'));
-        rmdir($tempPath);
-    
-        // Get the URL of the zip file
-        $zipUrl = Storage::disk('do')->url($folderPath . '/' . $zipName);
-    
-        return response()->redirectTo($zipUrl)->deleteFileAfterSend(true);
     }
 
 
