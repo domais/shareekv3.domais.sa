@@ -18,8 +18,8 @@
               <div class="col-6 mb-3">
                   <div class="card">
                       <div class="card-body">
-                          <h5 class="card-title">{{$key}}</h5>
-                          @if($item['type'] == 'star')
+                        <h5 class="card-title">{{$key}}</h5>
+                        @if($item['type'] == 'star')
                           <input
                           class="rating"
                           name="guest-rate-10"
@@ -28,7 +28,7 @@
                           style="--stars:5;--value:{{$item['value']}}"
                           type="range"
                           value="{{$item['value']}}" />
-                          @elseif($item['type'] == 'text')
+                        @elseif($item['type'] == 'text')
                           <p class="card-text">{{$item['value']}}</p>
                         @elseif($item['type'] == 'boolean')
                             <p class="card-text">
