@@ -24,7 +24,7 @@ new #[Layout('layouts.auth')] class extends Component
 
         } catch (ValidationException $e) {
             // Handle the validation errors
-            return back()->withErrors($e->validator);
+            $this->errors = $e->validator->errors()->toArray();
         }
     }
 
