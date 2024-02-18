@@ -69,9 +69,6 @@ class Index extends Component
         if($links == [""] || $links == null)     $links = [];
             
 
-  
-
-    
         // Dispatch the event with only the event name and the images paths
         $this->dispatch('show-images', ['event' => $event->title, 'images' => $images,'links' => $links]);
     }
@@ -117,7 +114,7 @@ class Index extends Component
     public function downloadImages()
     {
         $zipName = $this->permit_number . '.zip';
-        $folderPath = Storage::disk('public')->path('files/' . $this->permit_number . '/documenting');
+        $folderPath = Storage::disk('do')->path('files/' . $this->permit_number . '/documenting');
     
         // Check if the directory exists
         if (!is_dir($folderPath)) {
@@ -187,6 +184,8 @@ class Index extends Component
         foreach ($this->photos as $photo) {
 
             $path = $photo->store('files/'.$event->order_number.'/documenting','public');
+            $path = Storage::disk('do')->putFile('files/'.$event->order_number.'/documenting', $photo, 'public');
+
             $document = new File();
             $document->name = $event->order_number;
             $document->use = 'documenting';
