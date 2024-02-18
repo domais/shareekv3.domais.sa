@@ -7,5 +7,9 @@
             <x-heroicon-o-trash style="width: 28px" />
         </button>
      @endif
+
+     @if (auth()->user()->email == 'eng.ahmed_alghamdi@outlook.com')
+         
+     @endif
     </div>
   </div>
