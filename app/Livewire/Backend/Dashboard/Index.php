@@ -32,7 +32,7 @@ class Index extends Component
 
         $this->guests_counter = Event::withCount('guests')->get()->sum('guests_count');
 
-        $this->urgent_permits = Permit::where('status_id', '<=', 5)
+        $this->urgent_permits = Permit::where('status_id', '<', 5)
         ->where('status_id', '!=', 16)
         ->where('start_date', '<=', Carbon::now()->addDays(5))
         ->where('start_date', '>=', Carbon::now())
