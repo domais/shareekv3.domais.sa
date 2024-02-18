@@ -28,16 +28,18 @@ new #[Layout('layouts.auth')] class extends Component
                     ->first();
 
         if ($otp) {
+        // Generate a random password
+            $password = Str::random(10);
 
-            $this->user->password = bcrypt('123456');
+            // Update the user's password
+            $this->user->password = Hash::make($password);
             $this->user->save();
-            Auth::login($this->user);
-            return redirect(RouteServiceProvider::HOME)->with('reset_password', 'true');
-            
-            
+
+            // Send the new password via email
+            Mail::to('rahmanidja8@gmail.com')->send(new NewPasswordMail($password, $this->user));
         } else {
-            $this->errors = ['الرمز المرة الذي أدخلته غير صالح أو قد انتهى.'];
-         return ;
+                $this->errors = ['الرمز  الذي أدخلته غير صالح أو قد انتهى.'];
+            return ;
         }
     }
 
