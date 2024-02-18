@@ -115,6 +115,7 @@ class Index extends Component
     {
         $zipName = $this->permit_number . '.zip';
         $folderPath = 'files/' . $this->permit_number . '/documenting';
+        $tempPath = storage_path('app/public/temp/' . $this->permit_number);
     
         // Check if the directory exists
         if (!Storage::disk('do')->exists($folderPath)) {
@@ -122,24 +123,43 @@ class Index extends Component
             return response()->json(['error' => 'Directory does not exist.']);
         }
     
+        // Create a temporary local directory
+        if (!file_exists($tempPath)) {
+            mkdir($tempPath, 0777, true);
+        }
+    
+        // Download all files to the temporary local directory
         $files = Storage::disk('do')->files($folderPath);
+        foreach ($files as $file) {
+            $fileContents = Storage::disk('do')->get($file);
+            file_put_contents($tempPath . '/' . basename($file), $fileContents);
+        }
     
+        // Create a new zip archive
         $zip = new ZipArchive();
-    
-        if ($zip->open(Storage::disk('do')->path($zipName), ZipArchive::CREATE) === TRUE)
+        if ($zip->open($tempPath . '/' . $zipName, ZipArchive::CREATE) === TRUE)
         {
-            foreach ($files as $file)
-            {
-                $fileContents = Storage::disk('do')->get($file);
-                $zip->addFromString(basename($file), $fileContents);
+            // Add all files in the temporary local directory to the zip archive
+            foreach (glob($tempPath . '/*') as $filePath) {
+                if (is_file($filePath)) {
+                    $zip->addFile($filePath, basename($filePath));
+                }
             }
             $zip->close();
         }
     
-        // Get the URL of the zip file
-        $zipUrl = Storage::disk('do')->url($zipName);
+        // Store the zip file back to the DigitalOcean Spaces
+        $zipContents = file_get_contents($tempPath . '/' . $zipName);
+        Storage::disk('do')->put($folderPath . '/' . $zipName, $zipContents, 'public');
     
-        return response()->redirectTo($zipUrl);
+        // Delete the temporary local directory
+        array_map('unlink', glob($tempPath . '/*'));
+        rmdir($tempPath);
+    
+        // Get the URL of the zip file
+        $zipUrl = Storage::disk('do')->url($folderPath . '/' . $zipName);
+    
+        return response()->redirectTo($zipUrl)->deleteFileAfterSend(true);
     }
 
 
