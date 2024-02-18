@@ -139,27 +139,27 @@ Route::get('/delete-firebase/{token}', function ($token) {
 
     // 16-feb-2024
     User::where('source', 'firebase')
-        ->where('created_at', '>', '2024-02-16')
+        ->where('created_at', '>', '2024-02-17')
         ->get()->each(function ($user) {
             $user->forceDelete();
         });
 
     Event::where('source', 'firebase')
-        ->where('created_at', '>', '2024-02-16')
+        ->where('created_at', '>', '2024-02-17')
         ->get()->each(function ($event) {
             $event->forceDelete();
         });
 
 
     Permit::where('source', 'firebase')
-        ->where('created_at', '>', '2024-02-16')
+        ->where('created_at', '>', '2024-02-17')
         ->get()->each(function ($event) {
             $event->forceDelete();
         });
 
 
     Partner::where('source', 'firebase')
-        ->where('created_at', '>', '2024-02-16')
+        ->where('created_at', '>', '2024-02-17')
         ->get()->each(function ($partner) {
             $partner->forceDelete();
         });
