@@ -7,6 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use App\Models\Code;
 use App\Models\User;
+use App\Mail\NewPasswordMail;
 
 use Illuminate\Support\Facades\Auth;
 
