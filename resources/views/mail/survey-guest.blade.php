@@ -48,7 +48,7 @@
 </p>
 
 <p>
-    <a href="{{env('APP_URL')}}/survey/guest/{{$token}}"
+    <a href="{{env('APP_URL')}}survey/guest/{{$token}}"
     >
     اضغط هنا للدخول للاستبيان</a>
 </p>
