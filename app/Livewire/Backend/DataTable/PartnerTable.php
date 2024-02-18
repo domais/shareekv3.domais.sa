@@ -8,6 +8,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Partner;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\On;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Maatwebsite\Excel\Facades\Excel;
@@ -43,7 +44,10 @@ class PartnerTable extends DataTableComponent
     #[On('reset-password')]
     public function resetpassword($id)
     {
-        dd($id);
+        $partner = Partner::find($id);
+        $partner->owner->update(['password' => Hash::make('123456')]);
+
+        $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
 
     #[On('partner-details')]
