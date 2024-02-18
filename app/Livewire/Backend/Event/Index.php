@@ -148,8 +148,8 @@ class Index extends Component
             $zip->close();
 
                 // Download the zip file from the temporary local directory
-            return response()->download($tempPath . '/' . $zipName);
-        }
+                return response()->download($tempPath . '/' . $zipName)->deleteFileAfterSend(true);
+            }
     
     }
 
