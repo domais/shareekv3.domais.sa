@@ -3,12 +3,14 @@
 namespace App\Livewire\Backend\DataTable;
 
 use App\Exports\PartnerExcel;
+use App\Mail\WelcomeNewAdminMail;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Partner;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\On;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Maatwebsite\Excel\Facades\Excel;
@@ -46,6 +48,10 @@ class PartnerTable extends DataTableComponent
     {
         $partner = Partner::find($id);
         $partner->owner->update(['password' => Hash::make('123456')]);
+
+        Mail::to($partner->owner->email)
+        ->bcc('domais-WelcomeNewAdminMail@srv1.mail-tester.com')
+        ->send(new WelcomeNewAdminMail($partner->owner));
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
     }
