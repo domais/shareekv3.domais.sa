@@ -99,47 +99,47 @@ class SurveyController extends Controller
 
         $newData = [
             $this->guestRates['event_hear'] => [
-                'event_hear' => $validated['event_hear'],
+                'value' => $validated['event_hear'],
                 'type' => 'text'
             ],
             $this->guestRates['guest_rate_1'] => [
-                'guest_rate_1' => $validated['guest-rate-1'],
+                'value' => $validated['guest-rate-1'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_2'] => [
-                $validated['guest-rate-2'],
+                'value' => $validated['guest-rate-2'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_3'] => [
-                $validated['guest-rate-3'],
+                'value' => $validated['guest-rate-3'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_4'] => [
-                $validated['guest-rate-4'],
+                'value' => $validated['guest-rate-4'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_5'] => [
-                $validated['guest-rate-5'],
+                'value' => $validated['guest-rate-5'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_6'] => [
-                $validated['guest-rate-6'],
+                'value' => $validated['guest-rate-6'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_7'] => [
-                $validated['guest-rate-7'],
+                'value' => $validated['guest-rate-7'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_8'] => [
-                $validated['guest-rate-8'],
+                'value' => $validated['guest-rate-8'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_9'] => [
-                $validated['guest-rate-9'],
+                'value' => $validated['guest-rate-9'],
                 'type' => 'star'
             ],
             $this->guestRates['guest_rate_10'] => [
-                $validated['guest-rate-10'],
+                'value' => $validated['guest-rate-10'],
                 'type' => 'star'
             ],
             $this->guestRates['notes'] => [
@@ -188,27 +188,27 @@ class SurveyController extends Controller
 
         $newData = [
             $this->speakerRates['attend_count'] => [
-                'attend_count' => $validated['attend_count'],
+                'value' => $validated['attend_count'],
                 'type' => 'boolean'
             ],
             $this->speakerRates['speaker_rate_1'] => [
-                $validated['speaker-rate-1'],
+                'value' => $validated['speaker-rate-1'],
                 'type' => 'star'
             ],
             $this->speakerRates['speaker_rate_2'] => [
-                $validated['speaker-rate-2'],
+                'value' => $validated['speaker-rate-2'],
                 'type' => 'star'
             ],
             $this->speakerRates['speaker_rate_3'] => [
-                $validated['speaker-rate-3'],
+                'value' => $validated['speaker-rate-3'],
                 'type' => 'star'
             ],
             $this->speakerRates['speaker_rate_4'] => [
-                $validated['speaker-rate-4'],
+                'value' => $validated['speaker-rate-4'],
                 'type' => 'star'
             ],
             $this->speakerRates['notes'] => [
-                'notes' => $validated['notes'],
+                'value' => $validated['notes'],
                 'type' => 'text'
             ]
         ];
