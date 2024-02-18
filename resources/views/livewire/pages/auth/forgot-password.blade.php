@@ -9,7 +9,24 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.auth')] class extends Component
 {
     public $errors = [];
-    public $email;
+    public $email = '';
+
+    public function reset()
+    {
+        try {
+            // Validate the email field
+            $validatedData = $this->validate([
+                'email' => 'required|email|exists:users,email',
+            ]);
+
+            // If validation passes, continue with the password reset process
+            // ...
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Handle the validation errors
+            return back()->withErrors($e->validator);
+        }
+    }
 
     /**
      * Handle an incoming authentication request.
@@ -34,7 +51,7 @@ x-data="{errors: @entangle('errors').live}"
         });
     "
 >
-	<form wire:submit="login">
+	<form wire:submit="reset">
 		<h3 class="fs-3 fw-bold text-center">ضبط كلمة السر</h3>
 
 		<input placeholder="البريد الإلكتروني" wire:model="email" autocomplete="email" type="email" class="form-control my-3 text-center">		
