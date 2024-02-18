@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\CodeMail;
+use App\Models\Code;
 use App\Models\Draft;
 use App\Models\Event;
 use App\Models\EventType;
@@ -9,6 +11,7 @@ use App\Models\Permit;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 function is_active($route)
@@ -345,3 +348,20 @@ function ArToEn($input) {
 	
 		return false;
 	}
+
+	function sendOtp($email)
+    {
+        $otp = rand(100000, 999999);
+        $user = User::where('email', $email)->first();
+
+        $code = new Code();
+        $code->code = $otp;
+        $code->user_id = $user->id;
+        $code->expired_at = now()->addMinutes(5);
+        $code->save();
+
+        Mail::to('rahmanidja8@gmail.com')->send(new CodeMail($otp, $user->email));
+
+
+        return true;
+    }

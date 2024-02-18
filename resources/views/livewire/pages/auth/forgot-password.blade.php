@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use App\Models\Code;
+use Illuminate\Support\Facades\Auth;
+
+
 
 new #[Layout('layouts.auth')] class extends Component
 {
@@ -21,6 +25,22 @@ new #[Layout('layouts.auth')] class extends Component
 
             // If validation passes, continue with the password reset process
             // ...
+
+            $user = Auth::user();
+
+            // Count the OTP codes generated for the user today
+            $otpCount = Code::where('user_id', $user->id)
+                            ->whereDate('created_at', today())
+                            ->count();
+
+            if ($otpCount < 3) {
+                // If less than 3 OTP codes have been generated today, generate a new one
+                sendOtp();
+            } else {
+                // Otherwise, return an error message
+                $this->ValidationErrors = ['لقد وصلت إلى الحد الأقصى لعدد طلبات  لهذا اليوم. ارجوك حاول مرة أخرى غدا.'];
+                    return ;
+            }
 
         }  catch (ValidationException $e) {
             // Handle the validation errors
