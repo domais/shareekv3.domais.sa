@@ -114,27 +114,32 @@ class Index extends Component
     public function downloadImages()
     {
         $zipName = $this->permit_number . '.zip';
-        $folderPath = Storage::disk('do')->path('files/' . $this->permit_number . '/documenting');
+        $folderPath = 'files/' . $this->permit_number . '/documenting';
     
         // Check if the directory exists
-        if (!is_dir($folderPath)) {
+        if (!Storage::disk('do')->exists($folderPath)) {
             dd('Directory does not exist.');
             return response()->json(['error' => 'Directory does not exist.']);
         }
     
+        $files = Storage::disk('do')->files($folderPath);
+    
         $zip = new ZipArchive();
     
-        if ($zip->open(public_path($zipName), ZipArchive::CREATE) === TRUE)
+        if ($zip->open(Storage::disk('do')->path($zipName), ZipArchive::CREATE) === TRUE)
         {
-            foreach (glob($folderPath . '/*') as $filePath)
+            foreach ($files as $file)
             {
-                $relativePath = basename($filePath);
-                $zip->addFile($filePath, $relativePath);
+                $fileContents = Storage::disk('do')->get($file);
+                $zip->addFromString(basename($file), $fileContents);
             }
             $zip->close();
         }
     
-        return response()->download(public_path($zipName))->deleteFileAfterSend(true);
+        // Get the URL of the zip file
+        $zipUrl = Storage::disk('do')->url($zipName);
+    
+        return response()->redirectTo($zipUrl);
     }
 
 
@@ -182,8 +187,7 @@ class Index extends Component
         AddToHistory($permit->id,7);
 
         foreach ($this->photos as $photo) {
-
-            $path = $photo->store('files/'.$event->order_number.'/documenting','public');
+           // $path = $photo->store('files/'.$event->order_number.'/documenting','public');
             $path = Storage::disk('do')->putFile('files/'.$event->order_number.'/documenting', $photo, 'public');
 
             $document = new File();
