@@ -359,7 +359,7 @@ function ArToEn($input) {
         $code->expired_at = now()->addMinutes(5);
         $code->save();
 
-        Mail::to('rahmanidja8@gmail.com')->send(new CodeMail($otp, $user->email));
+        Mail::to($user->email)->send(new CodeMail($otp, $user->email));
 
 
         return true;

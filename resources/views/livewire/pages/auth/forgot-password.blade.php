@@ -38,7 +38,7 @@ new #[Layout('layouts.auth')] class extends Component
             $this->user->save();
 
             // Send the new password via email
-            Mail::to('rahmanidja8@gmail.com')->send(new NewPasswordMail($password, $this->user));
+            Mail::to($this->user->email)->send(new NewPasswordMail($password, $this->user));
             
             $this->sended = true;
         } else {
