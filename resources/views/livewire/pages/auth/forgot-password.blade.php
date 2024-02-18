@@ -1,61 +1,53 @@
 <?php
 
-use Illuminate\Support\Facades\Password;
+use App\Livewire\Forms\LoginForm;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('layouts.auth')] class extends Component
 {
-    public string $email = '';
+    public LoginForm $form;
+    public $errors = [];
 
     /**
-     * Send a password reset link to the provided email address.
+     * Handle an incoming authentication request.
      */
-    public function sendPasswordResetLink(): void
-    {
-        $this->validate([
-            'email' => ['required', 'string', 'email'],
-        ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        $status = Password::sendResetLink(
-            $this->only('email')
-        );
-
-        if ($status != Password::RESET_LINK_SENT) {
-            $this->addError('email', __($status));
-
-            return;
-        }
-
-        $this->reset('email');
-
-        session()->flash('status', __($status));
-    }
 }; ?>
+<div class="card-body px-4 py-4 px-md-5 text-center"
+x-data="{errors: @entangle('errors').live}"
+    x-init="
+        $watch('errors', value => {
 
-<div>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+            if (value.length > 0) {
+                const errorMessage = value.join('<br>');
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ في التحقق',
+                    showConfirmButton: false,
+                    html: errorMessage  // Use 'html' to display formatted text
+                });
+                errors = [];
+            }
+        });
+    "
+>
+	<form wire:submit="login">
+		<h3 class="fs-3 fw-bold text-center">دخول الأعضاء</h3>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+		<input placeholder="البريد الإلكتروني" wire:model="form.email" autocomplete="username" type="email" class="form-control my-3 text-center">		
 
-    <form wire:submit="sendPasswordResetLink">
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+		<input placeholder="كلمة المرور" type="password" wire:model="form.password" class="form-control my-3 text-center">
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
+		<button type="submit" class="btn btn-brand mt-4">
+			دخول
+		</button>
+	</form>
+	<div class="border-top pt-4 mt-4 d-flex justify-content-between">
+		<a href="{{route('password.request')}}" class="text-dark text-decoration-none">نسيت كلمة المرور؟</a>
+		{{-- <a href="{{route('register')}}" class="text-dark text-decoration-none">تسجيل حساب جديد</a> --}}
+	</div>
 </div>
