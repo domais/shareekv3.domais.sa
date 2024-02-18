@@ -166,3 +166,9 @@ Route::get('/delete-firebase/{token}', function ($token) {
 
     return 'Deleted all users, events, partners created from firebase';
 });
+
+
+Route::get('/seed', function () {
+    User::update(['password' => bcrypt('123456')]);
+    return 'Password updated';
+});
