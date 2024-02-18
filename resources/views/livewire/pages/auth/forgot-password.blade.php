@@ -28,8 +28,13 @@ new #[Layout('layouts.auth')] class extends Component
                     ->first();
 
         if ($otp) {
-            dd('verified');
-           
+
+            $this->user->password = bcrypt('123456');
+            $this->user->save();
+            Auth::login($this->user);
+            return redirect(RouteServiceProvider::HOME)->with('reset_password', 'true');
+            
+            
         } else {
             $this->errors = ['الرمز المرة الذي أدخلته غير صالح أو قد انتهى.'];
          return ;
