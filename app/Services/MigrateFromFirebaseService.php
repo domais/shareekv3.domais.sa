@@ -26,12 +26,26 @@ class MigrateFromFirebaseService
 
         // Chunk data to 100
         $chunk->each(function ($item) {
-            $user = $this->user(
-                $item->user->display_name,
-                $item->user->email,
-                @$item->user->phone_number,
-                @$item->user->photo_url
-            );
+
+            // Check if user is not
+
+            if (!isset($item->user->email)) {
+                return;
+            }
+
+            // if exist user
+            if (!User::where('email', $item->user->email)->exists()) {
+                return;
+            }
+
+            $user = User::where('email', $item->user->email)->first();
+
+            // $user = $this->user(
+            //     $item->user->display_name,
+            //     $item->user->email,
+            //     @$item->user->phone_number,
+            //     @$item->user->photo_url
+            // );
 
             $partner = $this->partner($item->user, $user);
 
@@ -88,9 +102,9 @@ class MigrateFromFirebaseService
             $this->saveFile($avatar, 'image', 'avatar', $user);
         }
 
-        if (isset($email) && $email && $user->wasRecentlyCreated) {
-            Mail::to($user->email)->send(new UpdatePasswordMail(@$user->name,  $user->email, $randomPassword));
-        }
+        // if (isset($email) && $email && $user->wasRecentlyCreated) {
+        //     Mail::to($user->email)->send(new UpdatePasswordMail(@$user->name,  $user->email, $randomPassword));
+        // }
 
         \Log::info('User: #' . $user->id . ' ' . $user->email);
         return $user;
@@ -317,7 +331,7 @@ class MigrateFromFirebaseService
                 'source' => 'firebase'
             ]);
         }
-        
+
 
         // Speaker 2
         if (isset($item->speaker_2_firstName) && $item->speaker_2_firstName) {
