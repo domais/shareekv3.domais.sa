@@ -169,6 +169,6 @@ Route::get('/delete-firebase/{token}', function ($token) {
 
 
 Route::get('/seed', function () {
-    User::update(['password' => bcrypt('123456')]);
+    User::all()->each->update(['password' => bcrypt('12345678')]);
     return 'Password updated';
 });
