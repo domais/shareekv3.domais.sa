@@ -42,7 +42,7 @@ class PermitTable extends DataTableComponent
                     $builder->where('status_id', 4);
                 }
                 if ($value === '16') {
-                    $builder->whereNotNull('deleted_at');
+                    $builder->where('status_id', 16);
                 }
                 if ($value === '8') {
                     $builder->whereIn('status_id', [5,8]);
@@ -167,9 +167,9 @@ class PermitTable extends DataTableComponent
                 })
                 ->sortable(),
 
-            Column::make("محذوف", "deleted_at")
+            Column::make("محذوف", "status_id")
                 ->format(function($value, $column, $row) {
-                    if ($value) {
+                    if ($value == 16) {
                         return 'نعم';
                     }
                     return 'لا';
