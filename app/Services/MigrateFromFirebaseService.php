@@ -60,10 +60,20 @@ class MigrateFromFirebaseService
 
         $source = $guest ? 'firebase-guest' : 'firebase';
 
+
+        if (User::where('email', $email)->exists()) {
+            return User::where('email', $email)->first();
+        }
+
+        if (User::where('phone', $phone)->exists()) {
+            return User::where('phone', $phone)->first();
+        }
+
+
         // Create User
         $user = User::updateOrCreate(
-            ['email' => $email],
-            ['name' => $name, 'phone' => $phone, 'password' => Hash::make($randomPassword), 'source' => $source]
+            ['email' => $email, 'phone' => $phone],
+            ['name' => $name, 'password' => Hash::make($randomPassword), 'source' => $source]
         );
 
         // assign role based 2
@@ -213,7 +223,7 @@ class MigrateFromFirebaseService
             'title' => $item->Event_name,
             'description' => $item->Event_Des,
             'user_id' => $user->id,
-            'admin_id' => 4,
+            'admin_id' => null,
             'event_type_id' => $eventTypeId,
             'event_location' => $item->Event_cat === 'داخلية' ? 1 : 2,
             'start_date' => Carbon::createFromTimestamp($item->Start_time->seconds),
@@ -230,8 +240,6 @@ class MigrateFromFirebaseService
             'updated_at' => Carbon::createFromTimestamp($item->time_Post->seconds),
             'source' => 'firebase'
         ]);
-
-
 
         // event is updated
         if ($event->wasRecentlyCreated && isset($item->Evint_img) &&  $item->Evint_img) {
@@ -309,6 +317,7 @@ class MigrateFromFirebaseService
                 'source' => 'firebase'
             ]);
         }
+        
 
         // Speaker 2
         if (isset($item->speaker_2_firstName) && $item->speaker_2_firstName) {
