@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\Forms\LoginForm;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
@@ -9,8 +8,8 @@ use Livewire\Volt\Component;
 
 new #[Layout('layouts.auth')] class extends Component
 {
-    public LoginForm $form;
     public $errors = [];
+    public $email;
 
     /**
      * Handle an incoming authentication request.
@@ -36,18 +35,16 @@ x-data="{errors: @entangle('errors').live}"
     "
 >
 	<form wire:submit="login">
-		<h3 class="fs-3 fw-bold text-center">دخول الأعضاء</h3>
+		<h3 class="fs-3 fw-bold text-center">ضبط كلمة السر</h3>
 
-		<input placeholder="البريد الإلكتروني" wire:model="form.email" autocomplete="username" type="email" class="form-control my-3 text-center">		
-
-		<input placeholder="كلمة المرور" type="password" wire:model="form.password" class="form-control my-3 text-center">
+		<input placeholder="البريد الإلكتروني" wire:model="email" autocomplete="email" type="email" class="form-control my-3 text-center">		
 
 		<button type="submit" class="btn btn-brand mt-4">
-			دخول
+			ارسل رمز التحقق
 		</button>
 	</form>
 	<div class="border-top pt-4 mt-4 d-flex justify-content-between">
-		<a href="{{route('password.request')}}" class="text-dark text-decoration-none">نسيت كلمة المرور؟</a>
+		<a href="{{route('login')}}" class="text-dark text-decoration-none">تسجيل الدخول</a>
 		{{-- <a href="{{route('register')}}" class="text-dark text-decoration-none">تسجيل حساب جديد</a> --}}
 	</div>
 </div>
