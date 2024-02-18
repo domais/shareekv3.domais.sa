@@ -18,12 +18,11 @@ new #[Layout('layouts.auth')] class extends Component
     public $email = '';
     public $step_two = false;
     public $code = '';
+    public $user;
 
     public function verifyCode()
     {
-        $user = User::where('email', $this->email)->first();
-
-        $otp = Code::where('user_id', $user->id)
+        $otp = Code::where('user_id', $this->user->id)
                     ->where('code', $this->code)
                     ->where('created_at', '>=', now()->subMinutes(5))
                     ->first();
@@ -53,16 +52,16 @@ new #[Layout('layouts.auth')] class extends Component
             // If validation passes, continue with the password reset process
             // ...
 
-            $user = User::where('email', $this->email)->first();
+            $this->user = User::where('email', $this->email)->first();
 
             // Count the OTP codes generated for the user today
-            $otpCount = Code::where('user_id', $user->id)
+            $otpCount = Code::where('user_id', $this->user->id)
                             ->whereDate('created_at', today())
                             ->count();
 
             if ($otpCount < 3) {
                 // If less than 3 OTP codes have been generated today, generate a new one
-                sendOtp($user);
+                sendOtp($this->user);
                 $this->step_two = true;
             } else {
                 // Otherwise, return an error message
