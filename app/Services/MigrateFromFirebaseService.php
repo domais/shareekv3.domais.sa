@@ -317,6 +317,7 @@ class MigrateFromFirebaseService
                 'source' => 'firebase'
             ]);
         }
+        
 
         // Speaker 2
         if (isset($item->speaker_2_firstName) && $item->speaker_2_firstName) {
