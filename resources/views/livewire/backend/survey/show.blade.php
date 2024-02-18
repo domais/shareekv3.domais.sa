@@ -19,7 +19,7 @@
                   <div class="card">
                       <div class="card-body">
                           <h5 class="card-title">{{$key}}</h5>
-                          @if($item['type'] == 'start')
+                          @if($item['type'] == 'star')
                           <input
                           class="rating"
                           name="guest-rate-10"
