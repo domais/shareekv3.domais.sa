@@ -6,6 +6,8 @@ use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use App\Models\Code;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 
 
