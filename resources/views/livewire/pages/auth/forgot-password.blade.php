@@ -11,7 +11,7 @@ new #[Layout('layouts.auth')] class extends Component
     public $errors = [];
     public $email = '';
 
-    public function reset()
+    public function reseting(): void
     {
         try {
             // Validate the email field
@@ -51,7 +51,7 @@ x-data="{errors: @entangle('errors').live}"
         });
     "
 >
-	<form wire:submit="reset">
+	<form wire:submit="reseting">
 		<h3 class="fs-3 fw-bold text-center">ضبط كلمة السر</h3>
 
 		<input placeholder="البريد الإلكتروني" wire:model="email" autocomplete="email" type="email" class="form-control my-3 text-center">		
