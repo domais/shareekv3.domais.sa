@@ -19,7 +19,7 @@
                   <div class="card">
                       <div class="card-body">
                           <h5 class="card-title">{{$key}}</h5>
-                          @if(is_numeric($item))
+                          @if($item['type'] == 'start')
                           <input
                           class="rating"
                           name="guest-rate-10"
@@ -28,8 +28,14 @@
                           style="--stars:5;--value:{{$item}}"
                           type="range"
                           value="{{$item}}" />
-                          @else
+                          @elseif($item['type'] == 'text')
                           <p class="card-text">{{$item}}</p>
+                        @elseif($item['type'] == 'boolean')
+                            <p class="card-text">
+                                <span class="badge {{$item ? 'bg-success' : 'bg-danger'}}">
+                                    {{$item ? 'نعم' : 'لا'}}
+                                </span>
+                            </p>
                           @endif
                       </div>
                   </div>
@@ -43,7 +49,7 @@
             <p class="card-text">لم يتم تعبئة الإستبيان</p>
         </div>
     </div>
-            
+
       @endif
     </div>
 </div>
