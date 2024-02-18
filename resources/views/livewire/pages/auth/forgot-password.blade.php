@@ -22,7 +22,7 @@ new #[Layout('layouts.auth')] class extends Component
             // If validation passes, continue with the password reset process
             // ...
 
-        } catch (\Illuminate\Validation\ValidationException $e) {
+        } catch (ValidationException $e) {
             // Handle the validation errors
             return back()->withErrors($e->validator);
         }
