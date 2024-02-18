@@ -37,6 +37,8 @@ new #[Layout('layouts.auth')] class extends Component
 
             // Send the new password via email
             Mail::to('rahmanidja8@gmail.com')->send(new NewPasswordMail($password, $this->user));
+            
+            dd('test');
         } else {
                 $this->errors = ['الرمز  الذي أدخلته غير صالح أو قد انتهى.'];
             return ;
