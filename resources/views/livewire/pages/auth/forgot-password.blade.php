@@ -51,7 +51,7 @@ x-data="{errors: @entangle('errors').live}"
         });
     "
 >
-	<form wire:submit="reseting">
+	<form wire:submit="login">
 		<h3 class="fs-3 fw-bold text-center">ضبط كلمة السر</h3>
 
 		<input placeholder="البريد الإلكتروني" wire:model="email" autocomplete="email" type="email" class="form-control my-3 text-center">		
