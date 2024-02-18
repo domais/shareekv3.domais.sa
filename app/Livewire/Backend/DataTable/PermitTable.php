@@ -42,7 +42,7 @@ class PermitTable extends DataTableComponent
                     $builder->where('status_id', 4);
                 }
                 if ($value === '16') {
-                    $builder->where('status_id', 16);
+                    $builder->whereNotNull('deleted_at');
                 }
                 if ($value === '8') {
                     $builder->whereIn('status_id', [5,8]);
