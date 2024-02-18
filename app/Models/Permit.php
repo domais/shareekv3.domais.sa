@@ -31,6 +31,7 @@ class Permit extends Model
         'lng',
         'source',
         'meeting_link',
+        'deleted_at'
     ];
 
     public function user()
