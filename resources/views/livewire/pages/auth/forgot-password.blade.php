@@ -18,6 +18,7 @@ new #[Layout('layouts.auth')] class extends Component
     public $errors = [];
     public $email = '';
     public $step_two = false;
+    public $sended = false;
     public $code = '';
     public $user;
 
@@ -39,7 +40,7 @@ new #[Layout('layouts.auth')] class extends Component
             // Send the new password via email
             Mail::to('rahmanidja8@gmail.com')->send(new NewPasswordMail($password, $this->user));
             
-            dd('test');
+            $this->sended = true;
         } else {
                 $this->errors = ['الرمز  الذي أدخلته غير صالح أو قد انتهى.'];
             return ;
@@ -91,10 +92,9 @@ new #[Layout('layouts.auth')] class extends Component
 
 }; ?>
 <div class="card-body px-4 py-4 px-md-5 text-center"
-x-data="{errors: @entangle('errors').live}"
+x-data="{errors: @entangle('errors').live, sended: @entangle('sended').live}"
     x-init="
         $watch('errors', value => {
-
             if (value.length > 0) {
                 const errorMessage = value.join('<br>');
                 Swal.fire({
@@ -104,6 +104,18 @@ x-data="{errors: @entangle('errors').live}"
                     html: errorMessage  // Use 'html' to display formatted text
                 });
                 errors = [];
+            }
+        });
+
+        $watch('sended', value => {
+            if (value) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'تم الإرسال',
+                    text: 'لقد تم إرسال كلمة المرور على البريد الإلكتروني الخاص بك',
+                    showConfirmButton: false,
+                });
+                sended = false;
             }
         });
     "
