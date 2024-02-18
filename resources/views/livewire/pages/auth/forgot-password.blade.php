@@ -17,7 +17,7 @@ new #[Layout('layouts.auth')] class extends Component
     public $errors = [];
     public $email = '';
     public $step_two = false;
-    public = $code = '';
+    public $code = '';
 
     public function verifyCode()
     {
