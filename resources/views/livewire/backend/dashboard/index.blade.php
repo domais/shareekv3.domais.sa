@@ -493,7 +493,7 @@
       title: false,
       subtitle: false,
       xAxis: {
-        categories: ["مارس", "أبريل", "مايو", "يوليو", "يونيو", "اغسطس"],
+        categories: @json(array_column($this->guests_months, 'month')),
         title: false,
         labels: { enabled: false },
         lineWidth: 0,
@@ -544,7 +544,7 @@
         {
           name: "التمويل",
           color: "#ae2a3f70",
-          data: [345, 546, 471, 443, 268, 190],
+          data: @json(array_column($this->guests_months, 'guests_count')),
         },
       ],
     });
