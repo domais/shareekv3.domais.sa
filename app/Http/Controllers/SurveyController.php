@@ -143,7 +143,7 @@ class SurveyController extends Controller
                 'type' => 'star'
             ],
             $this->guestRates['notes'] => [
-                'notes' => $validated['notes'],
+                'value' => $validated['notes'],
                 'type' => 'text'
             ],
         ];
