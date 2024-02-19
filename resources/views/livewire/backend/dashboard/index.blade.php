@@ -587,13 +587,13 @@
       series: [
           {
               borderRadius: 3,
-              data: @json($this->literary_pie->map(function ($literary) use ($totalEvents) {
+              data: {!! json_encode($this->literary_pie->map(function ($literary) use ($totalEvents) {
                   return [
                       'name' => $literary->name,
                       'y' => $literary->events_count,
                       'm' => round(($literary->events_count / $totalEvents) * 100, 2) . '%',
                   ];
-              })),
+              })) !!},
               colors: ["#ae2a3f40", "#ae2a3f70", "#ae2a3f"],
           },
       ],
