@@ -48,10 +48,10 @@ class Index extends Component
                 $month->startOfMonth(),
                 $month->copy()->endOfMonth()->endOfDay()
             ])->count();
-
-            $guestsCount = Event::whereBetween('created_at', [
+        
+            $guestsCount = Event::whereBetween('start_date', [
                 $month->startOfMonth(),
-                $month->endOfMonth()
+                $month->copy()->endOfMonth()->endOfDay()
             ])->withCount('guests')->get()->sum('guests_count');
         
             $this->guests_months[] = [
