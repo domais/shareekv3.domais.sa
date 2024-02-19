@@ -21,14 +21,14 @@
                     <tbody>
                         @foreach($this->permit->event->guests as $guest)
                         <tr class="mx-2">
-                            <th scope="row">{{$loop->iteration}}</th>
+                            <td>{{$loop->iteration}}</td>
                             <td>{{$guest->name}}</td>
                             <td>{{$guest->email}}</td>
                             <td>{{$guest->phone}}</td>
                             <td>{{$guest->gender === 'male' ? 'ذكر' : 'انثى'}}</td>
                             <td>{{$guest->getAge()}}</td>
                             <td class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">
-                                {{$guest->pivot->type === 'going' ? 'ذاهب' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}
+                                {{$guest->pivot->type === 'going' ? 'مسجل' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}
                             </td>
                             <td class="badge {{$guest->pivot->status === 'approved' ? 'bg-success' : 'bg-danger'}}">
                                 {{$guest->pivot->status === 'approved' ? 'حاضر' : 'لم يحضر بعد'}}
