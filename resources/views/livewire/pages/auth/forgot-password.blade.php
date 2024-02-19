@@ -125,7 +125,7 @@ x-data="{errors: @entangle('errors').live, sended: @entangle('sended').live}"
 
         @if ($step_two)
 
-        <input placeholder="رمز التحقق" wire:model="code" autocomplete="code" type="number" class="form-control my-3 text-center">		
+        <input placeholder="رمز التحقق" wire:model="code" autocomplete="code" type="text" class="form-control my-3 text-center">		
 
             
         @else
