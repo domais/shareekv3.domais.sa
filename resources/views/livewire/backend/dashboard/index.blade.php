@@ -93,7 +93,7 @@
                   </div>
                   <div class="d-flex align-items-center">
                     <span class="dot bg-primary"></span
-                    ><span class="fw-semi-bold">حجوزات ومكافآت</span>
+                    ><span class="fw-semi-bold">حجوزات</span>
                   </div>
                 </div>
                 <div class="d-flex flex-between-center mb-1">
@@ -102,16 +102,7 @@
                   </div>
                   <div class="d-flex align-items-center">
                     <span class="dot bg-info"></span
-                    ><span class="fw-semi-bold">ساعات استشارية</span>
-                  </div>
-                </div>
-                <div class="d-flex flex-between-center mb-1">
-                  <div class="me-2">
-                    <span class="badge bg-success-subtle rounded-pill"> </span>
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <span class="dot bg-300"></span
-                    ><span class="fw-semi-bold">نشر سوشل ميديا</span>
+                    ><span class="fw-semi-bold">مكافآت</span>
                   </div>
                 </div>
               </div>
@@ -679,16 +670,12 @@
           borderRadius: 2,
           data: [
             {
-              name: "نشر",
-              y: 27,
-            },
-            {
-              name: "إرشاد",
-              y: 15,
+              name: "مكافآت",
+              y: {{$reward_counter}},
             },
             {
               name: "حجوزات",
-              y: 50,
+              y: {{$reservation_counter}},
             },
           ],
           colors: ["#a3cfbb", "#0dcaf0", "#ffc107"],

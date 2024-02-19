@@ -6,6 +6,7 @@ use App\Models\Event;
 use App\Models\Literary;
 use App\Models\Partner;
 use App\Models\Permit;
+use App\Models\Speaker;
 use App\Models\Support;
 use Carbon\Carbon;
 use Livewire\Component;
@@ -19,6 +20,8 @@ class Index extends Component
     public $urgent_permits = [];
     public $guests_counter;
     public $support_counter;
+    public $reservation_counter;
+    public $reward_counter;
     public $months;
     public $guests_months;
     public $literary_pie;
@@ -41,7 +44,11 @@ class Index extends Component
         ->where('start_date', '<=', Carbon::now()->addDays(5))
         ->where('start_date', '>=', Carbon::now())
         ->get();
+
         $this->support_counter = Support::count();
+
+        $this->reservation_counter = Speaker::where('reservations', 1)->count();
+        $this->reward_counter = Speaker::where('reward', 1)->count();
 
         $this->literary_pie = Literary::withCount('events')
         ->orderBy('events_count', 'desc')
