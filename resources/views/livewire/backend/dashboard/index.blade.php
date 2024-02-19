@@ -57,7 +57,7 @@
           <div class="row">
             <div class="col-5">
                 <div class="fs-11 mt-3">
-                    @foreach($this->literary_pie as $literary)
+                    @foreach($this->literary_pie->take(3) as $literary)
                         <div class="d-flex flex-between-center mb-1">
                           <div class="me-2">{{ round(($literary->events_count / $event_counter) * 100, 2) }}%</div>
                           <div class="d-flex align-items-center">
@@ -585,37 +585,17 @@
         },
       },
       series: [
-        {
-          borderRadius: 3,
-          data: [
-            {
-              name: "الشعر",
-              y: 505992,
-              m: "34%",
-            },
-            {
-              name: "القصص",
-              y: 551695,
-              m: "29%",
-            },
-            {
-              name: "الأفلام",
-              y: 312679,
-              m: "53%",
-            },
-            {
-              name: "الروايات",
-              y: 78865,
-              m: "7%",
-            },
-            {
-              name: "المسابقات",
-              y: 301336,
-              m: "21%",
-            },
-          ],
-          colors: ["#ae2a3f40", "#ae2a3f70", "#ae2a3f"],
-        },
+          {
+              borderRadius: 3,
+              data: @json($this->literary_pie->map(function ($literary) use ($totalEvents) {
+                  return [
+                      'name' => $literary->name,
+                      'y' => $literary->events_count,
+                      'm' => round(($literary->events_count / $totalEvents) * 100, 2) . '%',
+                  ];
+              })),
+              colors: ["#ae2a3f40", "#ae2a3f70", "#ae2a3f"],
+          },
       ],
     });
   

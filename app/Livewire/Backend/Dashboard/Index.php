@@ -45,7 +45,7 @@ class Index extends Component
 
         $this->literary_pie = Literary::withCount('events')
         ->orderBy('events_count', 'desc')
-        ->take(3)
+        ->take(5)
         ->get();
 
 
