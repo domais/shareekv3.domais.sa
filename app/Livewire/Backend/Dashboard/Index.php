@@ -18,6 +18,7 @@ class Index extends Component
     public $urgent_permits = [];
     public $guests_counter;
     public $support_counter;
+    public $months;
 
     public function mount()
     {
@@ -37,8 +38,23 @@ class Index extends Component
         ->where('start_date', '<=', Carbon::now()->addDays(5))
         ->where('start_date', '>=', Carbon::now())
         ->get();
-
         $this->support_counter = Support::count();
+
+        for ($i = 0; $i < 6; $i++) {
+            $month = now()->subMonths($i);
+        
+            $count = Event::whereBetween('created_at', [
+                $month->startOfMonth(),
+                $month->endOfMonth()
+            ])->count();
+        
+            $this->months[] = [
+                'month' => $month->format('F Y'),
+                'count' => $count
+            ];
+        }
+
+        dd($this->months);
     }
     public function render()
     {
