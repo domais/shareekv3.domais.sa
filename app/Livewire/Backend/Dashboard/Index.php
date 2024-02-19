@@ -48,28 +48,7 @@ class Index extends Component
                 $month->startOfMonth(),
                 $month->copy()->endOfMonth()->endOfDay()
             ])->count();
-        
-            $this->months[] = [
-                'month' => __(date('F', mktime(0, 0, 0, $month->month, 10))), // Translate the month name
-                'count' => $count
-            ];
-        }
 
-        $this->countEventsGuests();
-        dd($this->guests_months);
-
-    }
-
-    public function countEventsGuests()
-    {
-        for ($i = 0; $i < 6; $i++) {
-            $month = now()->subMonths($i);
-        
-            $eventsCount = Event::whereBetween('created_at', [
-                $month->startOfMonth(),
-                $month->endOfMonth()
-            ])->count();
-        
             $guestsCount = Event::whereBetween('created_at', [
                 $month->startOfMonth(),
                 $month->endOfMonth()
@@ -77,13 +56,20 @@ class Index extends Component
         
             $this->guests_months[] = [
                 'month' => __(date('F', mktime(0, 0, 0, $month->month, 10))),
-                'events_count' => $eventsCount,
                 'guests_count' => $guestsCount
+            ];
+        
+            $this->months[] = [
+                'month' => __(date('F', mktime(0, 0, 0, $month->month, 10))), // Translate the month name
+                'count' => $count
             ];
         }
 
-        
+
+
     }
+
+
 
     public function render()
     {
