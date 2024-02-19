@@ -56,7 +56,7 @@ class Index extends Component
         }
 
         $this->countEventsGuests();
-        dd($this->guests_month);
+        dd($this->guests_months);
 
     }
 
