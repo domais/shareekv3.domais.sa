@@ -65,6 +65,8 @@ class Index extends Component
             ];
         }
 
+        dd($this->guests_months);
+
 
 
     }
