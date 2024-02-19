@@ -49,7 +49,7 @@ class Index extends Component
             ])->count();
         
             $this->months[] = [
-                'month' => $month->format('F Y'),
+                'month' => __(date('F', mktime(0, 0, 0, $month->month, 10))), // Translate the month name
                 'count' => $count
             ];
         }
