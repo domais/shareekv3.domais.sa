@@ -50,6 +50,7 @@ class EventCollection extends ResourceCollection
                 'literary' => optional($event->literary)->name ?? 'لم يحدد النوع',
                 'status_id' => $event->status->name,
                 'available_seats' => $event->available_seats,
+                'meeting_link' => $event->meeting_link,
                 'guest_count' => $event->guestsGoing->count(),
                 'goings' => $event->guestsGoing->pluck('id'),
                 'guest_approved' => $event->guestsGoing->where('id', auth()->id())->first()?->pivot->status === 'approved',
