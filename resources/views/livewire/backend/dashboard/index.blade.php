@@ -16,10 +16,7 @@
           <div class="row">
             <div class="col-5">
               <p class="bigNumber">{{$event_counter}}</p>
-              <span
-                class="badge bg-success-subtle border border-success-subtle text-success rounded-pill"
-                >3.5% <i class="fa-solid fa-arrow-up"></i
-              ></span>
+
             </div>
             <div class="col me-1 p-0">
               <div class="chart h-100" id="chart_1"></div>
@@ -458,7 +455,7 @@
         {
           name: "التمويل",
           color: "#ae2a3f80",
-          data: [98, 60, 121, 39, 54, 86],
+          data: @json(array_column($this->months, 'count')),
         },
       ],
     });
