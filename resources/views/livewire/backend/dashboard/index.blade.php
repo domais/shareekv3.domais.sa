@@ -178,7 +178,7 @@
             <div class="card-body d-flex flex-column justify-content-end">
               <div class="row">
                 <div class="col-12">
-                  <p class="bigNumber text-center py-4">مكان فارغ لأي أقتراح</p>
+                  <p class="bigNumber text-center py-4">من المقاهي للمجتمع .. نمهد للأدب طريقا</p>
                 </div>
               </div>
             </div>
