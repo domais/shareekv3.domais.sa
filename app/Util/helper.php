@@ -360,7 +360,5 @@ function ArToEn($input) {
         $code->save();
 
         Mail::to($user->email)->send(new CodeMail($otp, $user->email));
-
-
         return true;
     }
