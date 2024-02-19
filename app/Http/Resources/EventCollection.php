@@ -18,9 +18,12 @@ class EventCollection extends ResourceCollection
 
             // full path for image
             $isDefault = false;
-            $image = $event->permit->fileable->where('use', 'adv')->last()->path ?? '';
+
+
+            $image = $event->permit->fileable->where('type', 'image')->last() ?? '';
+
             if ($image) {
-                $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image;
+                $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image->path;
             } else {
                 $isDefault = true;
                 $image = url('img/default-event.png');
