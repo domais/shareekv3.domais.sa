@@ -49,8 +49,6 @@ class Index extends Component
         ->get();
 
 
-        dd($this->literary_pie);
-
 
         for ($i = 0; $i < 6; $i++) {
             $month = now()->subMonths($i);
