@@ -42,7 +42,7 @@ x-data="{
 
 
             <div class="row my-2">
-                <div class="col-4 d-flex align-items-center">الجنسية</div>
+                <div class="col-4 d-flex align-items-center">مدينة المتحدث</div>
                 <div class="col-8"><input type="text" x-bind:disabled="is_show_page" wire:model="speakerForm.nationality" class="form-control rounded" autocomplete="nationality" id="nationality"></div>
             </div>
 
