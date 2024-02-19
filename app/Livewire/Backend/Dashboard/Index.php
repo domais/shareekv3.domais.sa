@@ -3,6 +3,7 @@
 namespace App\Livewire\Backend\Dashboard;
 
 use App\Models\Event;
+use App\Models\Literary;
 use App\Models\Partner;
 use App\Models\Permit;
 use App\Models\Support;
@@ -20,6 +21,7 @@ class Index extends Component
     public $support_counter;
     public $months;
     public $guests_months;
+    public $literary_pie;
 
     public function mount()
     {
@@ -40,6 +42,15 @@ class Index extends Component
         ->where('start_date', '>=', Carbon::now())
         ->get();
         $this->support_counter = Support::count();
+
+        $this->literary_pie = Literary::withCount('events')
+        ->orderBy('events_count', 'desc')
+        ->take(3)
+        ->get();
+
+
+        dd($this->literary_pie);
+
 
         for ($i = 0; $i < 6; $i++) {
             $month = now()->subMonths($i);
