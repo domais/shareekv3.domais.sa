@@ -19,6 +19,7 @@ class Index extends Component
     public $guests_counter;
     public $support_counter;
     public $months;
+    public $guests_months;
 
     public function mount()
     {
@@ -54,7 +55,36 @@ class Index extends Component
             ];
         }
 
+        $this->countEventsGuests();
+        dd($this->guests_month);
+
     }
+
+    public function countEventsGuests()
+    {
+        for ($i = 0; $i < 6; $i++) {
+            $month = now()->subMonths($i);
+        
+            $eventsCount = Event::whereBetween('created_at', [
+                $month->startOfMonth(),
+                $month->endOfMonth()
+            ])->count();
+        
+            $guestsCount = Event::whereBetween('created_at', [
+                $month->startOfMonth(),
+                $month->endOfMonth()
+            ])->withCount('guests')->get()->sum('guests_count');
+        
+            $this->guests_months[] = [
+                'month' => __(date('F', mktime(0, 0, 0, $month->month, 10))),
+                'events_count' => $eventsCount,
+                'guests_count' => $guestsCount
+            ];
+        }
+
+        
+    }
+
     public function render()
     {
         return view('livewire.backend.dashboard.index');
