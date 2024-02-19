@@ -56,34 +56,22 @@
         <div class="card-body d-flex flex-column justify-content-end">
           <div class="row">
             <div class="col-5">
-              <div class="fs-11 mt-3">
-                <div class="d-flex flex-between-center mb-1">
-                  <div class="me-2">33%</div>
-                  <div class="d-flex align-items-center">
-                    <span class="dot bg-primary"></span
-                    ><span class="fw-semi-bold">الخيالي</span>
-                  </div>
+                <div class="fs-11 mt-3">
+                    @foreach($this->literary_pie as $literary)
+                        <div class="d-flex flex-between-center mb-1">
+                          <div class="me-2">{{ round(($literary->events_count / $event_counter) * 100, 2) }}%</div>
+                          <div class="d-flex align-items-center">
+                                <span class="dot bg-primary"></span>
+                                <span class="fw-semi-bold">{{ $literary->name }}</span>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="d-flex flex-between-center mb-1">
-                  <div class="me-2">29%</div>
-                  <div class="d-flex align-items-center">
-                    <span class="dot bg-info"></span
-                    ><span class="fw-semi-bold">المصور</span>
-                  </div>
-                </div>
-                <div class="d-flex flex-between-center mb-1">
-                  <div class="me-2">20%</div>
-                  <div class="d-flex align-items-center">
-                    <span class="dot bg-300"></span
-                    ><span class="fw-semi-bold">الشعر</span>
-                  </div>
-                </div>
-              </div>
             </div>
             <div class="col me-1 p-0">
-              <div class="chart h-100" id="chart_3"></div>
+                <div class="chart h-100" id="chart_3"></div>
             </div>
-          </div>
+        </div>
         </div>
       </div>
     </div>
