@@ -14,7 +14,7 @@
                         <th scope="col">الجوال</th>
                         <th scope="col">الجنس</th>
                         <th scope="col">الفئة العمرية</th>
-                        <th scope="col">النوع</th>
+                        <th scope="col">التسجيل</th>
                         <th scope="col">الحالة</th>
                         </tr>
                     </thead>
