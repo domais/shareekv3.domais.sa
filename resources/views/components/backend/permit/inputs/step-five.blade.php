@@ -27,11 +27,15 @@
                             <td>{{$guest->phone}}</td>
                             <td>{{$guest->gender === 'male' ? 'ذكر' : 'انثى'}}</td>
                             <td>{{$guest->getAge()}}</td>
-                            <td class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">
+                            <td>
+                            <div class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">
                                 {{$guest->pivot->type === 'going' ? 'مسجل' : ($guest->pivot->type === 'interested' ? 'مهتم' : ($guest->pivot->type === 'maybe' ? 'ربما' : 'ملغي'))}}
+                            </div>
                             </td>
-                            <td class="badge {{$guest->pivot->status === 'approved' ? 'bg-success' : 'bg-danger'}}">
+                            <td>
+                            <div class="badge {{$guest->pivot->status === 'approved' ? 'bg-success' : 'bg-danger'}}">
                                 {{$guest->pivot->status === 'approved' ? 'حاضر' : 'لم يحضر بعد'}}
+                            </div>
                             </td>
                         </tr>
                         @endforeach
