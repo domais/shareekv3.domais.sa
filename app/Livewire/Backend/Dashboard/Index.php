@@ -54,7 +54,6 @@ class Index extends Component
             ];
         }
 
-        dd($this->months);
     }
     public function render()
     {

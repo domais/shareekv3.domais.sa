@@ -430,7 +430,7 @@
       title: false,
       subtitle: false,
       xAxis: {
-        categories: ["مارس", "أبريل", "مايو", "يوليو", "يونيو", "اغسطس"],
+        categories: @json(array_column($this->months, 'month')),
         title: false,
         labels: { enabled: false },
         lineWidth: 0,
