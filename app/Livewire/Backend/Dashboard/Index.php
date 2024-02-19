@@ -43,9 +43,9 @@ class Index extends Component
         for ($i = 0; $i < 6; $i++) {
             $month = now()->subMonths($i);
         
-            $count = Event::whereBetween('created_at', [
+            $count = Event::whereBetween('start_date', [
                 $month->startOfMonth(),
-                $month->endOfMonth()
+                $month->copy()->endOfMonth()->endOfDay()
             ])->count();
         
             $this->months[] = [
