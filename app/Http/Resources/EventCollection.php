@@ -20,7 +20,11 @@ class EventCollection extends ResourceCollection
             $isDefault = false;
 
 
-            $image = $event->permit->fileable->where('type', 'image')->last() ?? '';
+            $image = $event->permit->fileable ?? '';
+
+            if ($image) {
+                $image = $image->where('type', 'image')->last();
+            }
 
             if ($image) {
                 $image = config('filesystems.disks.do.cdn_endpoint') . '/' . $image->path;
