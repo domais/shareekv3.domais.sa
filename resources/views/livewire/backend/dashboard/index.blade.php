@@ -140,23 +140,10 @@
       <div class="row">
         <div class="col-md-12 col-xxl-12">
           <div class="card h-lg-100">
-            <div
-              class="bg-holder bg-card"
-              style="background-image: url('../../img/corner-1.png')"
-            ></div>
             <div class="card-body position-relative d-flex align-items-center">
-              <a class="text-dark fs-5 text-decoration-none" href="#"
-                ><img
-                  alt=""
-                  src="../../img/3DMarker.png"
-                  height="150"
-                  class="me-5 ms-3"
-              /></a>
-              <a class="text-dark fs-5 text-decoration-none" href="#"
-                >شاهد توزيع الفعاليات على الخريطة</a
-              >
+                <div id="map" style="height: 400px; width: 100%;"></div>
             </div>
-          </div>
+        </div>
         </div>
       </div>
 
@@ -355,6 +342,18 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=start&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
+<script>
+    function initMap() {
+        var mapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(-34.397, 150.644),
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    }
+</script>
 
 <script>
     // if (!localStorage.getItem("token")) {
