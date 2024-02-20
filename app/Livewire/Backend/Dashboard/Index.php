@@ -54,7 +54,15 @@ class Index extends Component
 
 
 
-        $this->partners = Partner::whereIn('owner_id', $user_ids)->get();
+        $this->partners = Partner::whereIn('owner_id', $user_ids)->with(['owner.events.guests'])
+        ->get()
+        ->sortByDesc(function ($partner) {
+            return $partner->owner->events->sum(function ($event) {
+                return $event->guests->count();
+            });
+        });
+
+        dd($this->partners);
 
 
 
