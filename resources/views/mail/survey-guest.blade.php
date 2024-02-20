@@ -49,6 +49,7 @@
 
 <p>
     <a href="{{env('APP_URL')}}survey/guest/{{$token}}"
+        style="color: #4CAF50; /* Green */"
     >
     اضغط هنا للدخول للاستبيان</a>
 </p>
