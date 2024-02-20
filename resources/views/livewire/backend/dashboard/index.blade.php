@@ -345,15 +345,36 @@
 
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
-<script>
-    function initMap() {
-        var mapOptions = {
-            zoom: 8,
-            center: new google.maps.LatLng(-34.397, 150.644),
-        };
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    }
-</script>
+    <script>
+      function initMap() {
+          var mapOptions = {
+              zoom: 8,
+              center: new google.maps.LatLng(24.7136, 46.6753), // Riyadh coordinates
+          };
+          var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  
+          var locations = [
+              {lat: 24.7136, lng: 46.6753, info: 'Riyadh'},
+              {lat: 21.4225, lng: 39.8262, info: 'Mecca'},
+              {lat: 21.4858, lng: 39.1925, info: 'Jeddah'}
+          ];
+  
+          locations.forEach(function(location) {
+              var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(location.lat, location.lng),
+                  map: map
+              });
+  
+              var infowindow = new google.maps.InfoWindow({
+                  content: location.info
+              });
+  
+              marker.addListener('click', function() {
+                  infowindow.open(map, marker);
+              });
+          });
+      }
+  </script>
 
 <script>
     // if (!localStorage.getItem("token")) {
