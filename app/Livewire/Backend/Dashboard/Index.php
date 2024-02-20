@@ -47,6 +47,8 @@ class Index extends Component
 
         $this->partners = Partner::with('owner.permits')
         ->whereHas('owner.permits')
+        ->withCount('owner.permits as permits_count')
+        ->orderBy('permits_count', 'desc')
         ->take(10)
         ->get();
 
