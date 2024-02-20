@@ -44,18 +44,18 @@ class Index extends Component
         });
 
         $this->last_chart = Literary::select('name')
-            ->withCount(['events' => function ($query) {
-                $query->whereBetween('created_at', [now()->startOfYear(), now()]);
-            }])
-            ->orderBy('events_count', 'desc')
-            ->take(5)
-            ->get()
-            ->map(function ($literary) {
-                return [
-                    'name' => $literary->name,
-                    'data' => array_pad([], 12, $literary->events_count)
-                ];
-            });
+        ->withCount(['events' => function ($query) {
+            $query->whereBetween('created_at', [now()->startOfYear(), now()->endOfYear()]);
+        }])
+        ->orderBy('events_count', 'desc')
+        ->take(5)
+        ->get()
+        ->map(function ($literary) {
+            return [
+                'name' => $literary->name,
+                'data' => array_pad([], 12, $literary->events_count)
+            ];
+        });
 
             dd($this->last_chart);
 
