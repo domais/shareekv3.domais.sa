@@ -103,6 +103,7 @@ class PermitTable extends DataTableComponent
     public function deleteRole($id)
     {
 
+        dd($id);
         $permit = Permit::findorfail($id);
 
         $permit->status_id = 16;
