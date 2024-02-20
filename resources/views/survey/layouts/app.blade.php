@@ -47,7 +47,7 @@
                 <p class="text-center text-xs leading-5 text-gray-500">&copy; Powered By, Inc. All rights reserved.
                     <span>
                         <a class="text-white text-decoration" href="https://domais.sa" target="_tab">
-                        Domais LLC</a> © {{date('Y')}}</a>
+                        NextLevel LLC</a> © {{date('Y')}}</a>
                     </span>
                 </p>
                 </div>
