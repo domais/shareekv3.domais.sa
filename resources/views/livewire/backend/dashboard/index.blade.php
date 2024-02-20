@@ -348,7 +348,7 @@
     <script>
       function initMap() {
           var mapOptions = {
-              zoom: 8,
+              zoom: 5,
               center: new google.maps.LatLng(24.7136, 46.6753), // Riyadh coordinates
           };
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
