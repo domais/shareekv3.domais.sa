@@ -32,8 +32,18 @@ class Index extends Component
     {
         $this->event_counter = Event::count();
 
-        $this->events_maps_locations = Event::whereIn('status_id', [5,6])->get();
+        $this->events_maps_locations = Event::whereIn('status_id', [5,6])
+        ->get()
+        ->map(function ($event) {
+            return [
+                'lat' => $event->latitude,
+                'lng' => $event->longitude,
+                'info' => $event->title . ', ' . $event->user->owner->name
+            ];
+        });
 
+        dd($this->events_maps_locations);
+        
         $this->partners = Partner::with('owner.permits')
         ->whereHas('owner.permits')
         ->take(10)
