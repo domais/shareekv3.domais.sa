@@ -44,16 +44,11 @@ class Index extends Component
         ->toArray();
     
         $data = [];
-        for ($i = 6; $i < 24; $i += 3) {
+        for ($i = 0; $i < 24; $i++) {
             $data[] = $events_starts_today[$i] ?? 0;
-            $data[] = 0;
-            $data[] = 0;
         }
-        $data[] = $events_starts_today[0] ?? 0; // for 12am
-        $data[] = 0;
-        $data[] = 0;
 
-        dd($data);
+        $events_starts_today = $data;
 
 
         $this->partners_counter = Partner::count();
