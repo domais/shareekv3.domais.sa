@@ -741,7 +741,7 @@
       series: [
         {
           color: "#062E3A",
-          data: @json($this->events_starts_today),
+          data: {!! json_encode($this->events_starts_today) !!},
         },
       ],
     });
