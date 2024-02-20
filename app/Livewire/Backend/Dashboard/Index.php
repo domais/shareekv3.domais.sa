@@ -9,6 +9,7 @@ use App\Models\Permit;
 use App\Models\Speaker;
 use App\Models\Support;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Index extends Component
@@ -45,12 +46,14 @@ class Index extends Component
 
 
 
-        $this->partners = Partner::with('owner.permits')
-        ->whereHas('owner.permits')
-        ->withCount('owner.permits as permits_count')
+        $this->partners = Permit::select('user_id', DB::raw('count(*) as permits_count'))
+        ->groupBy('user_id')
         ->orderBy('permits_count', 'desc')
         ->take(10)
-        ->get();
+        ->get()
+        ->load('user.owner');
+
+        dd($this->partners);
 
         $this->events_starts_today = Event::whereDate('start_date', Carbon::today())
         ->selectRaw('HOUR(start_date) as hour, count(*) as count')
