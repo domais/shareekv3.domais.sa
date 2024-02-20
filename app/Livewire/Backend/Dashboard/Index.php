@@ -46,8 +46,8 @@ class Index extends Component
 
         $this->last_chart = Literary::select('name')
         ->with(['events' => function ($query) {
-            $query->select(DB::raw('MONTH(start_at) as month'), DB::raw('COUNT(*) as count'))
-                ->whereBetween('start_at', [now()->startOfYear(), now()->endOfYear()])
+            $query->select(DB::raw('MONTH(start_date) as month'), DB::raw('COUNT(*) as count'))
+                ->whereBetween('start_date', [now()->startOfYear(), now()->endOfYear()])
                 ->groupBy('month');
         }])
         ->get()
