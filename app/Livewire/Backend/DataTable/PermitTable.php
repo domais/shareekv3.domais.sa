@@ -105,9 +105,6 @@ class PermitTable extends DataTableComponent
 
         $permit = Permit::findorfail($id);
 
-        dd($id, $permit);
-
-
         $permit->status_id = 16;
 
         $permit->save();
