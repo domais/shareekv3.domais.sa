@@ -125,20 +125,8 @@
               class="card-header pb-0 d-flex align-items-center justify-content-between"
             >
               <h6 class="p-3 pb-0 pe-0 mb-0 d-flex align-items-center">
-                أوقات بدء الفعاليات
+                أوقات بدء الفعاليات اليوم
               </h6>
-              <select
-                class="mt-3 me-3 px-2 py-1 rounded border-secondary-subtle"
-              >
-                <option selected>اختر اليوم ...</option>
-                <option>الخميس</option>
-                <option>الجمعة</option>
-                <option>السبت</option>
-                <option>الأحد</option>
-                <option>الأثنين</option>
-                <option>الثلاثاء</option>
-                <option>الأربعاء</option>
-              </select>
             </div>
             <div class="card-body d-flex flex-column justify-content-end">
               <div id="chart_10" style="height: 282px"></div>
