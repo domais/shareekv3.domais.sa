@@ -9,7 +9,6 @@ use App\Models\Permit;
 use App\Models\Speaker;
 use App\Models\Support;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Index extends Component
@@ -44,30 +43,7 @@ class Index extends Component
             ];
         });
 
-        $this->last_chart = Literary::select('name')
-        ->with(['events' => function ($query) {
-            $query->select(DB::raw('MONTH(start_date) as month'), DB::raw('COUNT(*) as count'))
-                ->whereBetween('start_date', [now()->startOfYear(), now()->endOfYear()])
-                ->groupBy('month');
-        }])
-        ->get()
-        ->map(function ($literary) {
-            $data = array_fill(0, 12, 0); // Initialize an array with 12 zeros
-            foreach ($literary->events as $event) {
-                $data[$event->month - 1] = $event->count;
-            }
-            return [
-                'name' => $literary->name,
-                'data' => $data
-            ];
-        })
-        ->sortByDesc(function ($literary) {
-            return array_sum($literary['data']);
-        })
-        ->take(5)
-        ->values();
 
-            dd($this->last_chart);
 
         $this->partners = Partner::with('owner.permits')
         ->whereHas('owner.permits')
