@@ -25,6 +25,7 @@ class Index extends Component
     public $months;
     public $guests_months;
     public $literary_pie;
+    public $events_starts_today;
 
     public function mount()
     {
@@ -34,6 +35,21 @@ class Index extends Component
         ->whereHas('owner.permits')
         ->take(10)
         ->get();
+
+        $events_starts_today = Event::whereDate('start_date', Carbon::today())
+        ->selectRaw('HOUR(start_date) as hour, count(*) as count')
+        ->groupBy('hour')
+        ->get()
+        ->pluck('count', 'hour')
+        ->toArray();
+    
+        $data = [];
+        for ($i = 0; $i < 24; $i++) {
+            $data[] = $events_starts_today[$i] ?? 0;
+        }
+
+        dd($data);
+
 
         $this->partners_counter = Partner::count();
 
