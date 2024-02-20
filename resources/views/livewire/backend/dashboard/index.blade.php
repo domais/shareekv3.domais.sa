@@ -360,6 +360,7 @@
                   'info' => $event->title . ', ' . $event->user->owner->name
               ];
           }));
+          
   
           locations.forEach(function(location) {
               var marker = new google.maps.Marker({
