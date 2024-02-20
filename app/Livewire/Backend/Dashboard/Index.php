@@ -27,6 +27,7 @@ class Index extends Component
     public $literary_pie;
     public $events_starts_today;
     public $events_maps_locations;
+    public $last_chart;
 
     public function mount()
     {
@@ -41,6 +42,22 @@ class Index extends Component
                 'info' => $event->title . ', ' . $event->user->owner->name
             ];
         });
+
+        $this->last_chart = Literary::select('name')
+            ->withCount(['events' => function ($query) {
+                $query->whereBetween('created_at', [now()->startOfYear(), now()]);
+            }])
+            ->orderBy('events_count', 'desc')
+            ->take(5)
+            ->get()
+            ->map(function ($literary) {
+                return [
+                    'name' => $literary->name,
+                    'data' => array_pad([], 12, $literary->events_count)
+                ];
+            });
+
+            dd($this->last_chart);
 
         $this->partners = Partner::with('owner.permits')
         ->whereHas('owner.permits')
