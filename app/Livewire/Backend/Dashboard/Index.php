@@ -44,9 +44,14 @@ class Index extends Component
         ->toArray();
     
         $data = [];
-        for ($i = 0; $i < 24; $i++) {
+        for ($i = 6; $i < 24; $i += 3) {
             $data[] = $events_starts_today[$i] ?? 0;
+            $data[] = 0;
+            $data[] = 0;
         }
+        $data[] = $events_starts_today[0] ?? 0; // for 12am
+        $data[] = 0;
+        $data[] = 0;
 
         dd($data);
 
