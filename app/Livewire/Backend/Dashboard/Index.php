@@ -62,9 +62,6 @@ class Index extends Component
             });
         });
 
-        dd($this->partners);
-
-
 
         $this->events_starts_today = Event::whereDate('start_date', Carbon::today())
         ->selectRaw('HOUR(start_date) as hour, count(*) as count')
