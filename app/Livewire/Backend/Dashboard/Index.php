@@ -37,15 +37,17 @@ class Index extends Component
         ->get();
 
         $events_starts_today = Event::whereDate('start_date', Carbon::today())
-        ->selectRaw('HOUR(start_date) as hour, count(*) as count')
-        ->groupBy('hour')
+        ->selectRaw('FLOOR(HOUR(start_date)/3) as interval, count(*) as count')
+        ->groupBy('interval')
         ->get()
-        ->pluck('count', 'hour')
+        ->pluck('count', 'interval')
         ->toArray();
     
         $data = [];
-        for ($i = 0; $i < 24; $i++) {
+        for ($i = 2; $i < 10; $i++) {
             $data[] = $events_starts_today[$i] ?? 0;
+            $data[] = 0;
+            $data[] = 0;
         }
 
         dd($data);
