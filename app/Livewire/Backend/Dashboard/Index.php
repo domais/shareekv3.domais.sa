@@ -54,9 +54,9 @@ class Index extends Component
 
 
 
-        $this->partners = Partner::whereIn('user_id', $user_ids)->get();
+        $this->partners = Partner::whereIn('owner_id', $user_ids)->get();
 
-        
+
 
         $this->events_starts_today = Event::whereDate('start_date', Carbon::today())
         ->selectRaw('HOUR(start_date) as hour, count(*) as count')
