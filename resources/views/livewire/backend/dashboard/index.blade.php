@@ -353,11 +353,13 @@
           };
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
   
-          var locations = [
-              {lat: 24.7136, lng: 46.6753, info: 'Riyadh'},
-              {lat: 21.4225, lng: 39.8262, info: 'Mecca'},
-              {lat: 21.4858, lng: 39.1925, info: 'Jeddah'}
-          ];
+          var locations = @json($this->events_maps_locations->map(function ($event) {
+              return [
+                  'lat' => $event->latitude,
+                  'lng' => $event->longitude,
+                  'info' => $event->title . ', ' . $event->user->owner->name
+              ];
+          }));
   
           locations.forEach(function(location) {
               var marker = new google.maps.Marker({

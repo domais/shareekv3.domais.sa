@@ -26,10 +26,13 @@ class Index extends Component
     public $guests_months;
     public $literary_pie;
     public $events_starts_today;
+    public $events_maps_locations;
 
     public function mount()
     {
         $this->event_counter = Event::count();
+
+        $this->events_maps_locations = Event::whereIn('status_id', [5,6])->get();
 
         $this->partners = Partner::with('owner.permits')
         ->whereHas('owner.permits')
