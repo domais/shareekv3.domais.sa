@@ -36,7 +36,7 @@ class Index extends Component
         ->take(10)
         ->get();
 
-        $events_starts_today = Event::whereDate('start_date', Carbon::today())
+        $this->events_starts_today = Event::whereDate('start_date', Carbon::today())
         ->selectRaw('HOUR(start_date) as hour, count(*) as count')
         ->groupBy('hour')
         ->get()
@@ -45,10 +45,10 @@ class Index extends Component
     
         $data = [];
         for ($i = 0; $i < 24; $i++) {
-            $data[] = $events_starts_today[$i] ?? 0;
+            $data[] = $this->events_starts_today[$i] ?? 0;
         }
 
-        $events_starts_today = $data;
+        $this->events_starts_today = $data;
 
 
 
