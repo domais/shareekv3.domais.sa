@@ -344,7 +344,7 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=start&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyAat9OI4xdqvO2RjpsvbMx3PE3AoBCVoXo&language=ar&region=SA"></script>
 <script>
     function initMap() {
         var mapOptions = {
