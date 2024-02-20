@@ -50,6 +50,8 @@ class Index extends Component
 
         $events_starts_today = $data;
 
+        dd($events_starts_today);
+
 
         $this->partners_counter = Partner::count();
 
