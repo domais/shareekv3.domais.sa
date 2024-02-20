@@ -36,14 +36,12 @@ class Index extends Component
         ->get()
         ->map(function ($event) {
             return [
-                'lat' => $event->latitude,
-                'lng' => $event->longitude,
+                'lat' => $event->lat,
+                'lng' => $event->lng,
                 'info' => $event->title . ', ' . $event->user->owner->name
             ];
         });
 
-        dd($this->events_maps_locations);
-        
         $this->partners = Partner::with('owner.permits')
         ->whereHas('owner.permits')
         ->take(10)

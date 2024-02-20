@@ -353,14 +353,7 @@
           };
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
   
-          var locations = @json($this->events_maps_locations->map(function ($event) {
-              return [
-                  'lat' => $event->latitude,
-                  'lng' => $event->longitude,
-                  'info' => $event->title . ', ' . $event->user->owner->name
-              ];
-          }));
-          
+          var locations = @json($this->events_maps_locations);
   
           locations.forEach(function(location) {
               var marker = new google.maps.Marker({
