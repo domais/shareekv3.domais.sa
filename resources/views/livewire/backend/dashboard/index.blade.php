@@ -172,15 +172,6 @@
           <h6 class="p-3 pb-0 pe-0 mb-0 d-flex align-items-center">
             عدد الفعاليات الشهرية حسب المناطق
           </h6>
-          <select class="mt-3 me-3 px-2 py-1 rounded border-secondary-subtle">
-            <option selected>اختر الفترة ...</option>
-            <option>آخر 7 أيام</option>
-            <option>آخر اسبوعين</option>
-            <option>آخر شهر</option>
-            <option>آخر 3 أشهر</option>
-            <option>آخر 6 أشهر</option>
-            <option>آخر سنة</option>
-          </select>
         </div>
         <div class="card-body d-flex flex-column justify-content-start">
           <div class="col-12" id="chart_30"></div>
