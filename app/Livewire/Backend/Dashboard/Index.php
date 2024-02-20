@@ -44,16 +44,19 @@ class Index extends Component
             ];
         });
 
-
-
-        $this->partners = Permit::select('user_id', DB::raw('count(*) as permits_count'))
+        $user_ids = Permit::select('user_id', DB::raw('count(*) as permits_count'))
         ->groupBy('user_id')
         ->orderBy('permits_count', 'desc')
         ->take(10)
         ->get()
-        ->load('user.owner');
+        ->pluck('user_id')
+        ->toArray();
 
-        dd($this->partners);
+
+
+        $this->partners = Partner::whereIn('user_id', $user_ids)->get();
+
+        
 
         $this->events_starts_today = Event::whereDate('start_date', Carbon::today())
         ->selectRaw('HOUR(start_date) as hour, count(*) as count')
