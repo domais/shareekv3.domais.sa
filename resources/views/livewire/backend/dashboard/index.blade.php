@@ -920,7 +920,7 @@
           },
           {
             from: 15,
-            to: 20,
+            to: 50,
             color: "#DF5353", // red
             thickness: 20,
           },

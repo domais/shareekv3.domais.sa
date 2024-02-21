@@ -132,7 +132,7 @@ class Index extends Component
         ->whereDate('created_at', '>=', now()->subDays(30))
         ->count();
 
-        $this->support_speed = Support::where('status_id', 13)
+        $this->support_speed = Support::whereIn('status_id', [13,14])
         ->whereDate('created_at', '>=', now()->subDays(30))
         ->count();
 
