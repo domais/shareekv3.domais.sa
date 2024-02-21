@@ -128,7 +128,7 @@ class Index extends Component
         });
 
         $this->permit_speed = Permit::where('status_id', 5)
-        ->whereDate('created_at', '>=', now()->subDays(32))
+        ->whereDate('created_at', '>=', now()->subDays(30))
         ->count();
 
         for ($i = 0; $i < 6; $i++) {
