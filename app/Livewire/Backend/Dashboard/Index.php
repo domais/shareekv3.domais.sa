@@ -125,7 +125,7 @@ class Index extends Component
                 ];
             });
             
-            dd($monthly_counts);
+    
 
         
 
