@@ -201,11 +201,11 @@ class MigrateFromFirebaseService
         }
 
         if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
-            $status = 2;
+            return 0;
         }
 
         if (isset($event->sup_post) && $event->sup_post) {
-            $status = 3;
+            $status = 7;
         }
 
         if (isset($event->verification) && $event->verification) {
