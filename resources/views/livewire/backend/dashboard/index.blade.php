@@ -891,7 +891,7 @@
       // the value axis
       yAxis: {
         min: 0,
-        max: 20,
+        max: 40,
         tickPixelInterval: 72,
         tickPosition: "inside",
         tickColor: Highcharts.defaultOptions.chart.backgroundColor || "#FFFFFF",
@@ -920,7 +920,7 @@
           },
           {
             from: 15,
-            to: 50,
+            to: 40,
             color: "#DF5353", // red
             thickness: 20,
           },
