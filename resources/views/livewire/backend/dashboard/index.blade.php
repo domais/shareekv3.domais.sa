@@ -771,7 +771,28 @@
           '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
         footerFormat: "</table>",
       },
-      series: @json($this->monthly_counts),
+      series: [
+        {
+          name: "الدراسات",
+          data: [1, 3, 0, 2, 0, 2, 4, 1, 5, 7, 8, 9],
+        },
+        {
+          name: "الأطفال واليافعين",
+          data: [5, 8, 6, 9, 3, 0, 2, 8, 4, 6, 7, 5],
+        },
+        {
+          name: "الأدب المصور",
+          data: [0, 0, 0, 0, 2, 4, 2, 6, 7, 4, 6, 4],
+        },
+        {
+          name: "الخيالي",
+          data: [11, 16, 7, 9, 17, 16, 5, 4, 6, 2, 0, 0],
+        },
+        {
+          name: "الغير خيالي",
+          data: [5, 7, 4, 2, 5, 8, 4, 7, 9, 5, 9, 3],
+        },
+      ],
     });
   
     Highcharts.chart("chart_51", {
