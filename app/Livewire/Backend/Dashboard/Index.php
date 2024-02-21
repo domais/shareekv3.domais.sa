@@ -99,28 +99,14 @@ class Index extends Component
         ->take(5)
         ->get();
 
-        $literary_monthly_data = Literary::with(['events' => function ($query) {
-            $query->select(DB::raw('MONTH(start_date) as month'))
-                ->whereYear('start_date', now()->year);
-        }])
-        ->withCount('events')
-        ->orderBy('events_count', 'desc')
-        ->take(5)
-        ->get()
-        ->map(function ($literary) {
-            $data = array_fill(0, 12, 0); // Initialize an array with 12 zeros
-            foreach ($literary->events as $event) {
-                if ($event->month) {
-                    $data[$event->month - 1]++;
-                }
-            }
-            return [
-                'name' => $literary->name,
-                'data' => $data
-            ];
-        });
 
-        dd($literary_monthly_data);
+        dd($this->literary_pie);
+
+
+        
+
+
+    
 
 
 
