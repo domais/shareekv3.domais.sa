@@ -201,7 +201,7 @@ class MigrateFromFirebaseService
         }
 
         if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
-            return 0;
+            return 9;
         }
 
         if (isset($event->sup_post) && $event->sup_post) {
