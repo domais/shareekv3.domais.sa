@@ -771,7 +771,7 @@
           '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
         footerFormat: "</table>",
       },
-      series: {!! json_encode($monthly_counts) !!},
+      series: @json($this->monthly_counts),
     });
   
     Highcharts.chart("chart_51", {
