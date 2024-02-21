@@ -837,7 +837,7 @@
   
       series: [
         {
-          data: [22],
+          data: [32],
           dataLabels: {
             format: "بالمتوسط {y} يوم",
             borderWidth: 0,
