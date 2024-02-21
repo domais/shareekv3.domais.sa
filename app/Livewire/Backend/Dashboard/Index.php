@@ -120,7 +120,6 @@ class Index extends Component
                         ->count();
                 }
                 return [
-                    'id' => $literary['id'],
                     'name' => $literary['name'],
                     'counts' => $counts
                 ];
