@@ -99,8 +99,19 @@ class Index extends Component
         ->take(5)
         ->get();
 
+        $literary_ids_names = Literary::withCount('events')
+            ->orderBy('events_count', 'desc')
+            ->take(5)
+            ->get()
+            ->map(function ($literary) {
+                return [
+                    'id' => $literary->id,
+                    'name' => $literary->name
+                ];
+            });
 
-        dd($this->literary_pie);
+
+        dd($literary_ids_names);
 
 
         
