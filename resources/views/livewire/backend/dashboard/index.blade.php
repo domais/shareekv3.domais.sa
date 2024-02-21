@@ -837,7 +837,7 @@
   
       series: [
         {
-          data: [32],
+          data: [{{$this->permit_speed}}],
           dataLabels: {
             format: "بالمتوسط {y} يوم",
             borderWidth: 0,

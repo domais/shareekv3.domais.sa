@@ -30,6 +30,7 @@ class Index extends Component
     public $events_maps_locations;
     public $last_chart;
     public $monthly_counts;
+    public $permit_speed;
 
     public function mount()
     {
@@ -124,8 +125,11 @@ class Index extends Component
                     'name' => $literary['name'],
                     'data' => array_values($counts)
                 ];
-            });
+        });
 
+        $this->permit_speed = Permit::where('status_id', 5)
+        ->whereDate('created_at', '>=', now()->subDays(32))
+        ->count();
 
         for ($i = 0; $i < 6; $i++) {
             $month = now()->subMonths($i);
