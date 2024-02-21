@@ -31,6 +31,7 @@ class Index extends Component
     public $last_chart;
     public $monthly_counts;
     public $permit_speed;
+    public $support_speed;
 
     public function mount()
     {
@@ -128,6 +129,10 @@ class Index extends Component
         });
 
         $this->permit_speed = Permit::where('status_id', 5)
+        ->whereDate('created_at', '>=', now()->subDays(30))
+        ->count();
+
+        $this->support_speed = Support::where('status_id', 13)
         ->whereDate('created_at', '>=', now()->subDays(30))
         ->count();
 

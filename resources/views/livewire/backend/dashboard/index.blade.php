@@ -929,9 +929,9 @@
   
       series: [
         {
-          data: [16],
+          data: [{{$support_speed}}],
           dataLabels: {
-            format: "بالمتوسط {y} يوم",
+            format: "بالمتوسط 30 يوم",
             borderWidth: 0,
             color:
               (Highcharts.defaultOptions.title &&
