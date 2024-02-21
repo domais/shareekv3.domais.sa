@@ -29,6 +29,7 @@ class Index extends Component
     public $events_starts_today;
     public $events_maps_locations;
     public $last_chart;
+    public $monthly_counts;
 
     public function mount()
     {
@@ -111,7 +112,7 @@ class Index extends Component
             });
 
 
-        $monthly_counts = $literary_ids_names->map(function ($literary) {
+        $this->monthly_counts = $literary_ids_names->map(function ($literary) {
                 $counts = [];
                 for ($month = 1; $month <= 12; $month++) {
                     $counts[$month] = Event::where('literary_id', $literary['id'])
@@ -121,9 +122,12 @@ class Index extends Component
                 }
                 return [
                     'name' => $literary['name'],
-                    'counts' => $counts
+                    'data' => $counts
                 ];
             });
+
+        $this->monthly_counts = $this->monthly_counts->toArray();
+
             
     
 
