@@ -126,18 +126,6 @@ class Index extends Component
                 ];
             });
 
-        dd($this->monthly_counts);
-
-
-            
-    
-
-        
-
-
-    
-
-
 
         for ($i = 0; $i < 6; $i++) {
             $month = now()->subMonths($i);
