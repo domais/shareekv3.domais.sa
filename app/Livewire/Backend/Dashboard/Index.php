@@ -111,8 +111,22 @@ class Index extends Component
             });
 
 
-        dd($literary_ids_names);
-
+        $monthly_counts = $literary_ids_names->map(function ($literary) {
+                $counts = [];
+                for ($month = 1; $month <= 12; $month++) {
+                    $counts[$month] = Event::where('literary_id', $literary['id'])
+                        ->whereMonth('start_date', $month)
+                        ->whereYear('start_date', now()->year)
+                        ->count();
+                }
+                return [
+                    'id' => $literary['id'],
+                    'name' => $literary['name'],
+                    'counts' => $counts
+                ];
+            });
+            
+        dd($monthly_counts);
 
         
 
