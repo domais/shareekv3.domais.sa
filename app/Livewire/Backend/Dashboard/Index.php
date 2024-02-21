@@ -126,7 +126,6 @@ class Index extends Component
                 ];
             });
 
-        $this->monthly_counts = $this->monthly_counts->toArray();
 
             
     
