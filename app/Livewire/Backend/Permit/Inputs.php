@@ -204,6 +204,13 @@ class Inputs extends Component
             $this->form->lng = auth()->user()->owner->lng;
             $this->form->lat = auth()->user()->owner->lat;
         }
+        if(session()->has('draft'))
+        {
+            $this->draft = session('draft');
+            $this->form->setFormDraft($this->draft);
+            session()->forget('draft');
+            // Session has 'draft'
+        }
     }   
 
     public function store($status)
