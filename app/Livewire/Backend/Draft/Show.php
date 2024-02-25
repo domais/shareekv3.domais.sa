@@ -14,7 +14,7 @@ class Show extends Component
 {
     use LiveChanges;
 
-    public ?Permit $permit = null;
+    public ?Draft $permit = null;
     public $order_number;
     public PermitForm $form;
     public SpeakerForm  $speakerForm;
@@ -45,6 +45,7 @@ class Show extends Component
 
     public function mount()
     {   
+        dd($this->order_number, $this->permit);
         $this->permit = Draft::where('order_number', $this->order_number)->first();
 
         if ($this->order_number && $this->permit == null) {
