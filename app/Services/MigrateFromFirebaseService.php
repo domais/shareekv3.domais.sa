@@ -38,6 +38,15 @@ class MigrateFromFirebaseService
                 return;
             }
 
+            if (isset($item->event_Send) && $item->event_Send && isset($item->reject_evint) && !$item->reject_evint) {
+                return;
+            }
+
+            // 0FfF0tsEhvdJwJUof2HJ, 3JTE5S3q33A26XqKws79, jgnumAhEzxaBv20lT1iD, lfDsDJWN6TLZGAwKJY38, YgJBCnS4lpfdbai3tmfJ
+            if (isset($item->id) && in_array($item->id, ['0FfF0tsEhvdJwJUof2HJ', '3JTE5S3q33A26XqKws79', 'jgnumAhEzxaBv20lT1iD', 'lfDsDJWN6TLZGAwKJY38', 'YgJBCnS4lpfdbai3tmfJ'])) {
+                return;
+            }
+
             $user = User::where('email', $item->user->email)->first();
 
             // $user = $this->user(
@@ -188,28 +197,30 @@ class MigrateFromFirebaseService
         $start = Carbon::createFromTimestamp($start);
         $end = Carbon::createFromTimestamp($end);
 
-        $status = 9;
+        $status = 7;
         // status 5 => Start_time > now && End_time <= now
-        if ($start->gt(now())) {
-            $status = 5;
-            // status 6 => Between Start_time && End_time
-        } elseif ($start->lte(now()) && $end->gte(now())) {
-            $status = 6;
-            // status 7 => Start_time <= now && End_time <= now
-        } elseif ($end->lt(now())) {
-            $status = 7;
+        if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
+            if ($start->gt(now())) { // Start_time > now
+                $status = 5;
+                // status 6 => Between Start_time && End_time
+            } elseif ($start->lte(now()) && $end->gte(now())) {
+                $status = 6;
+                // status 7 => Start_time <= now && End_time <= now
+            } elseif ($end->lt(now())) { // End_time <= now
+                $status = 7;
+            }
         }
 
         if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
-            return 9;
+            return 16;
         }
 
-        if (isset($event->sup_post) && $event->sup_post) {
-            $status = 7;
-        }
+        // if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
+        //     $status = 7;
+        // }
 
         if (isset($event->verification) && $event->verification) {
-            $status = 8;
+            $status = 9;
         }
 
         \Log::info('Status: ' . $status);
