@@ -281,6 +281,8 @@ class Inputs extends Component
             if (!empty($this->draft->partnership)) {
                 $this->partnerships = json_decode($this->draft->partnership);
             }
+
+            dd($this->speakers,$this->partnerships);
         }
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
