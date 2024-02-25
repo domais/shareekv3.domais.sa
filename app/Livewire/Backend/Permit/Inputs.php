@@ -165,7 +165,7 @@ class Inputs extends Component
 
             $this->draft = Draft::where('order_number', $this->order_number)->first();
 
-           // dd($this->draft, $this->order_number);
+            dd($this->draft, $this->order_number);
 
             if ($this->draft) {
                 $this->form->setForm($this->draft);
