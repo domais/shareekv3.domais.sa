@@ -67,6 +67,11 @@ Route::namespace('App\Livewire\Backend')->middleware('auth')->group(function () 
             ->middleware('checkUserRelation:event');
     });
 
+    Route::namespace('Draft')->prefix('draft')->middleware('checkpassword')->as('draft.')->group(function () {
+        Route::get('/show/{order_number}', Show::class)
+            ->name('show');
+    });
+
     Route::namespace('Ticket')->prefix('ticket')->middleware('checkpassword')->as('ticket.')->group(function () {
 
         Route::get('/', Index::class)->name('index');

@@ -62,8 +62,9 @@ x-data="{errors: @entangle('errors').live, view: 'kanban'}"  x-init="
 			name="مسودة"
 			count="{{count($drafts)}}" 
 			:data="$drafts"
-			:buttons="KanbanButtons('PermitUserDraft')"
+			:buttons="[]"
 			type="draft"
+			route="draft"
 		/>
 		@endrole
 
