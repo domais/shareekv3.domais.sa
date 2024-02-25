@@ -221,8 +221,6 @@ class Inputs extends Component
             if (!empty($this->draft->partnership)) {
                 $this->partnerships = json_decode($this->draft->partnership,true);
             }
-
-            dd($this->speakers,$this->partnerships);
         }
     }   
 
