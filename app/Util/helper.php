@@ -315,6 +315,7 @@ function ArToEn($input) {
 	function deleteDraft()
 	{
 		if (session()->has('draft_to_delete')) {
+			dd(session()->get('draft_to_delete'));
 			$draft = Draft::find(session()->get('draft_to_delete'))->first();
 			if ($draft) {
 				$draft->delete();
