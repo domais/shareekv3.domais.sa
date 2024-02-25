@@ -253,7 +253,7 @@ class Inputs extends Component
         $permitData = $this->form->toArray();
 
         if ($status == 1) {
-            if (empty($this->form->litrary_children_id)  || empty($this->form->title) ) {
+            if (empty($this->form->title) ) {
                 $this->errors[] = "يجب إدخال العنوان و التصنيف الأدبي" ; 
                 return;
             }
