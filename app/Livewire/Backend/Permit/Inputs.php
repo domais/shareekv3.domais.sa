@@ -45,6 +45,7 @@ class Inputs extends Component
     public $permitFile;
     public $newAdmin = "";
     public $edit_support = false;
+    public $is_draft = false;
 
 
     public function changeAdmin()
@@ -221,6 +222,8 @@ class Inputs extends Component
             if (!empty($this->draft->partnership)) {
                 $this->partnerships = json_decode($this->draft->partnership,true);
             }
+
+            $this->is_draft = true;
         }
     }   
 

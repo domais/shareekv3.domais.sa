@@ -33,12 +33,11 @@
 				@endif
 			</ol>
 			<div class="links">
-				@if (!$permit)
-				<button class="btn btn-outline-secondary me-2" wire:click="store(1)">
-					حفظ
-					@if(empty($draft)) كمسودة @endif
-				</button>
-
+				@if (!$permit && !$this->is_draft)
+					<button class="btn btn-outline-secondary me-2" wire:click="store(1)">
+						حفظ
+						@if(empty($draft)) كمسودة @endif
+					</button>
 				@endif
 				@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
 
