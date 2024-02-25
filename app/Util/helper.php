@@ -316,12 +316,11 @@ function ArToEn($input) {
 	{
 		if (session()->has('draft_to_delete')) {
 			$id = session()->get('draft_to_delete');
-			$draft = Draft::find($id)->first();
-			dd($draft);
+			$draft = Draft::find($id);
 			if ($draft) {
 				$draft->delete();
-				session()->forget('draft_to_delete');
 			}
+			session()->forget('draft_to_delete');
 		}
 	}
 
