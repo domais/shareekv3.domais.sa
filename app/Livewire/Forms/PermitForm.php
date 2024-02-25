@@ -82,9 +82,31 @@ class PermitForm extends Form
             $this->approval_file = $data->fileable->where('use','approval_letter')->last() ? 'public/'.$data->fileable->where('use','approval_letter')->last()->path : "";
         }
 
+    }
+    public function setFormDraft($data)
+    {
+        $this->title = $data->title;
+        if ($data->literary) {
+           // dd($data->literary);
+            # code...
+            $this->literary_id = $data->literary->parent ? $data->literary->parent->id : $data->id;
+            $this->litrary_children_id = $data->literary_id ?? "";
+        }
 
 
+        $this->meeting_link = $data->meeting_link ?? "";
+        $this->event_type_id = $data->event_type_id ?? "";
+        $this->category_id = $data->category_id ?? "";
+        $this->other = $data->other ?? "";
+        $this->targeted_audience = $data->targeted_audience ?? "";
+        $this->description = $data->description ?? "";
+        $this->start_date = $data->start_date ?? "";
+        $this->end_date = $data->end_date ?? "";
+        $this->available_seats = $data->available_seats ?? "";
+        $this->event_location = $data->event_location ?? "";
 
+        $this->lat = $data->lat;
+        $this->lng = $data->lng;
 
     }
 }

@@ -164,7 +164,7 @@ class Inputs extends Component
         if ($this->order_number && $this->permit == null) {
 
             $this->draft = Draft::where('order_number', $this->order_number)->first();
-            
+
             if ($this->draft == null) {
                 abort(403,'التصريح غير موجود'); 
             } 
@@ -192,6 +192,8 @@ class Inputs extends Component
 
         if ($this->draft) {
             $this->is_show_page = false ;
+            $this->form->setFormDraft($this->draft);
+
         }  
 
         if ($this->is_show_page && $this->permit) {
