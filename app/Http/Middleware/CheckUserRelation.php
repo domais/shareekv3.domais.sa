@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Draft;
 use App\Models\Event;
 use App\Models\Permit;
 use Closure;
@@ -21,8 +22,12 @@ class CheckUserRelation
         $data = Permit::where('order_number', $data)->first();
         $user = $request->user();
             if (isset($data->user_id) && $user->hasRole('User') && $data->user_id != $user->id){
+                $data = Draft::where('order_number', $data)->first();
+
+                if (isset($data->user_id) && $user->hasRole('User') && $data->user_id != $user->id){
+                    abort(403, 'عملية غير مصرح بها');
+                }
                 // Handle the case where the user is not the owner of the event // Modefied by Domais
-                abort(403, 'عملية غير مصرح بها');
             }
 
         return $next($request);
