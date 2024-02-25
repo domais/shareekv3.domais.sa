@@ -271,6 +271,16 @@ class Inputs extends Component
         }
         if ($this->draft) {
             session(['draft_to_delete' => $this->draft->id]);
+            $this->speakers = json_decode($this->draft->speakers);
+            
+            foreach ($this->speakers as &$speaker) {
+                $speaker['reservations'] = $speaker['reservations'] == 1 ? true : false;
+                $speaker['reward'] = $speaker['reward'] == 1 ? true : false;
+            }
+
+            if (!empty($this->draft->partnership)) {
+                $this->partnerships = json_decode($this->draft->partnership);
+            }
         }
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
