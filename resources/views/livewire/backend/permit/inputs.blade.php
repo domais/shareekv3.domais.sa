@@ -18,7 +18,7 @@
 
 					{{$text_bread_crumb === "permit" ? 'التصريح' : ($text_bread_crumb === "support" ? 'الدعم' : 'المبادرة')}}					</a>
 
-					 رقم {{$permit->order_number}}</li>
+					 رقم {{$permit->order_number ?? ''}}</li>
 				@else
 
 				<li class="breadcrumb-item active" aria-current="page">

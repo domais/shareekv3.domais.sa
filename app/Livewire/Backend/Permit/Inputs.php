@@ -164,15 +164,10 @@ class Inputs extends Component
         if ($this->order_number && $this->permit == null) {
 
             $this->draft = Draft::where('order_number', $this->order_number)->first();
-
             
-
-            if ($this->draft) {
-               
-            }  
-            else{
+            if ($this->draft == null) {
                 abort(403,'التصريح غير موجود'); 
-            }
+            } 
         }
 
  
@@ -194,6 +189,11 @@ class Inputs extends Component
         }   
 
         $this->is_show_page = Route::currentRouteName() == 'permit.show';
+
+        if ($this->draft) {
+            $this->is_show_page = false ;
+        }  
+
         if ($this->is_show_page && $this->permit) {
             $this->histories = $this->permit->history()->whereNull('support_id')->orderBy('created_at', 'asc')->get();            
         }
