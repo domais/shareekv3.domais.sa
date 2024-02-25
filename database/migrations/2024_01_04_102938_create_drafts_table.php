@@ -35,6 +35,9 @@ return new class extends Migration
             $table->double('lat')->nullable();
             $table->double('lng')->nullable();
 
+            $table->integer('points')->default(0);
+
+
             $table->json('speakers')->nullable();
             $table->json('partnership')->nullable();
 

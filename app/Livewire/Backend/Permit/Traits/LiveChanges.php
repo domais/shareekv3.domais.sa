@@ -306,6 +306,8 @@ trait LiveChanges
                 }
             }
             else{
+
+                dd('hello');
                 // create permit
                 $permit = Permit::create($permitData);
 
