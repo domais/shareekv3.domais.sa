@@ -48,9 +48,6 @@ class Show extends Component
         
         $this->permit = Draft::where('order_number', $this->order_number)->first();
 
-
-        dd($this->order_number, $this->permit);
-
         if ($this->order_number && $this->permit == null) {
             abort(403,'التصريح غير موجود'); 
         }
