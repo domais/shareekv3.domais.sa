@@ -162,17 +162,23 @@ class Inputs extends Component
         $this->permit = Permit::where('order_number', $this->order_number)->first();
 
         if ($this->order_number && $this->permit == null) {
-            abort(403,'التصريح غير موجود'); 
+
+            $this->draft = Draft::where('id', $this->order_number)->first();
+
+            if ($this->draft) {
+                $this->form->setForm($this->draft);
+                $this->updatedForm();
+                if ($this->draft->speakers != null) {
+                    $this->speakers = json_decode($this->draft->speakers , true);
+                    $this->partnerships = json_decode($this->draft->partnership , true);
+                }
+            }  
+            else{
+                abort(403,'التصريح غير موجود'); 
+            }
         }
 
-        if ($this->draft) {
-            $this->form->setForm($this->draft);
-            $this->updatedForm();
-            if ($this->draft->speakers != null) {
-                $this->speakers = json_decode($this->draft->speakers , true);
-                $this->partnerships = json_decode($this->draft->partnership , true);
-            }
-        }   
+ 
         
         if ($this->permit) {
             $this->form->setForm($this->permit);
