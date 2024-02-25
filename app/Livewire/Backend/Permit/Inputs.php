@@ -271,6 +271,10 @@ class Inputs extends Component
         }
         if ($this->draft) {
             session(['draft_to_delete' => $this->draft->id]);
+            $draft = Draft::find($this->draft->id);
+            if($draft) {
+                $draft->delete();
+            }
         }
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
