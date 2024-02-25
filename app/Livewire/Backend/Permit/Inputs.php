@@ -211,7 +211,7 @@ class Inputs extends Component
             session()->forget('draft');
             // Session has 'draft'
 
-            $this->speakers = json_decode($this->draft->speakers);
+            $this->speakers = json_decode($this->draft->speakers, true);
             
             foreach ($this->speakers as &$speaker) {
                 $speaker['reservations'] = $speaker['reservations'] == 1 ? true : false;
@@ -219,7 +219,7 @@ class Inputs extends Component
             }
 
             if (!empty($this->draft->partnership)) {
-                $this->partnerships = json_decode($this->draft->partnership);
+                $this->partnerships = json_decode($this->draft->partnership,true);
             }
 
             dd($this->speakers,$this->partnerships);
