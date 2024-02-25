@@ -11,10 +11,11 @@ use App\Models\Permit;
 use Carbon\Carbon;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class Show extends Component
 {
-    use LiveChanges;
+    use LiveChanges,WithFileUploads;
 
     public ?Draft $permit = null;
     public $order_number;
