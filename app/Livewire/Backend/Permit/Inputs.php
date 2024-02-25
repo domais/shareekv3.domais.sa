@@ -163,7 +163,9 @@ class Inputs extends Component
 
         if ($this->order_number && $this->permit == null) {
 
-            $this->draft = Draft::where('id', $this->order_number)->first();
+            $this->draft = Draft::where('order_number', $this->order_number)->first();
+
+           // dd($this->draft, $this->order_number);
 
             if ($this->draft) {
                 $this->form->setForm($this->draft);
