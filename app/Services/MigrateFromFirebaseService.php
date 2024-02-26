@@ -199,15 +199,15 @@ class MigrateFromFirebaseService
 
         $status = 7;
         // status 5 => Start_time > now && End_time <= now
-        if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
+        if (isset($event->sup_post) && !$event->sup_post && isset($event->active_Event) && $event->active_Event) {
             if ($start->gt(now())) { // Start_time > now
-                $status = 5;
+                return $status = 5;
                 // status 6 => Between Start_time && End_time
             } elseif ($start->lte(now()) && $end->gte(now())) {
-                $status = 6;
+                return $status = 6;
                 // status 7 => Start_time <= now && End_time <= now
             } elseif ($end->lt(now())) { // End_time <= now
-                $status = 7;
+                return $status = 7;
             }
         }
 
@@ -220,7 +220,7 @@ class MigrateFromFirebaseService
         // }
 
         if (isset($event->verification) && $event->verification) {
-            $status = 9;
+            return $status = 9;
         }
 
         \Log::info('Status: ' . $status);
