@@ -47,6 +47,10 @@ class MigrateFromFirebaseService
                 return;
             }
 
+            $status = $this->getStatus($item);
+
+            if ($status === 0) return;
+
             $user = User::where('email', $item->user->email)->first();
 
             // $user = $this->user(
@@ -197,7 +201,7 @@ class MigrateFromFirebaseService
         $start = Carbon::createFromTimestamp($start);
         $end = Carbon::createFromTimestamp($end);
 
-        $status = 7;
+        $status = 0;
         // status 5 => Start_time > now && End_time <= now
         if (isset($event->sup_post) && !$event->sup_post && isset($event->active_Event) && $event->active_Event) {
             if ($start->gt(now())) { // Start_time > now
@@ -230,6 +234,7 @@ class MigrateFromFirebaseService
     private function event($item, $user): Event
     {
         $status = $this->getStatus($item);
+
 
         $type = $item->cheld_yang_Shear ?? $item->type_adab;
         \Log::info('Type: ' . $type);
