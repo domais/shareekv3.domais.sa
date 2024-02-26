@@ -176,6 +176,9 @@ return [
         'event_location' => [
             '3' => 'افتراضي',
         ],
+        'event_type_id' => [
+            '1' => 'فعالية',
+        ],
     ],
     'custom' => [
         'approval_file' => [
