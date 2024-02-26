@@ -25,11 +25,17 @@
                 @else
                 يوجد مشكلة في إدخال رقم {{ $item->id }}
                 @endif
-
                 {{--<div class="type mb-3"> {{$item->literary->parent->name}}   > {{$item->literary->name}}</div> --}}
-                @else
-                <div class="type mb-3">مساهمة</div>
-
+                    @else
+                        @if ($item->event_type_id == 1)
+                        <div class="type mb-3">
+                            فعالية لم يحدد نوع الأدب فيها
+                        </div>  
+                        @else
+                        <div class="type mb-3">
+                            مساهمة
+                        </div>
+                    @endif
                 @endif
                 
                 <div class="number">
