@@ -147,7 +147,9 @@ trait LiveChanges
         $permit->user->owner->points += $permit->points;
         $permit->user->owner->save();
 
-        
+        $permit->status_id = 16;
+
+        $permit->save();
 
         $permit->delete();
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));

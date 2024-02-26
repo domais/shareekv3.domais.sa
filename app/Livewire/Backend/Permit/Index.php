@@ -179,6 +179,11 @@ class Index extends Component
             $permit = Draft::findOrfail($id);
         }
         $statusId = $permit->status_id;
+
+        $permit->status_id = 16;
+
+        $permit->save();
+
         $permit->delete();
 
         if ($statusId == 1) {
