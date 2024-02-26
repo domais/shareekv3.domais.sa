@@ -238,6 +238,12 @@ class Inputs extends Component
                 $this->errors[] = "يجب إضافة متحدث واحد على الأقل" ;
                 return;
             }
+
+            if($this->form->event_type_id == 1 && $this->form->litrary_children_id == null)
+            {
+                $this->errors[] = "يجب إختيار الفرع الأدبي" ;
+                return;
+            }
          
             if ($status == 2) {
                 $startDate = Carbon::parse($this->form->start_date);
