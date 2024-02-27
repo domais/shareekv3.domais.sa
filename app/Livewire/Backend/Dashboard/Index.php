@@ -57,13 +57,13 @@ class Index extends Component
 
 
 
-        $this->partners = Partner::whereIn('owner_id', $user_ids)->with(['owner.events.guests'])
+        $this->partners = Partner::whereIn('owner_id', $user_ids)->with(['owner.events'])
         ->get()
         ->sortByDesc(function ($partner) {
-            return $partner->owner->events->sum(function ($event) {
-                return $event->guests->count();
-            });
+            return $partner->owner->events->count();
         });
+
+  
 
 
         $this->events_starts_today = Event::whereDate('start_date', Carbon::today())
