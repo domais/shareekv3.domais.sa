@@ -139,9 +139,11 @@ class Index extends Component
             ->join('events as e', 'p.owner_id', '=', 'e.user_id')
             ->select('p.city', DB::raw('COUNT(e.id) as event_count'))
             ->groupBy('p.city')
-            ->get();
+            ->get()
+            ->pluck('event_count', 'city')
+            ->toArray();
         
-        //dd($cityEventCounts);
+        dd($cityEventCounts);
 
         $this->permit_speed = Permit::where('status_id', 5)
         ->whereDate('created_at', '>=', now()->subDays(30))

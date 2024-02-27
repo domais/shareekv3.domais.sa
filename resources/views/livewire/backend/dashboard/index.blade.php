@@ -738,7 +738,7 @@
       title: false,
       subtitle: false,
       xAxis: {
-        categories: @json(array_keys($cityEventCounts)),
+        categories: @json(array_keys($this->cityEventCounts)),
       },
       yAxis: {
         title: {
@@ -768,7 +768,7 @@
           '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
         footerFormat: "</table>",
       },
-      series: @json(array_values($cityEventCounts)),
+      series: @json(array_values($this->cityEventCounts)),
     });
   
     Highcharts.chart("chart_51", {
