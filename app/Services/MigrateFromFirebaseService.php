@@ -203,7 +203,7 @@ class MigrateFromFirebaseService
 
         $status = 0;
         // status 5 => Start_time > now && End_time <= now
-        if (isset($event->sup_post) && !$event->sup_post && isset($event->active_Event) && $event->active_Event) {
+        if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
             if ($start->gt(now())) { // Start_time > now
                 return $status = 5;
                 // status 6 => Between Start_time && End_time
@@ -217,6 +217,10 @@ class MigrateFromFirebaseService
 
         if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
             return 16;
+        }
+
+        if (isset($event->sup_post) && $event->sup_post) {
+            return $status = 7;
         }
 
         // if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
