@@ -95,6 +95,8 @@ class Index extends Component
             return Carbon::parse($permit->start_date)->diffInDays(Carbon::now());
         });
 
+        dd()
+
        // $this->support_counter = Support::count();
 
         $this->reservation_counter = Speaker::where('reservations', 1)->count();

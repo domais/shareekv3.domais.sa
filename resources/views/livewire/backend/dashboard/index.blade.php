@@ -217,7 +217,7 @@
                         {{$item->title}}
                     </div>
                     <div class="col-2 badge d-flex align-items-center">
-                        <span class="badge text-secondary {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) <= 2 ? 'bg-danger' : 'bg-warning' }} rounded-pill fw-normal">
+                        <span class="badge text-white {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) <= 2 ? 'bg-danger' : 'bg-warning' }} rounded-pill fw-normal">
                             {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::now()) }} أيام
                         </span>
                     </div>
