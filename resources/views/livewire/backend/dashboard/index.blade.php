@@ -732,43 +732,39 @@
     });
   
     Highcharts.chart("chart_30", {
-      chart: {
-        type: "spline",
-      },
-      title: false,
-      subtitle: false,
-      xAxis: {
-        categories: @json(array_keys($this->cityEventCounts)),
-      },
-      yAxis: {
-        title: {
-          text: "عدد الفعاليات",
+        chart: {
+            type: "bar",
         },
-      },
-      plotOptions: {
-        spline: {
-          lineWidth: 4,
-          states: {
-            hover: {
-              lineWidth: 5,
+        title: false,
+        subtitle: false,
+        xAxis: {
+            categories: @json(array_keys($this->cityEventCounts)),
+        },
+        yAxis: {
+            title: {
+                text: "عدد الفعاليات",
             },
-          },
-          marker: {
-            enabled: false,
-          },
         },
-      },
-      tooltip: {
-        crosshairs: true,
-        shared: true,
-        useHTML: true,
-        borderRadius: 8,
-        headerFormat: '<b>{point.key}</b><table dir="rtl" style="width:175px">',
-        pointFormat:
-          '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
-        footerFormat: "</table>",
-      },
-      series: @json(array_values($this->cityEventCounts)),
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            useHTML: true,
+            borderRadius: 8,
+            headerFormat: '<b>{point.key}</b><table dir="rtl" style="width:175px">',
+            pointFormat: '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
+            footerFormat: "</table>",
+        },
+        series: [{
+            name: 'الفعاليات',
+            data: @json(array_values($this->cityEventCounts)),
+        }],
     });
   
     Highcharts.chart("chart_51", {

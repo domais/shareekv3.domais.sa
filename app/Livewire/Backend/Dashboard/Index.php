@@ -143,8 +143,6 @@ class Index extends Component
             ->pluck('event_count', 'city')
             ->toArray();
         
-        dd($cityEventCounts);
-
         $this->permit_speed = Permit::where('status_id', 5)
         ->whereDate('created_at', '>=', now()->subDays(30))
         ->count();
