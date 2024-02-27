@@ -32,6 +32,7 @@ class Index extends Component
     public $monthly_counts;
     public $permit_speed;
     public $support_speed;
+    public $cityEventCounts;
 
     public function mount()
     {
@@ -135,7 +136,7 @@ class Index extends Component
 
         // to here 
 
-        $cityEventCounts = DB::table('partners as p')
+        $this->cityEventCounts = DB::table('partners as p')
             ->join('events as e', 'p.owner_id', '=', 'e.user_id')
             ->select('p.city', DB::raw('COUNT(e.id) as event_count'))
             ->groupBy('p.city')
