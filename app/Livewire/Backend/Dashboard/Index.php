@@ -90,13 +90,9 @@ class Index extends Component
         ->where('status_id', '!=', 16)
         ->where('start_date', '<=', Carbon::now()->addDays(5))
         ->where('start_date', '>=', Carbon::now())
-        ->orderBy('start_date', 'asc')
-        ->get()
-        ->sortBy(function ($permit) {
-            return Carbon::parse($permit->start_date)->diffInDays(Carbon::now());
-        });
+        ->orderBy('start_date', 'desc')
+        ->get();
 
-        dd($this->urgent_permits);
        // $this->support_counter = Support::count();
 
         $this->reservation_counter = Speaker::where('reservations', 1)->count();
