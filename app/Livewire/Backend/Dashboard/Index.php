@@ -90,8 +90,10 @@ class Index extends Component
         ->where('status_id', '!=', 16)
         ->where('start_date', '<=', Carbon::now()->addDays(5))
         ->where('start_date', '>=', Carbon::now())
-        ->orderBy('start_date', 'desc')
-        ->get();
+        ->get()
+        ->sortBy(function ($permit) {
+            return Carbon::parse($permit->start_date)->diffInDays(Carbon::now());
+        });
 
        // $this->support_counter = Support::count();
 
