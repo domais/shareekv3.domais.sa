@@ -738,20 +738,7 @@
       title: false,
       subtitle: false,
       xAxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        categories: @json(array_keys($cityEventCounts)),
       },
       yAxis: {
         title: {
@@ -781,7 +768,7 @@
           '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
         footerFormat: "</table>",
       },
-      series: @json($monthly_counts),
+      series: @json(array_values($cityEventCounts)),
     });
   
     Highcharts.chart("chart_51", {
