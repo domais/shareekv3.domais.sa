@@ -47,7 +47,7 @@ class Index extends Component
             ];
         });
 
-        $user_ids = Permit::select('user_id', DB::raw('count(*) as permits_count'))
+        $user_ids = Event::select('user_id', DB::raw('count(*) as permits_count'))
         ->groupBy('user_id')
         ->orderBy('permits_count', 'desc')
         ->take(10)
