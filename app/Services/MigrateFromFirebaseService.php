@@ -212,7 +212,10 @@ class MigrateFromFirebaseService
                 return $status = 6;
                 // status 7 => Start_time <= now && End_time <= now
             } elseif ($end->lt(now())) { // End_time <= now
-                return $status = 7;
+                // any after 1 Feb 2024 return status 7
+                if ($start->gt(Carbon::create(2024, 2, 1, 0, 0, 0))) {
+                    return $status = 7;
+                }
             }
         }
 
@@ -221,7 +224,9 @@ class MigrateFromFirebaseService
         }
 
         if (isset($event->sup_post) && $event->sup_post) {
-            return $status = 7;
+            if ($start->gt(Carbon::create(2024, 2, 1, 0, 0, 0))) {
+                return $status = 7;
+            }
         }
 
         // if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
