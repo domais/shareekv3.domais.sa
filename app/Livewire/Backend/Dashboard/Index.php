@@ -105,6 +105,8 @@ class Index extends Component
         ->take(5)
         ->get();
 
+        //from here
+
         $literary_ids_names = Literary::withCount('events')
             ->orderBy('events_count', 'desc')
             ->take(5)
@@ -130,6 +132,16 @@ class Index extends Component
                     'data' => array_values($counts)
                 ];
         });
+
+        // to here 
+
+        $cityEventCounts = DB::table('partners as p')
+            ->join('events as e', 'p.owner_id', '=', 'e.user_id')
+            ->select('p.city', DB::raw('COUNT(e.id) as event_count'))
+            ->groupBy('p.city')
+            ->get();
+
+        dd($cityEventCounts);
 
         $this->permit_speed = Permit::where('status_id', 5)
         ->whereDate('created_at', '>=', now()->subDays(30))
