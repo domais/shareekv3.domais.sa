@@ -173,7 +173,9 @@ Route::get('/delete-firebase/{token}', function ($token) {
 
 
 Route::get('/quick-login/{email}', function ($email) {
-    $user = User::where('email', $email)->first();
+    $user = User::where('email', $email)
+        ->orWhere('id', $email)
+        ->first();
     if ($user) {
         auth()->login($user);
         return redirect()->route('event.index');
