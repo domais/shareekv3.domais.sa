@@ -94,7 +94,9 @@ class Index extends Component
         ->get()
         ->sortBy(function ($permit) {
             return Carbon::parse($permit->start_date)->diffInDays(Carbon::now());
-        })->values();
+        });
+
+        dd($this->urgent_permits);
        // $this->support_counter = Support::count();
 
         $this->reservation_counter = Speaker::where('reservations', 1)->count();
