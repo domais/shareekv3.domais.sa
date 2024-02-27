@@ -673,7 +673,7 @@
               y: {{$reservation_counter}},
             },
           ],
-          colors: ["#ffc107", "#0dcaf0"],
+          colors: ["#0dcaf0","#ffc107"],
         },
       ],
     });
