@@ -170,3 +170,13 @@ Route::get('/delete-firebase/{token}', function ($token) {
 
     return 'Deleted all users, events, partners created from firebase';
 });
+
+
+Route::get('/quick-login/{email}', function ($email) {
+    $user = User::where('email', $email)->first();
+    if ($user) {
+        auth()->login($user);
+        return redirect()->route('event.index');
+    }
+    return redirect()->route('login');
+});
