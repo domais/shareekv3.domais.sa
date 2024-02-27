@@ -47,6 +47,11 @@ class MigrateFromFirebaseService
                 return;
             }
 
+            $status = $this->getStatus($item);
+            \Log::info('Status: ' . $status);
+
+            if ($status === 0) return;
+
             $user = User::where('email', $item->user->email)->first();
 
             // $user = $this->user(
@@ -197,7 +202,7 @@ class MigrateFromFirebaseService
         $start = Carbon::createFromTimestamp($start);
         $end = Carbon::createFromTimestamp($end);
 
-        $status = 7;
+        $status = 0;
         // status 5 => Start_time > now && End_time <= now
         if (isset($event->sup_post) && !$event->sup_post && isset($event->active_Event) && $event->active_Event) {
             if ($start->gt(now())) { // Start_time > now
@@ -207,12 +212,21 @@ class MigrateFromFirebaseService
                 return $status = 6;
                 // status 7 => Start_time <= now && End_time <= now
             } elseif ($end->lt(now())) { // End_time <= now
-                return $status = 7;
+                // any after 1 Feb 2024 return status 7
+                if ($start->gt(Carbon::create(2024, 2, 1, 0, 0, 0))) {
+                    return $status = 7;
+                }
             }
         }
 
         if (isset($event->event_Send) && $event->event_Send && isset($event->reject_evint) && !$event->reject_evint) {
             return 16;
+        }
+
+        if (isset($event->sup_post) && $event->sup_post) {
+            if ($start->gt(Carbon::create(2024, 2, 1, 0, 0, 0))) {
+                return $status = 7;
+            }
         }
 
         // if (isset($event->sup_post) && $event->sup_post && isset($event->active_Event) && $event->active_Event) {
@@ -230,6 +244,7 @@ class MigrateFromFirebaseService
     private function event($item, $user): Event
     {
         $status = $this->getStatus($item);
+
 
         $type = $item->cheld_yang_Shear ?? $item->type_adab;
         \Log::info('Type: ' . $type);
