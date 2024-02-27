@@ -629,7 +629,7 @@
             });
   
             var customText = (chart.myCustomText = chart.renderer
-              .text("{{$support_counter}}" + "<br>", chart.plotWidth / 2, chart.plotHeight / 2)
+              .text("" + "<br>", chart.plotWidth / 2, chart.plotHeight / 2)
               .css({
                 fontSize: "16px",
                 "text-align": "center",

@@ -90,9 +90,10 @@ class Index extends Component
         ->where('status_id', '!=', 16)
         ->where('start_date', '<=', Carbon::now()->addDays(5))
         ->where('start_date', '>=', Carbon::now())
+        ->orderBy('start_date', 'asc')
         ->get();
 
-        $this->support_counter = Support::count();
+       // $this->support_counter = Support::count();
 
         $this->reservation_counter = Speaker::where('reservations', 1)->count();
         $this->reward_counter = Speaker::where('reward', 1)->count();
