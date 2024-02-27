@@ -48,6 +48,7 @@ class MigrateFromFirebaseService
             }
 
             $status = $this->getStatus($item);
+            \Log::info('Status: ' . $status);
 
             if ($status === 0) return;
 
