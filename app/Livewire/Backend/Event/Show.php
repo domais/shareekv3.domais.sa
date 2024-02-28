@@ -45,7 +45,7 @@ class Show extends Component
 
     public function mount()
     {   
-        $this->permit = Permit::where('order_number', $this->order_number)->get();
+        $this->permit = Permit::where('order_number', $this->order_number)->first();
 
 
         dd($this->permit, $this->order_number);
