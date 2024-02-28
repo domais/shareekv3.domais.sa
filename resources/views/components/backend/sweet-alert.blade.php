@@ -321,6 +321,7 @@
 
 		function show_images_urls(id,model)
 		{
+			console.log(id,model);
 			Livewire.dispatch('show_images_urls', {id:id, model:model});
 		}
 
