@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\On;
+use Illuminate\Support\Str;
+
 
 trait LiveChanges
 {
@@ -308,6 +310,11 @@ trait LiveChanges
                 }
             }
             else{
+                // Generate a random string
+                $randomString = Str::random(10);
+
+                // Add the random string to the permitData array
+                $permitData['order_number'] = $randomString;
                 // create permit
                 $permit = Permit::create($permitData);
 
