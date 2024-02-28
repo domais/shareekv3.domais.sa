@@ -6,8 +6,10 @@ use App\Livewire\Backend\Permit\Traits\LiveChanges;
 use App\Livewire\Forms\PartnershipForm;
 use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
+use App\Models\Event;
 use App\Models\Permit;
 use Illuminate\Routing\Route;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Show extends Component
@@ -45,8 +47,6 @@ class Show extends Component
 
     public function mount()
     {   
-        dd('here');
-
         $this->permit = Permit::where('order_number', $this->order_number)->first();
 
         if ($this->order_number && $this->permit == null) {
@@ -80,6 +80,28 @@ class Show extends Component
             $this->form->lng = auth()->user()->owner->lng;
         }
     }   
+
+    #[On('show_images_urls')] 
+    public function show_images_urls($id,$model)
+    {
+        $event = Event::findorfail($id);
+
+
+
+    
+        // Get only the paths from images
+        $images = array_map(function ($image) {
+            return $image['path'];
+        }, $event->fileable->toArray());
+
+        $links = json_decode($event->links, true);
+
+        if($links == [""] || $links == null)     $links = [];
+            
+
+        // Dispatch the event with only the event name and the images paths
+        $this->dispatch('show-images', ['event' => $event->title, 'images' => $images,'links' => $links]);
+    }
     
     public function render()
     {
