@@ -3,6 +3,7 @@
 	type: @entangle('form.category_id').live,
 	literary_id: @entangle('form.literary_id').live,
 	Litrary_childes: @entangle('Litrary_childes').live,
+	selected_child: @entangle('form.litrary_children_id').live,
 }"
 
 >
@@ -99,7 +100,7 @@
 						x-bind:disabled="is_show_page">
 						<option selected disabled value="">اختر ...</option>
 						<template x-for="item in Litrary_childes" :key="item.id">
-							<option x-bind:value="item.id" x-text="item.name" x-bind:selected="item.id == form.litrary_children_id"></option>
+							<option x-bind:value="item.id" x-text="item.name" x-bind:selected="item.id == selected_child"></option>
 						</template>
 					</select>
 				</div>
