@@ -24,7 +24,7 @@ use Illuminate\Validation\Rules\Password;
     function newPermit()
     {
         return [
-            'order_number' => 'required|unique:permits,order_number',
+            'order_number' => 'required',
             'user_id' => 'required|exists:users,id',
             'event_type_id' => 'required|exists:event_types,id',
             'event_location' => 'required|in:1,2,3',
