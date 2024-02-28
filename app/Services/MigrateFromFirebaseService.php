@@ -258,6 +258,10 @@ class MigrateFromFirebaseService
             $eventTypeId = 1;
         }
 
+        if (Event::where('order_number', $item->id)->exists()) {
+            return Event::where('order_number', $item->id)->first();
+        }
+
 
         $event = Event::updateOrCreate(['order_number' => $item->id], [
             'title' => $item->Event_name,
@@ -297,6 +301,11 @@ class MigrateFromFirebaseService
 
     private function permit($item, $event)
     {
+
+        if (Permit::where('order_number', $item->id)->exists()) {
+            return;
+        }
+
         $permit = Permit::updateOrCreate(['order_number' => $item->id], [
             'order_number' => $item->id,
             'user_id' => $event->user_id,
