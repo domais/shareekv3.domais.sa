@@ -40,13 +40,13 @@
 					</button>
 				@endif
 
-				@if ($this->is_show_page  && $permit->status_id == 9)
+				@if ($this->is_show_page  && $permit->event?->status_id == 9)
 					<button class="btn btn-outline-secondary me-2">
 						إطلاع على التوثيق
 					</button>
 				
 				@else 
-				@dd($permit->status_id,$permit)
+				@dd($permit->event?->status_id,$permit)
 				@endif
 
 			
