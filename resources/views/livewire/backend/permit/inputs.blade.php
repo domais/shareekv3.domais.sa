@@ -44,9 +44,6 @@
 					<button class="btn btn-outline-secondary me-2">
 						إطلاع على التوثيق
 					</button>
-				
-				@else 
-				@dd($permit->event?->status_id,$permit)
 				@endif
 
 			
