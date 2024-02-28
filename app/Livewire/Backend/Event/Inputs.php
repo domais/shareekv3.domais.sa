@@ -8,6 +8,7 @@ use App\Livewire\Forms\PermitForm;
 use App\Livewire\Forms\SpeakerForm;
 use App\Mail\ChangeStatus;
 use App\Models\Draft;
+use App\Models\Event;
 use App\Models\Permit;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -151,6 +152,25 @@ class Inputs extends Component
 
         $this->dispatch('DeletePermit_Response', array_merge(SwalResponse(), ['place' => 'inside']));
 
+    }
+
+    #[On('show_images_urls')] 
+    public function show_images_urls($id,$model)
+    {
+        $event = Event::findorfail($id);
+
+            // Get only the paths from images
+        $images = array_map(function ($image) {
+            return $image['path'];
+        }, $event->fileable->toArray());
+
+        $links = json_decode($event->links, true);
+
+        if($links == [""] || $links == null)     $links = [];
+            
+
+        // Dispatch the event with only the event name and the images paths
+        $this->dispatch('show-images', ['event' => $event->title, 'images' => $images,'links' => $links]);
     }
 
 
