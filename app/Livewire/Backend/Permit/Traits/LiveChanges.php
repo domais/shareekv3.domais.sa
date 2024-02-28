@@ -245,6 +245,7 @@ trait LiveChanges
                         # code...
                         $permitData['user_id'] = $permit->user_id;                        
                     }
+                    
                     $permit->update($permitData);
                 }
 

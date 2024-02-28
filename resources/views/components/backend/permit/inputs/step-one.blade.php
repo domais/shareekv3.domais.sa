@@ -99,7 +99,7 @@
 						x-bind:disabled="is_show_page">
 						<option selected disabled value="">اختر ...</option>
 						<template x-for="item in Litrary_childes" :key="item.id">
-							<option x-bind:value="item.id" x-text="item.name"></option>
+							<option x-bind:value="item.id" x-text="item.name" x-bind:selected="item.id == form.litrary_children_id"></option>
 						</template>
 					</select>
 				</div>
