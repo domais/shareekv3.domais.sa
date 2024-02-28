@@ -39,6 +39,13 @@
 						@if(empty($draft)) كمسودة @endif
 					</button>
 				@endif
+
+				@if ($permit && $permit->status_id == 9)
+					<button class="btn btn-outline-secondary me-2">
+						إطلاع على التوثيق
+					</button>
+				@endif
+
 				@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
 
 				<a class="btn btn-warning"
