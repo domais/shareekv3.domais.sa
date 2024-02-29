@@ -50,8 +50,10 @@ class SurveyCommand extends Command
                     'type' => 'speaker',
                 ]);
 
+                \Log::info('Survey [MAIL SENDING] created for speaker ' . $speaker->id . ' for event ' . $event->id);
+
                 Mail::to($speaker->email)
-                ->bcc('domais-SurveyMail@srv1.mail-tester.com')->send(new SurveyMail($token, $event, $speaker, 'speaker'));
+                    ->bcc('domais-SurveyMail@srv1.mail-tester.com')->send(new SurveyMail($token, $event, $speaker, 'speaker'));
             });
 
             $event->guestsGoing->each(function ($guest) use ($event) {
@@ -62,12 +64,14 @@ class SurveyCommand extends Command
                     'event_id' => $event->id,
                     'type' => 'guest',
                 ]);
+
+                \Log::info('Survey [MAIL SENDING] created for guest ' . $guest->id . ' for event ' . $event->id);
+
                 Mail::to($guest->email)
-                ->bcc('domais-SurveyMail@srv1.mail-tester.com')->send(new SurveyMail($token, $event, $guest, 'guest'));
+                    ->bcc('domais-SurveyMail@srv1.mail-tester.com')->send(new SurveyMail($token, $event, $guest, 'guest'));
             });
             \Log::info('Survey sent to event ' . $event->id);
             $event->update(['is_survey_sent' => 1]);
         });
-
     }
 }
