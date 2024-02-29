@@ -187,3 +187,33 @@ Route::get('/check-files', function () {
     $directories = Storage::disk('local')->allDirectories();
     dd($directories);
 });
+
+Route::get('/download-zip', function () {
+    $directories = [
+        'public/files/2400003/documenting',
+        'public/files/2400005/documenting',
+        'public/files/2400015/documenting',
+        'public/files/2400073/documenting',
+        'public/files/2400074/documenting',
+        'public/files/2400046/documenting',
+        'public/files/2400077/documenting',
+        'public/files/2400023/documenting',
+    ];
+
+    $zip = new ZipArchive;
+    $zipPath = storage_path('app/public/files.zip');
+
+    if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE) {
+        foreach ($directories as $directory) {
+            if (Storage::disk('local')->exists($directory)) {
+                $files = Storage::disk('local')->files($directory);
+                foreach ($files as $file) {
+                    $zip->addFile(storage_path('app/' . $file), $file);
+                }
+            }
+        }
+        $zip->close();
+    }
+
+    return response()->download($zipPath)->deleteFileAfterSend(true);
+});
