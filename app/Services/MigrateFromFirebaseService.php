@@ -27,8 +27,11 @@ class MigrateFromFirebaseService
         // Chunk data to 100
         $chunk->each(function ($item) {
 
-            // Check if user is not
+            if (Event::where('order_number', $item->id)->exists()) {
+                return;
+            }
 
+            // Check if user is not
             if (!isset($item->user->email)) {
                 return;
             }
@@ -257,11 +260,6 @@ class MigrateFromFirebaseService
         } else {
             $eventTypeId = 1;
         }
-
-        if (Event::where('order_number', $item->id)->exists()) {
-            return Event::where('order_number', $item->id)->first();
-        }
-
 
         $event = Event::updateOrCreate(['order_number' => $item->id], [
             'title' => $item->Event_name,
