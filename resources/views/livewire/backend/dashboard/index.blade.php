@@ -732,40 +732,40 @@
     });
   
     Highcharts.chart("chart_30", {
-          chart: {
-              type: "bar",
-          },
-          title: false,
-          subtitle: false,
-          xAxis: {
-              categories: @json(array_keys($this->cityEventCounts)),
-          },
-          yAxis: {
-              title: {
-                  text: "عدد الفعاليات",
-              },
-          },
-          plotOptions: {
-              bar: {
-                  dataLabels: {
-                      enabled: true
-                  }
-              }
-          },
-          tooltip: {
-              crosshairs: true,
-              shared: true,
-              useHTML: true,
-              borderRadius: 8,
-              headerFormat: '<b>{point.key}</b><table dir="rtl" style="width:175px">',
-              pointFormat: '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
-              footerFormat: "</table>",
-          },
-          series: [{
-              name: 'الفعاليات',
-              data: @json(array_values($this->cityEventCounts)),
-          }],
-      });
+        chart: {
+            type: "column", // Change this line
+        },
+        title: false,
+        subtitle: false,
+        xAxis: {
+            categories: @json(array_keys($this->cityEventCounts)),
+        },
+        yAxis: {
+            title: {
+                text: "عدد الفعاليات",
+            },
+        },
+        plotOptions: {
+            column: { // Change this line
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            useHTML: true,
+            borderRadius: 8,
+            headerFormat: '<b>{point.key}</b><table dir="rtl" style="width:175px">',
+            pointFormat: '<tr><td> </td><td>{point.y}</td><td style="text-align: right;color: {series.color}">{series.name} </td></tr>',
+            footerFormat: "</table>",
+        },
+        series: [{
+            name: 'الفعاليات',
+            data: @json(array_values($this->cityEventCounts)),
+        }],
+    });
   
     Highcharts.chart("chart_51", {
       chart: {
