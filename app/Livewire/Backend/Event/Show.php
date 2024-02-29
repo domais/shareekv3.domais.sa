@@ -113,8 +113,8 @@ class Show extends Component
         if (!Storage::disk('do')->exists($folderPath)) {
             // If not, check if the directory exists on local disk
             if (!Storage::disk('local')->exists($folderPath)) {
-                dd('Directory does not exist.');
-                return response()->json(['error' => 'Directory does not exist.']);
+                $this->errors[] = 'هناك خطأ في تحميل الملفات';
+                return;
             } else {
                 // If it exists on local disk, use local disk
                 $disk = Storage::disk('local');
