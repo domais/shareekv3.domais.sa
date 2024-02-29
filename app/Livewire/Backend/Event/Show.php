@@ -105,9 +105,9 @@ class Show extends Component
     #[On('downloadImages')] 
     public function downloadImages()
     {
-        $zipName = $this->permit->permit_number . '.zip';
-        $folderPath = 'files/' . $this->permit->permit_number . '/documenting';
-        $tempPath = storage_path('app/public/temp/' . $this->permit->permit_number);
+        $zipName = $this->permit->order_number  . '.zip';
+        $folderPath = 'files/' . $this->permit->order_number  . '/documenting';
+        $tempPath = storage_path('app/public/temp/' . $this->permit->order_number );
     
         // Check if the directory exists
         if (!Storage::disk('do')->exists($folderPath)) {
