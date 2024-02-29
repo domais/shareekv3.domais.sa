@@ -712,7 +712,7 @@
       subtitle: false,
       xAxis: {
           categories: {!! json_encode(array_map(function($hour) {
-              return $hour < 12 ? $hour . ' am' : ($hour == 12 ? $hour . ' pm' : ($hour - 12) . ' pm');
+              return $hour == 0 ? '12 am' : ($hour < 12 ? $hour . ' am' : ($hour == 12 ? $hour . ' pm' : ($hour - 12) . ' pm'));
           }, array_keys($events_starts_today))) !!},
           title: true,
           labels: { enabled: true },
