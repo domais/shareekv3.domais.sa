@@ -191,7 +191,13 @@ Route::get('/check-files', function () {
 
 Route::get('/upload-to-do', function () {
     $directories = [
-        'public/files/2400005/documenting',
+        'public/files/2400003/documenting',
+        'public/files/2400015/documenting',
+        'public/files/2400073/documenting',
+        'public/files/2400074/documenting',
+        'public/files/2400046/documenting',
+        'public/files/2400077/documenting',
+        'public/files/2400023/documenting',
     ];
 
     foreach ($directories as $directory) {
