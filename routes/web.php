@@ -184,6 +184,6 @@ Route::get('/quick-login/{email}', function ($email) {
 });
 
 Route::get('/check-files', function () {
-    $directories = Storage::disk('local')->directories();
+    $directories = Storage::disk('local')->directories('public');
     dd($directories);
 });
