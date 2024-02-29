@@ -111,6 +111,7 @@ class Show extends Component
     
         // Check if the directory exists
         if (!Storage::disk('do')->exists($folderPath)) {
+            dd($folderPath);
             $this->errors[] = 'توجد مشكلة في تحميل الملفات.';
             return;
         }
