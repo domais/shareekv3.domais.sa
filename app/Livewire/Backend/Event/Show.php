@@ -107,13 +107,21 @@ class Show extends Component
     {
         $zipName = $this->permit->order_number  . '.zip';
         $folderPath = 'files/' . $this->permit->order_number  . '/documenting';
-        $tempPath = storage_path('app/public/temp/' . $this->permit->order_number );
+        $tempPath = storage_path('app/public/temp/' . $this->permit->order_number);
     
-        // Check if the directory exists
+        // Check if the directory exists on 'do' disk
         if (!Storage::disk('do')->exists($folderPath)) {
-            dd($folderPath);
-            $this->errors[] = 'توجد مشكلة في تحميل الملفات.';
-            return;
+            // If not, check if the directory exists on local disk
+            if (!Storage::disk('local')->exists($folderPath)) {
+                dd('Directory does not exist.');
+                return response()->json(['error' => 'Directory does not exist.']);
+            } else {
+                // If it exists on local disk, use local disk
+                $disk = Storage::disk('local');
+            }
+        } else {
+            // If it exists on 'do' disk, use 'do' disk
+            $disk = Storage::disk('do');
         }
     
         // Create a temporary local directory
@@ -122,9 +130,9 @@ class Show extends Component
         }
     
         // Download all files to the temporary local directory
-        $files = Storage::disk('do')->files($folderPath);
+        $files = $disk->files($folderPath);
         foreach ($files as $file) {
-            $fileContents = Storage::disk('do')->get($file);
+            $fileContents = $disk->get($file);
             file_put_contents($tempPath . '/' . basename($file), $fileContents);
         }
     
@@ -139,11 +147,10 @@ class Show extends Component
                 }
             }
             $zip->close();
-
-                // Download the zip file from the temporary local directory
-                return response()->download($tempPath . '/' . $zipName)->deleteFileAfterSend(true);
-            }
     
+            // Download the zip file from the temporary local directory
+            return response()->download($tempPath . '/' . $zipName)->deleteFileAfterSend(true);
+        }
     }
 
    
