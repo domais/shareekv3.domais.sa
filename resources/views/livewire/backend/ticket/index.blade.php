@@ -159,7 +159,7 @@
 			<p><strong>الوصف:</strong> <span x-text="selectedTicket.description"></span></p>
 			@if (auth()->user()->hasRole('SuperAdmin'))
 			<template x-if="selectedTicket.user">
-				<p><strong>المستخدم:</strong> <span x-text="selectedTicket.user.name"></span></p>
+				<p><strong>اسم الشريك:</strong> <span x-text="selectedTicket.user.owner.name"></span></p>
 			</template>
 			@endif
 			<div >
