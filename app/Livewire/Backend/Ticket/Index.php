@@ -23,9 +23,9 @@ class Index extends Component
     {
         $this->user = auth()->user();
         if ($this->user->hasRole('User')) {
-            $this->tickets = $this->user->tickets->toArray();
+            $this->tickets = $this->user->tickets()->latest()->get()->toArray();
         } else {
-            $this->tickets = Ticket::with('user')->get()->toArray();
+            $this->tickets = Ticket::with('user')->latest()->get()->toArray();
         }
     
         foreach ($this->tickets as &$ticket) {
