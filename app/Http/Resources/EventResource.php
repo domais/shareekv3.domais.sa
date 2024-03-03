@@ -46,7 +46,7 @@ class EventResource extends JsonResource
             'need_support' => $this->need_support,
             'lat' => $this->lat,
             'lng' => $this->lng,
-            'links' => $this->links
+            'links' => $this->links,
             'meeting_link' => $this->meeting_link,
             'goings' => $this->guestsGoing->pluck('id'),
             'guest_count' => $this->guestsGoing->count(),

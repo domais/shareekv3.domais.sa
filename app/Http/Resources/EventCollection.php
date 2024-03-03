@@ -57,6 +57,7 @@ class EventCollection extends ResourceCollection
                 'literary' => optional($event->literary)->name ?? 'لم يحدد النوع',
                 'status_id' => $event->status->name,
                 'available_seats' => $event->available_seats,
+                'links' => $event->links,
                 'meeting_link' => $event->meeting_link,
                 'guest_count' => $event->guestsGoing->count(),
                 'goings' => $event->guestsGoing->pluck('id'),
