@@ -54,6 +54,8 @@ trait LiveChanges
             $now = Carbon::now();
 
             if ($startDate->lt($now)) {
+                $this->speakers[$index]['reservations'] = false;
+                $this->speakers[$index]['reward'] = false;
                 $validator = Validator::make([], []); // empty data and rules
                 $validator->errors()->add('start_date', 'يجب أن يكون تاريخ البداية أكبر من التاريخ الحالي.');
                 throw new ValidationException($validator);
