@@ -33,7 +33,10 @@ class Event extends Model
         'source',
         'is_survey_sent',
         'meeting_link',
+    ];
 
+    protected $casts = [
+        'links' => 'json',
     ];
 
     public function user()
