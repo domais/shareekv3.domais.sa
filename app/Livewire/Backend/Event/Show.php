@@ -93,7 +93,7 @@ class Show extends Component
             return $image['path'];
         }, $event->fileable->toArray());
 
-        $links = json_decode($event->links, true);
+        $links = is_string($event->links) ? json_decode($event->links, true) : $event->links;
 
         if($links == [""] || $links == null)     $links = [];
             
