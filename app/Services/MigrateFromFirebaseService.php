@@ -27,9 +27,9 @@ class MigrateFromFirebaseService
         // Chunk data to 100
         $chunk->each(function ($item) {
 
-            if (Event::where('order_number', $item->id)->exists()) {
-                return;
-            }
+            // if (Event::where('order_number', $item->id)->exists()) {
+            //     return;
+            // }
 
             // Check if user is not
             if (!isset($item->user->email)) {
