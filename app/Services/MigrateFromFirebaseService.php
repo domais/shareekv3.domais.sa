@@ -365,8 +365,25 @@ class MigrateFromFirebaseService
 
         if (isset($item->verification_event_img) && $item->verification_event_img) {
             \Log::info('Verification Image: ' . $item->verification_event_img . ' Image Link' . $item->verification_event_img_Link);
+
+            $urls = [];
+            // if verfication image has space then make it as array of links
+            if (strpos($item->verification_event_img, ' ') !== false) {
+                $urls = explode(' ', $item->verification_event_img);
+            } else {
+                $urls[] = $item->verification_event_img;
+            }
+
+            if ($item->verification_event_img_Link) {
+                if (strpos($item->verification_event_img_Link, ' ') !== false) {
+                    $urls = explode(' ', $item->verification_event_img_Link);
+                } else {
+                    $urls[] = $item->verification_event_img_Link;
+                }
+            }
+
             // morph file avatar to file table
-            $this->saveFile([$item->verification_event_img, $item->verification_event_img_Link], 'image', 'documenting', $event);
+            $this->saveFile($urls, 'image', 'documenting', $event);
         }
 
         // $this->permit($item, $event);
