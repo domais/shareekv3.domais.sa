@@ -130,8 +130,36 @@ class MigrateFromFirebaseService
     public function saveFile($url, $type, $use, $model): void
     {
         // Delete all files related to this model
-        // $model->image()->where('use', $use)->delete();
+        $model->image()->where('use', $use)->delete();
+        // Delete all files related to this model
+        Storage::disk('do')->delete($model->image->where('use', $use)->pluck('path')->toArray());
+
         // // dd($url);
+
+        if (is_array($url)) {
+            foreach ($url as $item) {
+                // if url return 404 not found then return
+                $headers = get_headers($item);
+                if (strpos($headers[0], '404')) {
+                    return;
+                }
+
+                $image = file_get_contents($item);
+
+                $name = Str::random(10) . '.png';
+                $path = strtolower(class_basename($model)) . '/' . $use . '/' . $model->id . '/' . $name;
+                Storage::disk('do')->put($path, $image);
+
+                // morph file avatar to file table
+                $model->image()->create([
+                    'name' => $name,
+                    'path' => $path,
+                    'type' => $type,
+                    'use' => $use,
+                ]);
+            }
+            return;
+        }
 
         // if url return 404 not found then return
         $headers = get_headers($url);
@@ -299,22 +327,16 @@ class MigrateFromFirebaseService
         }
 
         // video save in event[links] as array
-        if ((isset($item->verification_event_video) && $item->verification_event_video) || (isset($item->verification_event_video_link) && $item->verification_event_video_link)) {
+        if ($event && (isset($item->verification_event_video) && $item->verification_event_video) || (isset($item->verification_event_video_link) && $item->verification_event_video_link)) {
             \Log::info('Verification Video firebase: ' . $item->verification_event_video . ' Video Link' . $item->verification_event_video_link);
             $event->links = json_encode([$item->verification_event_video, $item->verification_event_video_link]);
             $event->save();
         }
 
-        if (isset($item->verification_event_img) && $item->verification_event_img) {
-            \Log::info('Verification Image: ' . $item->verification_event_img);
+        if ($event && isset($item->verification_event_img) && $item->verification_event_img) {
+            \Log::info('Verification Image: ' . $item->verification_event_img . ' Image Link' . $item->verification_event_img_Link);
             // morph file avatar to file table
-            $this->saveFile($item->verification_event_img, 'image', 'documenting', $event);
-        }
-
-        if (isset($item->verification_event_img_Link) && $item->verification_event_img_Link) {
-            \Log::info('Verification Image 2: ' . $item->verification_event_img_Link);
-            // morph file avatar to file table
-            $this->saveFile($item->verification_event_img_Link, 'image', 'documenting', $event);
+            $this->saveFile([$item->verification_event_img, $item->verification_event_img_Link], 'image', 'documenting', $event);
         }
 
 
