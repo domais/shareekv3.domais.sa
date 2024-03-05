@@ -132,7 +132,15 @@ class MigrateFromFirebaseService
         // Delete all files related to this model
         // $model->image()->where('use', $use)->delete();
         // // dd($url);
+
+        // if url return 404 not found then return
+        $headers = get_headers($url);
+        if (strpos($headers[0], '404')) {
+            return;
+        }
+
         $image = file_get_contents($url);
+
         $name = Str::random(10) . '.png';
         $path = strtolower(class_basename($model)) . '/' . $use . '/' . $model->id . '/' . $name;
         Storage::disk('do')->put($path, $image);
