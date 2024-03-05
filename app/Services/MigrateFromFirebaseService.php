@@ -130,9 +130,9 @@ class MigrateFromFirebaseService
     public function saveFile($url, $type, $use, $model): void
     {
         // Delete all files related to this model
-        $model->image()->where('use', $use)->delete();
         // Delete all files related to this model
         Storage::disk('do')->delete($model->image->where('use', $use)->pluck('path')->toArray());
+        $model->image()->where('use', $use)->delete();
 
         // // dd($url);
 
