@@ -350,13 +350,20 @@ class MigrateFromFirebaseService
         // }
 
         // video save in event[links] as array
-        if ($event && (isset($item->verification_event_video) && $item->verification_event_video) || (isset($item->verification_event_video_link) && $item->verification_event_video_link)) {
+        if (isset($item->verification_event_video)  || isset($item->verification_event_video_link)) {
             \Log::info('Verification Video firebase: ' . $item->verification_event_video . ' Video Link' . $item->verification_event_video_link);
-            $event->links = json_encode([$item->verification_event_video, $item->verification_event_video_link]);
+            $links = [];
+            if ($item->verification_event_video) {
+                $links[] = $item->verification_event_video;
+            }
+            if ($item->verification_event_video_link) {
+                $links[] = $item->verification_event_video_link;
+            }
+            $event->links = json_encode($links);
             $event->save();
         }
 
-        if ($event && isset($item->verification_event_img) && $item->verification_event_img) {
+        if (isset($item->verification_event_img) && $item->verification_event_img) {
             \Log::info('Verification Image: ' . $item->verification_event_img . ' Image Link' . $item->verification_event_img_Link);
             // morph file avatar to file table
             $this->saveFile([$item->verification_event_img, $item->verification_event_img_Link], 'image', 'documenting', $event);
