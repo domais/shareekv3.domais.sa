@@ -144,6 +144,11 @@ class MigrateFromFirebaseService
 
         if (is_array($url)) {
             foreach ($url as $item) {
+
+                if (!$item) {
+                    return;
+                }
+
                 // if url return 404 not found then return
                 $contentType = get_headers($item, 1)[0];
 
