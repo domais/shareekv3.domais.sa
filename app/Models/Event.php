@@ -36,7 +36,7 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'links' => 'json',
+        // 'links' => 'json',
     ];
 
     public function user()

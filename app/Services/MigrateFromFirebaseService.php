@@ -130,7 +130,7 @@ class MigrateFromFirebaseService
     public function saveFile($url, $type, $use, $model): void
     {
         // Delete all files related to this model
-        $model->image()->delete();
+        // $model->image()->where('use', $use)->delete();
         // // dd($url);
         $image = file_get_contents($url);
         $name = Str::random(10) . '.png';
@@ -289,6 +289,26 @@ class MigrateFromFirebaseService
             // morph file avatar to file table
             $this->saveFile($item->Evint_img, 'image', 'adv', $event);
         }
+
+        // video save in event[links] as array
+        if (isset($item->verification_event_video) && $item->verification_event_video || isset($item->verification_event_video_link) && $item->verification_event_video_link) {
+            \Log::info('Verification Video: ' . $item->verification_event_video, $item->verification_event_video_link);
+            $event->links = json_encode([$item->verification_event_video, $item->verification_event_video_link]);
+            $event->save();
+        }
+
+        if (isset($item->verification_event_img) && $item->verification_event_img) {
+            \Log::info('Verification Image: ' . $item->verification_event_img);
+            // morph file avatar to file table
+            $this->saveFile($item->verification_event_img, 'image', 'documenting', $event);
+        }
+
+        if (isset($item->verification_event_img_Link) && $item->verification_event_img_Link) {
+            \Log::info('Verification Image 2: ' . $item->verification_event_img_Link);
+            // morph file avatar to file table
+            $this->saveFile($item->verification_event_img_Link, 'image', 'documenting', $event);
+        }
+
 
         $this->permit($item, $event);
 
