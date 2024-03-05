@@ -33,7 +33,7 @@ class MigrateFirebase extends Command
         $json = file_get_contents(public_path('firebase_data/Events.json'));
         $data = json_decode($json);
 
-        Bus::batch(collect($data)->chunk(100)->map(function ($chunk) {
+        Bus::batch(collect($data)->chunk(10)->map(function ($chunk) {
             // $this->info('Migrating chunk count: ' . $chunk->count() . ' ...');
             return new MigrateBatchJob($chunk);
         }))
