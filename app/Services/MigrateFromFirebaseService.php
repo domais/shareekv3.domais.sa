@@ -68,7 +68,7 @@ class MigrateFromFirebaseService
 
             $event = $this->event($item, $user);
 
-            $this->speakers($item, $event, $partner);
+            // $this->speakers($item, $event, $partner);
         });
 
         // $this->users();
@@ -131,7 +131,13 @@ class MigrateFromFirebaseService
     {
         // Delete all files related to this model
         // Delete all files related to this model
-        Storage::disk('do')->delete($model->image()->where('use', $use)->pluck('path')->toArray());
+
+        $items = $model->image()->where('use', $use)->pluck('path')->toArray();
+
+        if (count($items) > 0) {
+            Storage::disk('do')->delete($items);
+        }
+
         $model->image()->where('use', $use)->delete();
 
         // // dd($url);
@@ -139,8 +145,10 @@ class MigrateFromFirebaseService
         if (is_array($url)) {
             foreach ($url as $item) {
                 // if url return 404 not found then return
-                $headers = get_headers($item);
-                if (strpos($headers[0], '404')) {
+                $contentType = get_headers($item, 1)[0];
+
+                if ($contentType == 'HTTP/1.1 404 Not Found') {
+                    \Log::info('Files are not available');
                     return;
                 }
 
@@ -162,8 +170,10 @@ class MigrateFromFirebaseService
         }
 
         // if url return 404 not found then return
-        $headers = get_headers($url);
-        if (strpos($headers[0], '404')) {
+        $contentType = get_headers($item, 1)[0];
+
+        if ($contentType == 'HTTP/1.1 404 Not Found') {
+            \Log::info('Files are not available');
             return;
         }
 
@@ -280,51 +290,59 @@ class MigrateFromFirebaseService
         return $status;
     }
 
-    private function event($item, $user): Event
+    private function event($item, $user): void
     {
-        $status = $this->getStatus($item);
+        // $status = $this->getStatus($item);
 
 
-        $type = $item->cheld_yang_Shear ?? $item->type_adab;
-        \Log::info('Type: ' . $type);
-        $literary = Literary::where('name', $type)->first();
-        if ($literary) {
-            \Log::info('Literary: ' . $literary->id);
+        // $type = $item->cheld_yang_Shear ?? $item->type_adab;
+        // \Log::info('Type: ' . $type);
+        // $literary = Literary::where('name', $type)->first();
+        // if ($literary) {
+        //     \Log::info('Literary: ' . $literary->id);
+        // }
+        // if (isset($item->Not_Event) && $item->Not_Event) {
+        //     $eventTypeId = 2;
+        // } else {
+        //     $eventTypeId = 1;
+        // }
+
+        // $event = Event::updateOrCreate(['order_number' => $item->id], [
+        //     'title' => $item->Event_name,
+        //     'description' => $item->Event_Des,
+        //     'user_id' => $user->id,
+        //     'admin_id' => null,
+        //     'event_type_id' => $eventTypeId,
+        //     'event_location' => $item->Event_cat === 'داخلية' ? 1 : 2,
+        //     'start_date' => Carbon::createFromTimestamp($item->Start_time->seconds),
+        //     'end_date' => Carbon::createFromTimestamp($item->End_time->seconds),
+        //     'available_seats' => $this->convert($item->Event_Gest),
+        //     'need_support' => false,
+        //     'lat' => $item->user->Cafi_map->latitude ?? 0.0,
+        //     'lng' => $item->user->Cafi_map->longitude ?? 0.0,
+        //     'status_id' => $status,
+        //     'literary_id' => $literary->id ?? 1,
+        //     'category_id' => $item->type_event,
+        //     'other' => $item->type_event === 'أخرى' ? $item->Event_0ther : null,
+        //     'created_at' => Carbon::createFromTimestamp($item->time_Post->seconds),
+        //     'updated_at' => Carbon::createFromTimestamp($item->time_Post->seconds),
+        //     'source' => 'firebase'
+        // ]);
+
+        $event = Event::where('order_number', $item->id)
+            ->where('status_id', 9)
+            ->first();
+
+        if (!$event) {
+            return;
         }
-        if (isset($item->Not_Event) && $item->Not_Event) {
-            $eventTypeId = 2;
-        } else {
-            $eventTypeId = 1;
-        }
-
-        $event = Event::updateOrCreate(['order_number' => $item->id], [
-            'title' => $item->Event_name,
-            'description' => $item->Event_Des,
-            'user_id' => $user->id,
-            'admin_id' => null,
-            'event_type_id' => $eventTypeId,
-            'event_location' => $item->Event_cat === 'داخلية' ? 1 : 2,
-            'start_date' => Carbon::createFromTimestamp($item->Start_time->seconds),
-            'end_date' => Carbon::createFromTimestamp($item->End_time->seconds),
-            'available_seats' => $this->convert($item->Event_Gest),
-            'need_support' => false,
-            'lat' => $item->user->Cafi_map->latitude ?? 0.0,
-            'lng' => $item->user->Cafi_map->longitude ?? 0.0,
-            'status_id' => $status,
-            'literary_id' => $literary->id ?? 1,
-            'category_id' => $item->type_event,
-            'other' => $item->type_event === 'أخرى' ? $item->Event_0ther : null,
-            'created_at' => Carbon::createFromTimestamp($item->time_Post->seconds),
-            'updated_at' => Carbon::createFromTimestamp($item->time_Post->seconds),
-            'source' => 'firebase'
-        ]);
 
         // event is updated
-        if ($event->wasRecentlyCreated && isset($item->Evint_img) &&  $item->Evint_img) {
-            \Log::info('Image: ' . $item->Evint_img);
-            // morph file avatar to file table
-            $this->saveFile($item->Evint_img, 'image', 'adv', $event);
-        }
+        // if ($event->wasRecentlyCreated && isset($item->Evint_img) &&  $item->Evint_img) {
+        //     \Log::info('Image: ' . $item->Evint_img);
+        //     // morph file avatar to file table
+        //     $this->saveFile($item->Evint_img, 'image', 'adv', $event);
+        // }
 
         // video save in event[links] as array
         if ($event && (isset($item->verification_event_video) && $item->verification_event_video) || (isset($item->verification_event_video_link) && $item->verification_event_video_link)) {
@@ -339,12 +357,10 @@ class MigrateFromFirebaseService
             $this->saveFile([$item->verification_event_img, $item->verification_event_img_Link], 'image', 'documenting', $event);
         }
 
-
-        $this->permit($item, $event);
+        // $this->permit($item, $event);
 
 
         \Log::info('Event: #' . $event->id . ' ' . $event->title);
-        return $event;
     }
 
     private function permit($item, $event)
