@@ -299,7 +299,8 @@ class MigrateFromFirebaseService
         }
 
         // video save in event[links] as array
-        if (isset($item->verification_event_video) && $item->verification_event_video || isset($item->verification_event_video_link) && $item->verification_event_video_link) {
+        if ((isset($item->verification_event_video) && $item->verification_event_video) || (isset($item->verification_event_video_link) && $item->verification_event_video_link)) {
+            \Log::info('Verification Video firebase: ' . $item->verification_event_video . ' Video Link' . $item->verification_event_video_link);
             $event->links = json_encode([$item->verification_event_video, $item->verification_event_video_link]);
             $event->save();
         }
