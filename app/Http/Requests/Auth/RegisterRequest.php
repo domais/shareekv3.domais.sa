@@ -27,6 +27,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'age' => 'required|in:less-11,11-18,more-18',
             'gender' => 'required|in:male,female',
+            'register' => 'nullable',
         ];
     }
 }

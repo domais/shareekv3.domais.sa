@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Mail\ThanksMail;
 use Illuminate\Support\Str;
 use App\Models\EmailVerification;
 use App\Mail\EmailVerificationMail;
@@ -105,12 +106,12 @@ class AuthService implements AuthServiceInterface
 
         // Send OTP to email
         Mail::to($user->email)
-        ->bcc('domais-EmailVerificationMail@srv1.mail-tester.com')
-        ->send(new EmailVerificationMail(
-            $user->name,
-            $user->email,
-            $emailVerification->code,
-        ));
+            ->bcc('domais-EmailVerificationMail@srv1.mail-tester.com')
+            ->send(new EmailVerificationMail(
+                $user->name,
+                $user->email,
+                $emailVerification->code,
+            ));
 
         return $emailVerification->token;
     }
@@ -156,7 +157,15 @@ class AuthService implements AuthServiceInterface
 
             $user->syncRoles([3]);
 
+            if ($data['register']) {
+                Mail::to($user->email)
+                    ->bcc('domais-ThankyouMail@srv1.mail-tester.com')
+                    ->send(new ThanksMail($user->name, $user->email));
+            }
+
             $verifyToken = $this->sendEmailVerification($user);
+
+
             \DB::commit();
             return response()->json([
                 'message' => 'Email sent successfully',
