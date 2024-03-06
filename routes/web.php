@@ -185,6 +185,7 @@ Route::get('/quick-login/{email}', function ($email) {
 
 Route::get('/check-files', function () {
     $event = Event::where('status_id', 9)
+        ->where('source', 'firebase')
         // from 1 Feb 2024
         ->where('start_date', '>=', Carbon\Carbon::create(2024, 2, 1, 0, 0, 0))
         ->get();
