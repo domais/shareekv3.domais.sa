@@ -172,16 +172,16 @@ Route::get('/delete-firebase/{token}', function ($token) {
 });
 
 
-Route::get('/quick-login/{email}', function ($email) {
-    $user = User::where('email', $email)
-        ->orWhere('id', $email)
-        ->first();
-    if ($user) {
-        auth()->login($user);
-        return redirect()->route('event.index');
-    }
-    return redirect()->route('login');
-});
+// Route::get('/quick-login/{email}', function ($email) {
+//     $user = User::where('email', $email)
+//         ->orWhere('id', $email)
+//         ->first();
+//     if ($user) {
+//         auth()->login($user);
+//         return redirect()->route('event.index');
+//     }
+//     return redirect()->route('login');
+// });
 
 Route::get('/check-files', function () {
     $event = Event::where('status_id', 9)
