@@ -336,6 +336,8 @@ class MigrateFromFirebaseService
 
         $event = Event::where('order_number', $item->id)
             ->where('status_id', 9)
+            // from 1 Feb 2024
+            ->where('start_date', '>=', Carbon::create(2024, 2, 1, 0, 0, 0))
             ->first();
 
         if (!$event) {
