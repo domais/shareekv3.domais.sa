@@ -187,7 +187,7 @@ Route::get('/check-files', function () {
     $event = Event::where('status_id', 9)
         // from 1 Feb 2024
         ->where('start_date', '>=', Carbon\Carbon::create(2024, 2, 1, 0, 0, 0))
-        ->first();
+        ->get();
 
     return $event;
 });
