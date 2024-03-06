@@ -190,7 +190,10 @@ Route::get('/check-files', function () {
         ->where('start_date', '>=', Carbon\Carbon::create(2024, 2, 1, 0, 0, 0))
         ->get();
 
-    return $event;
+    return [
+        'count' => $event->count(),
+        'data' => $event
+    ];
 });
 
 
