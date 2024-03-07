@@ -332,13 +332,14 @@
 								showConfirmButton: false,
 							});
 
-							// Enable the button
-							document.querySelector('.submitButton').disabled = false;
 						}, (event) => {
 							// Progress callback...
 							// event.detail.progress contains a number between 1 and 100 as the upload progresses
-						    console.log('Upload progress:', event.detail.progress);
-						})
+
+							if (event.detail.progress === 100) {
+								// Enable the button
+								document.querySelector('.submitButton').disabled = false;
+							}
 					});
 				}
 			});
