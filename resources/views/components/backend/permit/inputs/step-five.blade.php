@@ -10,7 +10,7 @@
                         <tr>
                         <th scope="col">#</th>
                         <th scope="col">الاسم</th>
-                        <th scope="col">البريد الالكتروني</th>
+                        <th scope="col">البريد الإلكروني</th>
                         <th scope="col">الجوال</th>
                         <th scope="col">الجنس</th>
                         <th scope="col">الفئة العمرية</th>
@@ -25,7 +25,7 @@
                             <td>{{$guest->name}}</td>
                             <td>{{$guest->email}}</td>
                             <td>{{$guest->phone}}</td>
-                            <td>{{$guest->gender === 'male' ? 'ذكر' : 'انثى'}}</td>
+                            <td>{{$guest->gender === 'male' ? 'ذكر' : 'أنثي'}}</td>
                             <td>{{$guest->getAge()}}</td>
                             <td>
                             <div class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">

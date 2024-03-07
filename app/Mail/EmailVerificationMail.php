@@ -40,7 +40,7 @@ class EmailVerificationMail extends Mailable implements ShouldQueue
     {
         return new Envelope(
             from: new Address(config('mail.from.address'), 'جسر الثقافة'),
-            subject: 'لقد تم إنشاء كلمة مرور جديدة لحسابك في  جسر الثقافة',
+            subject: 'لقد تم إنشاء كلمة مرور جديدة لحسابك في جسر الثقافة',
         );
     }
 
