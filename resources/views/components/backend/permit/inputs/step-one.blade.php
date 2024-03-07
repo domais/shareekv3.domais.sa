@@ -333,6 +333,9 @@
 
 				// Enable the button
 			}, (event) => {
+				
+				console.log('Upload progress:', event.detail.progress);
+
 				if (event.detail.progress === 100) {
 					// Enable the button
 					document.querySelector('.submitButton').disabled = false;
