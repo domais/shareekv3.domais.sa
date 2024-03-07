@@ -306,6 +306,10 @@
 						var file = new File([blob], "image.png", {
 							type: fileType
 						});
+
+						// Disable the button
+						document.querySelector('.submitButton').disabled = true;
+
 						// Upload a file
 						@this.upload('form.image_adv', file, (uploadedFilename) => {
 							// Success callback...
@@ -316,6 +320,9 @@
 								showConfirmButton: false,
 								timer: 1500
 							});*/
+
+							// Enable the button
+							document.querySelector('.submitButton').disabled = false;
 						}, () => {
 							// Error callback...
 							Swal.fire({
@@ -323,12 +330,13 @@
 								title: 'خطأ',
 								text: 'حدث خطأ أثناء التحميل',
 								showConfirmButton: false,
-
 							});
+
+							// Enable the button
+							document.querySelector('.submitButton').disabled = false;
 						}, (event) => {
 							// Progress callback...
 							// event.detail.progress contains a number between 1 and 100 as the upload progresses
-
 						})
 					});
 				}

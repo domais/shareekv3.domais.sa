@@ -59,7 +59,7 @@
 				@endif
 
 				@if (!$this->is_show_page && auth()->user()->hasRole('SuperAdmin') )
-					<button class="btn btn-secondary" wire:click="updatePermit" wire:loading.attr="disabled">إرسال الطلب</button>
+					<button class="btn btn-secondary submitButton" wire:click="updatePermit" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
 				@if ($this->is_show_page && auth()->user()->hasRole('SuperAdmin') && $this->permit->status_id < 5)
 				<a class="btn btn-secondary mx-2 text-decoration-none" href="{{route('permit.edit',['order_number' => $this->permit->order_number])}}">
@@ -70,7 +70,7 @@
 
 
 				@if (!$this->is_show_page && auth()->user()->hasRole('User') )
-					<button class="btn btn-secondary" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
+					<button class="btn btn-secondary submitButton" wire:click="store(2)" wire:loading.attr="disabled">إرسال الطلب</button>
 				@endif
 				@if ($this->is_show_page && $this->permit && $this->permit->status_id < 5 && (auth()->user()->hasRole(['SuperAdmin']) || (havePermission(auth()->user(),'permit-update'))))
 				   @if ($this->permit->status_id == 2)
