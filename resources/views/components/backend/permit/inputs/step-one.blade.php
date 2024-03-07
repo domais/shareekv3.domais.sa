@@ -300,48 +300,48 @@
 				cropBoxResizable: false,
 				toggleDragModeOnDblclick: false,
 				ready: function() {
-					// This will be called when the cropper is ready
-					var canvas = window.cropper1.getCroppedCanvas();
-					canvas.toBlob(function(blob) {
-						var file = new File([blob], "image.png", {
-							type: fileType
-						});
+		// This will be called when the cropper is ready
+		var canvas = window.cropper1.getCroppedCanvas();
+		canvas.toBlob(function(blob) {
+			var file = new File([blob], "image.png", {
+				type: fileType
+			});
 
-						// Disable the button
-						document.querySelector('.submitButton').disabled = true;
+			// Disable the button
+			document.querySelector('.submitButton').disabled = true;
 
-						// Upload a file
-						@this.upload('form.image_adv', file, (uploadedFilename) => {
-							// Success callback...
-							/*  Swal.fire({
-								icon: 'success',
-								title: 'تم تحميل الصورة بنجاح',
-								text: null,
-								showConfirmButton: false,
-								timer: 1500
-							});*/
+			// Upload a file
+			@this.upload('form.image_adv', file, (uploadedFilename) => {
+				// Success callback...
+				/*  Swal.fire({
+					icon: 'success',
+					title: 'تم تحميل الصورة بنجاح',
+					text: null,
+					showConfirmButton: false,
+					timer: 1500
+				});*/
 
-							// Enable the button
-							document.querySelector('.submitButton').disabled = false;
-						}, () => {
-							// Error callback...
-							Swal.fire({
-								icon: 'error',
-								title: 'خطأ',
-								text: 'حدث خطأ أثناء التحميل',
-								showConfirmButton: false,
-							});
+				// Enable the button
+			}, () => {
+				// Error callback...
+				Swal.fire({
+					icon: 'error',
+					title: 'خطأ',
+					text: 'حدث خطأ أثناء التحميل',
+					showConfirmButton: false,
+				});
 
-						}, (event) => {
-							// Progress callback...
-							// event.detail.progress contains a number between 1 and 100 as the upload progresses
-
-							if (event.detail.progress === 100) {
-								// Enable the button
-								document.querySelector('.submitButton').disabled = false;
-							}
-					});
+				// Enable the button
+			}, (event) => {
+				if (event.detail.progress === 100) {
+					// Enable the button
+					document.querySelector('.submitButton').disabled = false;
 				}
+				// Progress callback...
+				// event.detail.progress contains a number between 1 and 100 as the upload progresses
+			})
+		});
+	}
 			});
 
 			window.cropper1.replace(URL.createObjectURL(e.target.files[0]))
