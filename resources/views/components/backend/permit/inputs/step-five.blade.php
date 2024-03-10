@@ -25,7 +25,7 @@
                             <td>{{$guest->name}}</td>
                             <td>{{$guest->email}}</td>
                             <td>{{$guest->phone}}</td>
-                            <td>{{$guest->gender === 'male' ? 'ذكر' : 'أنثي'}}</td>
+                            <td>{{$guest->gender === 'male' ? 'ذكر' : 'أنثى'}}</td>
                             <td>{{$guest->getAge()}}</td>
                             <td>
                             <div class="badge {{$guest->pivot->type === 'going' ? 'bg-success' : ($guest->pivot->type === 'interested' ? 'bg-warning' : ($guest->pivot->type === 'maybe' ? 'bg-info' : 'bg-danger'))}}">
