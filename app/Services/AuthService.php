@@ -157,7 +157,7 @@ class AuthService implements AuthServiceInterface
 
             $user->syncRoles([3]);
 
-            if ($data['register']) {
+            if (isset($data['register'])) {
                 Mail::to($user->email)
                     ->bcc('domais-ThankyouMail@srv1.mail-tester.com')
                     ->send(new ThanksMail($user->name, $user->email));
