@@ -18,7 +18,7 @@ class ManualEventSeedCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:manual-event';
+    protected $signature = 'app:manual-event {--delete}';
 
     /**
      * The console command description.
@@ -32,6 +32,13 @@ class ManualEventSeedCommand extends Command
      */
     public function handle()
     {
+
+        // delete all source manual
+        if ($this->option('delete')) {
+            Event::where('source', 'manual')->forceDelete();
+            Permit::where('source', 'manual')->forceDelete();
+        }
+
         // development mode
         // if (app()->environment() === 'local') {
         //     // delete all source manual

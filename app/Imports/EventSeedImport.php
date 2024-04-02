@@ -49,22 +49,16 @@ class EventSeedImport implements ToCollection, WithHeadingRow
             return;
         }
 
-        // 8:00 PM = 8:00 م or 8:00 AM = 8:00 ص
-        $event['start_time'] = str_replace(['م', 'ص'], ['PM', 'AM'], $event['start_time']);
-        $event['end_time'] = str_replace(['م', 'ص'], ['PM', 'AM'], $event['end_time']);
-        // 10/19/23 = 19-10-23
-        $event['start_date'] = implode('-', array_reverse(explode('/', $event['start_date'])));
-        $event['end_date'] = implode('-', array_reverse(explode('/', $event['end_date'])));
-
 
         \Log::info('START: ' .$event['start_date'] . ' ' . $event['start_time']);
-        // 2023-15-9 8:00PM
-        $start = \Carbon\Carbon::createFromFormat('y-m-d h:iA', $event['start_date'] . ' ' . $event['start_time']); // 23-15-9 8:00PM
+
+        // 9/6/2023 8:00 PM
+        $start = \Carbon\Carbon::createFromFormat('d/m/Y h:i A', $event['start_date'] . ' ' . $event['start_time']);
         \Log::info('END: ' .$event['end_date'] . ' ' . $event['end_time']);
-        $end = \Carbon\Carbon::createFromFormat('y-m-d h:iA', $event['end_date'] . ' ' . $event['end_time']); // 23-15-9 10:00PM
+        $end = \Carbon\Carbon::createFromFormat('d/m/Y h:i A', $event['end_date'] . ' ' . $event['end_time']);
         $type = EventType::where('name', $event['type'])->first();
         $literary = Literary::where('name', 'LIKE', '%'.$event['literary'].'%')->first();
-        $docs = $event['docs'] == 'التوثيق' ? null : $event['docs'];
+        $docs = $event['docs'] == 0 ? null : [$event['docs']];
 
         if (!$literary) {
             \Log::error('Literary not found: ' . $event['literary']);
@@ -95,7 +89,7 @@ class EventSeedImport implements ToCollection, WithHeadingRow
             'literary_id' => $literary->id,
             'category_id' => $event['event_type'],
             'other' => null,
-            'links' => json_encode([$docs]),
+            'links' => json_encode($docs),
             'source' => 'manual'
         ]);
 
