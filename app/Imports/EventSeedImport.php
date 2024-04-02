@@ -91,7 +91,7 @@ class EventSeedImport implements ToCollection, WithHeadingRow
             'need_support' => false,
             'lat' => $partner->lat,
             'lng' => $partner->lng,
-            'status_id' => $this->getStatus($start, $end),
+            'status_id' => 9,
             'literary_id' => $literary->id,
             'category_id' => $event['event_type'],
             'other' => null,
