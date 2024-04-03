@@ -22,8 +22,8 @@ class EventSeedImport implements ToCollection, WithHeadingRow
      */
     public function collection(Collection $collection)
     {
-        foreach ($collection as $row) {
-            $this->seedEvent($row);
+        foreach ($collection as $key => $row) {
+            $this->seedEvent($row, $key);
         }
     }
 
@@ -32,9 +32,9 @@ class EventSeedImport implements ToCollection, WithHeadingRow
      *
      * @param $events
      */
-    private function seedEvent($event)
+    private function seedEvent($event, $key)
     {
-        $id = 0;
+
         $user = User::where('email', $event['email'])->first();
 
         if (!$user) {
@@ -98,12 +98,11 @@ class EventSeedImport implements ToCollection, WithHeadingRow
 
         $eventSave->update(['order_number' => 'm-' . date('y') . str_pad($eventSave->id, 5, '0', STR_PAD_LEFT)]);
 
-        \Log::info('Event created: #' . $id . ' ' . $event['email']);
+        \Log::info('Event created: #' . $key . ' ' . $event['email']);
 
         // Create Permit
         Permit::create($eventSave->toArray());
 
-        $id++;
     }
 
     private function getStatus($start, $end)
