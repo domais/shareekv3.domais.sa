@@ -76,6 +76,8 @@ class EventSeedImport implements ToCollection, WithHeadingRow
             'order_number' => Str::random(10),
             'title' => $event['title'],
             'description' => $event['body'] ?? $event['title'],
+            // content without html tags
+            'content' => strip_tags($event['body'] ?? $event['title']),
             'user_id' => $user->id,
             'event_type_id' => $type->id ?? 1,
             'event_location' => $event['palce'] === 'داخلية' ? 1 : 2,

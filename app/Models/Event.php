@@ -33,7 +33,8 @@ class Event extends Model
         'source',
         'is_survey_sent',
         'meeting_link',
-        'links'
+        'links',
+        'content',
     ];
 
     protected $casts = [
