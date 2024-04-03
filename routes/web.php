@@ -221,3 +221,13 @@ Route::get('/upload-to-do', function () {
 
     return response()->json(['success' => 'Directories uploaded successfully.']);
 });
+
+Route::get('/update-db', function () {
+    // clear html from description and put it in content
+    $events = Event::all();
+    foreach ($events as $event) {
+        $event->update([
+            'content' => strip_tags($event->description),
+        ]);
+    }
+});
