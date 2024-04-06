@@ -230,4 +230,12 @@ Route::get('/update-db', function () {
             'content' => strip_tags($event->description),
         ]);
     }
+
+    $permit = Permit::all();
+
+    foreach ($permit as $p) {
+        $p->update([
+            'content' => strip_tags($p->description),
+        ]);
+    }
 });
