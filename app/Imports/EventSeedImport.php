@@ -60,10 +60,10 @@ class EventSeedImport implements ToCollection, WithHeadingRow
         $literary = Literary::where('name', 'LIKE', '%'.$event['literary'].'%')->first();
         $docs = $event['docs'] == 0 ? null : [$event['docs']];
 
-        // if (!$literary) {
-        //     \Log::error('Literary not found: ' . $event['literary']);
-        //     return;
-        // }
+        if (!$literary) {
+            \Log::error('Literary not found: ' . $event['literary']);
+            return;
+        }
 
         $existEvent = Event::where('title', $event['title'])->where('start_date', $start)->where('end_date', $end)->first();
 
