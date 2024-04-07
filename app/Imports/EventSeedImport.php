@@ -22,8 +22,9 @@ class EventSeedImport implements ToCollection, WithHeadingRow
      */
     public function collection(Collection $collection)
     {
+        $id = 0;
         foreach ($collection as $key => $row) {
-            $this->seedEvent($row, $key);
+            $this->seedEvent($row, $key, $id);
         }
     }
 
@@ -32,9 +33,9 @@ class EventSeedImport implements ToCollection, WithHeadingRow
      *
      * @param $events
      */
-    private function seedEvent($event, $key)
+    private function seedEvent($event, $key, $id)
     {
-
+        \Log::info("Processing: " . $key . ' ' . $event['email']);
         $user = User::where('email', $event['email'])->first();
 
         // if (!$user) {
@@ -102,6 +103,8 @@ class EventSeedImport implements ToCollection, WithHeadingRow
 
         // Create Permit
         Permit::create($eventSave->toArray());
+
+        \Log::info('Permit created: #' . $key . ' ' . $event['email']);
 
     }
 
