@@ -35,20 +35,20 @@ class EventSeedImport implements ToCollection, WithHeadingRow
      */
     private function seedEvent($event, $key, $id)
     {
-        \Log::info("Processing: " . $key . ' ' . $event['email']);
+        \Log::info("Processing: " . $id . ' ' . $event['email']);
         $user = User::where('email', $event['email'])->first();
 
-        // if (!$user) {
-        //     \Log::error('User not found: ' . $event['email']);
-        //     return;
-        // }
+        if (!$user) {
+            \Log::error('User not found: ' . $event['email']);
+            return;
+        }
 
         $partner = $user->owner;
 
-        // if (!$partner) {
-        //     \Log::error('Partner not found: ' . $event['email']);
-        //     return;
-        // }
+        if (!$partner) {
+            \Log::error('Partner not found: ' . $event['email']);
+            return;
+        }
 
 
         \Log::info('START: ' .$event['start_date'] . ' ' . $event['start_time']);
@@ -104,7 +104,9 @@ class EventSeedImport implements ToCollection, WithHeadingRow
         // Create Permit
         Permit::create($eventSave->toArray());
 
-        \Log::info('Permit created: #' . $key . ' ' . $event['email']);
+        \Log::info('Permit created: #' . $id . ' ' . $event['email']);
+
+        $id++;
 
     }
 
