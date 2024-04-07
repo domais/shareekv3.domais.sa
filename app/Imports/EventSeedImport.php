@@ -37,17 +37,17 @@ class EventSeedImport implements ToCollection, WithHeadingRow
 
         $user = User::where('email', $event['email'])->first();
 
-        if (!$user) {
-            \Log::error('User not found: ' . $event['email']);
-            return;
-        }
+        // if (!$user) {
+        //     \Log::error('User not found: ' . $event['email']);
+        //     return;
+        // }
 
         $partner = $user->owner;
 
-        if (!$partner) {
-            \Log::error('Partner not found: ' . $event['email']);
-            return;
-        }
+        // if (!$partner) {
+        //     \Log::error('Partner not found: ' . $event['email']);
+        //     return;
+        // }
 
 
         \Log::info('START: ' .$event['start_date'] . ' ' . $event['start_time']);
@@ -60,17 +60,17 @@ class EventSeedImport implements ToCollection, WithHeadingRow
         $literary = Literary::where('name', 'LIKE', '%'.$event['literary'].'%')->first();
         $docs = $event['docs'] == 0 ? null : [$event['docs']];
 
-        if (!$literary) {
-            \Log::error('Literary not found: ' . $event['literary']);
-            return;
-        }
+        // if (!$literary) {
+        //     \Log::error('Literary not found: ' . $event['literary']);
+        //     return;
+        // }
 
         $existEvent = Event::where('title', $event['title'])->where('start_date', $start)->where('end_date', $end)->first();
 
-        if ($existEvent) {
-            \Log::warning('Event already exists: ' . $event['title']);
-            return;
-        }
+        // if ($existEvent) {
+        //     \Log::warning('Event already exists: ' . $event['title']);
+        //     return;
+        // }
 
         $eventSave = Event::create([
             'order_number' => Str::random(10),
