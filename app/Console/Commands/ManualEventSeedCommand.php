@@ -45,7 +45,7 @@ class ManualEventSeedCommand extends Command
         //     Event::where('source', 'manual')->forceDelete();
         //     Permit::where('source', 'manual')->forceDelete();
         // }
-        Excel::import(new \App\Imports\EventSeedImport, base_path('database/seeders/events_2.xlsx'));
+        Excel::import(new \App\Imports\EventSeedImport, base_path('database/seeders/events.csv'));
 
 
         $this->info('End seeding events');
