@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Permit;
 use App\Models\Literary;
 use App\Models\EventType;
+use AWS\CRT\Log;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -73,6 +74,14 @@ class EventSeedImport implements ToCollection, WithHeadingRow
         //     \Log::warning('Event already exists: ' . $event['title']);
         //     return;
         // }
+
+        \Log::info('**************** start *****************');
+
+        \Log::info('Event: ' . $start);
+
+        \Log::info('**************** end *****************');
+
+
 
         $eventSave = Event::create([
             'order_number' => Str::random(10),
