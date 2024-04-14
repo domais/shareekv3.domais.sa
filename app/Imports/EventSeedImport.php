@@ -53,33 +53,35 @@ class EventSeedImport implements ToCollection, WithHeadingRow
         }
 
 
+        
         \Log::info('START: ' . $event['start_date'] . ' ' . $event['start_time']);
-
-        // 9/6/2023 8:00 PM
-        $start = \Carbon\Carbon::createFromFormat('d/m/Y h:i A', $event['start_date'] . ' ' . $event['start_time']);
+        
+        // 9/27/2023 8:00 PM
+        $start = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['start_date'] . ' ' . $event['start_time']);
         \Log::info('END: ' . $event['end_date'] . ' ' . $event['end_time']);
-        $end = \Carbon\Carbon::createFromFormat('d/m/Y h:i A', $event['end_date'] . ' ' . $event['end_time']);
+        $end = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['end_date'] . ' ' . $event['end_time']);
         $type = EventType::where('name', $event['type'])->first();
         $literary = Literary::where('name', 'LIKE', '%' . $event['literary'] . '%')->first();
         $docs = $event['docs'] == 0 ? null : [$event['docs']];
-
+        
         if (!$literary) {
             \Log::error('Literary not found: ' . $event['literary']);
             return;
         }
-
+        
         $existEvent = Event::where('title', $event['title'])->where('start_date', $start)->where('end_date', $end)->first();
-
+        
         // if ($existEvent) {
         //     \Log::warning('Event already exists: ' . $event['title']);
         //     return;
         // }
-
+        
         \Log::info('**************** start *****************');
-
+        
         \Log::info('Event: ' . $start);
-
+        
         \Log::info('**************** end *****************');
+        
 
 
 
