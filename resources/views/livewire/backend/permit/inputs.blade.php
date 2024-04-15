@@ -41,9 +41,20 @@
 				@endif
 
 				@if ($this->is_show_page  && $permit->event?->status_id == 9)
-					<button class="btn btn-outline-secondary me-2" onclick="show_images_urls({{$permit->event->id}},'test')">
-						إطلاع على التوثيق
-					</button>
+					@if (!$permit->order_number || !\Illuminate\Support\Str::startsWith($permit->order_number, 'm-'))
+						<button class="btn btn-outline-secondary me-2" onclick="show_images_urls({{$permit->event->id}},'test')">
+							إطلاع على التوثيق
+						</button>
+					@else
+						@php
+							$links = json_decode($permit->links, true);
+						@endphp
+						@if (!empty($links))
+							<button class="btn btn-outline-secondary me-2" onclick="show_images_urls({{$permit->event->id}},'test')">
+								إطلاع على التوثيق
+							</button>
+						@endif
+					@endif
 				@endif
 
 			
