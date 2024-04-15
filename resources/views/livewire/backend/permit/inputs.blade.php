@@ -47,8 +47,7 @@
 						</button>
 					@else
 						@php
-							$links = json_decode($permit->links, true);
-							dd($links,$permit->event->links);
+							$links = json_decode($permit->event?->links, true);
 						@endphp
 						@if (!empty($links))
 							<button class="btn btn-outline-secondary me-2" onclick="show_images_urls({{$permit->event->id}},'test')">
