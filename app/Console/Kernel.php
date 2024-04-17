@@ -17,6 +17,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('app:survey')->hourly();
         $schedule->command('app:event-manger')->everyMinute();
 
+        $schedule->command('app:permit-status')->everyFourHours();
+
     }
 
     /**
