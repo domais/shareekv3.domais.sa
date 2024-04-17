@@ -83,7 +83,7 @@ class Index extends Component
 
             // Update the permit number
             $permit->permit_number = $this->permitNumber;
-            $permit->status_id = 5;
+            $permit->status_id = 17;
             $permit->save();
 
             // Store the file
@@ -136,7 +136,7 @@ class Index extends Component
     public function Act_ApproveWithoutPirmet($id, $model, $reason)
     {
         $permit = Permit::find($id);
-        $permit->status_id = 5;
+        $permit->status_id = 17;
         $permit->save();
 
         $event = Event::create($permit->toArray());

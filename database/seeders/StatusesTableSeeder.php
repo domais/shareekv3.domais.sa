@@ -114,6 +114,12 @@ class StatusesTableSeeder extends Seeder
                 'name'         => 'محذوف',
                 'description'  => 'تم حذف الطلب'
             ],
+            [
+                'id'           => 17,
+                'name'         => 'تحولت الى مبادرة',
+                'description'  => 'تحولت الى مبادرة'
+            ]
+
 
             
         ];
