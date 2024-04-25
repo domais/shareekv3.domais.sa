@@ -28,6 +28,7 @@ class CheckPermitStatus extends Command
     public function handle()
     {
         Permit::where('status_id', '>=', 5)
+            ->where('status_id', '!=', 10)
             ->update(['status_id' => 17]);
 
         Log::info('Permit status updated Successfully!');
