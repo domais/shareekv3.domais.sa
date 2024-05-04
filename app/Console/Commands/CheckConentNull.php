@@ -28,8 +28,6 @@ class CheckConentNull extends Command
     public function handle()
     {
         $permits = Permit::whereNull('content')
-        ->whereDate('start_date', '>=', '2024-04-01')
-        ->whereDate('end_date', '<=', '2024-04-30')
         ->get();
 
         foreach ($permits as $permit) {
