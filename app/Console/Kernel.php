@@ -19,6 +19,8 @@ class Kernel extends ConsoleKernel
 
         $schedule->command('app:permit-status')->everyMinute();
 
+        $schedule->command('app:conent-null')->everyMinute();
+
     }
 
     /**
