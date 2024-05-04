@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Event;
 use App\Models\Permit;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +28,10 @@ class CheckConentNull extends Command
      */
     public function handle()
     {
-        $permits = Permit::whereNull('content')
+        $permits = Permit::where('content', null)
+        ->get();
+
+        $events = Event::where('content', null)
         ->get();
 
         foreach ($permits as $permit) {
@@ -35,6 +39,12 @@ class CheckConentNull extends Command
             $permit->save();
         }
 
+        foreach ($events as $event) {
+            $event->content = strip_tags($event->description);
+            $event->save();
+        }
+
         Log::info('CheckConentNull: ' . $permits->count() . ' permits updated');
+        Log::info('CheckConentNull: ' . $events->count() . ' events updated');
     }
 }
