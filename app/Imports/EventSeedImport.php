@@ -68,14 +68,14 @@ class EventSeedImport implements ToCollection, WithHeadingRow
         
         $start_time = str_replace(['م', 'ص'], ['PM', 'AM'], $event['start_time']);
 
-        $start = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['start_date'] . ' ' . $start_time);
+        $start = \Carbon\Carbon::createFromFormat('d/m/Y h:i A', $event['start_date'] . ' ' . $start_time);
         
         
         \Log::info('END: ' . $event['end_date'] . ' ' . $event['end_time']);
         
         $end_time = str_replace(['م', 'ص'], ['PM', 'AM'], $event['end_time']);
         
-        $end = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['end_date'] . ' ' . $end_time);
+        $end = \Carbon\Carbon::createFromFormat('d/m/Y h:i A', $event['end_date'] . ' ' . $end_time);
         
         $type = EventType::where('name', $event['type'])->first();
         $literary = Literary::where('name', 'LIKE', '%' . $event['literary'] . '%')->first();
