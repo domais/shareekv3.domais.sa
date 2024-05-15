@@ -65,11 +65,21 @@ class EventSeedImport implements ToCollection, WithHeadingRow
 
         $start = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['start_date'] . ' ' . $start_time);
         
+        
         \Log::info('END: ' . $event['end_date'] . ' ' . $event['end_time']);
-        $end = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['end_date'] . ' ' . $event['end_time']);
+        
+        $end_time = str_replace(['م', 'ص'], ['PM', 'AM'], $event['end_time']);
+        
+        $end = \Carbon\Carbon::createFromFormat('m/d/Y h:i A', $event['end_date'] . ' ' . $end_time);
+        
         $type = EventType::where('name', $event['type'])->first();
         $literary = Literary::where('name', 'LIKE', '%' . $event['literary'] . '%')->first();
         $docs = $event['docs'] == 0 ? null : [$event['docs']];
+
+        if ($event['literary'] == '-') {
+            $literary = Literary::find(1);
+            # code...
+        }
         
         if (!$literary) {
             \Log::error('Literary not found: ' . $event['literary']);
