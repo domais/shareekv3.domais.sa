@@ -43,6 +43,8 @@ class EventSeedImport implements ToCollection, WithHeadingRow
     private function seedEvent($event, $key, $id)
     {
         \Log::info("Processing: " . $id . ' ' . $event['email']);
+        \Log::info("Title: ". $event['title'] );
+
         $user = User::where('email', $event['email'])->first();
 
         if (!$user) {
