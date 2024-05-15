@@ -28,6 +28,11 @@ class EventSeedImport implements ToCollection, WithHeadingRow
             $this->seedEvent($row, $key, $id);
             $id++;
         }
+
+        \Log::info('End seeding events');
+
+        // LOG THE TOTAL NUMBER OF EVENTS
+        \Log::info('Total number of events: ' . $id);
     }
 
     /**

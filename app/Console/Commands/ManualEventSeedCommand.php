@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Permit;
 use App\Models\Literary;
 use App\Models\EventType;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
 use Maatwebsite\Excel\Facades\Excel;
@@ -34,10 +35,17 @@ class ManualEventSeedCommand extends Command
     {
 
         // delete all source manual
+        
         if ($this->option('delete')) {
-            Event::where('source', 'manual')->forceDelete();
-            Permit::where('source', 'manual')->forceDelete();
+            Event::where('source', 'manual')
+                ->whereDate('created_at', Carbon::today())
+                ->forceDelete();
+        
+            Permit::where('source', 'manual')
+                ->whereDate('created_at', Carbon::today())
+                ->forceDelete();
         }
+        
 
         // development mode
         // if (app()->environment() === 'local') {
@@ -45,7 +53,7 @@ class ManualEventSeedCommand extends Command
         //     Event::where('source', 'manual')->forceDelete();
         //     Permit::where('source', 'manual')->forceDelete();
         // }
-        Excel::import(new \App\Imports\EventSeedImport, base_path('database/seeders/events.csv'));
+        Excel::import(new \App\Imports\EventSeedImport, base_path('database/seeders/event_2024_15_05.csv'));
 
 
         $this->info('End seeding events');
