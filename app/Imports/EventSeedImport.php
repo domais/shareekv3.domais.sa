@@ -24,6 +24,9 @@ class EventSeedImport implements ToCollection, WithHeadingRow
     public function collection(Collection $collection)
     {
         $id = 0;
+        \Log::info($collection->count() . ' events found');
+        \Log::info($collection->first());
+        \Log::info($collection);
         foreach ($collection as $key => $row) {
             $this->seedEvent($row, $key, $id);
             $id++;
