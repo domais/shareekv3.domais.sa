@@ -44,6 +44,7 @@ class ManualEventSeedCommand extends Command
             Permit::where('source', 'manual')
                 ->whereDate('created_at', Carbon::today())
                 ->forceDelete();
+                return;
         }
         
 
